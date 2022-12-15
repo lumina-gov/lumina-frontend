@@ -29,6 +29,7 @@ function handle_keyup(e: KeyboardEvent) {
     tabindex={disabled ? -1 : 0}
     on:click={clicked}
     on:keyup={handle_keyup}
+    role="button"
     class:hug
     class:disabled
     class="button {style}"

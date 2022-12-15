@@ -33,6 +33,7 @@ $: tag = href ? "a" : "div"
     href={href}
     on:click={click}
     on:keyup={handle_keyup}
+    role="button"
     class:disabled
     tabindex={disabled ? -1 : 0}
     class="segment {style}"

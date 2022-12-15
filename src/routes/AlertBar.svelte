@@ -1,7 +1,13 @@
 <div class="action-container-wrapper">
     {#each $alerts as message}
         <div
+            role="button"
             bind:this={elements[message.id]}
+            on:keypress={e => {
+                if (e.key === "Enter") {
+                    remove(message.id)
+                }
+            }}
             class={"action-bar " + MessageType[message.type]}
             on:click={() => remove(message.id)}>
             <div class="icon">

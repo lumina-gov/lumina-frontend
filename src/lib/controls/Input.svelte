@@ -35,6 +35,12 @@ onMount(() => {
     <div class="input-pseudo-wrapper">
         {#if left_icon}
             <div class="icon"
+                role="button"
+                on:keypress={e => {
+                    if (e.key === "Enter") {
+                        handle_icon_click(e, left_icon_handler)
+                    }
+                }}
                 class:clickable={!!left_icon_handler}
                 on:click={e => handle_icon_click(e, left_icon_handler)}>
                 <svelte:component this={left_icon} />
@@ -55,6 +61,12 @@ onMount(() => {
         {#if right_icon}
             <div class="icon"
                 class:clickable={!!right_icon_handler}
+                role="button"
+                on:keypress={e => {
+                    if (e.key === "Enter") {
+                        handle_icon_click(e, right_icon_handler)
+                    }
+                }}
                 on:click={e => handle_icon_click(e, right_icon_handler)}>
                 <svelte:component this={right_icon} />
             </div>

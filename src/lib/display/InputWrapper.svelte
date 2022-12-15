@@ -4,10 +4,9 @@
 export let name: string // name of the input
 
 </script>
-<div class="input-wrapper" on:click>
+<div class="input-wrapper" on:click on:keypress>
     <span class="input-label">{name}</span>
     <slot/>
-
 </div>
 <style lang="stylus">
 @import 'variables';

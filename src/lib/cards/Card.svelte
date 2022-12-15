@@ -33,6 +33,7 @@ function handle_keyup(e: KeyboardEvent) {
     {href}
     on:click={clicked}
     on:keyup={handle_keyup}
+    role="button"
     class:shadow
     tabindex={is_clickable ? 0 : -1}
     class:opacity

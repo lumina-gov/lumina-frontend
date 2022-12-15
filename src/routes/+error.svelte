@@ -2,7 +2,6 @@
 import { page } from "$app/stores"
 import Heading from "$lib/display/Heading.svelte"
 import Tag from "$lib/display/Tag.svelte"
-import Logo from "$lib/icons/Logo.svelte"
 import Alert from "$icons/Alert.svelte"
 import Button from "$lib/buttons/Button.svelte"
 import Home from "$icons/Home.svelte"
