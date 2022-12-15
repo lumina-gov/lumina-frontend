@@ -1,5 +1,6 @@
 
 import { RustEnum } from "$lib/utils/enums/rust_enum"
+import { error } from "@sveltejs/kit"
 
 export type GraphStore = {
     req:<T>(type: TemplateStringsArray, ...text: Record<string, unknown>[]) => Promise<{ data: T, errors: string[]}>,
@@ -10,22 +11,35 @@ export const graph_init = (auth_token: string | null, api_domain: string | null)
     return {
         auth_token,
         async req<T>(strings: TemplateStringsArray, ...variables: Record<string, unknown>[]) {
-            const query = parse_inputs(strings, variables)
+            try {
+                const query = parse_inputs(strings, variables)
 
-            const BACKENDAPI = api_domain ? `https://${api_domain}` : "http://localhost:81" // fallback to rust test http main.rs server
-            const auth_token = this.auth_token
+                const BACKENDAPI = api_domain ? `https://${api_domain}` : "http://localhost:81" // fallback to rust test http main.rs server
+                const auth_token = this.auth_token
 
-            const request = new Request(`${BACKENDAPI}/graph`, {
-                method: "POST",
-                body: JSON.stringify({
-                    query,
-                    auth_token
-                }),
-            })
+                const request = new Request(`${BACKENDAPI}/graph`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        query,
+                        auth_token
+                    }),
+                })
 
-            const response = await fetch(request)
+                const response = await fetch(request)
 
-            return await response.json() as T
+                return await response.json() as T
+            } catch (err) {
+                if (err instanceof Error) {
+                    throw error(400, {
+                        message: err.message,
+                        code: "faulty_request",
+                        stack: err.stack,
+                        cause: err,
+                    })
+                }
+                throw err
+            }
+
         }
     }
 }

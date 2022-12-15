@@ -10,6 +10,12 @@ declare global {
             graph: GraphStore;
             alerts: AlertsStore;
         }
+        interface Error {
+            code?: string;
+            cause?: Error;
+            message: string;
+            stack?: string;
+        }
         // interface Platform {}
     }
 }
