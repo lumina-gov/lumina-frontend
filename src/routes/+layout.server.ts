@@ -1,6 +1,5 @@
 import { env } from "$env/dynamic/private"
 import { get_cookies_from_string } from "$lib/utils/cookie"
-import { redirect } from "@sveltejs/kit"
 import type { LayoutServerLoad } from "./$types"
 
 export const load: LayoutServerLoad = async load_event => {
