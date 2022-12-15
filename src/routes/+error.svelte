@@ -19,9 +19,11 @@ $: error = $page.error as NonNullable<typeof $page.error>
     <Heading left_icon={Alert} left_icon_color="red">
         {error.message}
     </Heading>
-    <div class="code">
-        <strong>Code</strong> {error.code}
-    </div>
+    {#if error.code}
+        <div class="code">
+            <strong>Code</strong> {error.code}
+        </div>
+    {/if}
     <Button
         hug={true}
         href="/"

@@ -1,5 +1,5 @@
-import type { PageLoad } from "./$types"
 import { MessageType } from "$lib/types/message"
+import type { PageLoad } from "./$types"
 
 export const load: PageLoad = async function load({ parent }) {
     const data = await parent()

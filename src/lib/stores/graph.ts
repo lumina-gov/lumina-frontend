@@ -7,14 +7,14 @@ export type GraphStore = {
     auth_token: string | null
 }
 
-export const graph_init = (auth_token: string | null, api_domain: string | null): GraphStore => {
+export const graph_init = (auth_token: string | null, api_domain: string): GraphStore => {
     return {
         auth_token,
         async req<T>(strings: TemplateStringsArray, ...variables: Record<string, unknown>[]) {
             try {
                 const query = parse_inputs(strings, variables)
 
-                const BACKENDAPI = api_domain ? `https://${api_domain}` : "http://localhost:81" // fallback to rust test http main.rs server
+                const BACKENDAPI = api_domain  // fallback to rust test http main.rs server
                 const auth_token = this.auth_token
 
                 const request = new Request(`${BACKENDAPI}/graph`, {

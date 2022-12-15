@@ -3,7 +3,6 @@ import type { User } from "$lib/types/user"
 import type { AlertsStore } from "$lib/stores/alerts"
 import type { GraphStore } from "$lib/stores/graph"
 
-
 export async function get_user(graph: GraphStore, alerts: AlertsStore): Promise<User | null> {
     const { data: { me }, errors } = await graph.req<{ me?: User }>`
             message {
