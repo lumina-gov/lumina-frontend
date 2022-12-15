@@ -9,6 +9,6 @@ export const load: LayoutServerLoad = async load_event => {
     return {
         auth_token,
         // the DOMAIN variable should be passed into the frontend container
-        api_domain: env.LUMINA_API_SERVER
+        api_domain: env.LUMINA_API_DOMAIN
     }
 }
