@@ -17,7 +17,7 @@ export const graph_init = (auth_token: string | null, api_domain: string): Graph
                 const BACKENDAPI = api_domain  // fallback to rust test http main.rs server
                 const auth_token = this.auth_token
 
-                const request = new Request(`//${BACKENDAPI}/graph`, {
+                const request = new Request(`${BACKENDAPI}/graph`, {
                     method: "POST",
                     body: JSON.stringify({
                         query,
