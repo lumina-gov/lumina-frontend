@@ -34,7 +34,6 @@ export const graph_init = (auth_token: string | null, api_domain: string): Graph
                         message: err.message,
                         code: "faulty_request",
                         stack: err.stack,
-                        cause: err,
                     })
                 }
                 throw err
