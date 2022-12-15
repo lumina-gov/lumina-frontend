@@ -1,0 +1,38 @@
+{
+    "name": "frontend",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "dev": "vite dev --port 80 --host",
+        "prod": "vite preview --port 80 --host",
+        "build": "vite build",
+        "package": "vite package",
+        "preview": "vite preview",
+        "check": "svelte-check --tsconfig ./tsconfig.json",
+        "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+        "lint": "eslint --ignore-path .gitignore ."
+    },
+    "devDependencies": {
+        "@sveltejs/adapter-auto": "next",
+        "@sveltejs/kit": "next",
+        "@typescript-eslint/eslint-plugin": "^5.46.1",
+        "@typescript-eslint/parser": "^5.46.1",
+        "eslint": "^8.29.0",
+        "eslint-plugin-svelte3": "^4.0.0",
+        "svelte": "^3.55.0",
+        "svelte-check": "^2.10.2",
+        "svelte-preprocess": "^5.0.0",
+        "tslib": "^2.4.1",
+        "typescript": "^4.9.4",
+        "vite": "^4.0.1"
+    },
+    "type": "module",
+    "dependencies": {
+        "marked": "^4.2.4",
+        "postcss": "8.4.20",
+        "schema-dts": "^1.1.0",
+        "stylus": "0.55.0",
+        "svelte-markdown": "^0.2.3",
+        "svelte-material-icons": "^2.0.4"
+    }
+}

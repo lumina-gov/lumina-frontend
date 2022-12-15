@@ -1,0 +1,137 @@
+
+<script lang="ts">
+import Input from "./Input.svelte"
+import EyeOutline from "svelte-material-icons/EyeOutline.svelte"
+import EyeOffOutline from "svelte-material-icons/EyeOffOutline.svelte"
+import Lock from "svelte-material-icons/Lock.svelte"
+import { page } from "$app/stores"
+import { MessageType } from "$lib/types/message"
+import type { GraphStore } from "$lib/stores/graph"
+
+let visible = false
+export let value: string
+export let placeholder = "Enter password"
+export let autocomplete = "current-password"
+export let name = "Password"
+export let focus_on_mount = false
+export let check_strength = false
+
+enum Rating {
+    Weak,
+    Medium,
+    Strong,
+    Impossible,
+}
+
+let seconds : number | null = null
+let crack_string : string | null = null
+$: rating = typeof seconds == "number" ?
+    seconds < 86400 * 7 ? Rating.Weak :
+        seconds < 86400 * 365 * 1 ? Rating.Medium :
+            seconds < 86400 * 365 * 50 ? Rating.Strong :
+                Rating.Impossible : null
+
+$: style = rating !== null ? Rating[rating] : ""
+
+
+async function check_password_strength() {
+    if (!check_strength) return
+
+    let { data: { crack_time }, errors } = await ($page.data.graph as GraphStore).req<{ crack_time?: { seconds: number, string: string } }>`
+        message {
+            crack_time(${{ password: value }}) {
+                seconds
+                string
+            }
+        }`
+
+    if (errors.length > 0) {
+        errors.map((error: string) => $page.data.alerts.create_alert(MessageType.Error, error))
+        return
+    }
+
+    if (!crack_time) {
+        seconds = null
+        crack_string = null
+    } else {
+        seconds = crack_time.seconds
+        crack_string = crack_time.string
+    }
+}
+
+
+
+</script>
+<Input
+    type={visible ? "text" : "password"}
+    placeholder={placeholder}
+    autocomplete={autocomplete}
+    left_icon={Lock}
+    right_icon={visible ? EyeOutline : EyeOffOutline}
+    focus_on_mount={focus_on_mount}
+    right_icon_handler={() => visible = !visible}
+    on:keyup
+    on:keydown
+    name={name}
+    on:input={() => check_password_strength()}
+    bind:value>
+    {#if check_strength}
+        <div class="strength {style}">
+            {#each Array(4) as _, i}
+                <div class="bar {rating !== null ? rating >= i ? "filled" : "" : ""}"/>
+            {/each}
+        </div>
+        {#if rating !== null}
+            <div class="strength-text-wrapper">
+                <span class="opacity">Would take a goverment agency</span>
+                <span class="strength-text {style}">{ crack_string ? crack_string : "an unknown time"}</span>
+                <span class="opacity">to crack</span>
+            </div>
+        {/if}
+    {/if}
+</Input>
+
+<style lang="stylus">
+@import "variables"
+
+.strength-text-wrapper
+    color white
+    .opacity
+        opacity 0.5
+    .strength-text
+        color white
+        &.Weak
+            color $red
+        &.Medium
+            color $orange
+        &.Strong
+            color mix($yellow, $green)
+        &.Impossible
+            color darken($green, 10%)
+.strength
+    display flex
+    width 100%
+    gap 8px
+    overflow hidden
+    border-radius 20px
+
+    .bar
+        height 8px
+        background transparify(white, 6%)
+        flex 1
+    &.Weak
+        .filled
+            background $red
+    &.Medium
+        .filled
+            background $orange
+    &.Strong
+        .filled
+            background mix($yellow, $green)
+    &.Impossible
+        .filled
+            background darken($green, 10%)
+
+
+
+</style>

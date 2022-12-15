@@ -1,0 +1,157 @@
+<script lang="ts">
+import { countries } from "$lib/data/countries"
+import Dropdown from "../Dropdown.svelte"
+import Country from "./Country.svelte"
+import type { Country as CountryType} from "$lib/data/countries"
+import ChevronDown from "$icons/ChevronDown.svelte"
+import Options from "../Options.svelte"
+import Search from "../Search.svelte"
+import ClickoutRegion from "../ClickoutRegion.svelte"
+import Inside from "../Inside.svelte"
+
+import InputWrapper from "$lib/display/InputWrapper.svelte"
+export let name = "Phone Number"
+
+export let value: { country: CountryType | null, number: string }
+export let autocomplete = "tel"
+export let placeholder = "Phone Number"
+let input_ref: HTMLInputElement
+let open = false
+let search = ""
+
+$: regex = new RegExp(search, "i")
+$: filtered = countries.filter(country => regex.test(country.name) || regex.test(country.code) || regex.test(country.calling_code))
+
+let options: Options<CountryType>
+let search_component: Search
+</script>
+<InputWrapper {name}>
+    <ClickoutRegion clicked_outside={() => open = false}>
+        <div class="input-wrapper">
+            <Inside>
+                <div
+                    tabindex="0"
+                    on:keypress={event => {
+                        if (event.key === "Enter") {
+                            open = !open
+                        }
+                    }}
+                    on:click={() => open = !open}
+                    class="country-selector">
+                    <div class="country-data">
+                        {#if !value.country}
+                            <div class="country-data-flag">
+                                <div class="iti-flag"/>
+                            </div>
+                        {:else}
+                            <div class="country-data-flag">
+                                <div class="iti-flag flag {value.country.code.toLowerCase()}"/>
+                            </div>
+                            <div class="country-data-label">{ value.country.calling_code }</div>
+                        {/if}
+                    </div>
+                    <ChevronDown/>
+                </div>
+                {#if open}
+                    <Dropdown>
+                        <Search bind:this={search_component} bind:search on:keyup={e => { if (e.key === "ArrowDown") options.focus() }}/>
+                        <Options
+                            on:keyup={e => { if (e.detail.key === "ArrowUp") search_component.focus() }}
+                            bind:this={options}
+                            options={filtered}
+                            on:select={e => {
+                                value.country = e.detail
+                                open = false
+                            }}
+                            let:option>
+                            <Country selected={value.country} country={option}/>
+                        </Options>
+                    </Dropdown>
+                {/if}
+            </Inside>
+            <div class="input-pseudo-wrapper" on:click={() => input_ref.focus()}>
+                <input
+                    bind:this={input_ref}
+                    on:keyup
+                    on:keydown
+                    on:keyup
+                    name={autocomplete}
+                    {placeholder}
+                    {autocomplete}
+                    bind:value={value.number}/>
+            </div>
+        </div>
+    </ClickoutRegion>
+</InputWrapper>
+<style lang="stylus">
+@import "variables"
+
+.input-wrapper
+    display flex
+    align-items center
+
+.input-pseudo-wrapper
+    flex 1
+    display flex
+    align-items center
+    background transparify(white, 10%)
+    border-top-right-radius 4px
+    border-bottom-right-radius 4px
+
+input
+    appearance none
+    border none
+    outline none
+    background none
+    color inherit
+    line-height 1
+    flex 1
+    width 100%
+    font-size 16px
+    padding 12px 16px
+    padding-left 6px
+    margin 0
+    &::placeholder
+        color white
+        opacity 0.3
+
+.country-selector
+    border-top-left-radius 4px
+    margin-right 1px
+    border-bottom-left-radius 4px
+    display flex
+    align-items center
+    padding-left 6px
+    height 48px
+    background transparify(white, 10%)
+    &:focus, &:hover
+        outline none
+        cursor pointer
+        background transparify(white, 15%)
+    .country-data
+        display flex
+        align-items center
+        .country-data-label
+            font-size 16px
+            padding-left 5px
+            padding-right 5px
+            flex 1
+    .country-title
+        font-size 13px
+        text-transform uppercase
+        font-weight 500
+        color transparify(white, 80%)
+
+:global
+    @import "flags"
+
+    .iti-flag.flag
+        background-image url("/flags.png")
+        image-rendering pixelated
+
+
+    .country-data-flag
+        outline: 1px solid transparent
+        transform scale(0.7)
+
+</style>

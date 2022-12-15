@@ -1,0 +1,27 @@
+import adapter from "@sveltejs/adapter-auto"
+// import node from '@sveltejs/adapter-node'
+import preprocess from "svelte-preprocess"
+import { dirname, resolve } from "path"
+import { fileURLToPath } from "url"
+
+let __dirname = dirname(fileURLToPath(import.meta.url))
+
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+    // Consult https://github.com/sveltejs/svelte-preprocess
+    // for more information about preprocessors
+    preprocess: preprocess({
+        stylus: {
+            // this will allow us to @import 'variables' inside of our svelte stylus css section
+            paths: [resolve(__dirname, "./src/stylus")]
+        }
+    }),
+    kit: {
+        alias: {
+            "$icons/*": "./node_modules/svelte-material-icons/*"
+        },
+        adapter: adapter(),
+    }
+}
+
+export default config
