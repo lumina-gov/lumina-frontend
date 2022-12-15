@@ -30,7 +30,7 @@ import PageLoaderBar from "./PageLoaderBar.svelte"
         margin 0
         padding 0
         min-height 100%
-        font-family  'Prompt'
+        font-family 'Prompt', sans-serif
 
 </style>
 <svelte:head>
