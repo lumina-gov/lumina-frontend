@@ -17,9 +17,6 @@ const config = {
         }
     }),
     kit: {
-        alias: {
-            "$icons/*": "./node_modules/svelte-material-icons/*"
-        },
         adapter: adapter(),
     }
 }

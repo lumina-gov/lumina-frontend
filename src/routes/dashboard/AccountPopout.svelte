@@ -44,7 +44,9 @@ async function logout() {
                 Account Settings
             </span>
         </a>
-        <div class="link red" on:click={logout}>
+        <div class="link red" on:click={logout} role="button" on:keypress={e => {
+            if (e.key === "Enter") logout()
+        }}>
             <Icon icon={ExitToApp} size={20}/>
             <span>
                 Log Out

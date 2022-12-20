@@ -1,7 +1,7 @@
 <script lang="ts">
 import Discord from "svelte-material-icons/Discord.svelte"
 import RightChevron from "svelte-material-icons/ChevronRight.svelte"
-import Button from "$lib/buttons/Button.svelte"
+import Button from "$lib/controls/Button.svelte"
 </script>
 <div class="banner-inner">
     <div class="left">

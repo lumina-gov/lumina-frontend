@@ -1,16 +1,16 @@
 <script lang="ts">
 import Heading from "$lib/display/Heading.svelte"
-import CheckboxMarkedCircle from "$icons/CheckboxMarkedCircle.svelte"
-import ScriptText from "$icons/ScriptText.svelte"
+import CheckboxMarkedCircle from "svelte-material-icons/CheckboxMarkedCircle.svelte"
+import ScriptText from "svelte-material-icons/ScriptText.svelte"
 import InfoBox from "$lib/display/InfoBox.svelte"
 import Tag from "$lib/display/Tag.svelte"
-import Information from "$icons/Information.svelte"
+import Information from "svelte-material-icons/Information.svelte"
 import Proposal from "./Proposal.svelte"
 import Card from "./AssemblyCard.svelte"
-import Button from "$lib/buttons/Button.svelte"
-import Plus from "$icons/Plus.svelte"
+import Button from "$lib/controls/Button.svelte"
+import Plus from "svelte-material-icons/Plus.svelte"
 import AssemblyStat from "./AssemblyStat.svelte"
-import HumanGreetingVariant from "$icons/HumanGreetingVariant.svelte"
+import HumanGreetingVariant from "svelte-material-icons/HumanGreetingVariant.svelte"
 
 let proposals = [
     {

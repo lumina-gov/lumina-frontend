@@ -1,5 +1,5 @@
 <script>
-import LogoLoading from "./LogoLoading.svelte"
+import LogoLoading from "$lib/display/LogoLoading.svelte"
 
 </script>
 <div class="overlay-spinner">

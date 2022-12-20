@@ -1,7 +1,7 @@
 <script lang="ts">
 import Settlement from "$lib/icons/Settlement.svelte"
 import Logo from "$lib/icons/Logo.svelte"
-import Button from "$lib/buttons/Button.svelte"
+import Button from "$lib/controls/Button.svelte"
 import Copy from "svelte-material-icons/ContentCopy.svelte"
 import Info from "svelte-material-icons/InformationOutline.svelte"
 import Box from "$lib/cards/Box.svelte"

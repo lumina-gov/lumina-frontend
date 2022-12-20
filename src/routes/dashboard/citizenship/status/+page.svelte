@@ -1,5 +1,5 @@
 <script lang="ts">
-import Button from "$lib/buttons/Button.svelte"
+import Button from "$lib/controls/Button.svelte"
 import Heading from "$lib/display/Heading.svelte"
 import Tag from "$lib/display/Tag.svelte"
 import Logo from "$lib/icons/Logo.svelte"

@@ -1,4 +1,4 @@
-<!-- <script lang="ts">
+/<!-- <script lang="ts">
 import TopHero from "$lib/components/banners/heros/TopHero.svelte"
 import RightsIntroBlock from "$lib/components/pages/rights_and_duties/RightsIntroBlock.svelte"
 import IAmAPicker from "$lib/components/general_components/IAmAPicker.svelte"

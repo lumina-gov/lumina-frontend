@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Star from "$icons/Star.svelte"
+    import Star from "svelte-material-icons/Star.svelte"
 
     function rate(rating: number) {
         rated = true

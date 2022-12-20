@@ -2,9 +2,9 @@
 import { page } from "$app/stores"
 import Heading from "$lib/display/Heading.svelte"
 import Tag from "$lib/display/Tag.svelte"
-import Alert from "$icons/Alert.svelte"
-import Button from "$lib/buttons/Button.svelte"
-import Home from "$icons/Home.svelte"
+import Alert from "svelte-material-icons/Alert.svelte"
+import Button from "$lib/controls/Button.svelte"
+import Home from "svelte-material-icons/Home.svelte"
 
 $: error = $page.error as NonNullable<typeof $page.error>
 </script>

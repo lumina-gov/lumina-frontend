@@ -6,7 +6,7 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 
 import { createEventDispatcher } from "svelte"
 import SelectCard from "$lib/controls/SelectCard.svelte"
-import Button from "$lib/buttons/Button.svelte"
+import Button from "$lib/controls/Button.svelte"
 import ShieldLock from "svelte-material-icons/ShieldLock.svelte"
 import Heading from "$lib/display/Heading.svelte"
 

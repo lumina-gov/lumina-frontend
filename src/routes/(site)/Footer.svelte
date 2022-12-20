@@ -1,6 +1,6 @@
 <script lang="ts">
 import ArrowRight from "svelte-material-icons/ArrowRight.svelte"
-import Button from "$lib/buttons/Button.svelte"
+import Button from "$lib/controls/Button.svelte"
 import Youtube from "svelte-material-icons/Youtube.svelte"
 import Twitter from "svelte-material-icons/Twitter.svelte"
 import Discord from "svelte-material-icons/Discord.svelte"

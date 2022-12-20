@@ -1,5 +1,5 @@
 <script lang="ts">
-import Button from "$lib/buttons/Button.svelte"
+import Button from "$lib/controls/Button.svelte"
 import Card from "$lib/cards/Card.svelte"
 import InformationOutline from "svelte-material-icons/InformationOutline.svelte"
 import Bell from "svelte-material-icons/Bell.svelte"

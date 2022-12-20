@@ -1,5 +1,5 @@
 <script lang="ts">
-import Alert from "$icons/Alert.svelte"
+import Alert from "svelte-material-icons/Alert.svelte"
 export let error: string
 </script>
 <div class="error-wrapper">

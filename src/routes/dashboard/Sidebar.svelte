@@ -1,9 +1,9 @@
 <script lang="ts">
-import IconButton from "$lib/buttons/IconButton.svelte"
+import IconButton from "$lib/controls/IconButton.svelte"
 import Apps from "svelte-material-icons/Apps.svelte"
 import Lumina from "$lib/icons/Lumina.svelte"
 import BellOutline from "svelte-material-icons/BellOutline.svelte"
-import ProfileButton from "$lib/buttons/ProfileButton.svelte"
+import ProfileButton from "$lib/controls/ProfileButton.svelte"
 import NotificationsPopout from "./NotificationsPopout.svelte"
 import AccountPopout from "./AccountPopout.svelte"
 import Inside from "$lib/controls/Inside.svelte"
