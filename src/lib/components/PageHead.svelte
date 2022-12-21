@@ -5,7 +5,7 @@ export let title: string
 export let description: string
 export let type: "website" | "article" = "article"
 export let include_suffix = true
-$: real_title = include_suffix ? `${title} » Lumina » New City Movement` : title
+$: real_title = include_suffix ? `${title} » Lumina » The City of the Future` : title
 
 $: url = `https://${$page.url.host}${$page.url.pathname}${$page.url.search}`
 $: og_image = `https://${$page.url.host}/api/og?title=${title}`
