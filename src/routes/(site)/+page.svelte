@@ -1,6 +1,6 @@
 <PageHead
     type="website"
-    title="Lumina » New City Project"
+    title="Lumina » The City of the Future"
     include_suffix={false}
     description="Lumina is a social experiment with the goals of setting up a new innovative and environmentally sustainable city."
     />
@@ -20,7 +20,6 @@ import AccountOutline from "svelte-material-icons/AccountOutline.svelte"
 import Flash from "svelte-material-icons/Flash.svelte"
 import Settlement from "$lib/icons/Settlement.svelte"
 import Button from "$lib/controls/Button.svelte"
-import Inner from "$lib/components/layouts/Inner.svelte"
 import HubArea from "$lib/components/hub/HubArea.svelte"
 import Coloured from "$lib/display/Coloured.svelte"
 import Hero from "$lib/components/layouts/Hero.svelte"
