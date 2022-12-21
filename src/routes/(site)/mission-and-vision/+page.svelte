@@ -1,4 +1,8 @@
-
+<PageHead
+    title="Mission and vision"
+    description="Empowering every individual to have a direct say in the decision-making processes that affect their lives."
+    type="article"
+/>
 <script lang="ts">
 import Hero from "$lib/components/layouts/Hero.svelte"
 import Heading from "$lib/display/Heading.svelte"
@@ -21,6 +25,7 @@ import Crane from "svelte-material-icons/Crane.svelte"
 import Scale from "svelte-material-icons/ScaleBalance.svelte"
 import RocketLaunch from "svelte-material-icons/RocketLaunch.svelte"
 import BookOpenVariant from "svelte-material-icons/BookOpenVariant.svelte"
+import PageHead from "$lib/components/PageHead.svelte"
 
 type Goal = {
     title: string,
@@ -33,7 +38,7 @@ let goals: Goal[] = [
     {
         title: "Citizen-led governance",
         description: "Empowering every individual to have a direct say in the decision-making processes that affect their lives.",
-        icon: Scale
+        icon: HumanGreetingVariant
     },
     {
         title: "Excellence",

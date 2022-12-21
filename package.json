@@ -28,8 +28,10 @@
     },
     "type": "module",
     "dependencies": {
+        "@resvg/resvg-js": "^2.2.0",
         "marked": "^4.2.4",
         "postcss": "8.4.20",
+        "satori": "^0.0.44",
         "schema-dts": "^1.1.0",
         "stylus": "0.55.0",
         "svelte-markdown": "^0.2.3",
