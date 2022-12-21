@@ -1,5 +1,5 @@
 <script lang="ts">
-import Segment from "$lib/buttons/Segment.svelte"
+import Segment from "$lib/controls/Segment.svelte"
 import InputWrapper from "$lib/display/InputWrapper.svelte"
 import Inside from "./Inside.svelte"
 import ClickoutRegion from "./ClickoutRegion.svelte"
