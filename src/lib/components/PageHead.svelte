@@ -24,4 +24,5 @@ $: og_image = `https://${$page.url.host}/api/og?title=${title}`
     <meta name="twitter:description" content="{description}"/>
     <meta name="twitter:image" content={og_image}/>
     <meta name="description" content="{description}"/>
+    <link rel="canonical" href="{url}"/>
 </svelte:head>
