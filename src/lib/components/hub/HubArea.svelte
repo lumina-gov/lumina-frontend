@@ -5,7 +5,7 @@ import Hub from "$lib/icons/Hub.svelte"
 import { three_wide, two_wide } from "$lib/data/hub_data"
 </script>
 
-<div class="hub-wrapper">
+<div class="hub-wrapper" id="hub">
     <div class="title hub">
         <div class="hub-icon">
             <svelte:component this={Hub} />

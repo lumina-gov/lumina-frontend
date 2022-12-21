@@ -1,3 +1,12 @@
+<PageHead
+    type="website"
+    title="Lumina » New City Project"
+    include_suffix={false}
+    description="Lumina is a social experiment with the goals of setting up a new innovative and environmentally sustainable city."
+    />
+<svelte:head>
+    {@html serializeSchema(organizationSchema) }
+</svelte:head>
 <script lang="ts">
 import UpcomingEvents from "$lib/components/events/UpcomingEventsHero.svelte"
 import NewsHero from "$lib/components/pages/news/NewsHero.svelte"
@@ -21,6 +30,7 @@ import Cash from "svelte-material-icons/Cash.svelte"
 import type { PageData } from "./$types"
 import type { GovernmentOrganization, WithContext } from "schema-dts"
 import { serializeSchema } from "$lib/utils/schema"
+import PageHead from "$lib/components/PageHead.svelte"
 
 
 export const organizationSchema: WithContext<GovernmentOrganization> = {
@@ -198,11 +208,6 @@ let featuredStories = [
 </div>
 <NewsHero bind:featuredStories />
 
-<svelte:head>
-    <title>Lumina - the city of the future</title>
-    <meta name="description" content="Lumina is a social experiment with the goals of setting up a new innovative and environmentally sustainable city.">
-    {@html serializeSchema(organizationSchema) }
-</svelte:head>
 <style lang="stylus">
 @import "variables"
 
