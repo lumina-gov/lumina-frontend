@@ -2,7 +2,7 @@
 import HubCard from "$lib/components/hub/HubCard.svelte"
 
 import Hub from "$lib/icons/Hub.svelte"
-import { three_wide, two_wide } from "./hub_data"
+import { three_wide, two_wide } from "$lib/data/hub_data"
 </script>
 
 <div class="hub-wrapper">
@@ -33,6 +33,7 @@ import { three_wide, two_wide } from "./hub_data"
     gap 20px
     display flex
     flex-direction column
+    width 100%
 
 .title.hub
     display flex

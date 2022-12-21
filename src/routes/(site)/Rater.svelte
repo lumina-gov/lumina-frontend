@@ -1,15 +1,23 @@
 <script lang="ts">
-    import Star from "svelte-material-icons/Star.svelte"
+import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
+import future from "$lib/utils/future"
+import Star from "svelte-material-icons/Star.svelte"
 
-    function rate(rating: number) {
-        rated = true
-    }
+async function rate(rating: number) {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    rated = true
+}
 
-    let hovering_on: number | null = null
-    let rated = false
+let loading = false
+
+let hovering_on: number | null = null
+let rated = false
 </script>
 <div class="rating-hero">
     <div class="rating-card">
+        {#if loading}
+            <OverlayLoading/>
+        {/if}
         {#if rated === false}
             <div class="subtitle">Did you find this page helpful?</div>
             <div class="star-wrapper">
@@ -17,7 +25,10 @@
                     <div
                         class="star"
                         class:filled={hovering_on !== null && hovering_on > i - 1}
-                        on:click={() => rate(i)}
+                        on:click={() => future(rate(i), status => loading = status)}
+                        tabindex="0"
+                        on:keypress={e => e.key === "Enter" && rate(i)}
+                        role="button"
                         on:mouseenter={() => hovering_on = i}
                         on:mouseleave={() => hovering_on = null}>
                         <Star/>
@@ -34,10 +45,9 @@
 
 .rating-hero
     background transparify(white, 4%)
-    border-bottom 1px solid transparify(white, 4%)
+    background-blur(2px)
+    border-bottom 1px solid transparify(white, 8%)
     padding 20px
-    position relative
-    overflow hidden
     color white
     .subtitle
         font-size 18px
@@ -45,18 +55,19 @@
         font-weight 500
     .rating-card
         text-align center
+        overflow hidden
         display flex
         flex-direction column
         gap 10px
         justify-content center
-        text-align centre
+        text-align center
         font-weight 600
         color white
         max-width 400px
         padding 20px
         background transparify(white, 4%)
         margin auto
-        border-radius 5px
+        border-radius 8px
     .star-wrapper
         display flex
         justify-content center

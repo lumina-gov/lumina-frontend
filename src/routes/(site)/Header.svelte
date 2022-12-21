@@ -12,8 +12,8 @@ import Apps from "svelte-material-icons/Apps.svelte"
 import type { User } from "$lib/types/user"
 import ClickoutRegion from "$lib/controls/ClickoutRegion.svelte"
 import Inside from "$lib/controls/Inside.svelte"
-import type { SvelteComponent } from "svelte"
-import { all_links } from "$lib/components/hub/hub_data"
+import { onMount, type SvelteComponent } from "svelte"
+import { all_links } from "$lib/data/hub_data"
 import type { HubType } from "$lib/types/HubType"
 import { beforeNavigate } from "$app/navigation"
 export let user: User | null
@@ -47,8 +47,25 @@ beforeNavigate(() => {
     menu_toggled = false
 })
 
+function toggle_menu(link: MenuLink) {
+    if ("sublinks" in link && link.name !== menu_toggled) {
+        menu_toggled = link.name
+    } else {
+        menu_toggled = true
+    }
+}
+
+let scrolled = false
+
+onMount(() => {
+    scrolled = window.scrollY != 0
+    window.addEventListener("scroll", () => {
+        scrolled = window.scrollY != 0
+    })
+})
+
 </script>
-<header>
+<header class:scrolled>
     <ClickoutRegion clicked_outside={() => menu_toggled = false}>
         <div class="inner-header">
             <nav class="left">
@@ -108,18 +125,13 @@ beforeNavigate(() => {
                     <nav>
                         {#each links as link}
                             <div class="menu-section">
+                                <!-- svelte-ignore a11y-click-events-have-key-events -->
                                 <svelte:element
                                     this={"href" in link ? "a" : "div"}
                                     href={"href" in link ? link.href : undefined}
                                     class:toggled={menu_toggled === link.name}
                                     class="menu-link"
-                                    on:click={() => {
-                                        if ("sublinks" in link && link.name !== menu_toggled) {
-                                            menu_toggled = link.name
-                                        } else {
-                                            menu_toggled = true
-                                        }
-                                    }}>
+                                    on:click={() => toggle_menu(link)}>
                                     <div class="link-icon">
                                         <svelte:component this={link.icon}/>
                                     </div>
@@ -174,7 +186,14 @@ header
     position sticky
     top 0
     z-index 8
-    background $dark_app
+    background transparent
+    box-shadow none
+    transition box-shadow 0.1s ease-in-out, background 0.1s ease-in-out
+    &.scrolled
+        box-shadow 0 0 10px 0 rgba(0, 0, 0, 0.5)
+        background $dark_app
+        background transparify($dark_app, 50%)
+        background-blur(10px)
 
 .menu
     max-width 1200px

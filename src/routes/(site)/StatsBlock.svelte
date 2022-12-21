@@ -32,6 +32,7 @@ export let stats: {
 .stats
     display grid
     grid-template-columns repeat(4, 1fr)
+    width 100%
     grid-gap 20px
     padding 40px 0
     @media (max-width 900px)

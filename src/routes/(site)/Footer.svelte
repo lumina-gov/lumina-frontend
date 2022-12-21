@@ -80,6 +80,7 @@ import Logo from "$lib/icons/Logo.svelte"
 
 footer
     background transparify(white, 4%)
+    background-blur(2px)
 
 .inner-wrapper
     padding 60px 20px
@@ -112,7 +113,7 @@ footer
     display inline-flex
 
 .divider
-    background transparify(white, 4%)
+    background transparify(white, 8%)
     height 1px
     width 100%
 

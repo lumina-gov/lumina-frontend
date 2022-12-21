@@ -38,6 +38,7 @@ import Button from "$lib/controls/Button.svelte"
     padding 40px
     justify-content space-between
     gap 20px
+    background-blur(2px)
     cardify()
     @media(max-width $tablet)
         flex-direction column

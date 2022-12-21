@@ -9,18 +9,12 @@ import AccountGroup from "svelte-material-icons/AccountGroup.svelte"
 import Domain from "svelte-material-icons/Domain.svelte"
 import AccountOutline from "svelte-material-icons/AccountOutline.svelte"
 import Flash from "svelte-material-icons/Flash.svelte"
-import CodeTags from "svelte-material-icons/CodeTags.svelte"
-import Clock from "svelte-material-icons/Clock.svelte"
-import Wifi from "svelte-material-icons/Wifi.svelte"
-import Brush from "svelte-material-icons/Brush.svelte"
-import Text from "svelte-material-icons/Text.svelte"
-import Hammer from "svelte-material-icons/Hammer.svelte"
 import Settlement from "$lib/icons/Settlement.svelte"
 import Button from "$lib/controls/Button.svelte"
-import Inner from "$lib/components/heros/Inner.svelte"
+import Inner from "$lib/components/layouts/Inner.svelte"
 import HubArea from "$lib/components/hub/HubArea.svelte"
 import Coloured from "$lib/display/Coloured.svelte"
-import Hero from "$lib/components/heros/Hero.svelte"
+import Hero from "$lib/components/layouts/Hero.svelte"
 import ArchiveBox from "svelte-material-icons/Archive.svelte"
 import Bank from "svelte-material-icons/Bank.svelte"
 import Cash from "svelte-material-icons/Cash.svelte"
@@ -50,194 +44,6 @@ export const organizationSchema: WithContext<GovernmentOrganization> = {
 }
 
 export let data: PageData
-
-let jobFields = [
-    {
-        title: "Software",
-        jobs: [
-            {
-                title: "Backend Engineer",
-                icon: CodeTags,
-                attributes: [
-                    {
-                        icon: Clock,
-                        text: "Volunteer",
-                    },
-                    {
-                        icon: Wifi,
-                        text: "Remote",
-                    }
-                ]
-            },
-            {
-                title: "Frontend Engineer",
-                icon: CodeTags,
-                attributes: [
-                    {
-                        icon: Clock,
-                        text: "Volunteer",
-                    },
-                    {
-                        icon: Wifi,
-                        text: "Remote",
-                    }
-                ]
-            },
-            {
-                title: "Deployment Engineer",
-                icon: CodeTags,
-                attributes: [
-                    {
-                        icon: Clock,
-                        text: "Volunteer",
-                    },
-                    {
-                        icon: Wifi,
-                        text: "Remote",
-                    }
-                ]
-            },
-
-        ]
-    },
-    {
-        title: "Design",
-        jobs: [
-            {
-                title: "UX Design",
-                icon: Brush,
-                attributes: [
-                    {
-                        icon: Clock,
-                        text: "Volunteer",
-                    },
-                    {
-                        icon: Wifi,
-                        text: "Remote",
-                    }
-                ]
-            },
-            {
-                title: "Video Editor",
-                icon: Brush,
-                attributes: [
-                    {
-                        icon: Clock,
-                        text: "Volunteer",
-                    },
-                    {
-                        icon: Wifi,
-                        text: "Remote",
-                    }
-                ]
-            },
-            {
-                title: "Content Writer",
-                icon: Text,
-                attributes: [
-                    {
-                        icon: Clock,
-                        text: "Volunteer",
-                    },
-                    {
-                        icon: Wifi,
-                        text: "Remote",
-                    }
-                ]
-            }
-
-        ]
-    },
-    {
-        title: "Settlement",
-        jobs: [
-            {
-                title: "Welder",
-                icon: Hammer,
-                attributes: [
-                    {
-                        icon: Clock,
-                        text: "Future",
-                    },
-                    {
-                        icon: Settlement,
-                        text: "Settlement",
-                    }
-                ]
-            },
-            {
-                title: "Plumber",
-                icon: Hammer,
-                attributes: [
-                    {
-                        icon: Clock,
-                        text: "Future",
-                    },
-                    {
-                        icon: Settlement,
-                        text: "Settlement",
-                    }
-                ]
-            },
-            {
-                title: "Concreter",
-                icon: Hammer,
-                attributes: [
-                    {
-                        icon: Clock,
-                        text: "Future",
-                    },
-                    {
-                        icon: Settlement,
-                        text: "Settlement",
-                    }
-                ]
-            },
-            {
-                title: "Power Engineer",
-                icon: Hammer,
-                attributes: [
-                    {
-                        icon: Clock,
-                        text: "Future",
-                    },
-                    {
-                        icon: Settlement,
-                        text: "Settlement",
-                    }
-                ]
-            },
-            {
-                title: "Civil Engineer",
-                icon: Hammer,
-                attributes: [
-                    {
-                        icon: Clock,
-                        text: "Future",
-                    },
-                    {
-                        icon: Settlement,
-                        text: "Settlement",
-                    }
-                ]
-            },
-            {
-                title: "Electrical Engineer",
-                icon: Hammer,
-                attributes: [
-                    {
-                        icon: Clock,
-                        text: "Future",
-                    },
-                    {
-                        icon: Settlement,
-                        text: "Settlement",
-                    }
-                ]
-            }
-        ]
-    }
-]
 
 let events = [
     {
@@ -313,66 +119,60 @@ let featuredStories = [
 
 </script>
 <Hero>
-    <Inner>
-        <div class="hero">
-            <div class="hero-main">
-                <h1>city of the <Coloured>future</Coloured></h1>
-                <p>
-                    Welcome to <Coloured>Lumina</Coloured>, a social experiment with the goals of
-                    setting up a new innovative and environmentally sustainable city.
-                </p>
-                <p>
-                    Lumina proposes to set up a <Coloured>Autonomous Zone</Coloured>, which is a
-                    city with it's own government, laws, and currency.
-                </p>
-                <Button href="/onboarding" right_icon={Settlement} hug={true}>
-                    Become a citizen
-                </Button>
-            </div>
-            <div class="image-wrapper">
-                <img class="hero-image" src={"/images/hero-image.svg"} alt="a city skyline">
-            </div>
+    <div class="hero">
+        <div class="hero-main">
+            <h1>city of the <Coloured>future</Coloured></h1>
+            <p>
+                Welcome to <Coloured>Lumina</Coloured>, a social experiment with the goals of
+                setting up a new innovative and environmentally sustainable city.
+            </p>
+            <p>
+                Lumina proposes to set up an <Coloured>Autonomous Zone</Coloured>, which is a
+                city with it's own government, laws, and currency.
+            </p>
+            <Button href="/onboarding" right_icon={Settlement} hug={true}>
+                Become a citizen
+            </Button>
         </div>
-        <StatsHero stats={[
-            {
-                icon: AccountGroup,
-                name: "Citizens registered",
-                value: data.user_count,
-                color: "#5D35D5"
-            },
-            {
-                icon: Domain,
-                name: "Government Ministries",
-                value: 15,
-                color: "#4F63CE"
-            },
-            {
-                icon: AccountOutline,
-                name: "Government Staff",
-                value: 36,
-                color: "#4488C9"
-            },
-            {
-                icon: Flash,
-                name: "Renewable",
-                value: "100%",
-                color: "#34BFC1"
-            }
-        ]}/>
-    </Inner>
+        <div class="image-wrapper">
+            <img class="hero-image" src={"/images/hero-image.svg"} alt="a city skyline">
+        </div>
+    </div>
+    <StatsHero stats={[
+        {
+            icon: AccountGroup,
+            name: "Citizens registered",
+            value: data.user_count,
+            color: "#5D35D5"
+        },
+        {
+            icon: Domain,
+            name: "Government Ministries",
+            value: 15,
+            color: "#4F63CE"
+        },
+        {
+            icon: AccountOutline,
+            name: "Government Staff",
+            value: 36,
+            color: "#4488C9"
+        },
+        {
+            icon: Flash,
+            name: "Renewable",
+            value: "100%",
+            color: "#34BFC1"
+        }
+    ]}/>
 </Hero>
 <Hero>
     <DiscordBanner/>
 </Hero>
 <Hero translucent={true}>
-    <Inner max_width={1000}>
-        <HubArea/>
-    </Inner>
+    <HubArea/>
 </Hero>
 <Hero>
-    <Inner>
-        <JobHero bind:jobFields />
-    </Inner>
+    <JobHero/>
 </Hero>
 <div class="extra-info-wrapper">
     <UpcomingEvents bind:events />
@@ -410,6 +210,7 @@ let featuredStories = [
     position relative
     display flex
     align-items center
+    width 100%
     .hero-main
         max-width 500px
         z-index 2

@@ -8,7 +8,7 @@ export let padding = "0px"
 export let max_width: string | undefined = undefined
 export let shadow = true
 export let direction: "vertical" | "horizontal" = "vertical"
-export let gap = "0px"
+export let gap: number | string = 0
 export let reset_bg = false
 export let opacity = false
 export let interactive = false
@@ -42,7 +42,7 @@ function handle_keyup(e: KeyboardEvent) {
     class:horizontal={direction === "horizontal"}
     style="
         max-width: {max_width};
-        gap: {gap};
+        gap: {typeof gap === "number" ? gap + "px" : gap};
         padding: {padding};
     "
     class:clickable={is_clickable}>
@@ -59,6 +59,7 @@ function handle_keyup(e: KeyboardEvent) {
     display flex
     align-items center
     justify-content center
+    background-blur(2px)
     &.clickable
         cursor pointer
         &:hover

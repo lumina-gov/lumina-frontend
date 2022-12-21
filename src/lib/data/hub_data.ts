@@ -16,8 +16,22 @@ import PlaneLanding from "svelte-material-icons/AirplaneLanding.svelte"
 import Bank from "svelte-material-icons/Bank.svelte"
 import Tax from "svelte-material-icons/Calculator.svelte"
 import Family from "svelte-material-icons/FamilyTree.svelte"
+import FormatListBullet from "svelte-material-icons/FormatListBulleted.svelte"
+import DnaHelix from "svelte-material-icons/Dna.svelte"
 
 export const two_wide: HubType[] = [
+    {
+        link: "/mission-and-vision",
+        tag: {
+            text: "Info",
+            color: "blue",
+        },
+        title: {
+            icon: Telescope,
+            text: "Mission & Vision",
+        },
+        description: "Learn about our mission and vision for Lumina, and how we plan to achieve it.",
+    },
     {
         // link: "/principles-and-values",
         tag: {
@@ -28,7 +42,7 @@ export const two_wide: HubType[] = [
             icon: Pillar,
             text: "Principles & Values",
         },
-        description: "Our mission, principles and values define the emotional, moral, and spiritual core of our society.",
+        description: "Our principles and values define the emotional, moral, and spiritual core of our society.",
     },
     {
         // link: "/rights-and-duties",
@@ -52,7 +66,7 @@ export const two_wide: HubType[] = [
             icon: PassportBiometric,
             text: "Citizenship",
         },
-        description: "Find out the benefits of becoming a citizen in Lumina. Get involved, along with thousands others today.",
+        description: "Find out the benefits of becoming a citizen in Lumina. Get involved, along with thousands of others today.",
     },
     {
         link: "/dashboard",
@@ -66,21 +80,21 @@ export const two_wide: HubType[] = [
         },
         description: "Lumina's cloud government portal that lets citizens access government services.",
     },
+    {
+        // link: "/government-directory",
+        tag: {
+            text: "Info",
+            color: "brand",
+        },
+        title: {
+            icon: FormatListBullet,
+            text: "Government Directory",
+        },
+        description: "Guide to the structures, organisations and key people in the government of Lumina.",
+    },
 ]
 
 export const three_wide: HubType[] = [
-    {
-        // link: "",
-        tag: {
-            text: "Coming Soon",
-            color: "white"
-        },
-        title: {
-            icon: Telescope,
-            text: "Our Vision",
-        },
-        description: "Get a detailed look at what we're aiming to accomplish for the present, and future of Lumina.",
-    },
     {
         // link: "",
         tag: {
@@ -175,7 +189,7 @@ export const three_wide: HubType[] = [
             icon: Bank,
             text: "Monetary System",
         },
-        description: "Learn how we will revolutionise banking in Lumina, with our 100% digital currency, the Luminar (Ł)",
+        description: "Learn how we will revolutionise banking in Lumina, with our 100% digital currency, the Aura (Ѧ)",
     },
     {
         // link: "",
@@ -187,7 +201,7 @@ export const three_wide: HubType[] = [
             icon: Tax,
             text: "Tax System",
         },
-        description: "Find out how the progressive nature of Lumina’s taxes, benefits everyone.",
+        description: "Find out how the progressive nature of Lumina's taxes, benefits everyone.",
     },
     {
         // link: "",
@@ -213,6 +227,32 @@ export const three_wide: HubType[] = [
         },
         description: "Want to become a pioneer and help build a new city from scratch? Learn how.",
     },
+    //healthcare
+    {
+        // link: "",
+        tag: {
+            text: "Coming Soon",
+            color: "white"
+        },
+        title: {
+            icon: DnaHelix,
+            text: "Healthcare",
+        },
+        description: "Learn about our healthcare system, and how we're revolutionising healthcare.",
+    },
+    //culture & history
+    // {
+    //     // link: "",
+    //     tag: {
+    //         text: "Coming Soon",
+    //         color: "white"
+    //     },
+    //     title: {
+    //         icon: Book,
+    //         text: "Culture & History",
+    //     },
+    //     description: "Learn about the history of Lumina, and how we're building a new culture.",
+    // }
 ]
 
 export const all_links = [...two_wide, ...three_wide]

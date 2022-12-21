@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let color: "red" | "brand" | "blue" | "white" | "yellow" = "brand"
+export let color: "red" | "brand" | "blue" | "white" | "yellow" = "brand"
 </script>
 
 <span class="tag {color}">
