@@ -10,6 +10,7 @@ import AccountCircle from "svelte-material-icons/AccountCircle.svelte"
 import Close from "svelte-material-icons/Close.svelte"
 import ClickoutRegion from "./ClickoutRegion.svelte"
 import Inside from "./Inside.svelte"
+import Icon from "$lib/display/Icon.svelte"
 
 export let first_name: string
 export let last_name: string
@@ -30,9 +31,7 @@ let toggled = false
                     <div class="group">
                         <div class="space-between">
                             <Heading level={4} left_icon={AccountCircle}>Update Identity</Heading>
-                            <div class="icon" on:click={() => toggled = !toggled}>
-                                <Close/>
-                            </div>
+                            <Icon on:click={() => toggled = !toggled} icon={Close}/>
                         </div>
                         <div class="input-group">
                             <Input

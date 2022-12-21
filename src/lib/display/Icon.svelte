@@ -6,7 +6,11 @@ export let size: number | undefined = undefined
 export let color: "brand" | "white" | "red" | undefined = undefined
 export let opacity = 1
 </script>
-<div class="icon {color}" style="opacity: {opacity};">
+<div
+    class="icon {color}"
+    style="opacity: {opacity};"
+    on:click
+    on:keypress>
     <svelte:component this={icon} size={size}/>
 </div>
 <style lang="stylus">
