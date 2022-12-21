@@ -1,3 +1,7 @@
+<PageHead
+    title="Sign in"
+    description="Sign in to your Lumina account."
+/>
 <script lang="ts">
 import Logo from "$lib/icons/Logo.svelte"
 import Tag from "$lib/display/Tag.svelte"
@@ -21,6 +25,7 @@ import { goto } from "$app/navigation"
 import type { PageData } from "./$types"
 import { get_user } from "$lib/api/user"
 import Password from "$lib/controls/Password.svelte"
+import PageHead from "$lib/components/PageHead.svelte"
 
 export let data: PageData
 

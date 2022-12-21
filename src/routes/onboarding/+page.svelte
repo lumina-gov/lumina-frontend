@@ -1,3 +1,7 @@
+<PageHead
+    title="Onboarding"
+    description="Create your account and start building your future city."
+/>
 <script lang="ts">
 import Logo from "$lib/icons/Logo.svelte"
 import AccountCreate from "./AccountCreate.svelte"
@@ -6,6 +10,7 @@ import ProgressBar from "$lib/display/ProgressBar.svelte"
 import Tag from "$lib/display/Tag.svelte"
 import { onMount } from "svelte"
 import { get_query } from "$lib/utils/query"
+import PageHead from "$lib/components/PageHead.svelte"
 
 export let data: import("./$types").PageData
 
