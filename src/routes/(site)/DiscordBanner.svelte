@@ -2,6 +2,7 @@
 import Discord from "svelte-material-icons/Discord.svelte"
 import RightChevron from "svelte-material-icons/ChevronRight.svelte"
 import Button from "$lib/controls/Button.svelte"
+import site_data from "$lib/data/site_data"
 </script>
 <div class="banner-inner">
     <div class="left">
@@ -20,7 +21,7 @@ import Button from "$lib/controls/Button.svelte"
     <Button
         hug={true}
         left_icon={Discord}
-        href="https://discord.gg/r4vNcUKktT"
+        href={site_data.socials.discord}
         style="translucent"
         right_icon={RightChevron}>
         Join Server

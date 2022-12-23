@@ -12,6 +12,8 @@ export let gap: number | string = 0
 export let reset_bg = false
 export let opacity = false
 export let interactive = false
+export let align_items: "center" | "flex-start" | "flex-end" = "center"
+export let justify_content: "center" | "flex-start" | "flex-end" = "center"
 
 $: is_clickable = (href || interactive)
 
@@ -44,6 +46,8 @@ function handle_keyup(e: KeyboardEvent) {
         max-width: {max_width};
         gap: {typeof gap === "number" ? gap + "px" : gap};
         padding: {padding};
+        align-items: {align_items};
+        justify-content: {justify_content};
     "
     class:clickable={is_clickable}>
     <slot/>
@@ -57,15 +61,13 @@ function handle_keyup(e: KeyboardEvent) {
     background transparify(white, 4%)
     width 100%
     display flex
-    align-items center
-    justify-content center
     background-blur(2px)
     &.clickable
         cursor pointer
         &:hover
             background transparify(white, 8%)
     &.shadow
-        box-shadow 0 0 4px rgba(0, 0, 0, 0.2)
+        box-shadow 0 2px 6px rgba(0, 0, 0, 0.3)
     &.reset_bg
         background mix(white, $dark_app, 10%)
     &.vertical

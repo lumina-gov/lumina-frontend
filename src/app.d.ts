@@ -7,8 +7,8 @@ declare global {
     declare namespace App {
         // interface Locals {}
         interface PageData {
-            graph: GraphStore;
-            alerts: AlertsStore;
+            graph: GraphStore!;
+            alerts: AlertsStore!;
         }
         interface Error {
             code?: string;

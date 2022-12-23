@@ -1,7 +1,7 @@
 import { MessageType } from "$lib/types/message"
 import type { PageLoad } from "./$types"
 
-export const load: PageLoad = async function load({ parent }) {
+export const load = (async ({ parent }) => {
     const data = await parent()
 
     const { data: { user_count }, errors } = await data.graph.req<{ user_count?: number }>`
@@ -15,7 +15,6 @@ export const load: PageLoad = async function load({ parent }) {
     }
 
     return {
-        ...data,
         user_count: user_count || 2000,
     }
-}
+}) satisfies PageLoad

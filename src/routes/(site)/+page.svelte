@@ -4,9 +4,7 @@
     include_suffix={false}
     description="Lumina is a social experiment with the goals of setting up a new innovative and environmentally sustainable city."
     />
-<svelte:head>
-    {@html serializeSchema(organizationSchema) }
-</svelte:head>
+<SchemaComponent schema={organizationSchema}/>
 <script lang="ts">
 import UpcomingEvents from "$lib/components/events/UpcomingEventsHero.svelte"
 import NewsHero from "$lib/components/pages/news/NewsHero.svelte"
@@ -28,8 +26,9 @@ import Bank from "svelte-material-icons/Bank.svelte"
 import Cash from "svelte-material-icons/Cash.svelte"
 import type { PageData } from "./$types"
 import type { GovernmentOrganization, WithContext } from "schema-dts"
-import { serializeSchema } from "$lib/utils/schema"
 import PageHead from "$lib/components/PageHead.svelte"
+import site_data from "$lib/data/site_data"
+import SchemaComponent from "$lib/components/SchemaComponent.svelte"
 
 
 export const organizationSchema: WithContext<GovernmentOrganization> = {
@@ -42,11 +41,11 @@ export const organizationSchema: WithContext<GovernmentOrganization> = {
     "url": "https://lumina.earth",
     "logo": "https://lumina.earth/images/lumina.png",
     "sameAs": [
-        "https://twitter.com/luminagov",
-        "https://www.facebook.com/luminagov",
+        site_data.socials.facebook,
+        site_data.socials.tiktok,
+        site_data.socials.twitter,
+        site_data.socials.youtube,
         "https://www.wikidata.org/wiki/Q104434355",
-        "https://www.tiktok.com/@luminagov",
-        "https://www.youtube.com/channel/UCL8Fjjq-gSzWMbAC3sEOXpA",
         "https://lumina.earth",
         "https://www.crunchbase.com/organization/lumina-autonomous-government",
     ]

@@ -96,10 +96,10 @@ export const two_wide: HubType[] = [
 
 export const three_wide: HubType[] = [
     {
-        // link: "",
+        link: "/media-and-press",
         tag: {
-            text: "Coming Soon",
-            color: "white"
+            text: "Info",
+            color: "blue"
         },
         title: {
             icon: BadgeAccountHorizontal,

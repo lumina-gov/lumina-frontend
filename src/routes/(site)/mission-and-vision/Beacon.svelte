@@ -19,7 +19,7 @@
     align-items center
 
 .logo
-    animation beacon 1s ease-in-out infinite
+    animation beacon 1.5s ease-in-out infinite
     font-size 80px
     display inline-flex
     color $brand
@@ -28,7 +28,7 @@
     0%
         opacity: 1
     50%
-        opacity: 0.5
+        opacity: 0.3
     100%
         opacity: 1
 </style>

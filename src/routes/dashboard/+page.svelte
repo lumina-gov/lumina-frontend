@@ -16,6 +16,7 @@ import Bank from "svelte-material-icons/Bank.svelte"
 import HumanGreetingVariant from "svelte-material-icons/HumanGreetingVariant.svelte"
 import type { PageData } from "./$types"
 import Heading from "$lib/display/Heading.svelte"
+import site_data from "$lib/data/site_data"
 
 export let data: PageData
 
@@ -60,7 +61,7 @@ let left_cards: {
         title: "Join the Discord",
         description: "If you've got questions or are interested in contributing, come chat on our community Discord server.",
         icon: Discord,
-        href: "https://discord.gg/r4vNcUKktT",
+        href: site_data.socials.discord,
         tag: {
             text: "RECOMMENDED",
             color: "brand",
