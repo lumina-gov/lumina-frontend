@@ -8,7 +8,7 @@ export let include_suffix = true
 $: real_title = include_suffix ? `${title} » Lumina » The City of the Future` : title
 
 $: url = `https://${$page.url.host}${$page.url.pathname}${$page.url.search}`
-$: og_image = `https://${$page.url.host}/api/og?title=${title}`
+$: og_image = `https://${$page.url.host}/api/og?title=${encodeURIComponent(title)}`
 </script>
 <svelte:head>
     <title>{ real_title }</title>
