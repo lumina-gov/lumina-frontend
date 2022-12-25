@@ -7,20 +7,18 @@ import { fade } from "svelte/transition"
 export let loading = false
 
 const progress = tweened(0, {
-    duration: 3500,
     easing: cubicOut
 })
 
-$: if (!loading) {
-    progress.set(1, { duration: 1000 })
-}
-
-beforeNavigate(() => {
+beforeNavigate(async () => {
     loading = true
+    await progress.set(0, { duration: 0 })
+    await progress.set(0.9, { duration: 4000 })
 })
 
-afterNavigate(() => {
+afterNavigate(async () => {
     loading = false
+    await progress.set(1, { duration: 500 })
 })
 
 </script>
