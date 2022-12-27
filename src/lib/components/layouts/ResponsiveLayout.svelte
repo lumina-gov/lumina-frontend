@@ -2,8 +2,8 @@
 export let gap = 16
 export let vertical_gap: number = gap || 0
 export let horizontal_gap: number = gap || 0
-export let justify_content: "flex-start" | "center" | "flex-end" = "flex-start"
-export let align_items: "flex-start" | "center" | "flex-end" = "flex-start"
+export let justify_content: "flex-start" | "center" | "flex-end" | "stretch" | "normal" = "normal"
+export let align_items: "flex-start" | "center" | "flex-end" | "stretch" | "normal" = "normal"
 export let padding = 0
 export let vertical_padding: number = padding || 0
 export let horizontal_padding: number = padding || 0

@@ -1,8 +1,9 @@
 <script lang="ts">
-export let color: "red" | "brand" | "blue" | "white" | "yellow" = "brand"
+export let color: "red" | "brand" | "blue" | "white" | "yellow" | "green" = "brand"
+export let opacity = false
 </script>
 
-<span class="tag {color}">
+<span class="tag {color}" class:opacity>
     <div class="text">
         <slot />
     </div>
@@ -18,6 +19,8 @@ export let color: "red" | "brand" | "blue" | "white" | "yellow" = "brand"
     border-radius 4px
     color white
     background transparify(white, 16%)
+    &.opacity
+        opacity 0.5
     .text
         padding 3px 4px
         line-height 100%
@@ -41,4 +44,8 @@ export let color: "red" | "brand" | "blue" | "white" | "yellow" = "brand"
     &.yellow
         color $yellow
         background transparify($yellow, 16%)
+
+    &.green
+        color $green
+        background transparify($green, 16%)
 </style>

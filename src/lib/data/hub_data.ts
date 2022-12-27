@@ -81,7 +81,7 @@ export const two_wide: HubType[] = [
         description: "Lumina's cloud government portal that lets citizens access government services.",
     },
     {
-        // link: "/government-directory",
+        link: "/government-directory",
         tag: {
             text: "Info",
             color: "brand",

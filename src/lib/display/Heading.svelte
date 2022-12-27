@@ -9,10 +9,11 @@ export let left_icon_color: Prop<Icon, "color"> = "brand"
 export let right_icon: typeof SvelteComponent | null = null
 export let right_icon_color: Prop<Icon, "color"> = "brand"
 export let level: 1 | 2 | 3 | 4 = 1
+export let id: string | null = null
 export let underline = false
 </script>
 
-<svelte:element this={"h" + level} class="heading" class:underline>
+<svelte:element this={"h" + level} class="heading" class:underline {id}>
     {#if left_icon}
         <Icon color={left_icon_color} icon={left_icon}/>
     {/if}
@@ -31,6 +32,7 @@ export let underline = false
     align-items center
     margin 0
     position relative
+    scroll-margin-top 80px
     &.underline
         padding 0 4px
         padding-bottom 2px

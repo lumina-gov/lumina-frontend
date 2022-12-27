@@ -13,7 +13,7 @@ export let reset_bg = false
 export let opacity = false
 export let interactive = false
 export let align_items: "center" | "flex-start" | "flex-end" = "center"
-export let justify_content: "center" | "flex-start" | "flex-end" = "center"
+export let justify_content: "center" | "flex-start" | "flex-end" | "space-between" = "center"
 
 $: is_clickable = (href || interactive)
 
