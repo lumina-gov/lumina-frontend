@@ -34,12 +34,10 @@ export const load = (async () => {
                 })
             }
 
-            console.log(release)
-
             return {
-                title: (release.properties.Name as unknown as { title: { plain_text: string }[]}).title.map(title => title.plain_text).join(""),
+                title: (release.properties.Name as { title: { plain_text: string }[]}).title.map(title => title.plain_text).join(""),
                 date: new Date(Date.parse((release.properties.Published as unknown as { date: { start: string } }).date.start)),
-                slug: (release.properties.Slug as unknown as { rich_text: { plain_text: string}[] }).rich_text.map(text => text.plain_text).join(""),
+                slug: (release.properties.Slug as { formula: { string: string }}).formula.string
             }
         })
     }
