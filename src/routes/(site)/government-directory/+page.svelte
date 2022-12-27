@@ -21,6 +21,7 @@ import DotsCircle from "svelte-material-icons/DotsCircle.svelte"
 import MenuDown from "svelte-material-icons/MenuDown.svelte"
 import Sidebar from "./Sidebar.svelte"
 import Box from "$lib/cards/Box.svelte"
+import Government from "svelte-material-icons/Bank.svelte"
 
 export let data: PageData
 
@@ -108,7 +109,7 @@ let org_types: {
                     {#each data.core_orgs as org}
                         <Card padding="16px" align_items="flex-start" justify_content="space-between" gap={16}>
                             <VerticalLayout gap={8}>
-                                <Heading level={3}>{org.name}</Heading>
+                                <Heading level={4} left_icon={Government}>{org.name}</Heading>
                                 <Paragraph>
                                     {org.description}
                                 </Paragraph>
