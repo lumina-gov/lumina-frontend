@@ -1,3 +1,6 @@
+<PageHead
+    title="Meeting times (Your timezone)"
+    description="Find pioneer meeting times in your local timezone"/>
 <script lang="ts">
 import Card from "$lib/cards/Card.svelte"
 import Hero from "$lib/components/layouts/Hero.svelte"
@@ -6,6 +9,7 @@ import Calendar from "svelte-material-icons/Calendar.svelte"
 import type { PageData } from "./$types"
 import Tag from "$lib/display/Tag.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
+import PageHead from "$lib/components/PageHead.svelte"
 
 export let data: PageData
 
