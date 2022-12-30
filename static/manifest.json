@@ -1,4 +1,5 @@
 {
+    "$schema": "https://json.schemastore.org/web-manifest-combined.json",
     "short_name": "Lumina",
     "name": "Lumina Hub",
     "start_url": "/dashboard",
