@@ -22,6 +22,8 @@ export let data: PageData
 
 $: user_has_citizenship_application = data.user_wrapper.user.citizenship_status === "pending"
 
+$: console.log(data.user_wrapper.user)
+
 async function copy_referral_link() {
     let text = `https://${window.location.host}/onboarding?referral=${data.user_wrapper.user._id}`
     await navigator.clipboard.writeText(text)
@@ -37,16 +39,6 @@ let left_cards: {
     disabled: boolean
 }[] = [
     user_has_citizenship_application ? {
-        title: "Become a citizen",
-        description: "Sign up to become a citizen of Lumina here.",
-        icon: PassportBiometric,
-        href: "/dashboard/citizenship",
-        tag: {
-            text: "RECOMMENDED",
-            color: "brand",
-        },
-        disabled: false,
-    } : {
         title: "Citizen Application Status",
         description: "View your citizenship application status here.",
         icon: PassportBiometric,
@@ -54,6 +46,16 @@ let left_cards: {
         tag: {
             text: "PENDING",
             color: "yellow",
+        },
+        disabled: false,
+    } : {
+        title: "Become a citizen",
+        description: "Sign up to become a citizen of Lumina here.",
+        icon: PassportBiometric,
+        href: "/dashboard/citizenship",
+        tag: {
+            text: "RECOMMENDED",
+            color: "brand",
         },
         disabled: false,
     },
