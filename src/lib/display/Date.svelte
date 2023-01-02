@@ -35,8 +35,6 @@ $: units_ago = diff_in_hours <= 1 ? "minute" : diff_in_days <= 1 ? "hour" : "day
 $: units = diff_in_hours <= 1 ? diff_in_minutes : diff_in_days <= 1 ? diff_in_hours : diff_in_days
 $: ago = `${Math.ceil(units)} ${units_ago}${units > 1 ? "s" : ""} ago`
 
-$: console.log(diff_in_hours)
-
 $: day_with_suffix = date.getDate() + get_day_suffix(date.getDate())
 $: month = date.toLocaleString("en-us", { month: "short" })
 $: year = date.getFullYear()
