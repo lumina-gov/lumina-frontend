@@ -22,22 +22,13 @@ export let data: PageData
 
 $: user_has_citizenship_application = data.user_wrapper.user.citizenship_status === "pending"
 
-$: console.log(data.user_wrapper.user)
-
 async function copy_referral_link() {
     let text = `https://${window.location.host}/onboarding?referral=${data.user_wrapper.user._id}`
     await navigator.clipboard.writeText(text)
     data.alerts.create_alert(MessageType.Success, "Invite link copied")
 }
 
-let left_cards: {
-    title: string,
-    icon: typeof SvelteComponent
-    href?: string
-    description: string
-    tag?: Prop<AppCard, "tag">,
-    disabled: boolean
-}[] = [
+$: left_cards = [
     user_has_citizenship_application ? {
         title: "Citizen Application Status",
         description: "View your citizenship application status here.",
@@ -100,16 +91,16 @@ let left_cards: {
         },
         disabled: true,
     },
-]
-
-let right_cards: {
+] satisfies {
     title: string,
     icon: typeof SvelteComponent
     href?: string
     description: string
     tag?: Prop<AppCard, "tag">,
     disabled: boolean
-}[] = [
+}[]
+
+$: right_cards = [
     {
         title: "Read the Lumina Accords",
         description: "A short infographic novel about the changing world order, and why we need a new system of governance. The high level plan and ideas behind implementing Lumina.",
@@ -138,9 +129,17 @@ let right_cards: {
             text: "COMING SOON",
             color: "white",
         },
+        href: undefined,
         disabled: true,
     }
-]
+] satisfies {
+    title: string,
+    icon: typeof SvelteComponent
+    href?: string
+    description: string
+    tag?: Prop<AppCard, "tag">,
+    disabled: boolean
+}[]
 
 </script>
 <div class="wrapper">
