@@ -60,7 +60,7 @@ $: {
             interval = null
         } else if($alerts.length !== 0) {
             setBottomHeights()
-            if(interval == null) interval = setInterval(intervalFn, 3000)
+            if(interval == null) interval = setInterval(intervalFn, 5000)
         }
     }
 }

@@ -1,6 +1,8 @@
 <script lang="ts">
 import AlertBar from "./AlertBar.svelte"
 import PageLoaderBar from "./PageLoaderBar.svelte"
+import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
+
 </script>
 <style lang="stylus">
 :global
@@ -50,4 +52,5 @@ import PageLoaderBar from "./PageLoaderBar.svelte"
 </svelte:head>
 <PageLoaderBar/>
 <AlertBar/>
+<ServiceWorkerUI/>
 <slot/>

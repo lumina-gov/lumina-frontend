@@ -6,18 +6,22 @@ declare let self: ServiceWorkerGlobalScope
 import { build, files, version } from "$service-worker"
 
 self.addEventListener("install", e => {
-    console.log("[Service Worker] Install")
+    console.info("[Service Worker] Install")
 
     e.waitUntil((async () => {
-        console.log("[Service Worker] Installing")
+        console.info("[Service Worker] Installing")
         const cache = await caches.open(version)
         await cache.addAll(files)
         await cache.addAll(build)
-        await cache.addAll(["/", "/dashboard"])
-        console.log("[Service Worker] Cached all files")
-    })())
+        // here we need to cache an offline load url for the service worker
+        // so that we can load the app offline, and client-side navigate to
+        // the page we want
+        await cache.addAll([])
+        console.info("[Service Worker] Cached all files")
 
-    self.skipWaiting()
+        await self.skipWaiting()
+        console.info("[Service Worker] Skipped Waiting")
+    })())
 })
 
 self.addEventListener("fetch", event => {
@@ -53,7 +57,7 @@ self.addEventListener("push", event => {
 
 self.addEventListener("activate", event => {
     event.waitUntil((async () => {
-        console.log("[Service Worker] Activated")
+        console.info("[Service Worker] Activated")
     })())
 })
 

@@ -1,5 +1,19 @@
 <script>
-    export let width = 50
+import { cubicInOut, cubicOut } from "svelte/easing"
+import { tweened } from "svelte/motion"
+
+
+export let width = 50
+
+const progress = tweened(width, {
+    duration: 1000,
+    easing: cubicOut
+})
+
+$: progress.set(width, {
+    duration: 1000,
+    easing: cubicOut
+})
 </script>
 
 <div class="progress-bar">
