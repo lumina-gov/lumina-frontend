@@ -96,7 +96,7 @@ onMount(() => {
                         Start
                     </Button>
                 {:else}
-                    <Button style="transparent" href="/dashboard" right_icon={Apps}>
+                    <Button style="transparent" href="/hub" right_icon={Apps}>
                         Dashboard
                     </Button>
                 {/if}
@@ -117,7 +117,7 @@ onMount(() => {
                                 Start
                             </Button>
                         {:else}
-                            <Button style="translucent" href="/dashboard" right_icon={Apps}>
+                            <Button style="translucent" href="/hub" right_icon={Apps}>
                                 Dashboard
                             </Button>
                         {/if}

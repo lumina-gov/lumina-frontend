@@ -52,6 +52,7 @@ export let event: EventType
     color white
     cardify()
     overflow hidden
+    position relative
 
     &:hover
         background transparify(white, 8%)

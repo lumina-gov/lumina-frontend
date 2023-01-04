@@ -74,8 +74,7 @@ function handle_keyup(e: KeyboardEvent) {
         display: inline-flex
     &:not(.disabled)
         &:focus-visible
-            outline $brand 2px dashed
-            outline-offset 2px
+            outline-effect()
         &.branded
             background: $brand
             &:hover, &:focus

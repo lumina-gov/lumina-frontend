@@ -1,12 +1,27 @@
 <script lang="ts">
 import Profile from "$lib/display/Profile.svelte"
+import type { User } from "$lib/types/user"
+import { createEventDispatcher } from "svelte"
 
+let dispatch = createEventDispatcher<{ click: Event }>()
 export let active = false
+export let user: User
+
+function clicked(e: Event) {
+    e.stopPropagation()
+    dispatch("click", e)
+}
 </script>
 <div
-    on:click|stopPropagation
+    on:click={clicked}
     tabindex="0"
+    role="button"
     class="profile-button-wrapper"
+    on:keydown={e => {
+        if (e.key === "Enter" || e.key === "Escape") {
+            clicked(e)
+        }
+    }}
     class:active>
     <Profile/>
 </div>
@@ -17,10 +32,19 @@ export let active = false
     padding 4px
     cursor pointer
     border-radius 4px
-    &:hover
-        background transparify(white, 4%)
-    &:active
-        background transparify(white, 12%)
-    &.active
+    display flex
+    align-items center
+    justify-content center
+    &:focus-visible
+        outline-effect()
+    &:hover, &:focus
         background transparify(white, 8%)
+    &:active
+        background transparify(white, 14%)
+    &.active
+        background transparify(white, 14%)
+    @media (max-width $tablet)
+        border-radius 0
+        height 100%
+        width 100%
 </style>

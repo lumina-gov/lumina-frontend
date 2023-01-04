@@ -63,7 +63,7 @@ async function signin () {
 
     alerts.create_alert(MessageType.Success, "Login Successful")
 
-    await goto("/dashboard")
+    await goto("/hub")
 }
 
 

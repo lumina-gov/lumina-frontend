@@ -41,7 +41,7 @@ import site_data from "$lib/data/site_data"
             <nav class="links-wrapper">
                 <a href="/" class="link">Home</a>
                 <a href="https://lightsquare.org" class="link">Light Square</a>
-                <a href="/dashboard" class="link">Dashboard</a>
+                <a href="/hub" class="link">Dashboard</a>
                 <a href="https://www.notion.so/lumina-gov/Knowledge-Hub-048c967061914862b2eeff5ba21da29b" class="link">Knowledge Center</a>
                 <a href={site_data.socials.discord} class="link">Discord</a>
                 <a href="/media-and-press" class="link">Media & Press</a>

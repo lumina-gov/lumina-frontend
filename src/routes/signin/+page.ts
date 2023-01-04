@@ -5,7 +5,7 @@ export const load: PageLoad = async function load({ parent }) {
     const data = await parent()
 
     if(data.user_wrapper.user) {
-        throw redirect(307, "/dashboard")
+        throw redirect(307, "/hub")
     }
 
     return {}

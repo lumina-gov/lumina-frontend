@@ -33,7 +33,7 @@ $: left_cards = [
         title: "Citizen Application Status",
         description: "View your citizenship application status here.",
         icon: PassportBiometric,
-        href: "/dashboard/citizenship/status",
+        href: "/hub/citizenship/status",
         tag: {
             text: "PENDING",
             color: "yellow",
@@ -43,7 +43,7 @@ $: left_cards = [
         title: "Become a citizen",
         description: "Sign up to become a citizen of Lumina here.",
         icon: PassportBiometric,
-        href: "/dashboard/citizenship",
+        href: "/hub/citizenship",
         tag: {
             text: "RECOMMENDED",
             color: "brand",
@@ -144,7 +144,6 @@ $: right_cards = [
 </script>
 <div class="wrapper">
     <div class="area">
-        <Logo/>
         <Heading right_icon={Settlement}>Hi, { data.user_wrapper.user.first_name }</Heading>
         <div class="referral">
             <Heading level={3}>User Referrals</Heading>
@@ -191,6 +190,7 @@ $: right_cards = [
 .wrapper
     display grid
     grid-template-columns 1fr 1fr
+    flex 1
     height 100%
     @media (max-width 1100px)
         grid-template-columns 1fr

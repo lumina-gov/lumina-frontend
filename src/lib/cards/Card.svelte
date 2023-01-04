@@ -77,6 +77,5 @@ function handle_keyup(e: KeyboardEvent) {
     &.opacity
         opacity 0.5
     &:focus-visible
-        outline $brand 2px dashed
-        outline-offset 2px
+        outline-effect()
 </style>

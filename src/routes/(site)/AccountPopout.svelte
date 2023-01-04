@@ -38,7 +38,7 @@ async function logout() {
         </div>
     </div>
     <div class="links">
-        <a class="link" href="/dashboard/account">
+        <a class="link" href="/hub/account">
             <Icon icon={Settings} size={20}/>
             <span>
                 Account Settings

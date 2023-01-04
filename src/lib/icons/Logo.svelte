@@ -14,7 +14,7 @@
 
 .logo
     display flex
-    align-items: center
+    align-items center
     gap 12px
     text-decoration none
     color white

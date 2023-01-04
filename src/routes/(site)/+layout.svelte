@@ -1,32 +1,70 @@
 <script lang="ts">
 import type { LayoutData } from "./$types"
 import Footer from "./Footer.svelte"
-import Header from "./Header.svelte"
+import Navigation from "./Navigation.svelte"
+import AppBar from "./AppBar.svelte"
 import Rater from "./Rater.svelte"
+import ClickoutRegion from "$lib/controls/ClickoutRegion.svelte"
+import Inside from "$lib/controls/Inside.svelte"
 
 export let data: LayoutData
+
+let nav_opened = false
+
+$: authenticated = data.user_wrapper.user != null
+
 </script>
-<div class="layout">
-    <div class="floating-gradient"/>
-    <Header bind:user={data.user_wrapper.user}/>
+
+<svelte:head>
+    <link rel="manifest" href="/manifest.json">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MK9JSEJ2P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-8MK9JSEJ2P');
+    </script>
+</svelte:head>
+<div class="layout" class:authenticated>
+    <ClickoutRegion clicked_outside={() => nav_opened = false}>
+        <AppBar bind:user={data.user_wrapper.user} bind:nav_opened/>
+        <Inside>
+            <Navigation bind:user={data.user_wrapper.user} bind:nav_opened/>
+        </Inside>
+    </ClickoutRegion>
     <div class="content">
         <slot/>
     </div>
-    <Rater/>
-    <Footer/>
+    {#if !data.user_wrapper.user}
+        <Rater/>
+        <Footer/>
+    {/if}
 </div>
 <style lang="stylus">
-@import "variables"
+@import 'variables'
 
 .content
     flex 1
+    display flex
+    flex-direction column
+    @media (max-width $tablet)
+        overflow-y auto
+        height 100%
+
 
 .layout
     display flex
-    height 100%
     flex-direction column
+    min-height 100%
+    &.authenticated
+        @media (max-width $tablet)
+            height 100vh
+            display grid
+            overflow-y hidden
+            grid-template-rows 1fr 60px // content, AppBar
+
     background rgba(0,0,0,0.2)
-    position relative
     &:before
         content ""
         position absolute
@@ -39,24 +77,4 @@ export let data: LayoutData
         background-image url("/images/bg-pattern.svg")
         background-position 50% 50%
 
-.floating-gradient
-    position fixed
-    top 0
-    left 0
-    bottom 0
-    right 0
-    z-index -1
-    background radial-gradient(at 50% 50%, #000F9930 0%, #000F9900 75%)
-    background-size 60% 60%
-    background-repeat no-repeat
-    animation move-gradient 10s ease-in-out infinite
-    transform rotate(45deg) scale(2)
-
-@keyframes move-gradient
-    0%
-        background-position 0% 50%
-    50%
-        background-position 100% 50%
-    100%
-        background-position 0% 50%
 </style>

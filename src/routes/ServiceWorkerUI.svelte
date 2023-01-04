@@ -1,7 +1,6 @@
 <script lang="ts">
-import Button from "$lib/controls/Button.svelte"
 import ProgressBar from "$lib/display/ProgressBar.svelte"
-import { onMount, tick } from "svelte"
+import { onMount } from "svelte"
 
 enum Status {
     None,

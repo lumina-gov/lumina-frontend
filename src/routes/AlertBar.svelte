@@ -94,7 +94,7 @@ async function setBottomHeights () {
     height 0
     display flex
     align-items flex-end
-    z-index 21
+    z-index 250
     justify-content center
     .action-bar
         cursor pointer
@@ -106,7 +106,7 @@ async function setBottomHeights () {
         font-weight 500
         box-shadow 0 0 5px rgba(0,0,0,0.1)
         border-radius 5px
-        z-index 60
+        z-index 251
         color white
         transition 0.2s ease-in-out
         display grid

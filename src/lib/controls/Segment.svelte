@@ -81,8 +81,7 @@ $: tag = href ? "a" : "div"
     &:hover
         background transparify(white, 10%)
     &:focus-visible
-        outline $brand 2px dashed
-        outline-offset 2px
+        outline-effect()
     &.branded
         background $brand
         &:hover

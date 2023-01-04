@@ -3,7 +3,7 @@
     "short_name": "Lumina",
     "name": "Lumina Hub",
     "id": "earth.lumina",
-    "start_url": "/dashboard",
+    "start_url": "/hub",
     "icons": [
         {
             "src": "/images/lumina-app-icon.svg",

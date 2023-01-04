@@ -69,7 +69,7 @@ export const two_wide: HubType[] = [
         description: "Find out the benefits of becoming a citizen in Lumina. Get involved, along with thousands of others today.",
     },
     {
-        link: "/dashboard",
+        link: "/hub",
         tag: {
             text: "Service",
             color: "brand",

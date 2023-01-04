@@ -55,8 +55,7 @@ function handle_keyup(e: KeyboardEvent) {
         background transparify(white, 8%)
         color white
     &:focus-visible
-        outline $brand 2px dashed
-        outline-offset 2px
+        outline-effect()
 
 
 </style>

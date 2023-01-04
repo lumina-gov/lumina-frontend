@@ -138,7 +138,7 @@ async function register() {
 
     data.alerts.create_alert(MessageType.Success, "Citizenship application created")
 
-    await goto("/dashboard/citizenship/status")
+    await goto("/hub/citizenship/status")
 }
 
 </script>

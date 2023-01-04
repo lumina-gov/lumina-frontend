@@ -78,12 +78,12 @@ let proposals = [
         <div class="cards">
             <Card
                 icon={ScriptText}
-                href="/dashboard/legislation"
+                href="/hub/legislation"
                 title="Legislative Library"
                 alert_count={32}
                 description={"View the library of active and historical legislation in Lumina."}/>
             <Card
-                href="/dashboard/assembly/petitions"
+                href="/hub/assembly/petitions"
                 icon={ScriptText}
                 title="Petitions"
                 alert_count={4}

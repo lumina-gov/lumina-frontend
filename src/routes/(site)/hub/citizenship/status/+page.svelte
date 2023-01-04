@@ -27,7 +27,7 @@ import ClockTimeFour from "svelte-material-icons/ClockTimeFour.svelte"
         <Button
             style="translucent"
             hug={true}
-            href="/dashboard"
+            href="/hub"
             right_icon={Apps}>
             Open Dashboard
         </Button>
