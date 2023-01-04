@@ -1,11 +1,16 @@
 <script lang="ts">
 export let color: "red" | "brand" | "blue" | "white" | "yellow" | "green" = "brand"
 export let opacity = false
+export let text = ""
 </script>
 
 <span class="tag {color}" class:opacity>
     <div class="text">
-        <slot />
+        {#if $$slots.default}
+            <slot />
+        {:else}
+            {text}
+        {/if}
     </div>
 </span>
 <style lang="stylus">
@@ -19,11 +24,12 @@ export let opacity = false
     border-radius 4px
     color white
     background transparify(white, 16%)
-    &.opacity
-        opacity 0.5
     .text
         padding 3px 4px
         line-height 100%
+
+    &.opacity
+        opacity 0.5
 
     &.brand
         color $brand

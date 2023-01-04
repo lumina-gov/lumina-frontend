@@ -85,7 +85,7 @@ async function signup () {
 
         data.alerts.create_alert(MessageType.Success, "Login Successful")
 
-        await goto("/hub")
+        await goto("/")
     }
 
 }

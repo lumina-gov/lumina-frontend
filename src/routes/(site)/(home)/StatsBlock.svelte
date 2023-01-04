@@ -1,4 +1,6 @@
 <script lang="ts">
+    import Grid from "$lib/components/layouts/Grid.svelte"
+    import GridItem from "$lib/components/layouts/GridItem.svelte"
 import type { SvelteComponent } from "svelte"
 
 export let stats: {
@@ -10,9 +12,20 @@ export let stats: {
 
 </script>
 
-<div class="stats">
+<Grid side_padding={false} columns={{
+    laptop: 16,
+    tablet: 8,
+    mobile: 4
+}}>
     {#each stats as stat}
-        <div class="stat">
+        <GridItem
+            align_items="center"
+            text_align="center"
+            columns={{
+                laptop: "span 4",
+                tablet: "span 2",
+                mobile: "span 2"
+            }}>
             <div class="stat-icon" style="color: {stat.color};">
                 <svelte:component this={stat.icon} />
             </div>
@@ -22,39 +35,19 @@ export let stats: {
             <div class="stat-name">
                 <span>{stat.name}</span>
             </div>
-        </div>
+        </GridItem>
     {/each}
-</div>
+</Grid>
 
 <style lang="stylus">
 @import "variables"
-
-.stats
-    display grid
-    grid-template-columns repeat(4, 1fr)
-    width 100%
-    grid-gap 20px
-    padding 40px 0
-    @media (max-width 900px)
-        grid-template-columns repeat(2, 1fr)
-        grid-gap 40px
-        padding 40px 0
-    @media (max-width 500px)
-        grid-template-columns 1fr
-        grid-gap 60px
-        padding 40px 0
-
-.stat
-    display flex
-    flex-direction column
-    align-items center
-    text-align center
 
 .stat-icon
     font-size 48px
 
 .stat-value
     font-size 36px
+    padding-bottom 4px
     font-weight 600
 
 .stat-name

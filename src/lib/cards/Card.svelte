@@ -12,8 +12,9 @@ export let gap: number | string = 0
 export let reset_bg = false
 export let opacity = false
 export let interactive = false
-export let align_items: "center" | "flex-start" | "flex-end" = "center"
-export let justify_content: "center" | "flex-start" | "flex-end" | "space-between" = "center"
+export let align_items: "center" | "flex-start" | "flex-end" | "stretch" | "normal" = "center"
+export let justify_content: "center" | "flex-start" | "flex-end" | "space-between" | "space-around" | "space-evenly" | "normal" = "normal"
+export let disabled = false
 
 $: is_clickable = (href || interactive)
 
@@ -40,6 +41,7 @@ function handle_keyup(e: KeyboardEvent) {
     tabindex={is_clickable ? 0 : -1}
     class:opacity
     class:reset_bg
+    class:disabled
     class:vertical={direction === "vertical"}
     class:horizontal={direction === "horizontal"}
     style="
@@ -56,12 +58,15 @@ function handle_keyup(e: KeyboardEvent) {
 @import 'variables'
 
 .card
-    border-radius 4px
+    border-radius 6px
     color white
     background transparify(white, 4%)
     width 100%
     display flex
     background-blur(2px)
+    &.disabled
+        opacity 0.6
+        pointer-events none
     &.clickable
         cursor pointer
         &:hover

@@ -6,30 +6,39 @@
     />
 <SchemaComponent schema={organizationSchema}/>
 <script lang="ts">
-import UpcomingEvents from "$lib/components/events/UpcomingEventsHero.svelte"
-import NewsHero from "$lib/components/pages/news/NewsHero.svelte"
-import DiscordBanner from "./DiscordBanner.svelte"
-import KnowledgeHubCard from "./HubsBlock.svelte"
 import StatsHero from "./StatsBlock.svelte"
-import JobHero from "$lib/components/jobs/JobHero.svelte"
 import AccountGroup from "svelte-material-icons/AccountGroup.svelte"
 import Domain from "svelte-material-icons/Domain.svelte"
 import AccountOutline from "svelte-material-icons/AccountOutline.svelte"
 import Flash from "svelte-material-icons/Flash.svelte"
 import Settlement from "$lib/icons/Settlement.svelte"
 import Button from "$lib/controls/Button.svelte"
-import HubArea from "$lib/components/hub/HubArea.svelte"
 import Coloured from "$lib/display/Coloured.svelte"
 import Hero from "$lib/components/layouts/Hero.svelte"
-import ArchiveBox from "svelte-material-icons/Archive.svelte"
-import Bank from "svelte-material-icons/Bank.svelte"
-import Cash from "svelte-material-icons/Cash.svelte"
 import type { PageData } from "./$types"
 import type { GovernmentOrganization, WithContext } from "schema-dts"
 import PageHead from "$lib/components/PageHead.svelte"
 import site_data from "$lib/data/site_data"
 import SchemaComponent from "$lib/components/SchemaComponent.svelte"
-
+import Grid from "$lib/components/layouts/Grid.svelte"
+import GridItem from "$lib/components/layouts/GridItem.svelte"
+import Card from "$lib/cards/Card.svelte"
+import Paragraph from "$lib/display/Paragraph.svelte"
+import FlexWrap from "$lib/display/FlexWrap.svelte"
+import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
+import VerticalLayout from "$lib/components/layouts/VerticalLayout.svelte"
+import Heading from "$lib/display/Heading.svelte"
+import Information from "svelte-material-icons/Information.svelte"
+import Profile from "$lib/display/Profile.svelte"
+import type { Props } from "$lib/utils/typed_props"
+import ServiceCard from "$lib/components/ServiceCard.svelte"
+import Passport from "svelte-material-icons/Passport.svelte"
+import Vote from "svelte-material-icons/Vote.svelte"
+import Cog from "svelte-material-icons/Cog.svelte"
+import ServicesArea from "./ServicesArea.svelte"
+import InformationArea from "./InformationArea.svelte"
+import Notification from "svelte-material-icons/Bell.svelte"
+import AlertsArea from "./AlertsArea.svelte"
 
 export const organizationSchema: WithContext<GovernmentOrganization> = {
     "@context": "https://schema.org",
@@ -53,210 +62,215 @@ export const organizationSchema: WithContext<GovernmentOrganization> = {
 
 export let data: PageData
 
-let events = [
-    {
-        link: "/",
-        date: {
-            time: {
-                hour: "00",
-                minutes: "00",
-                pm: false
-            },
-            day: 31,
-            month: "Aug",
-            year: 2022
-        },
-        title: "Lumina Day",
-        type: "Holiday",
-        img: "/images/lumina_flag.png",
-        location: "Lumina"
-    },
-    {
-        link: "/",
-        date: {
-            time: {
-                hour: "00",
-                minutes: "00",
-                pm: false
-            },
-            day: 31,
-            month: "Aug",
-            year: 2022
-        },
-        title: "Lumina Day",
-        type: "Holiday",
-        img: "images/lumina_flag.png",
-        location: "Lumina"
-    },
-]
+$: user = data.user_wrapper.user
+$: user_has_citizenship_applicaiton = user?.citizenship_status === "pending"
 
-let featuredStories = [
-    {
+console.log(user_has_citizenship_applicaiton)
+
+$: service_cards_top = [
+    user_has_citizenship_applicaiton ? {
+        icon: Passport,
+        title: "Citizenship Application",
+        href: "/citizenship",
         tag: {
-            text: "Announcement",
-            color: "#492C9C"
+            text: "Pending",
+            color: "yellow"
         },
-        date: {
-            dayAsNumber: 5,
-            month: "Jan",
-            year: 2022
+        description: "Your citizenship application is currently pending. You will be notified when it is approved."
+    } : {
+        icon: Passport,
+        title: "Apply for citizenship",
+        href: "/citizenship",
+        tag: {
+            text: "Recommended",
+            color: "green"
         },
-        title: "Lumina hits 2000 citizens",
-        author: {
-            name: "Albert",
-            img: "/images/albert_dp.png"
-        }
+        description: "Apply for citizenship in Lumina, and become a part of the city's government."
     },
     {
+        title: "Direct Democracy Platform",
+        // href: "/direct-democracy",
+        icon: Vote,
         tag: {
-            text: "Announcement",
-            color: "#492C9C"
+            text: "Coming soon",
+            color: "white",
+            opacity: true
         },
-        date: {
-            dayAsNumber: 3,
-            month: "August",
-            year: 2021
+        description: "Vote on proposals and laws, and have your say in the city's future."
+    },
+    {
+        title: "My Organisations",
+        // href: "/organisations",
+        icon: Domain,
+        tag: {
+            text: "Coming soon",
+            color: "white",
+            opacity: true
         },
-        title: "Lumina hits 1000 citizens",
-        author: {
-            name: "Albert",
-            img: "/images/albert_dp.png"
-        }
+        description: "View, register and manage your organisations here."
     }
-]
+] satisfies Props<ServiceCard>[]
 
 </script>
-<Hero>
-    <div class="hero">
-        <div class="hero-main">
-            <h1>city of the <Coloured>future</Coloured></h1>
-            <p>
-                Welcome to <Coloured>Lumina</Coloured>, a social experiment with the goals of
-                setting up a new innovative and environmentally sustainable city.
-            </p>
-            <p>
-                Lumina proposes to set up an <Coloured>Autonomous Zone</Coloured>, which is a
-                city with it's own government, laws, and currency.
-            </p>
-            <Button href="/onboarding" right_icon={Settlement} hug={true}>
-                Become a citizen
-            </Button>
-        </div>
-        <div class="image-wrapper">
-            <img class="hero-image" src={"/images/hero-image.svg"} alt="a city skyline">
-        </div>
-    </div>
-    <StatsHero stats={[
-        {
-            icon: AccountGroup,
-            name: "Citizens registered",
-            value: data.user_count,
-            color: "#5D35D5"
-        },
-        {
-            icon: Domain,
-            name: "Government Ministries",
-            value: 15,
-            color: "#4F63CE"
-        },
-        {
-            icon: AccountOutline,
-            name: "Government Staff",
-            value: 36,
-            color: "#4488C9"
-        },
-        {
-            icon: Flash,
-            name: "Renewable",
-            value: "100%",
-            color: "#34BFC1"
-        }
-    ]}/>
-</Hero>
-<Hero>
-    <DiscordBanner/>
-</Hero>
-<Hero translucent={true}>
-    <HubArea/>
-</Hero>
-<Hero>
-    <JobHero/>
-</Hero>
-<div class="extra-info-wrapper">
-    <UpcomingEvents bind:events />
-    <KnowledgeHubCard
-        main_area={{
-            href: "https://lumina-gov.notion.site/Knowledge-Hub-048c967061914862b2eeff5ba21da29b",
-            icon: ArchiveBox,
-            title: "Knowledge Hub",
-            description: "Learn about how Lumina plans to become a reality. Get information on funding, planning, settlement & more."
-        }}
-        areas={[
+<Grid padding_vertical="100px" padding_bottom="40px" vertical_gap={60}>
+    {#if user}
+        <GridItem gap="40px" align_items="flex-start" columns={{
+            laptop: "2 / span 6",
+            tablet: "span 4",
+            mobile: "span 4"
+        }}>
+            <VerticalLayout>
+                <h2>Welcome back</h2>
+                <h1><Profile size="40px"/> { user.first_name }</h1>
+            </VerticalLayout>
+        </GridItem>
+    {:else}
+        <GridItem gap="40px" align_items="flex-start" columns={{
+            laptop: "2 / span 7",
+            tablet: "span 4",
+            mobile: "span 4"
+        }}>
+            <VerticalLayout>
+                <h2>Welcome to the</h2>
+                <h1>city of the <br><Coloured>future</Coloured></h1>
+            </VerticalLayout>
+
+            <FlexWrap>
+                <Button href="/signin" style="translucent" right_icon={ExitToApp} hug={true}>
+                    Sign In
+                </Button>
+                <Button href="/onboarding" right_icon={Settlement} hug={true}>
+                    Become a citizen
+                </Button>
+            </FlexWrap>
+        </GridItem>
+        <GridItem columns={{
+            laptop: "span 7",
+            tablet: "span 4",
+            mobile: "span 4"
+        }}>
+            <Card padding="32px" gap="16px" align_items="flex-start">
+                <Heading left_icon={Information} level={3}>What is Lumina?</Heading>
+                <Paragraph>
+                    Welcome to <Coloured>Lumina</Coloured>, a social experiment with the goals of
+                    setting up a new innovative and environmentally sustainable city.
+                </Paragraph>
+                <Paragraph>
+                    Lumina proposes to set up an <Coloured>Autonomous Zone</Coloured>, which is a
+                    city with it's own government, laws, and currency.
+                </Paragraph>
+            </Card>
+        </GridItem>
+    {/if}
+    <GridItem columns={{
+        laptop: "span 16",
+        tablet: "span 8",
+        mobile: "span 4"
+    }}>
+        <StatsHero stats={[
             {
-                href: "https://lumina-gov.notion.site/Banking-Monetary-system-d3d4d2a99c3a41b59a468fb7db41d335",
-                icon: Bank,
-                title: "Banking & Monetary System"
+                icon: AccountGroup,
+                name: "Citizens registered",
+                value: data.user_count,
+                color: "#5D35D5"
             },
             {
-                href: "https://lumina-gov.notion.site/Taxation-System-84fd7a0d3d6b4951aa17ebfb4af4d702",
-                icon: Cash,
-                title: "Taxation System"
+                icon: Domain,
+                name: "Government Ministries",
+                value: 15,
+                color: "#4F63CE"
+            },
+            {
+                icon: AccountOutline,
+                name: "Government Staff",
+                value: 36,
+                color: "#4488C9"
+            },
+            {
+                icon: Flash,
+                name: "Renewable",
+                value: "100%",
+                color: "#34BFC1"
             }
         ]}/>
-</div>
-<NewsHero bind:featuredStories />
+    </GridItem>
+    <GridItem
+        columns={{
+            laptop: "span 16",
+            tablet: "span 8",
+            mobile: "span 4"
+        }}
+        >
+        <Grid side_padding={false} columns={{
+            laptop: 9,
+            tablet: 3,
+            mobile: 3
+        }}>
+            {#each service_cards_top as card}
+                <GridItem columns={{
+                    laptop: "span 3",
+                    tablet: "span 3",
+                    mobile: "span 3"
+                }}
+                flex_direction="row"
+                align_items="stretch">
+                    <ServiceCard {...card} size="large"/>
+                </GridItem>
+            {/each}
+        </Grid>
+    </GridItem>
+</Grid>
+
+<Hero translucent={true}>
+    <Grid vertical_gap={60} side_padding={false}>
+        <GridItem align_items="flex-start" columns={{
+            laptop: "span 16",
+            tablet: "span 8",
+            mobile: "span 4"
+        }} gap="16px">
+            <Heading level={2} left_icon={Cog}>Services</Heading>
+            <Paragraph>
+                The city of Lumina is run by the citizens, for the citizens. Here are some of the services you can use to get involved.
+            </Paragraph>
+            <ServicesArea/>
+        </GridItem>
+        <GridItem align_items="flex-start" columns={{
+            laptop: "span 11",
+            tablet: "span 8",
+            mobile: "span 4"
+        }} gap="16px">
+            <Heading level={2} left_icon={Information}>Information</Heading>
+            <Paragraph>
+                Here you can find information about the city, and how it works.
+            </Paragraph>
+            <InformationArea/>
+        </GridItem>
+        <GridItem align_items="flex-start" columns={{
+            laptop: "span 5",
+            tablet: "span 8",
+            mobile: "span 4"
+        }} gap="16px">
+            <Heading level={2} left_icon={Notification}>Alerts & Notifications</Heading>
+            <Paragraph>
+                Important events, alerts and notifications.
+            </Paragraph>
+            <AlertsArea/>
+        </GridItem>
+    </Grid>
+</Hero>
 
 <style lang="stylus">
 @import "variables"
 
-.hero
-    position relative
+h1
+    font-size 40px
+    font-weight 600
     display flex
     align-items center
-    width 100%
-    .hero-main
-        max-width 500px
-        z-index 2
-        position relative
-        width 100%
-        p
-            color transparify(white, 70%)
-    .image-wrapper
-        position absolute
-        right 0
-        z-index 1
-        max-width 600px
-        width 100%
-        display flex
-        align-items center
-        justify-content flex-end
-        @media (max-width 800px)
-            max-width 400px
-        @media (max-width 500px)
-            max-width 250px
-        img
-            width 100%
-
-
-h1
-    font-size 80px
+    gap 16px
+h2
+    font-size 20px
     font-weight 600
-    margin 0
-    @media (max-width 500px)
-        font-size 50px
-    @media (max-width 420px)
-        font-size 42px
-
-.hero-image
-    position relative
-    left 0
-
-.extra-info-wrapper
-    display grid
-    grid-template-columns 1.2fr 1fr
-    background transparify(white, 4%)
-    width 100%
-    @media (max-width $laptop)
-        grid-template-columns 1fr
+    opacity 0.3
 
 </style>

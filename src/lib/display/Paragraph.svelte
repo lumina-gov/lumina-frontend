@@ -6,6 +6,6 @@
 
 p
     margin 0
-    opacity 0.7
+    color transparify(white, 70%)
 
 </style>

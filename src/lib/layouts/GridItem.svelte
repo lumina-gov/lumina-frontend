@@ -11,13 +11,12 @@ type AlignItems = "flex-start" | "flex-end" | "center" | "baseline" | "stretch" 
 type FlexDirection = "row" | "row-reverse" | "column" | "column-reverse" | "normal"
 
 export let padding: string | undefined = undefined
-export let gap: string | undefined = undefined
+export let gap: number | undefined = undefined
 export let tag = "div"
 
 export let flex_direction: FlexDirection | BreakpointColumns<FlexDirection> | undefined = "column"
 export let justify_content: JustifyContent | BreakpointColumns<JustifyContent> | undefined = undefined
 export let align_items: AlignItems | BreakpointColumns<AlignItems> | undefined = undefined
-export let text_align: "left" | "center" | "right" | undefined = undefined
 
 export let columns: BreakpointColumns<string>
 
@@ -37,10 +36,10 @@ $: styles = {
     "align-items": typeof align_items == "string" ? align_items : undefined,
     "justify-content": typeof justify_content == "string" ? justify_content : undefined,
     "flex-direction": typeof flex_direction == "string" ? flex_direction : undefined,
-    "text-align": text_align,
     "padding": padding,
-    "gap": gap,
+    "gap": gap ? gap + "px" : undefined,
 }
+
 
 $: styles_string = Object.entries(styles)
     .filter(([_key, value]) => typeof value !== "undefined")
@@ -57,7 +56,6 @@ $: styles_string = Object.entries(styles)
 .grid-item
     display flex
     width 100%
-    text-align var(--text-align)
     grid-column var(--laptop-columns)
     justify-content var(--laptop-justify-content)
     align-items var(--laptop-align-items)

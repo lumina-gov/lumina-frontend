@@ -1,9 +1,9 @@
 <script lang="ts">
 import type { LayoutData } from "./$types"
-import Footer from "./Footer.svelte"
-import Navigation from "./Navigation.svelte"
-import AppBar from "./AppBar.svelte"
-import Rater from "./Rater.svelte"
+import Footer from "./components/Footer.svelte"
+import Navigation from "./components/Navigation.svelte"
+import AppBar from "./components/AppBar.svelte"
+import Rater from "./components/Rater.svelte"
 import ClickoutRegion from "$lib/controls/ClickoutRegion.svelte"
 import Inside from "$lib/controls/Inside.svelte"
 
@@ -65,16 +65,5 @@ $: authenticated = data.user_wrapper.user != null
             grid-template-rows 1fr 60px // content, AppBar
 
     background rgba(0,0,0,0.2)
-    &:before
-        content ""
-        position absolute
-        top 0
-        left 0
-        width 100%
-        z-index -1
-        height 100%
-        opacity 0.06
-        background-image url("/images/bg-pattern.svg")
-        background-position 50% 50%
 
 </style>

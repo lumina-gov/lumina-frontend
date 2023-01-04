@@ -18,6 +18,23 @@ export let data: LayoutData
         gtag('config', 'G-8MK9JSEJ2P');
     </script>
 </svelte:head>
+<div class="grid-wrapper">
+    <div class="grid laptop">
+        {#each new Array(16) as _}
+            <div/>
+        {/each}
+    </div>
+    <div class="grid tablet">
+        {#each new Array(8) as _}
+            <div/>
+        {/each}
+    </div>
+    <div class="grid mobile">
+        {#each new Array(4) as _}
+            <div/>
+        {/each}
+    </div>
+</div>
 <PageLoaderBar/>
 <AlertBar/>
 <ServiceWorkerUI/>
@@ -25,6 +42,45 @@ export let data: LayoutData
 <slot/>
 <style lang="stylus">
 @import 'variables'
+
+.grid-wrapper
+    position fixed
+    top 0
+    left 0
+    bottom 0
+    right 0
+    z-index -3
+
+.grid
+    max-width 1200px
+    margin 0 auto
+    display none
+    padding 0 16px
+    gap 16px
+    &.laptop
+        grid-template-columns repeat(16, 1fr)
+    &.tablet
+        grid-template-columns repeat(8, 1fr)
+    &.mobile
+        grid-template-columns repeat(4, 1fr)
+    @media (min-width $tablet)
+        &.laptop
+            display grid
+    @media (min-width $mobile) and (max-width $tablet)
+        &.tablet
+            display grid
+    @media (max-width $mobile)
+        &.mobile
+            display grid
+    height 100%
+    width 100%
+    border-right 1.5px dashed transparify(white, 8%)
+    border-left 1.5px dashed transparify(white, 8%)
+    > div
+        border-right 1.5px dashed transparify(white, 8%)
+        border-left 1.5px dashed transparify(white, 8%)
+        &:last-child
+            border-right 1.5px dashed transparify(white, 8%)
 
 .floating-gradient
     position fixed

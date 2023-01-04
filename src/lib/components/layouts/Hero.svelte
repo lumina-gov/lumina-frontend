@@ -2,7 +2,7 @@
 import type { Prop } from "$lib/utils/typed_props"
 import Inner from "./Inner.svelte"
 
-export let max_width: Prop<Inner, "max_width"> = 1000
+export let max_width: Prop<Inner, "max_width"> = 1200
 export let gap: Prop<Inner, "gap"> = 16
 export let vertical_padding: Prop<Inner, "vertical_padding"> = 48
 export let align: Prop<Inner, "align"> = "flex-start"
