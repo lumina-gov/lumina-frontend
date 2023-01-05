@@ -92,7 +92,8 @@ export let data: LayoutData
     background radial-gradient(at 50% 50%, #000F9930 0%, #000F9900 75%)
     background-size 60% 60%
     background-repeat no-repeat
-    animation move-gradient 10s ease-in-out infinite
+    background-position 50% 50%
+    // animation move-gradient 10s ease-in-out infinite
     transform rotate(45deg) scale(2)
 
 @keyframes move-gradient
