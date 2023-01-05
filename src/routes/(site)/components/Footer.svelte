@@ -82,7 +82,6 @@ import site_data from "$lib/data/site_data"
 
 footer
     background transparify(white, 4%)
-    background-blur(2px)
 
 .inner-wrapper
     padding 60px 20px

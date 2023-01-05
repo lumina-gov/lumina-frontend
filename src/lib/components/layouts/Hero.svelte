@@ -29,6 +29,5 @@ export let translucent = false
     align-items center
     &.translucent
         background transparify(white, 2%)
-        background-blur(2px)
 
 </style>

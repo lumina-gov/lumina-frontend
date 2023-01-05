@@ -45,7 +45,6 @@ let rated = false
 
 .rating-hero
     background transparify(white, 4%)
-    background-blur(2px)
     border-bottom 1px solid transparify(white, 8%)
     padding 20px
     color white

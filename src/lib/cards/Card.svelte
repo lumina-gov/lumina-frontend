@@ -63,7 +63,6 @@ function handle_keyup(e: KeyboardEvent) {
     background transparify(white, 4%)
     width 100%
     display flex
-    background-blur(2px)
     &.disabled
         opacity 0.6
         pointer-events none

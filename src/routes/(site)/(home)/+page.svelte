@@ -221,8 +221,8 @@ $: service_cards_top = [
     </GridItem>
 </Grid>
 
-<Hero translucent={true}>
-    <Grid vertical_gap={60} side_padding={false}>
+<Hero translucent={true} vertical_padding={100}>
+    <Grid vertical_gap={100} side_padding={false}>
         <GridItem align_items="flex-start" columns={{
             laptop: "span 16",
             tablet: "span 8",

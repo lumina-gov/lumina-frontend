@@ -12,6 +12,12 @@ import Twitter from "svelte-material-icons/Twitter.svelte"
 import Youtube from "svelte-material-icons/Youtube.svelte"
 import TikTok from "$lib/icons/TikTok.svelte"
 import { afterNavigate } from "$app/navigation"
+import { services } from "$lib/data/services"
+import type ServiceCard from "$lib/components/ServiceCard.svelte"
+import type { Props } from "$lib/utils/typed_props"
+import Information from "svelte-material-icons/Information.svelte"
+import { information } from "$lib/data/information"
+
 export let user: User | null
 export let nav_opened: boolean
 
@@ -19,15 +25,21 @@ type MenuLink = {
     icon: typeof SvelteComponent
     name: string
     href: string
-    sublinks?: HubType[]
+    sublinks?: Props<ServiceCard>[]
 }
 
 let links: MenuLink[] = [
     {
         icon: Hub,
-        name: "Lumina Hub",
-        href: "/",
-        sublinks: all_links
+        name: "Services",
+        href: "/#services",
+        sublinks: services
+    },
+    {
+        icon: Information,
+        name: "Information",
+        href: "/#information",
+        sublinks: information
     },
     {
         icon: Shop,
@@ -70,15 +82,15 @@ let wrapper: HTMLDivElement
                     <div class="menu-sublinks">
                         {#each link.sublinks as sublink}
                             <a
-                                href={sublink.link}
-                                class:disabled={!sublink.link}
+                                href={sublink.href}
+                                class:disabled={!sublink.href}
                                 class="menu-sublink">
                                 <div class="menu-sublink-icon {sublink.tag.color}">
-                                    <svelte:component this={sublink.title.icon}/>
+                                    <svelte:component this={sublink.icon}/>
                                 </div>
                                 <div class="info">
                                     <div class="menu-sublink-name">
-                                        {sublink.title.text}
+                                        {sublink.title}
                                     </div>
                                     <div class="description">
                                         {sublink.description}
@@ -214,8 +226,7 @@ let wrapper: HTMLDivElement
 .nav-wrapper
     position fixed
     nav
-        background transparify(mix($dark_app, white, 94%), 90%)
-        background-blur(10px)
+        background mix(white, $dark_app, 6%)
         box-shadow 0 0 8px 0 rgba(0, 0, 0, 0.5)
         overflow-y auto
     display flex

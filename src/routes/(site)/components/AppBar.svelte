@@ -4,7 +4,7 @@ import Logo from "$lib/icons/Logo.svelte"
 import type { User } from "$lib/types/user"
 import { onMount } from "svelte"
 import Menu from "svelte-material-icons/Menu.svelte"
-import Dashboard from "svelte-material-icons/Apps.svelte"
+import Apps from "svelte-material-icons/Apps.svelte"
 import NotificationOutline from "svelte-material-icons/BellOutline.svelte"
 import ProfileButton from "$lib/controls/ProfileButton.svelte"
 import Settlement from "$lib/icons/Settlement.svelte"
@@ -56,7 +56,7 @@ function toggle(toggling: Dropdown) {
         </div>
         <div class="flex-align-center">
             {#if user}
-                <AppbarButton authenticated_app_bar={authenticated} left_icon={Dashboard} href="/"/>
+                <AppbarButton authenticated_app_bar={authenticated} left_icon={Apps} href="/"/>
                 <AppbarButton authenticated_app_bar={authenticated} left_icon={NotificationOutline} on:click={() => toggle(Dropdown.Notifications)}/>
                 <ProfileButton user={user} on:click={() => toggle(Dropdown.Account)}/>
             {:else}
@@ -98,8 +98,8 @@ top_header()
 scroll_header()
     box-shadow 0 0 10px 0 rgba(0, 0, 0, 0.5)
     background $dark_app
-    background transparify(mix($dark_app, white, 90%), 50%)
-    background-blur(10px)
+    background mix(white, $dark_app, 8%)
+    // background-blur(10px)
 
 header
     display flex

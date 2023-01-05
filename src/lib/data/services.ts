@@ -12,15 +12,6 @@ import Discord from "svelte-material-icons/Discord.svelte"
 
 
 export const services: Props<ServiceCard>[] = [
-    // Join the Discord
-    // Find a Job
-    // Legislative Registry
-    // Bank Accounts
-    // View Demographics
-    // Bank Accounts
-    // Light University
-    // Tax
-    // Settlement
     {
         title: "Join the Discord",
         description: "Join the Discord to get involved and stay up to date",

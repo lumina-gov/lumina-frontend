@@ -1,6 +1,6 @@
 <script lang="ts">
 import Calendar from "svelte-material-icons/Calendar.svelte"
-import { onMount } from "svelte"
+import { onMount, onDestroy } from "svelte"
 
 // if the date difference is less than 3 days, we want to show something like:
 // "3 hours ago", "2 days ago", "10 minutes ago", etc.
@@ -18,10 +18,15 @@ function get_day_suffix(day: number) {
 
 let now = new Date()
 
+let interval: ReturnType<typeof setInterval> | null = null
 onMount(() => {
-    setInterval(() => {
+    interval = setInterval(() => {
         now = new Date()
-    }, 1000)
+    }, 5000)
+})
+
+onDestroy(() => {
+    if (interval) clearInterval(interval)
 })
 
 $: diff = now.getTime() - date.getTime()

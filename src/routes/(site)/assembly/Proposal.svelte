@@ -26,17 +26,17 @@ $: days = Math.floor((time_left.getTime() - new Date().getTime()) / (1000 * 60 *
 $: hours = Math.floor((time_left.getTime() - new Date().getTime()) / (1000 * 60 * 60)) % 24
 $: minutes = Math.floor((time_left.getTime() - new Date().getTime()) / (1000 * 60)) % 60
 
-let interval: ReturnType<typeof setInterval>
+// let interval: ReturnType<typeof setInterval>
 
-onMount(() => {
-    interval = setInterval(() => {
-        time_left = proposal.time_left
-    }, 500)
-})
+// onMount(() => {
+//     interval = setInterval(() => {
+//         time_left = proposal.time_left
+//     }, 1000)
+// })
 
-onDestroy(() => {
-    clearInterval(interval)
-})
+// onDestroy(() => {
+//     clearInterval(interval)
+// })
 </script>
 
 <div class="proposal">

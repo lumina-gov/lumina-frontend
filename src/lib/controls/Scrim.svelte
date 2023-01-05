@@ -28,5 +28,4 @@ let scrim: HTMLDivElement
     right 0
     bottom 0
     background transparify($dark_app, 40%)
-    background-blur(6px)
 </style>
