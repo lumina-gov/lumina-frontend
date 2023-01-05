@@ -1,6 +1,4 @@
 <script lang="ts">
-import { all_links } from "$lib/data/hub_data"
-import type { HubType } from "$lib/types/HubType"
 import type { User } from "$lib/types/user"
 import type { SvelteComponent } from "svelte"
 import Hub from "$lib/icons/Hub.svelte"
