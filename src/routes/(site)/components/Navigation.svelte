@@ -15,6 +15,7 @@ import type ServiceCard from "$lib/components/ServiceCard.svelte"
 import type { Props } from "$lib/utils/typed_props"
 import Information from "svelte-material-icons/Information.svelte"
 import { information } from "$lib/data/information"
+import Inside from "$lib/controls/Inside.svelte"
 
 export let user: User | null
 export let nav_opened: boolean
@@ -52,76 +53,86 @@ afterNavigate(() => {
     nav_opened = false
 })
 
-
-let wrapper: HTMLDivElement
 </script>
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div
-    bind:this={wrapper}
-    on:click={e => e.target === wrapper ? nav_opened = false : null}
-    class="nav-wrapper"
-    class:nav_opened
-    class:authenticated>
-    <nav>
-        {#each links as link}
+<Inside>
+    <div
+        class="nav-wrapper"
+        class:authenticated
+        class:nav_opened
+        aria-hidden={!nav_opened}
+        inert={!nav_opened}
+        on:focus|capture={ () => nav_opened = true }>
+        <nav>
+            {#each links as link}
+                <div class="menu-section">
+                    <a
+                        class="menu-link"
+                        href={link.href}>
+                        <div class="link-icon">
+                            <svelte:component this={ link.icon }/>
+                        </div>
+                        <div class="link-name">
+                            { link.name }
+                        </div>
+                    </a>
+                    {#if link.sublinks}
+                        <div class="menu-sublinks">
+                            {#each link.sublinks as sublink}
+                                <a
+                                    class="menu-sublink"
+                                    class:disabled={ !sublink.href }
+                                    href={sublink.href}>
+                                    <div class="menu-sublink-icon {sublink.tag.color}">
+                                        <svelte:component this={ sublink.icon }/>
+                                    </div>
+                                    <div class="info">
+                                        <div class="menu-sublink-name">
+                                            { sublink.title }
+                                        </div>
+                                        <div class="description">
+                                            { sublink.description }
+                                        </div>
+                                    </div>
+                                </a>
+                            {/each}
+                        </div>
+                    {/if}
+                </div>
+            {/each}
             <div class="menu-section">
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <a
-                    href={link.href}
-                    class="menu-link">
+                    class="menu-link"
+                    class:disabled={ authenticated }
+                    href={site_data.socials.discord}>
                     <div class="link-icon">
-                        <svelte:component this={link.icon}/>
+                        <Discord/>
                     </div>
                     <div class="link-name">
-                        {link.name}
+                        Join Community Discord
                     </div>
                 </a>
-                {#if link.sublinks}
-                    <div class="menu-sublinks">
-                        {#each link.sublinks as sublink}
-                            <a
-                                href={sublink.href}
-                                class:disabled={!sublink.href}
-                                class="menu-sublink">
-                                <div class="menu-sublink-icon {sublink.tag.color}">
-                                    <svelte:component this={sublink.icon}/>
-                                </div>
-                                <div class="info">
-                                    <div class="menu-sublink-name">
-                                        {sublink.title}
-                                    </div>
-                                    <div class="description">
-                                        {sublink.description}
-                                    </div>
-                                </div>
-                            </a>
-                        {/each}
-                    </div>
-                {/if}
             </div>
-        {/each}
-        <div class="menu-section">
-            <a
-                href={site_data.socials.discord}
-                class="menu-link"
-                class:disabled={authenticated}>
-                <div class="link-icon">
-                    <Discord/>
-                </div>
-                <div class="link-name">
-                    Join Community Discord
-                </div>
-            </a>
-        </div>
-        <div class="socials">
-            <a href={site_data.socials.twitter} class="social-media-icon"><Twitter/></a>
-            <a href={site_data.socials.discord} class="social-media-icon"><Discord/></a>
-            <a href={site_data.socials.tiktok} class="social-media-icon"><TikTok/></a>
-            <a href={site_data.socials.facebook} class="social-media-icon"><Facebook/></a>
-            <a href={site_data.socials.youtube} class="social-media-icon"><Youtube/></a>
-        </div>
-    </nav>
-</div>
+            <div class="socials">
+                <a
+                    class="social-media-icon"
+                    href={site_data.socials.twitter}><Twitter/></a>
+                <a
+                    class="social-media-icon"
+                    href={site_data.socials.discord}><Discord/></a>
+                <a
+                    class="social-media-icon"
+                    href={site_data.socials.tiktok}><TikTok/></a>
+                <a
+                    class="social-media-icon"
+                    href={site_data.socials.facebook}><Facebook/></a>
+                <a
+                    class="social-media-icon"
+                    href={site_data.socials.youtube}><Youtube/></a>
+            </div>
+        </nav>
+    </div>
+</Inside>
+
 <style lang="stylus">
 @import "variables"
 
@@ -251,7 +262,7 @@ let wrapper: HTMLDivElement
             height 100%
             box-shadow 4px 0 8px 0 rgba(0, 0, 0, 0.4)
         z-index 40
-        transition left 0.2s ease-in-out
+        transition left 0.3s ease-in-out
         width 100%
         top 0
         left -100%

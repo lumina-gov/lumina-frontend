@@ -1,7 +1,7 @@
 <script lang="ts">
-    import AlertCount from "$lib/display/AlertCount.svelte"
+import AlertCount from "$lib/display/AlertCount.svelte"
 import Coloured from "$lib/display/Coloured.svelte"
-    import Heading from "$lib/display/Heading.svelte"
+import Heading from "$lib/display/Heading.svelte"
 import type { SvelteComponent } from "svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 
@@ -12,9 +12,13 @@ export let description: string
 export let href: string
 
 </script>
-<a class="card" href={href}>
+<a
+    class="card"
+    href={href}>
     <div class="main">
-        <Heading left_icon={icon} level={3}>
+        <Heading
+            left_icon={icon}
+            level={3}>
             { title }
             {#if alert_count}
                 <AlertCount count={alert_count} />

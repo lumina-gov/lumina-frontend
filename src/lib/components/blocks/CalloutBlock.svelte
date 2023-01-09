@@ -13,7 +13,10 @@ $: icon_url = block.callout.icon && "external" in block.callout.icon ? block.cal
 <div class="callout">
     <div class="icon">
         {#if icon_url}
-            <img src={icon_url} alt="icon" class="icon"/>
+            <img
+                class="icon"
+                alt="icon"
+                src={icon_url}/>
         {:else}
             <Icon icon={Information}/>
         {/if}

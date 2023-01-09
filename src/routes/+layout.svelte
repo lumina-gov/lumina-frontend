@@ -1,15 +1,10 @@
-<script lang="ts">
-import type { LayoutData } from "./$types"
-import AlertBar from "./AlertBar.svelte"
-import PageLoaderBar from "./PageLoaderBar.svelte"
-import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
-
-export let data: LayoutData
-</script>
-
 <svelte:head>
-    <link rel="manifest" href="/manifest.json">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MK9JSEJ2P"></script>
+    <link
+        href="/manifest.json"
+        rel="manifest">
+    <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-8MK9JSEJ2P"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -18,6 +13,12 @@ export let data: LayoutData
         gtag('config', 'G-8MK9JSEJ2P');
     </script>
 </svelte:head>
+<script lang="ts">
+import AlertBar from "./AlertBar.svelte"
+import PageLoaderBar from "./PageLoaderBar.svelte"
+import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
+
+</script>
 <div class="grid-wrapper">
     <div class="grid laptop">
         {#each new Array(16) as _}
@@ -104,8 +105,18 @@ export let data: LayoutData
     100%
         background-position 0% 50%
 
+
 :global
     @import 'normalise'
+
+    *
+        &:focus
+            outline-effect()
+
+    hr
+        border 0
+        border-top 1px solid transparify(white, 10%)
+        width 100%
 
     html
         display flex

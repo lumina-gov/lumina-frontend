@@ -1,6 +1,6 @@
 <PageHead
-    title="Onboarding"
     description="Create your account and start building your future city."
+    title="Onboarding"
 />
 <script lang="ts">
 import Logo from "$lib/icons/Logo.svelte"
@@ -41,7 +41,7 @@ onMount(() => {
         <Tag color="brand">Onboarding</Tag>
     </div>
     {#if page == PageType.AccountType}
-        <AccountType on:next={() => page = PageType.AccountCreate}/>
+        <AccountType on:next={ () => page = PageType.AccountCreate }/>
     {:else if page == PageType.AccountCreate}
         <AccountCreate bind:data/>
     {/if}

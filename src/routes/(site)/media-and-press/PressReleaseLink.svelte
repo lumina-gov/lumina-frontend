@@ -17,23 +17,31 @@ $: formatted_date = date.toLocaleDateString("en-AU", {
 })
 
 </script>
-<a class="press-release" href={url} target="_blank" rel="noreferrer">
+<a
+    class="press-release"
+    href={url}
+    rel="noreferrer"
+    target="_blank">
     <div>
-        <Icon icon={Newspaper} size={24}/>
+        <Icon
+            icon={Newspaper}
+            size={24}/>
         <div class="title">
             { title }
         </div>
     </div>
     <div>
         <div class="date">
-            {formatted_date}
+            { formatted_date }
         </div>
         <div class="tags">
             {#each tags as tag}
                 <Tag>{ tag }</Tag>
             {/each}
         </div>
-        <Icon icon={ChevronRight} size={24}/>
+        <Icon
+            icon={ChevronRight}
+            size={24}/>
     </div>
 </a>
 <style lang="stylus">

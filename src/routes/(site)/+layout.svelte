@@ -16,8 +16,12 @@ $: authenticated = data.user_wrapper.user != null
 </script>
 
 <svelte:head>
-    <link rel="manifest" href="/manifest.json">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MK9JSEJ2P"></script>
+    <link
+        href="/manifest.json"
+        rel="manifest">
+    <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-8MK9JSEJ2P"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -26,20 +30,26 @@ $: authenticated = data.user_wrapper.user != null
         gtag('config', 'G-8MK9JSEJ2P');
     </script>
 </svelte:head>
-<div class="layout" class:authenticated>
+<div
+    class="layout"
+    class:authenticated>
     <ClickoutRegion clicked_outside={() => nav_opened = false}>
-        <AppBar bind:user={data.user_wrapper.user} bind:nav_opened/>
+        <AppBar
+            bind:user={ data.user_wrapper.user }
+            bind:nav_opened/>
+        <div class="content">
+            <slot/>
+        </div>
         <Inside>
-            <Navigation bind:user={data.user_wrapper.user} bind:nav_opened/>
+            <Navigation
+                bind:user={ data.user_wrapper.user }
+                bind:nav_opened/>
         </Inside>
+        {#if !data.user_wrapper.user}
+            <Rater/>
+            <Footer/>
+        {/if}
     </ClickoutRegion>
-    <div class="content">
-        <slot/>
-    </div>
-    {#if !data.user_wrapper.user}
-        <Rater/>
-        <Footer/>
-    {/if}
 </div>
 <style lang="stylus">
 @import 'variables'

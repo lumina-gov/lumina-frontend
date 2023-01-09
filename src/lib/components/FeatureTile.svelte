@@ -8,14 +8,17 @@ export let description: string
 </script>
 <div class="feature">
     <div class="feature-icon">
-        <Icon icon={icon} color="brand" size={24}/>
+        <Icon
+            color="brand"
+            icon={icon}
+            size={24}/>
     </div>
     <div class="feature-text">
         <h3 class="feature-heading">
-            {title}
+            { title }
         </h3>
         <div class="feature-description">
-            {description}
+            { description }
         </div>
     </div>
 </div>

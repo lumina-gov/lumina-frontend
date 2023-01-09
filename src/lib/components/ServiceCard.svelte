@@ -18,15 +18,23 @@ $: disabled = href === undefined
 
 </script>
 <Card
-    padding={ size === "large" ? "24px" : "16px"}
-    gap={ size === "large" ? "16px" : "8px"}
-    {href}
+    align_items="flex-start"
     {disabled}
-    align_items="flex-start">
-    <Box gap="16px" direction="horizontal" align_items="center">
-        <Icon color="brand" icon={icon} size={ size === "large" ? 40 : 24 } />
-        <Box gap="8px" align_items="flex-start">
-            <Heading level={3}>{title}</Heading>
+    gap={size === "large" ? "16px" : "8px"}
+    {href}
+    padding={size === "large" ? "24px" : "16px"}>
+    <Box
+        align_items="center"
+        direction="horizontal"
+        gap="16px">
+        <Icon
+            color="brand"
+            icon={icon}
+            size={size === "large" ? 40 : 24} />
+        <Box
+            align_items="flex-start"
+            gap="8px">
+            <Heading level={3}>{ title }</Heading>
             {#if size === "large"}
                 <Tag {...tag} />
             {/if}
@@ -35,5 +43,5 @@ $: disabled = href === undefined
     {#if size === "small"}
         <Tag {...tag} />
     {/if}
-    <Paragraph>{description}</Paragraph>
+    <Paragraph>{ description }</Paragraph>
 </Card>

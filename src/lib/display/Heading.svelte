@@ -13,13 +13,21 @@ export let id: string | null = null
 export let underline = false
 </script>
 
-<svelte:element this={"h" + level} class="heading" class:underline {id}>
+<svelte:element
+    this={ "h" + level }
+    {id}
+    class="heading"
+    class:underline>
     {#if left_icon}
-        <Icon color={left_icon_color} icon={left_icon}/>
+        <Icon
+            color={left_icon_color}
+            icon={left_icon}/>
     {/if}
     <slot/>
     {#if right_icon}
-        <Icon color={right_icon_color} icon={right_icon}/>
+        <Icon
+            color={right_icon_color}
+            icon={right_icon}/>
     {/if}
 </svelte:element>
 <style lang="stylus">

@@ -3,7 +3,7 @@ import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
 import future from "$lib/utils/future"
 import Star from "svelte-material-icons/Star.svelte"
 
-async function rate(rating: number) {
+async function rate(_rating: number) {
     await new Promise(resolve => setTimeout(resolve, 1000))
     rated = true
 }
@@ -24,13 +24,13 @@ let rated = false
                 {#each Array(5) as _, i}
                     <div
                         class="star"
-                        class:filled={hovering_on !== null && hovering_on > i - 1}
-                        on:click={() => future(rate(i), status => loading = status)}
-                        tabindex="0"
-                        on:keypress={e => e.key === "Enter" && rate(i)}
+                        class:filled={ hovering_on !== null && hovering_on > i - 1 }
                         role="button"
-                        on:mouseenter={() => hovering_on = i}
-                        on:mouseleave={() => hovering_on = null}>
+                        tabindex="0"
+                        on:click={ () => future(rate(i), status => loading = status) }
+                        on:keypress={ e => e.key === "Enter" && rate(i) }
+                        on:mouseenter={ () => hovering_on = i }
+                        on:mouseleave={ () => hovering_on = null }>
                         <Star/>
                     </div>
                 {/each}

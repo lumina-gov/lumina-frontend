@@ -8,21 +8,25 @@ import ClickoutRegion from "./ClickoutRegion.svelte"
 import Options from "./Options.svelte"
 import Dropdown from "./Dropdown.svelte"
 import Search from "./Search.svelte"
+import type { SvelteComponent } from "svelte"
+import FlexWrap from "$lib/display/FlexWrap.svelte"
 
+type $$Generic = T
 type T = $$Generic
 
 // Workaround for https://github.com/sveltejs/svelte/issues/7830
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface $$Slots {
-    default: { search: string }
-    selected: { value: T }
-    option: { option: T }
+    default: { search: string, option: T }
 }
 
 export let name: string
 export let values: T[]
 export let options: T[] | ((query: string) => T[])
 export let search_placeholder = "Search..."
+export let left_icon: typeof SvelteComponent | undefined = undefined
 export let allow_other: ((query: string) => T) | undefined = undefined
+export let get_title: (value: T) => string = value => value as unknown as string
 let search = ""
 
 $: available_options = (typeof options === "function" ? options(search) : options)
@@ -36,79 +40,45 @@ let dropdown_toggled = false
 </script>
 <InputWrapper bind:name>
     <ClickoutRegion clicked_outside={() => dropdown_toggled = false}>
-        <div class="tags">
-            <slot {search}/>
+        <FlexWrap>
             {#each values as value}
-                <div on:click={() => remove_value(value)} class="selected-option">
-                    <slot
-                        name="selected"
-                        {value}>
-                        No slot content
-                    </slot>
-                </div>
+                <Segment
+                    left_icon={left_icon}
+                    right_icon={CloseCircle}
+                    text={get_title(value)}
+                    on:click={ () => remove_value(value) }/>
             {/each}
             <Inside>
                 <Segment
                     left_icon={dropdown_toggled ? CloseCircle : Plus}
-                    on:click={() => dropdown_toggled = !dropdown_toggled}/>
+                    on:click={ () => dropdown_toggled = !dropdown_toggled }/>
                 {#if dropdown_toggled}
                     <Dropdown>
                         {#if typeof options === "function"}
-                            <Search bind:search placeholder={search_placeholder}/>
+                            <Search
+                                placeholder={search_placeholder}
+                                bind:search/>
                         {/if}
                         <Options
+                            allow_other={allow_other}
                             options={available_options}
-                            on:select={option => {
+                            bind:search
+                            on:select={ option => {
                                 values = [...values, option.detail]
                                 search = "" // Clear search
-                            }}
-                            display_no_more_options={!(typeof allow_other === "function" && search)}
+                            } }
                             let:option>
-                            <slot name="option" {option}/>
-                            <svelte:fragment slot="other">
-                                {#if typeof allow_other === "function" && search}
-                                    <div class="other-option" on:click={() => {
-                                            if (typeof allow_other === "function") {
-                                                values = [...values, allow_other(search)]
-                                                search = ""
-                                            }
-                                        }}>
-                                        Use "<strong>{search}</strong>"
-                                    </div>
-                                {/if}
-                            </svelte:fragment>
+                            <Segment
+                                left_icon={left_icon}
+                                tabindex={-1}
+                                text={get_title(option)}/>
+                            <slot
+                                option={option}
+                                search={search}/>
                         </Options>
-
                     </Dropdown>
                 {/if}
             </Inside>
-        </div>
+        </FlexWrap>
     </ClickoutRegion>
 </InputWrapper>
-<style lang="stylus">
-@import "variables"
-
-.selected-option
-    display contents
-
-.other-option
-    padding 16px 16px
-    border-bottom 1px solid transparify(white, 6%)
-    cursor pointer
-    font-size 16px
-    color transparify(white, 50%)
-    &:last-child
-        border-bottom none
-    strong
-        color white
-
-    font-weight 500
-    border-radius 4px
-
-.tags
-    display flex
-    gap 8px
-    flex-wrap wrap
-
-
-</style>

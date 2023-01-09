@@ -1,7 +1,9 @@
 <script lang="ts">
-    import Lumina from "$lib/icons/LuminaEdge.svelte"
+import Lumina from "$lib/icons/LuminaEdge.svelte"
 </script>
-<a href="/" class="logo">
+<a
+    class="logo"
+    href="/">
     <div class="symbol">
         <Lumina/>
     </div>

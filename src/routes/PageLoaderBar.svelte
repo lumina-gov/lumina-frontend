@@ -24,8 +24,12 @@ afterNavigate(async () => {
 </script>
 
 {#if $progress !== 1}
-    <div class="progress-bar" out:fade|local={{ delay: 500 }}>
-        <div class="progress-sliver" style={`--width: ${$progress * 100}%`} />
+    <div
+        class="progress-bar"
+        out:fade|local={ { delay: 500 } }>
+        <div
+            style={`--width: ${$progress * 100}%`}
+            class="progress-sliver" />
     </div>
 {/if}
 

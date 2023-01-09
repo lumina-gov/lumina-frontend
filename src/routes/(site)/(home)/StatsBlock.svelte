@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Grid from "$lib/components/layouts/Grid.svelte"
-    import GridItem from "$lib/components/layouts/GridItem.svelte"
+import Grid from "$lib/layouts/Grid.svelte"
+import GridItem from "$lib/layouts/GridItem.svelte"
 import type { SvelteComponent } from "svelte"
 
 export let stats: {
@@ -12,28 +12,32 @@ export let stats: {
 
 </script>
 
-<Grid side_padding={false} columns={{
-    laptop: 16,
-    tablet: 8,
-    mobile: 4
-}}>
+<Grid
+    columns={{
+        laptop: 16,
+        tablet: 8,
+        mobile: 4
+    }}
+    side_padding={false}>
     {#each stats as stat}
         <GridItem
             align_items="center"
-            text_align="center"
             columns={{
                 laptop: "span 4",
                 tablet: "span 2",
                 mobile: "span 2"
-            }}>
-            <div class="stat-icon" style="color: {stat.color};">
-                <svelte:component this={stat.icon} />
+            }}
+            text_align="center">
+            <div
+                style:color={ stat.color }
+                class="stat-icon">
+                <svelte:component this={ stat.icon } />
             </div>
             <div class="stat-value">
-                <span>{stat.value}</span>
+                <span>{ stat.value }</span>
             </div>
             <div class="stat-name">
-                <span>{stat.name}</span>
+                <span>{ stat.name }</span>
             </div>
         </GridItem>
     {/each}

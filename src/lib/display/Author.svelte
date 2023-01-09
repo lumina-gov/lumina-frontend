@@ -7,9 +7,12 @@ export let author: {
 
 </script>
 <div class="author">
-    <img src="{author.src}" alt="{author.name} profile picture" class="author_img">
+    <img
+        class="author_img"
+        alt="{author.name} profile picture"
+        src={author.src}>
     <div class="author_name">
-        {author.name}
+        { author.name }
     </div>
 </div>
 <style lang="stylus">

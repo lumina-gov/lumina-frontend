@@ -4,9 +4,9 @@ export let size = "32px"
 
 </script>
 
-<div class="profile" style="
-    --size: {size};
-">
+<div
+    style:--size={ size }
+    class="profile">
 
 </div>
 <style lang="stylus">

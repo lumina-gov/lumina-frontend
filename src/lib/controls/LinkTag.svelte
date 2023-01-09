@@ -22,14 +22,14 @@ function handle_keyup(e: KeyboardEvent) {
 }
 </script>
 <svelte:element
-    this={tag}
+    this={ tag }
+    class="tag"
     href={href}
-    on:click={clicked}
-    on:keyup={handle_keyup}
-    class="tag">
+    on:click={ clicked }
+    on:keyup={ handle_keyup }>
     {#if left_icon}
         <span class="icon">
-            <svelte:component this={left_icon} />
+            <svelte:component this={ left_icon } />
         </span>
     {/if}
     {#if $$slots.left}
@@ -42,8 +42,10 @@ function handle_keyup(e: KeyboardEvent) {
         <slot name="right"/>
     {/if}
     {#if right_icon}
-        <span class="icon" style="opacity: {right_icon_opacity};">
-            <svelte:component this={right_icon} />
+        <span
+            style:opacity={ right_icon_opacity }
+            class="icon">
+            <svelte:component this={ right_icon } />
         </span>
     {/if}
 </svelte:element>

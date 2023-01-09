@@ -8,15 +8,15 @@ $: tag = url ? "a" : "span"
 
 </script>
 <svelte:element
-    this={tag}
-    href={url}
-    class:bold={rich_text.annotations.bold}
-    class:italic={rich_text.annotations.italic}
-    class:underline={rich_text.annotations.underline}
-    class:strikethrough={rich_text.annotations.strikethrough}
-    class:code={rich_text.annotations.code}>
+    this={ tag }
+    class:bold={ rich_text.annotations.bold }
+    class:code={ rich_text.annotations.code }
+    class:italic={ rich_text.annotations.italic }
+    class:strikethrough={ rich_text.annotations.strikethrough }
+    class:underline={ rich_text.annotations.underline }
+    href={url}>
     {#if "text" in rich_text}
-        {rich_text.text.content}
+        { rich_text.text.content }
     {/if}
 </svelte:element>
 <style lang="stylus">

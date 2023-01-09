@@ -1,21 +1,21 @@
 <PageHead
-    title="Government Directory"
-    description="Find information about government agencies, departments, and elected officials."/>
+    description="Find information about government agencies, departments, and elected officials."
+    title="Government Directory"/>
 <script lang="ts">
-import Hero from "$lib/components/layouts/Hero.svelte"
+import Hero from "$lib/layouts/Hero.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
-import VerticalLayout from "$lib/components/layouts/VerticalLayout.svelte"
+import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
 import Tag from "$lib/display/Tag.svelte"
 import Heading from "$lib/display/Heading.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
 import BulletedList from "svelte-material-icons/FormatListBulletedSquare.svelte"
-import ResponsiveLayout from "$lib/components/layouts/ResponsiveLayout.svelte"
+import ResponsiveLayout from "$lib/layouts/ResponsiveLayout.svelte"
 import Card from "$lib/cards/Card.svelte"
 import type { PageData } from "./$types"
 import DirectoryList from "./DirectoryList.svelte"
-import Grid from "$lib/components/layouts/Grid.svelte"
-import GridItem from "$lib/components/layouts/GridItem.svelte"
-import Segments from "$lib/display/FlexWrap.svelte"
+import Grid from "$lib/layouts/Grid.svelte"
+import GridItem from "$lib/layouts/GridItem.svelte"
+import FlexWrap from "$lib/display/FlexWrap.svelte"
 import Segment from "$lib/controls/Segment.svelte"
 import DotsCircle from "svelte-material-icons/DotsCircle.svelte"
 import MenuDown from "svelte-material-icons/MenuDown.svelte"
@@ -58,8 +58,12 @@ let org_types: {
 
 </script>
 
-<Hero gap={80} max_width="1200px">
-    <VerticalLayout max_width={500}>
+<Hero
+    gap={80}
+    max_width="1200px">
+    <VerticalLayout
+        align_items="flex-start"
+        max_width={500}>
         <Tag color="brand">Official Resource</Tag>
         <Heading left_icon={BulletedList}>Government Directory</Heading>
         <Paragraph>
@@ -67,76 +71,98 @@ let org_types: {
         </Paragraph>
     </VerticalLayout>
     <Grid
-        horizontal_gap={40}
-        side_padding={false}
-        vertical_gap={80}
         columns={{
             mobile: 4,
             tablet: 8,
             laptop: 12
-        }}>
+        }}
+        horizontal_gap={40}
+        side_padding={false}
+        vertical_gap={80}>
         <GridItem
-            flex_direction="column"
             columns={{
                 mobile: "span 4",
                 tablet: "span 3",
                 laptop: "span 4",
             }}
-            gap="80px 0">
-            <Sidebar items={[
-                { name: "Core Institutions", href: "#core" },
-                { name: "Government Structures", href: "#structures" },
-                { name: "Directory", href: "#directory" },
-            ]}/>
+            flex_direction="column"
+            gap={80}>
+            <Sidebar
+                items={[
+                    { name: "Core Institutions", href: "#core" },
+                    { name: "Government Structures", href: "#structures" },
+                    { name: "Directory", href: "#directory" },
+                ]}/>
         </GridItem>
         <GridItem
-            flex_direction="column"
             columns={{
                 mobile: "span 4",
                 tablet: "span 5",
                 laptop: "span 8",
             }}
-            gap="80px 0">
+            flex_direction="column"
+            gap={80}>
 
-            <VerticalLayout>
-                <Heading level={2} underline={true} id="core">Core Institutions</Heading>
+            <VerticalLayout align_items="flex-start">
+                <Heading
+                    id="core"
+                    level={2}
+                    underline={true}>Core Institutions</Heading>
                 <VerticalLayout max_width={500}>
                     <Paragraph>
                         A highlight of the most essential and fundamental organisations that play a crucial role in the functioning of the government.
                     </Paragraph>
                 </VerticalLayout>
-                <ResponsiveLayout min_item_size={220} align_items="stretch">
+                <ResponsiveLayout
+                    align_items="stretch"
+                    min_item_size={220}>
                     {#each data.core_orgs as org}
-                        <Card padding="16px" align_items="flex-start" justify_content="space-between" gap={16}>
+                        <Card
+                            align_items="flex-start"
+                            gap={16}
+                            justify_content="space-between"
+                            padding="16px">
                             <VerticalLayout gap={8}>
-                                <Heading level={4} left_icon={Government}>{org.name}</Heading>
+                                <Heading
+                                    left_icon={Government}
+                                    level={4}>{ org.name }</Heading>
                                 <Paragraph>
-                                    {org.description}
+                                    { org.description }
                                 </Paragraph>
                             </VerticalLayout>
                             <div class="tags">
                                 <Tag color="brand">{ org.type }</Tag>
-                                <Tag color={org.status === "Halted" ? "white" : "green"} opacity={org.status === "Halted"}>{org.status}</Tag>
+                                <Tag
+                                    color={org.status === "Halted" ? "white" : "green"}
+                                    opacity={org.status === "Halted"}>{ org.status }</Tag>
                             </div>
                         </Card>
                     {/each}
                 </ResponsiveLayout>
             </VerticalLayout>
-            <VerticalLayout>
-                <Heading level={2} underline={true} id="structures">Government Structures</Heading>
+            <VerticalLayout align_items="flex-start">
+                <Heading
+                    id="structures"
+                    level={2}
+                    underline={true}>Government Structures</Heading>
                 <VerticalLayout max_width={500}>
                     <Paragraph>
                         Descriptions of the various types of government entities.
                     </Paragraph>
                 </VerticalLayout>
                 <Card padding="16px">
-                    <ResponsiveLayout min_item_size={220} align_items="stretch" gap={32}>
+                    <ResponsiveLayout
+                        align_items="stretch"
+                        gap={32}
+                        min_item_size={220}>
                         {#each org_types as type}
                             <Box gap="16px">
-                                <VerticalLayout gap={8}>
+                                <VerticalLayout
+                                    align_items="flex-start"
+                                    gap={8}>
                                     <Tag>{ type.name }</Tag>
                                     <Paragraph>
-                                        {type.description}
+                                        { type.description }
                                     </Paragraph>
                                 </VerticalLayout>
                             </Box>
@@ -144,8 +170,11 @@ let org_types: {
                     </ResponsiveLayout>
                 </Card>
             </VerticalLayout>
-            <VerticalLayout>
-                <Heading level={2} underline={true} id="directory">Directory</Heading>
+            <VerticalLayout align_items="flex-start">
+                <Heading
+                    id="directory"
+                    level={2}
+                    underline={true}>Directory</Heading>
                 <VerticalLayout max_width={500}>
                     <Paragraph>
                         A comprehensive list of all government entities
@@ -153,10 +182,16 @@ let org_types: {
                         and status and view detailed information about each entity by clicking on it to learn more. -->
                     </Paragraph>
                 </VerticalLayout>
-                <Segments>
-                    <Segment disabled={true} left_icon={BulletedList} right_icon={MenuDown}>Type</Segment>
-                    <Segment disabled={true} left_icon={DotsCircle} right_icon={MenuDown}>Status</Segment>
-                </Segments>
+                <FlexWrap>
+                    <Segment
+                        disabled={true}
+                        left_icon={BulletedList}
+                        right_icon={MenuDown}>Type</Segment>
+                    <Segment
+                        disabled={true}
+                        left_icon={DotsCircle}
+                        right_icon={MenuDown}>Status</Segment>
+                </FlexWrap>
                 <DirectoryList organisations={data.organisations}/>
             </VerticalLayout>
         </GridItem>

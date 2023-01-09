@@ -48,10 +48,10 @@ async function request_notification_permissions() {
         let { errors } = await graph.req<{ attach_notification_endpoint: null }>`
             message {
                 attach_notification_endpoint(${{
-        endpoint: push_subscription.endpoint,
-        p256dh: push_subscription.keys?.p256dh,
-        auth: push_subscription.keys?.auth
-    }})
+                endpoint: push_subscription.endpoint,
+                p256dh: push_subscription.keys?.p256dh,
+                auth: push_subscription.keys?.auth
+            }})
             }
         }`
 
@@ -67,8 +67,8 @@ async function request_notification_permissions() {
         let { errors } = await graph.req<{ send_test_notification: null }>`
             message {
                 send_test_notification(${{
-        endpoint: push_subscription.endpoint,
-    }})
+                endpoint: push_subscription.endpoint,
+            }})
             }
         `
         if (errors.length > 0) {
@@ -79,14 +79,16 @@ async function request_notification_permissions() {
 }
 </script>
 <Card
-    padding="16px"
     gap="16px"
+    padding="16px"
     reset_bg={true}>
     <div class="description">
         <InformationOutline/>
         No new notifications
     </div>
-    <Button on:click={request_notification_permissions} left_icon={Bell}>
+    <Button
+        left_icon={Bell}
+        on:click={ request_notification_permissions }>
         Enable notifications
     </Button>
 </Card>

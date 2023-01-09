@@ -17,7 +17,9 @@ $: progress.set(width, {
 </script>
 
 <div class="progress-bar">
-    <div class="inner-bar" style="width: {width}%;" />
+    <div
+        style:width="{ width }%"
+        class="inner-bar" />
 </div>
 
 <style lang="stylus">

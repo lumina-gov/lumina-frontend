@@ -12,18 +12,16 @@ $: is_clickable = href || click_handler
 $: tag = is_clickable ? "a" : "div"
 </script>
 <svelte:element
-    class="box {padding ? 'padding' : ''} {direction}"
-    this={tag}
-    href={href}
+    this={ tag }
+    style:align-items={ align_items }
+    style:justify-content={ justify_content }
+    style:gap
+    style:max-width={ max_width }
+    class="box {padding ? "padding" : ""} {direction}"
+    class:horizontal={ direction === "horizontal" }
     class:padding
-    class:vertical={direction === "vertical"}
-    class:horizontal={direction === "horizontal"}
-    style="
-        align-items: {align_items};
-        justify-content: {justify_content};
-        max-width: {max_width};
-        gap: {gap};
-    ">
+    class:vertical={ direction === "vertical" }
+    href={href}>
     <slot/>
 </svelte:element>
 <style lang="stylus">

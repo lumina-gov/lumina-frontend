@@ -13,20 +13,22 @@ $: error = $page.error as NonNullable<typeof $page.error>
         Error
     </Tag>
     <div class="status">
-        {$page.status}
+        { $page.status }
     </div>
-    <Heading left_icon={Alert} left_icon_color="red">
-        {error.message}
+    <Heading
+        left_icon={Alert}
+        left_icon_color="red">
+        { error.message }
     </Heading>
     {#if error.code}
         <div class="code">
-            <strong>Code</strong> {error.code}
+            <strong>Code</strong> { error.code }
         </div>
     {/if}
     <Button
-        hug={true}
-        href="/"
         style="translucent"
+        href="/"
+        hug={true}
         left_icon={Home}>Go Home</Button>
 </div>
 <style lang="stylus">

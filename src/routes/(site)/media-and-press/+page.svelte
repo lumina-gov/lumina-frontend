@@ -1,11 +1,11 @@
 <PageHead
-    title="Media & Press"
     description="Find media kits, information and press releases about Lumina - the City of the Future."
+    title="Media & Press"
 />
 <script lang="ts">
 import Card from "$lib/cards/Card.svelte"
-import Hero from "$lib/components/layouts/Hero.svelte"
-import VerticalLayout from "$lib/components/layouts/VerticalLayout.svelte"
+import Hero from "$lib/layouts/Hero.svelte"
+import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
 import Button from "$lib/controls/Button.svelte"
 import site_data from "$lib/data/site_data"
@@ -71,32 +71,51 @@ onMount(() => {
             Our media and press page offers a range of resources for journalists and members of the public.
         </Paragraph>
     </VerticalLayout>
-    <Card gap={16} padding="32px" align_items="flex-start">
-        <Heading level={2} underline={true}>Press Kit</Heading>
+    <Card
+        align_items="flex-start"
+        gap={16}
+        padding="32px">
+        <Heading
+            level={2}
+            underline={true}>Press Kit</Heading>
         <VerticalLayout max_width={500}>
             <Paragraph>
                 A range of resources about the city of Lumina, including legal documents, official symbols, location information, demographic data, and more.
             </Paragraph>
             <div class="items">
                 {#each assets as asset}
-                    <a class="asset" href={asset.url} download={asset.name}>
+                    <a
+                        class="asset"
+                        download={asset.name}
+                        href={asset.url}>
                         <div>
-                            <Icon icon={asset.icon} color="white" opacity={0.5} size={24}/>
+                            <Icon
+                                color="white"
+                                icon={asset.icon}
+                                opacity={0.5}
+                                size={24}/>
                             <div class="asset-title">
-                                {asset.name}
+                                { asset.name }
                             </div>
                         </div>
                         <div>
-                            <Tag color="brand">{asset.type}</Tag>
-                            <Icon icon={Download} size={24}/>
+                            <Tag color="brand">{ asset.type }</Tag>
+                            <Icon
+                                icon={Download}
+                                size={24}/>
                         </div>
                     </a>
                 {/each}
             </div>
         </VerticalLayout>
     </Card>
-    <Card gap={16} padding="32px" align_items="flex-start">
-        <Heading level={2} underline={true}>Contact Information</Heading>
+    <Card
+        align_items="flex-start"
+        gap={16}
+        padding="32px">
+        <Heading
+            level={2}
+            underline={true}>Contact Information</Heading>
         <VerticalLayout max_width={500}>
             <Paragraph>
                 Find our official social media accounts, and contact details of our government.
@@ -105,16 +124,45 @@ onMount(() => {
             </Paragraph>
         </VerticalLayout>
         <div class="flex-wrap">
-            <Button hug={true} style="translucent" href={site_data.socials.discord} left_icon={Discord}/>
-            <Button hug={true} style="translucent" href={site_data.socials.facebook} left_icon={Facebook}/>
-            <Button hug={true} style="translucent" href={site_data.socials.twitter} left_icon={Twitter}/>
-            <Button hug={true} style="translucent" href={site_data.socials.tiktok} left_icon={TikTok}/>
-            <Button hug={true} style="translucent" href={site_data.socials.youtube} left_icon={Youtube}/>
-            <Button hug={true} style="translucent" href={"mailto:" + site_data.socials.email} left_icon={Email}>{site_data.socials.email}</Button>
+            <Button
+                style="translucent"
+                href={site_data.socials.discord}
+                hug={true}
+                left_icon={Discord}/>
+            <Button
+                style="translucent"
+                href={site_data.socials.facebook}
+                hug={true}
+                left_icon={Facebook}/>
+            <Button
+                style="translucent"
+                href={site_data.socials.twitter}
+                hug={true}
+                left_icon={Twitter}/>
+            <Button
+                style="translucent"
+                href={site_data.socials.tiktok}
+                hug={true}
+                left_icon={TikTok}/>
+            <Button
+                style="translucent"
+                href={site_data.socials.youtube}
+                hug={true}
+                left_icon={Youtube}/>
+            <Button
+                style="translucent"
+                href={"mailto:" + site_data.socials.email}
+                hug={true}
+                left_icon={Email}>{ site_data.socials.email }</Button>
         </div>
     </Card>
-    <Card gap={16} padding="32px" align_items="flex-start">
-        <Heading level={2} underline={true}>Press Releases</Heading>
+    <Card
+        align_items="flex-start"
+        gap={16}
+        padding="32px">
+        <Heading
+            level={2}
+            underline={true}>Press Releases</Heading>
         <VerticalLayout max_width={500}>
             <Paragraph>
                 Here, you can find official statements and press releases issued by our government
@@ -124,11 +172,11 @@ onMount(() => {
         <div class="items">
             {#each data.press_releases as release}
                 <PressReleaseLink
-                    title={release.title}
                     date={release.date}
-                    url={"/news/" + release.slug}
                     tags={["Press Release"]}
-                    />
+                    title={release.title}
+                    url={"/news/" + release.slug}
+                />
             {/each}
         </div>
     </Card>

@@ -1,17 +1,19 @@
 <div class="action-container-wrapper">
     {#each $alerts as message}
         <div
+            bind:this={ elements[message.id] }
+            class={"action-bar " + MessageType[message.type]}
             role="button"
-            bind:this={elements[message.id]}
-            on:keypress={e => {
+            on:keypress={ e => {
                 if (e.key === "Enter") {
                     remove(message.id)
                 }
-            }}
-            class={"action-bar " + MessageType[message.type]}
-            on:click={() => remove(message.id)}>
+            } }
+            on:click={ () => remove(message.id) }>
             <div class="icon">
-                <svelte:component this={icons[message.type]} size="22px"/>
+                <svelte:component
+                    this={ icons[message.type] }
+                    size="22px"/>
             </div>
             <div class="text">
                 { message.text }

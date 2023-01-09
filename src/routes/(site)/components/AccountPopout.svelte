@@ -24,30 +24,39 @@ async function logout() {
 }
 
 </script>
-<Card
-    reset_bg={true}>
+<Card reset_bg={true}>
     <div class="account">
-        <Profile size=48px/>
+        <Profile size="48px"/>
         <div class="data">
             <span class="name">
-                {name}
+                { name }
             </span>
             <span class="email">
-                {email}
+                { email }
             </span>
         </div>
     </div>
     <div class="links">
-        <a class="link" href="/account">
-            <Icon icon={Settings} size={20}/>
+        <a
+            class="link"
+            href="/account">
+            <Icon
+                icon={Settings}
+                size={20}/>
             <span>
                 Account Settings
             </span>
         </a>
-        <div class="link red" on:click={logout} role="button" on:keypress={e => {
-            if (e.key === "Enter") logout()
-        }}>
-            <Icon icon={ExitToApp} size={20}/>
+        <div
+            class="link red"
+            role="button"
+            on:click={ logout }
+            on:keypress={ e => {
+                if (e.key === "Enter") logout()
+            } }>
+            <Icon
+                icon={ExitToApp}
+                size={20}/>
             <span>
                 Log Out
             </span>

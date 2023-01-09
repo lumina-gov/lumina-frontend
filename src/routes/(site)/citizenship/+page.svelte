@@ -1,3 +1,7 @@
+<PageHead
+    description="Apply for citizenship or check your citizenship status"
+    title={data?.user_wrapper?.user?.citizenship_status === null ? "Apply for citizenship" : "Citizenship status"}
+/>
 <script lang="ts">
 import Heading from "$lib/display/Heading.svelte"
 import type { PageData } from "./$types"
@@ -10,9 +14,10 @@ import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
 import FormComponent from "./FormComponent.svelte"
 import StatusComponent from "./StatusComponent.svelte"
-import Grid from "$lib/components/layouts/Grid.svelte"
-import GridItem from "$lib/components/layouts/GridItem.svelte"
+import Grid from "$lib/layouts/Grid.svelte"
+import GridItem from "$lib/layouts/GridItem.svelte"
 import Passport from "svelte-material-icons/Passport.svelte"
+import PageHead from "$lib/components/PageHead.svelte"
 
 export let data: PageData
 
@@ -47,17 +52,21 @@ let loading = false
 {#if loading}
     <OverlayLoading/>
 {/if}
-<Grid vertical_gap={40} padding_vertical="100px">
+<Grid
+    padding_vertical={80}
+    vertical_gap={40}>
     <GridItem
         align_items="flex-start"
-        gap="20px"
         columns={{
             laptop: "span 9",
             tablet: "span 8",
             mobile: "span 4"
-        }}>
+        }}
+        gap={40}>
         {#if data.user_wrapper.user && data.user_wrapper.user.citizenship_status === null}
-            <FormComponent bind:loading bind:user={data.user_wrapper.user}/>
+            <FormComponent
+                bind:loading
+                bind:user={ data.user_wrapper.user }/>
         {:else if data.user_wrapper.user && data.user_wrapper.user.citizenship_status}
             <StatusComponent/>
         {:else}

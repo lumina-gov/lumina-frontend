@@ -12,10 +12,10 @@ export let translucent = false
     class="hero"
     class:translucent>
     <Inner
-        {max_width}
+        {align}
         {gap}
-        {vertical_padding}
-        {align}>
+        {max_width}
+        {vertical_padding}>
         <slot/>
     </Inner>
 </div>

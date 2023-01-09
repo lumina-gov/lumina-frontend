@@ -15,34 +15,38 @@ export let areas: HubArea[]
 </script>
 
 <div class="main">
-    <a href={main_area.href} class="link">
+    <a
+        class="link"
+        href={main_area.href}>
         <div class="left-wrapper">
             <div class="icon">
-                <svelte:component this={main_area.icon} />
+                <svelte:component this={ main_area.icon } />
             </div>
             <div class="heading">
-                {main_area.title}
+                { main_area.title }
             </div>
             {#if main_area.description}
                 <p>
-                    {main_area.description}
+                    { main_area.description }
                 </p>
             {/if}
         </div>
         <div class="chevron-right">
-            <svelte:component this={ChevronRight} />
+            <svelte:component this={ ChevronRight } />
         </div>
     </a>
     {#each areas as area}
-        <a href={area.href} class="area link">
+        <a
+            class="area link"
+            href={area.href}>
             <div class="icon">
-                <svelte:component this={area.icon} />
+                <svelte:component this={ area.icon } />
             </div>
             <div class="info-heading">
-                {area.title}
+                { area.title }
             </div>
             <div class="chevron-right">
-                <svelte:component this={ChevronRight} />
+                <svelte:component this={ ChevronRight } />
             </div>
         </a>
     {/each}

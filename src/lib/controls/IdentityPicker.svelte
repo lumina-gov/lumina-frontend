@@ -22,7 +22,10 @@ let toggled = false
     <ClickoutRegion clicked_outside={() => toggled = false}>
         <div>
             <Inside>
-                <Segment right_icon={Edit} text={`${first_name} ${last_name}`} on:click={() => toggled = !toggled}/>
+                <Segment
+                    right_icon={Edit}
+                    text={`${first_name} ${last_name}`}
+                    on:click={ () => toggled = !toggled }/>
             </Inside>
         </div>
         {#if toggled}
@@ -30,20 +33,24 @@ let toggled = false
                 <Dropdown max_width="500px">
                     <div class="group">
                         <div class="space-between">
-                            <Heading level={4} left_icon={AccountCircle}>Update Identity</Heading>
-                            <Icon on:click={() => toggled = !toggled} icon={Close}/>
+                            <Heading
+                                left_icon={AccountCircle}
+                                level={4}>Update Identity</Heading>
+                            <Icon
+                                icon={Close}
+                                on:click={ () => toggled = !toggled }/>
                         </div>
                         <div class="input-group">
                             <Input
                                 name={"First Name"}
-                                bind:value={first_name}
                                 left_icon={Text}
-                                />
+                                bind:value={ first_name }
+                            />
                             <Input
                                 name={"Last Name"}
-                                bind:value={last_name}
                                 left_icon={Text}
-                                />
+                                bind:value={ last_name }
+                            />
                         </div>
                     </div>
                 </Dropdown>
@@ -63,15 +70,6 @@ let toggled = false
     display flex
     justify-content space-between
     align-items center
-
-.icon
-    cursor pointer
-    padding 4px
-    border-radius 4px
-    font-size 20px
-    display inline-flex
-    &:hover
-        background transparify(white, 4%)
 
 .input-group
     display grid

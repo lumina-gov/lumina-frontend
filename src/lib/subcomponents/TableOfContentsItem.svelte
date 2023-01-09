@@ -8,7 +8,9 @@ export let item: TreeItem
 
 </script>
 <div class="item">
-    <div class="text" on:click={() => toggled = !toggled}>
+    <div
+        class="text"
+        on:click={ () => toggled = !toggled }>
         <div class="icon">
             {#if toggled}
                 <RadioboxMarked />
@@ -18,12 +20,12 @@ export let item: TreeItem
         </div>
         {#if item.prefix}
             <span class="prefix">
-                {item.prefix}
+                { item.prefix }
             </span>
         {/if}
         {#if item.title}
             <span class="title">
-                {item.title}
+                { item.title }
             </span>
         {/if}
     </div>

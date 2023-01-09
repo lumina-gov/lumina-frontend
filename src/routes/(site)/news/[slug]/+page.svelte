@@ -1,15 +1,14 @@
-<PageHead
-    title={data.post.title}
+<PageHead title={data.post.title}
 />
 <SchemaComponent schema={schema}/>
 <script lang="ts">
-import Hero from "$lib/components/layouts/Hero.svelte"
+import Hero from "$lib/layouts/Hero.svelte"
 import type { PageData } from "./$types"
 import Newspaper from "svelte-material-icons/Newspaper.svelte"
 import Heading from "$lib/display/Heading.svelte"
 import Tag from "$lib/display/Tag.svelte"
 import Card from "$lib/cards/Card.svelte"
-import VerticalLayout from "$lib/components/layouts/VerticalLayout.svelte"
+import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
 import BlocksArray from "$lib/components/blocks/BlocksArray.svelte"
 import Date from "$lib/display/Date.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
@@ -49,18 +48,21 @@ export const schema: WithContext<NewsArticle> = {
 <Hero>
     <div class="tags">
         {#each data.post.tags as tag}
-            <Tag color="brand">{tag}</Tag>
+            <Tag color="brand">{ tag }</Tag>
         {/each}
     </div>
     <Heading left_icon={Newspaper}>{ data.post.title }</Heading>
     <div class="flex-wrap">
         <Date date={data.post.date}/>
-        <Author author={{
-            name: "Lumina",
-            src: "/images/lumina.png",
-        }}/>
+        <Author
+            author={{
+                name: "Lumina",
+                src: "/images/lumina.png",
+            }}/>
     </div>
-    <Card padding="32px" shadow={true}>
+    <Card
+        padding="32px"
+        shadow={true}>
         <VerticalLayout max_width={600}>
             <BlocksArray blocks={data.post.blocks}/>
         </VerticalLayout>

@@ -13,16 +13,16 @@ export let description: string | null = null
 </script>
 <div class="box">
     <div class="icon {color}">
-        <svelte:component this={icon}/>
+        <svelte:component this={ icon }/>
     </div>
     <div class="right">
         <Tag bind:color>
             { tag }
         </Tag>
-        <h3>{title}</h3>
+        <h3>{ title }</h3>
         {#if description}
             <div class="description">
-                {description}
+                { description }
             </div>
         {/if}
         {#if $$slots.default}

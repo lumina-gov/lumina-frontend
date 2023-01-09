@@ -10,17 +10,21 @@ $: against_percentage = against_votes / total_votes * 100
 </script>
 <div class="progress-bar-wrapper">
     <div class="progress left">
-        <div class="bar" style="width: {against_percentage >=  50 ? (against_percentage - 50) * 2 : 0}%"/>
+        <div
+            style:width="{ against_percentage >=  50 ? (against_percentage - 50) * 2 : 0 }%"
+            class="bar"/>
     </div>
     <div class="progress right">
-        <div class="bar" style="width: {for_percentage >= 50 ? (for_percentage - 50) * 2 : 0}%"/>
+        <div
+            style:width="{ for_percentage >= 50 ? (for_percentage - 50) * 2 : 0 }%"
+            class="bar"/>
     </div>
 </div>
 <div class="text">
     <div
-        class:support={for_percentage > 50}
-        class:against={against_percentage > 50}>
-            { for_percentage.toFixed(2) }%
+        class:against={ against_percentage > 50 }
+        class:support={ for_percentage > 50 }>
+        { for_percentage.toFixed(2) }%
     </div>
     <span>Support</span>
 </div>

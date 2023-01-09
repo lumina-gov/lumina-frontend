@@ -8,8 +8,13 @@ export let items: {
 </script>
 <div class="sidebar">
     {#each items as item}
-        <a href={item.href} class="item">
-            <Icon icon={Dot} size={14} color="brand"/>
+        <a
+            class="item"
+            href={item.href}>
+            <Icon
+                color="brand"
+                icon={Dot}
+                size={14}/>
             { item.name }
         </a>
     {/each}

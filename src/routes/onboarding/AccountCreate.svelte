@@ -31,11 +31,11 @@ let phone: { country: Country | null, number: string } = {
 
 $: invalid = !(
     user.email &&
-    user.password &&
-    user.first_name &&
-    user.last_name &&
-    phone.country &&
-    phone.number
+        user.password &&
+        user.first_name &&
+        user.last_name &&
+        phone.country &&
+        phone.number
 )
 
 async function signup () {
@@ -47,12 +47,12 @@ async function signup () {
         let { errors } = await data.graph.req`
             message {
                 create_user(${{
-        ...user,
-        calling_code: phone.country.calling_code,
-        country_code: phone.country.code,
-        phone_number: phone.number,
-        referrer: referral ? Option.Some(referral) : Option.None(),
-    }})
+                ...user,
+                calling_code: phone.country.calling_code,
+                country_code: phone.country.code,
+                phone_number: phone.number,
+                referrer: referral ? Option.Some(referral) : Option.None(),
+            }})
         }`
 
         if (errors.length > 0) {
@@ -67,9 +67,9 @@ async function signup () {
     {
         let { data: { login: token }, errors } = await data.graph.req<{ login: string }>`message {
             login(${{
-        email: user.email,
-        password: user.password,
-    }})
+                email: user.email,
+                password: user.password,
+            }})
         }`
 
         if (errors.length > 0) {
@@ -108,35 +108,35 @@ async function signup () {
             <Input
                 name="Email"
                 autocomplete="email"
-                placeholder="eg: john@example.com"
                 focus_on_mount={true}
-                bind:value={user.email}
                 left_icon={Email}
+                placeholder="eg: john@example.com"
+                bind:value={ user.email }
             />
-            <PhoneInput bind:value={phone}/>
+            <PhoneInput bind:value={ phone }/>
             <div class="split">
                 <Input
                     name="First Name"
                     autocomplete="given-name"
                     placeholder="eg: John"
-                    bind:value={user.first_name}
+                    bind:value={ user.first_name }
                 />
                 <Input
                     name="Last Name"
                     autocomplete="family-name"
                     placeholder="eg: Smith"
-                    bind:value={user.last_name}
+                    bind:value={ user.last_name }
                 />
             </div>
             <Password
                 autocomplete="new-password"
                 check_strength={true}
-                on:keyup={e => { if (e.key === "Enter" && user.password) future(signup(), status => loading = status)}}
-                bind:value={user.password}/>
+                on:keyup={ e => { if (e.key === "Enter" && user.password) future(signup(), status => loading = status)} }
+                bind:value={ user.password }/>
             <Button
                 disabled={invalid}
-                on:click={() => future(signup(), status => loading = status)}
-                right_icon={ShieldAccount}>
+                right_icon={ShieldAccount}
+                on:click={ () => future(signup(), status => loading = status) }>
                 Create Account
             </Button>
         </div>

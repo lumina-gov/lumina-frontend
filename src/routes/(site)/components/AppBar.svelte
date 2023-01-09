@@ -44,30 +44,51 @@ function toggle(toggling: Dropdown) {
 }
 
 </script>
-<header class:authenticated class:scrolled>
+<header
+    class:authenticated
+    class:scrolled>
     <div class="inner-header">
         <div class="flex-align-center">
             <Inside>
-                <AppbarButton style="transparent" authenticated_app_bar={authenticated} left_icon={Menu} on:click={() => nav_opened = !nav_opened}/>
+                <AppbarButton
+                    style="transparent"
+                    authenticated_app_bar={authenticated}
+                    left_icon={Menu}
+                    on:click={ () => nav_opened = !nav_opened }/>
             </Inside>
-            <div class="logo" class:authenticated>
+            <div
+                class="logo"
+                class:authenticated>
                 <Logo/>
             </div>
         </div>
         <div class="flex-align-center">
             {#if user}
-                <AppbarButton authenticated_app_bar={authenticated} left_icon={Apps} href="/"/>
-                <AppbarButton authenticated_app_bar={authenticated} left_icon={NotificationOutline} on:click={() => toggle(Dropdown.Notifications)}/>
-                <ProfileButton user={user} on:click={() => toggle(Dropdown.Account)}/>
+                <AppbarButton
+                    authenticated_app_bar={authenticated}
+                    href="/"
+                    left_icon={Apps}/>
+                <AppbarButton
+                    authenticated_app_bar={authenticated}
+                    left_icon={NotificationOutline}
+                    on:click={ () => toggle(Dropdown.Notifications) }/>
+                <ProfileButton
+                    user={user}
+                    on:click={ () => toggle(Dropdown.Account) }/>
             {:else}
-                <AppbarButton left_icon={Signin} href="/signin"/>
-                <AppbarButton style="branded" left_icon={Settlement} href="/onboarding">Start</AppbarButton>
+                <AppbarButton
+                    href="/signin"
+                    left_icon={Signin}/>
+                <AppbarButton
+                    style="branded"
+                    href="/onboarding"
+                    left_icon={Settlement}>Start</AppbarButton>
             {/if}
         </div>
     </div>
 </header>
 {#if dropdown !== null && user}
-    <Scrim on:close={() => dropdown = null}>
+    <Scrim on:close={ () => dropdown = null }>
         <div class="popout">
             {#if dropdown === Dropdown.Notifications}
                 <NotificationsPopout/>
@@ -98,8 +119,8 @@ top_header()
 scroll_header()
     box-shadow 0 0 10px 0 rgba(0, 0, 0, 0.5)
     background $dark_app
-    background mix(white, $dark_app, 8%)
-    // background-blur(10px)
+    background transparify(mix(white, $dark_app, 8%), 50%)
+    background-blur(10px)
 
 header
     display flex

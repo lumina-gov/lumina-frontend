@@ -54,8 +54,8 @@ let proposals = [
     <div class="inner-section space-between">
         <Heading left_icon={CheckboxMarkedCircle}>Lumina Assembly</Heading>
         <Button
-            hug={true}
             style="translucent"
+            hug={true}
             right_icon={Plus}>
             New Draft
         </Button>
@@ -64,36 +64,42 @@ let proposals = [
 <div class="section">
     <div class="inner-section grid-2">
         <InfoBox
+            color="white"
             icon={Information}
-            title="Lumina Assembly"
             tag="Info"
-            color="white">
+            title="Lumina Assembly">
             <div class="description">
                 Lumina Assembly is Lumina's direct democracy system, which enables citizens to propose and vote on new legislation.
             </div>
             <Tag color="white">Stats</Tag>
-            <AssemblyStat icon={HumanGreetingVariant} text="550 active voters"/>
-            <AssemblyStat icon={CheckboxMarkedCircle} text="5,320 total votes"/>
+            <AssemblyStat
+                icon={HumanGreetingVariant}
+                text="550 active voters"/>
+            <AssemblyStat
+                icon={CheckboxMarkedCircle}
+                text="5,320 total votes"/>
         </InfoBox>
         <div class="cards">
             <Card
-                icon={ScriptText}
-                href="/legislation"
-                title="Legislative Library"
                 alert_count={32}
-                description={"View the library of active and historical legislation in Lumina."}/>
+                description={"View the library of active and historical legislation in Lumina."}
+                href="/legislation"
+                icon={ScriptText}
+                title="Legislative Library"/>
             <Card
+                alert_count={4}
+                description={"Before legislation is proposed to the assembly, it must first obtain a certain number of petitions."}
                 href="/assembly/petitions"
                 icon={ScriptText}
-                title="Petitions"
-                alert_count={4}
-                description={"Before legislation is proposed to the assembly, it must first obtain a certain number of petitions."}/>
+                title="Petitions"/>
         </div>
     </div>
 </div>
 <div class="section">
     <div class="inner-section vertical-flex">
-        <Heading level={2} left_icon={ScriptText}>Proposed Legislation</Heading>
+        <Heading
+            left_icon={ScriptText}
+            level={2}>Proposed Legislation</Heading>
         <div class="cards">
             {#each proposals as proposal}
                 <Proposal proposal={proposal}/>

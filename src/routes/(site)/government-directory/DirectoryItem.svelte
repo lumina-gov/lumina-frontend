@@ -1,7 +1,6 @@
 <script lang="ts">
 import Icon from "$lib/display/Icon.svelte"
 import Tag from "$lib/display/Tag.svelte"
-import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 import Government from "svelte-material-icons/Bank.svelte"
 
 export let organisation: {
@@ -16,14 +15,19 @@ export let organisation: {
 </script>
 <div class="directory-item">
     <div>
-        <Icon icon={Government} color="brand" size={24}/>
+        <Icon
+            color="brand"
+            icon={Government}
+            size={24}/>
         <div class="name">
-            {organisation.name}
+            { organisation.name }
         </div>
     </div>
     <div>
-        <Tag>{organisation.type}</Tag>
-        <Tag color={organisation.status === "Halted" ? "white" : "green"} opacity={organisation.status === "Halted"}>{organisation.status}</Tag>
+        <Tag>{ organisation.type }</Tag>
+        <Tag
+            color={organisation.status === "Halted" ? "white" : "green"}
+            opacity={organisation.status === "Halted"}>{ organisation.status }</Tag>
         <!-- <Icon icon={ChevronRight} color="brand" size={24}/> -->
     </div>
 </div>

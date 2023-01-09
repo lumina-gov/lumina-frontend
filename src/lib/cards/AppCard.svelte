@@ -19,21 +19,23 @@ export let tag: {
 </script>
 
 <Card
-    gap="16px"
-    padding="24px"
     direction="horizontal"
+    gap="16px"
     {href}
-    opacity={disabled}
     interactive={!disabled}
+    opacity={disabled}
+    padding="24px"
     on:click
     on:keyup
 >
-    <Icon {icon} size={32} />
+    <Icon
+        {icon}
+        size={32} />
     <div class="box">
         <div class="top-part">
             <div class="title">{ title }</div>
             {#if tag}
-                <Tag color={tag.color}>{tag.text}</Tag>
+                <Tag color={tag.color}>{ tag.text }</Tag>
             {/if}
         </div>
         <div class="description">

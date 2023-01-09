@@ -6,7 +6,7 @@ import Apps from "svelte-material-icons/Apps.svelte"
 import Settlement from "$lib/icons/Settlement.svelte"
 import StatusCard from "./StatusCard.svelte"
 import ClockTimeFour from "svelte-material-icons/ClockTimeFour.svelte"
-import VerticalLayout from "$lib/components/layouts/VerticalLayout.svelte"
+import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
 import FlexWrap from "$lib/display/FlexWrap.svelte"
 import site_data from "$lib/data/site_data"
@@ -15,7 +15,9 @@ import site_data from "$lib/data/site_data"
 
 <Tag>Citizenship</Tag>
 <Heading right_icon={Settlement}>Citizenship Status</Heading>
-<StatusCard title="Status" left_icon={ClockTimeFour}>Pending</StatusCard>
+<StatusCard
+    left_icon={ClockTimeFour}
+    title="Status">Pending</StatusCard>
 <VerticalLayout>
     <Paragraph>
         We'll let you know the next steps as we continue to build our systems.
@@ -25,15 +27,15 @@ import site_data from "$lib/data/site_data"
     </Paragraph>
     <FlexWrap>
         <Button
-            hug={true}
             href={site_data.socials.discord}
+            hug={true}
             right_icon={Apps}>
             Join Discord
         </Button>
         <Button
             style="translucent"
-            hug={true}
             href="/"
+            hug={true}
             right_icon={Apps}>
             Open Hub
         </Button>

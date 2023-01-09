@@ -46,12 +46,15 @@ let current = 0
     <div class="bottom-part">
         <div class="cards">
             {#each cards as card, i}
-                <SelectCard info={card} bind:current i={i}/>
+                <SelectCard
+                    i={i}
+                    info={card}
+                    bind:current/>
             {/each}
         </div>
         <Button
-            on:click={() => dispatch("next")}
-            right_icon={ChevronRight}>
+            right_icon={ChevronRight}
+            on:click={ () => dispatch("next") }>
             Next
         </Button>
         <Button

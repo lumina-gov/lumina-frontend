@@ -11,7 +11,9 @@ $: root = {
 
 </script>
 <div class="toc">
-    <TableOfContentsItem item={root} toggled={true}/>
+    <TableOfContentsItem
+        item={root}
+        toggled={true}/>
 </div>
 <style lang="stylus">
 @import 'variables'

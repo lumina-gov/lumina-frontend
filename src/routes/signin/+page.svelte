@@ -1,6 +1,6 @@
 <PageHead
-    title="Sign in"
     description="Sign in to your Lumina account."
+    title="Sign in"
 />
 <script lang="ts">
 import Logo from "$lib/icons/Logo.svelte"
@@ -83,56 +83,60 @@ async function signin () {
     {#if loading}
         <OverlayLoading/>
     {/if}
-    <Card padding="24px" max_width="550px">
-        <Box max_width="360px" gap="20px">
+    <Card
+        max_width="550px"
+        padding="24px">
+        <Box
+            gap="20px"
+            max_width="360px">
             {#if display === DisplayPage.Email}
                 <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    autocomplete="email"
-                    left_icon={Email}
                     name="email"
+                    autocomplete="email"
                     focus_on_mount={true}
-                    bind:value={user.email}
-                    on:keyup={e => { if (e.key === "Enter" && user.email) display = DisplayPage.Password}}/>
+                    left_icon={Email}
+                    placeholder="Enter your email"
+                    type="email"
+                    bind:value={ user.email }
+                    on:keyup={ e => { if (e.key === "Enter" && user.email) display = DisplayPage.Password} }/>
                 <Button
                     disabled={!user.email.includes("@")}
-                    on:click={() => display = DisplayPage.Password}
-                    right_icon={ChevronRight}>
+                    right_icon={ChevronRight}
+                    on:click={ () => display = DisplayPage.Password }>
                     Enter password
                 </Button>
                 <Button
                     style="translucent"
-                    right_icon={Plus}
-                    href="/onboarding">
+                    href="/onboarding"
+                    right_icon={Plus}>
                     Create Account
                 </Button>
             {/if}
             {#if display === DisplayPage.Password}
                 <div class="hidden">
                     <Input
-                        type="email"
-                        placeholder="Enter your email"
-                        autocomplete="email"
-                        left_icon={Email}
                         name="email"
+                        autocomplete="email"
                         focus_on_mount={true}
-                        bind:value={user.email}
-                        on:keyup={e => { if (e.key === "Enter" && user.email) display = DisplayPage.Password}}/>
+                        left_icon={Email}
+                        placeholder="Enter your email"
+                        type="email"
+                        bind:value={ user.email }
+                        on:keyup={ e => { if (e.key === "Enter" && user.email) display = DisplayPage.Password} }/>
                 </div>
                 <Segment
-                    on:click={() => display = DisplayPage.Email}
                     left_icon={Account}
                     right_icon={Swap}
-                    text={user.email}/>
+                    text={user.email}
+                    on:click={ () => display = DisplayPage.Email }/>
                 <Password
                     focus_on_mount={true}
-                    on:keyup={e => { if (e.key === "Enter" && user.password) future(signin(), is_loading => loading = is_loading)}}
-                    bind:value={user.password}/>
+                    on:keyup={ e => { if (e.key === "Enter" && user.password) future(signin(), is_loading => loading = is_loading)} }
+                    bind:value={ user.password }/>
                 <Button
                     disabled={!user.password}
-                    on:click={() => future(signin(), is_loading => loading = is_loading)}
-                    right_icon={ExitToApp}>
+                    right_icon={ExitToApp}
+                    on:click={ () => future(signin(), is_loading => loading = is_loading) }>
                     Sign In
                 </Button>
             {/if}

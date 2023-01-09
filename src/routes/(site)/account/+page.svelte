@@ -3,15 +3,17 @@ import Heading from "$lib/display/Heading.svelte"
 import InfoBox from "$lib/display/InfoBox.svelte"
 import AccountCircle from "svelte-material-icons/AccountCircle.svelte"
 import Alert from "svelte-material-icons/Alert.svelte"
+
+console.log("Account Settings")
 </script>
 
 <div class="area">
     <Heading right_icon={AccountCircle}>Account Settings</Heading>
     <InfoBox
+        color="red"
         icon={Alert}
-        title="This feature is not developed yet"
         tag="Coming soon"
-        color="red"/>
+        title="This feature is not developed yet"/>
 </div>
 
 <style lang="stylus">

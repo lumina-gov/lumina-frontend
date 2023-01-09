@@ -5,8 +5,9 @@ export let href: string | null = null
 export let left_icon: typeof SvelteComponent | null = null
 export let right_icon: typeof SvelteComponent | null = null
 export let style: "translucent" | "transparent" | "branded" = "branded"
-export let hug = false
+export let hug = true
 export let disabled = false
+export let text: string | null = null
 
 $: tag = href ? "a" : "div"
 
@@ -24,29 +25,32 @@ function handle_keyup(e: KeyboardEvent) {
 </script>
 
 <svelte:element
-    this={tag}
-    href={href}
-    tabindex={disabled ? -1 : 0}
-    on:click={clicked}
-    on:keyup={handle_keyup}
-    role="button"
-    class:hug
-    class:disabled
+    this={ tag }
     class="button {style}"
+    class:disabled
+    class:hug
+    href={href}
+    role="button"
+    tabindex={disabled ? -1 : 0}
+    on:click={ clicked }
+    on:keyup={ handle_keyup }
 >
     {#if left_icon}
         <span class="icon">
-            <svelte:component this={left_icon} />
+            <svelte:component this={ left_icon } />
         </span>
     {/if}
-    {#if $$slots.default}
+    {#if $$slots.default || text}
         <span class="text">
             <slot/>
+            {#if text}
+                { text }
+            {/if}
         </span>
     {/if}
     {#if right_icon}
         <span class="icon">
-            <svelte:component this={right_icon} />
+            <svelte:component this={ right_icon } />
         </span>
     {/if}
 </svelte:element>

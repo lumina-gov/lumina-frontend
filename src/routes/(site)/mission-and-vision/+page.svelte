@@ -1,18 +1,18 @@
 <PageHead
-    title="Mission and vision"
     description="Empowering every individual to have a direct say in the decision-making processes that affect their lives."
+    title="Mission and vision"
     type="article"
 />
 <script lang="ts">
-import Hero from "$lib/components/layouts/Hero.svelte"
+import Hero from "$lib/layouts/Hero.svelte"
 import Heading from "$lib/display/Heading.svelte"
 import Tag from "$lib/display/Tag.svelte"
 import Beacon from "./Beacon.svelte"
 import Coloured from "$lib/display/Coloured.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
-import ResponsiveLayout from "$lib/components/layouts/ResponsiveLayout.svelte"
+import ResponsiveLayout from "$lib/layouts/ResponsiveLayout.svelte"
 import Card from "$lib/cards/Card.svelte"
-import UnresponsiveLayout from "$lib/components/layouts/VerticalLayout.svelte"
+import UnresponsiveLayout from "$lib/layouts/VerticalLayout.svelte"
 import type { SvelteComponent } from "svelte"
 import FeatureTile from "$lib/components/FeatureTile.svelte"
 
@@ -84,28 +84,45 @@ let goals: Goal[] = [
 </script>
 
 <Hero
-    vertical_padding={48}
     align="center"
-    gap={32}>
+    gap={32}
+    vertical_padding={48}>
     <Beacon/>
     <Tag>OUR CORE DIFFERENCE</Tag>
     <Heading left_icon={Scale}>Mission and <Coloured>Vision</Coloured></Heading>
-    <UnresponsiveLayout max_width="600px" text_align="center">
+    <UnresponsiveLayout
+        max_width="600px"
+        text_align="center">
         <Paragraph>
             We want Lumina to be a beacon of hope and progress, inspiring other cities and nations
             to embrace the principles of direct democracy and collaborative governance.
         </Paragraph>
     </UnresponsiveLayout>
-    <ResponsiveLayout max_width={1000} text_align="center" min_item_size={300}>
-        <Card direction="vertical" gap={16} padding="32px" shadow={true}>
-            <Heading level={2} underline={true}>Our mission</Heading>
+    <ResponsiveLayout
+        max_width={1000}
+        min_item_size={300}
+        text_align="center">
+        <Card
+            direction="vertical"
+            gap={16}
+            padding="32px"
+            shadow={true}>
+            <Heading
+                level={2}
+                underline={true}>Our mission</Heading>
             <Paragraph>
                 Our mission is to build a city that is grounded in the principles of direct democracy,
                 empowering its residents to participate in the decision-making process and to shape their own future
             </Paragraph>
         </Card>
-        <Card direction="vertical" gap="16px" padding="32px" shadow={true}>
-            <Heading level={2} underline={true}>Our vision</Heading>
+        <Card
+            direction="vertical"
+            gap="16px"
+            padding="32px"
+            shadow={true}>
+            <Heading
+                level={2}
+                underline={true}>Our vision</Heading>
             <Paragraph>
                 Our vision is to create a vibrant and dynamic city-state where our citizens
                 have the power to shape their own future through direct democracy and the use of cutting-edge technology
@@ -113,19 +130,33 @@ let goals: Goal[] = [
         </Card>
     </ResponsiveLayout>
 </Hero>
-<Hero vertical_padding={40} translucent={true} gap={40}>
-    <UnresponsiveLayout text_align="center" max_width={600} align_items="center" margin_auto={true}>
-        <Heading level={2} underline={true}>Goals & Commitments</Heading>
+<Hero
+    gap={40}
+    translucent={true}
+    vertical_padding={40}>
+    <UnresponsiveLayout
+        align_items="center"
+        margin_auto={true}
+        max_width={600}
+        text_align="center">
+        <Heading
+            level={2}
+            underline={true}>Goals & Commitments</Heading>
         <Paragraph>
             We are dedicated to building a city-state that meets the needs and aspirations of our citizens
         </Paragraph>
     </UnresponsiveLayout>
-    <ResponsiveLayout max_width={1200} min_item_size={300} vertical_gap={48} horizontal_gap={32} vertical_padding={16}>
+    <ResponsiveLayout
+        horizontal_gap={32}
+        max_width={1200}
+        min_item_size={300}
+        vertical_gap={48}
+        vertical_padding={16}>
         {#each goals as goal}
             <FeatureTile
-                title={goal.title}
                 description={goal.description}
-                icon={goal.icon}/>
+                icon={goal.icon}
+                title={goal.title}/>
         {/each}
     </ResponsiveLayout>
 </Hero>

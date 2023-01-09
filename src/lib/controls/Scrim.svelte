@@ -6,11 +6,14 @@ let scrim: HTMLDivElement
 
 </script>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div bind:this={scrim} class="scrim" on:click={e => {
-    if (e.target === scrim) {
-        dispatch("close")
-    }
-}}>
+<div
+    bind:this={ scrim }
+    class="scrim"
+    on:click={ e => {
+        if (e.target === scrim) {
+            dispatch("close")
+        }
+    } }>
     <slot/>
 </div>
 <style lang="stylus">

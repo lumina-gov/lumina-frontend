@@ -9,6 +9,7 @@ export let right_icon: typeof SvelteComponent | undefined = undefined
 export let right_icon_opacity = 0.5
 export let left_icon_opacity = 0.5
 export let text_opacity = 1
+export let tabindex: number | undefined = undefined
 export let style: "translucent" | "branded" = "translucent"
 export let disabled = false
 export let text: string | undefined = undefined
@@ -29,32 +30,38 @@ $: tag = href ? "a" : "div"
 </script>
 
 <svelte:element
-    this={tag}
-    href={href}
-    on:click={click}
-    on:keyup={handle_keyup}
-    role="button"
-    class:disabled
-    tabindex={disabled ? -1 : 0}
+    this={ tag }
     class="segment {style}"
+    class:disabled
+    href={href}
+    role="button"
+    tabindex={tabindex ?? disabled ? -1 : 0}
+    on:click={ click }
+    on:keyup={ handle_keyup }
 >
     {#if left_icon}
-        <span class="icon" style="opacity: {left_icon_opacity};">
-            <svelte:component this={left_icon} />
+        <span
+            style:opacity={ left_icon_opacity }
+            class="icon">
+            <svelte:component this={ left_icon } />
         </span>
     {/if}
     {#if text || $$slots.default}
-        <div class="text" style="opacity: {text_opacity};">
+        <div
+            style:opacity={ text_opacity }
+            class="text">
             {#if text}
-                {text}
+                { text }
             {:else}
                 <slot/>
             {/if}
         </div>
     {/if}
     {#if right_icon}
-        <span class="icon" style="opacity: {right_icon_opacity};">
-            <svelte:component this={right_icon} />
+        <span
+            style:opacity={ right_icon_opacity }
+            class="icon">
+            <svelte:component this={ right_icon } />
         </span>
     {/if}
 </svelte:element>

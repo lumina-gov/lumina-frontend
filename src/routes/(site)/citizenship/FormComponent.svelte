@@ -15,7 +15,6 @@ import { MessageType } from "$lib/types/message"
 import type { User } from "$lib/types/user"
 import future from "$lib/utils/future"
 import SwapHorizontal from "svelte-material-icons/SwapHorizontal.svelte"
-import CloseCircle from "svelte-material-icons/CloseCircle.svelte"
 import Calendar from "svelte-material-icons/Calendar.svelte"
 import Job from "svelte-material-icons/HammerScrewdriver.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
@@ -114,14 +113,16 @@ async function register() {
 </script>
 <Heading right_icon={Passport}>Citizenship Registration</Heading>
 <div class="inputs">
-    <IdentityPicker bind:first_name={citizenship_registration.first_name} bind:last_name={citizenship_registration.last_name}/>
+    <IdentityPicker
+        bind:first_name={ citizenship_registration.first_name }
+        bind:last_name={ citizenship_registration.last_name }/>
     <InputWrapper name="Sex">
         <div class="horizontal-segments">
             {#each sexes as sex}
                 <Segment
                     style={citizenship_registration.sex == sex ? "branded" : "translucent"}
-                    on:click={() => citizenship_registration.sex = sex}
-                    text={sex}/>
+                    text={sex}
+                    on:click={ () => citizenship_registration.sex = sex }/>
             {/each}
         </div>
     </InputWrapper>
@@ -131,109 +132,78 @@ async function register() {
             left_icon={Calendar}
             placeholder="Enter Date"
             type="date"
-            bind:value={citizenship_registration.date_of_birth}/>
+            bind:value={ citizenship_registration.date_of_birth }/>
     </div>
     <div class="horizontal-inputs">
         <MultiSegment
             name="Country of Citizenship"
-            bind:values={citizenship_registration.country_of_citizenship}
+            get_title={country => country.name}
             options={search => countries.filter(country => new RegExp(search, "ig").test(country.name))}
-            let:search>
-            <svelte:fragment slot="selected" let:value>
-                <Segment text={value.name}/>
-            </svelte:fragment>
-            <svelte:fragment slot="option" let:option>
-                <Segment text={option.name}/>
-            </svelte:fragment>
+            bind:values={ citizenship_registration.country_of_citizenship }>
         </MultiSegment>
         <MultiSegment
             name="Ethnic Group"
-            bind:values={citizenship_registration.ethnic_groups}
-            options={search => ethnicities.filter(ethnicity => new RegExp(search, "ig").test(ethnicity))}
             allow_other={query => query}
-            let:search>
-            <svelte:fragment slot="selected" let:value>
-                <Segment text={value}/>
-            </svelte:fragment>
-            <svelte:fragment slot="option" let:option>
-                <Segment text={option}/>
-            </svelte:fragment>
-        </MultiSegment>
+            options={search => ethnicities.filter(ethnicity => new RegExp(search, "ig").test(ethnicity))}
+            bind:values={ citizenship_registration.ethnic_groups }/>
     </div>
     <div class="horizontal-inputs">
         <SingleSegment
             name="Country of Residence"
             get_title={value => value.name}
+            options={search => countries.filter(country => new RegExp(search, "ig").test(country.name))}
             placeholder="Select Country"
             right_icon={SwapHorizontal}
-            bind:value={citizenship_registration.country_of_residence}
-            options={search => countries.filter(country => new RegExp(search, "ig").test(country.name))}/>
+            bind:value={ citizenship_registration.country_of_residence }/>
         <SingleSegment
             name="Country of Birth"
             get_title={value => value.name}
+            options={search => countries.filter(country => new RegExp(search, "ig").test(country.name))}
             placeholder="Select Country"
             right_icon={SwapHorizontal}
-            bind:value={citizenship_registration.country_of_birth}
-            options={search => countries.filter(country => new RegExp(search, "ig").test(country.name))}/>
+            bind:value={ citizenship_registration.country_of_birth }/>
     </div>
     <div class="horizontal-inputs">
         <MultiSegment
             name="Occupation"
-            options={search => occupations.filter(occupation => occupation.some(alias => new RegExp(search, "ig").test(alias)))}
-            bind:values={citizenship_registration.occupations}
             allow_other={query => [query]}
+            get_title={option => option[0]}
+            left_icon={Job}
+            options={search => occupations.filter(occupation => occupation.some(alias => new RegExp(search, "ig").test(alias)))}
+            bind:values={ citizenship_registration.occupations }
+            let:option
             let:search>
-                <svelte:fragment slot="selected" let:value>
-                    <Segment
-                        left_icon={Job}
-                        right_icon={CloseCircle}
-                        text={value[0]}/>
-                </svelte:fragment>
-                <svelte:fragment slot="option" let:option>
-                    <Segment
-                        left_icon={Job}>
-                        {@html option[0].replace(new RegExp(search ? search : "$^", "ig"), match => `<strong>${match}</strong>`)}
-                    </Segment>
-                    <div class="aliases">
-                        {@html
-                            option.slice(1)
-                                .map(alias => alias.replace(new RegExp(search ? search : "$^", "ig"), match => `<strong>${match}</strong>`))
-                                .sort(a => new RegExp(search, "ig").test(a) ? -1 : 1)
-                                .join(", ")
-                        }
-                    </div>
-                </svelte:fragment>
+            <div class="aliases">
+                {@html
+                    option.slice(1)
+                        .map(alias => alias.replace(new RegExp(search ? search : "$^", "ig"), match => `<strong>${match}</strong>`))
+                        .sort(a => new RegExp(search, "ig").test(a) ? -1 : 1)
+                        .join(", ")}
+            </div>
         </MultiSegment>
         <MultiSegment
             name="Skills"
-            options={search => skills.filter(skill => skill.some(alias => new RegExp(search, "ig").test(alias)))}
-            bind:values={citizenship_registration.skills}
             allow_other={query => [query.trim()]}
+            get_title={option => option[0]}
+            left_icon={Job}
+            options={search => skills.filter(skill => skill.some(alias => new RegExp(search, "ig").test(alias)))}
+            bind:values={ citizenship_registration.skills }
+            let:option
             let:search>
-                <svelte:fragment slot="selected" let:value>
-                    <Segment
-                        left_icon={Job}
-                        right_icon={CloseCircle}
-                        text={value[0]}/>
-                </svelte:fragment>
-                <svelte:fragment slot="option" let:option>
-                    <Segment
-                        left_icon={Job}>
-                        {@html option[0].replace(new RegExp(search ? search : "$^", "ig"), match => `<strong>${match}</strong>`)}
-                    </Segment>
-                    <div class="aliases">
-                        {@html
-                            option.slice(1)
-                                .map(alias => alias.replace(new RegExp(search ? search : "$^", "ig"), match => `<strong>${match}</strong>`))
-                                .sort(a => new RegExp(search, "ig").test(a) ? -1 : 1)
-                                .join(", ")
-                        }
-                    </div>
-                </svelte:fragment>
+            <div class="aliases">
+                {@html
+                    option.slice(1)
+                        .map(alias => alias.replace(new RegExp(search ? search : "$^", "ig"), match => `<strong>${match}</strong>`))
+                        .sort(a => new RegExp(search, "ig").test(a) ? -1 : 1)
+                        .join(", ")}
+            </div>
         </MultiSegment>
     </div>
     <div>
-        <Button right_icon={ChevronRight} hug={true} on:click={() => future(register(), status => loading = status)}>
+        <Button
+            hug={true}
+            right_icon={ChevronRight}
+            on:click={ () => future(register(), status => loading = status) }>
             Register
         </Button>
     </div>

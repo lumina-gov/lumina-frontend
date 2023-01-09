@@ -40,28 +40,27 @@ $: toc = convert_lex_to_toc_tree(marked.lexer(data.content))
     <div class="area light">
         <Heading right_icon={Script}>Create Legislation</Heading>
         <Input
-            left_icon={Title}
             name="Act Title"
-            bind:value={data.title}
+            left_icon={Title}
             placeholder="eg: Healthcare Act"
-            />
+            bind:value={ data.title }
+        />
         <MultiSegment
             name="Tags"
             options={["Health", "Education", "Ministry"]}
-            bind:values={data.tags}
-            />
+            bind:values={ data.tags }
+        />
         <TextArea
             name="Act Content"
-            bind:value={data.content}
             placeholder="Write your act content here, using markdown"
-            />
+            bind:value={ data.content }
+        />
         <MultiSegment
             name="Related Organisations"
             options={["Healthcare Ministry", "Education Ministry", "Infrastructure Ministry"]}
-            bind:values={data.related_organisations}
-            />
-        <Button
-            right_icon={Earth}>
+            bind:values={ data.related_organisations }
+        />
+        <Button right_icon={Earth}>
             Publish
         </Button>
     </div>
@@ -69,14 +68,16 @@ $: toc = convert_lex_to_toc_tree(marked.lexer(data.content))
         <Hint>Preview</Hint>
         <div class="tags">
             {#each data.tags as tag}
-                <Tag color="brand">{tag}</Tag>
+                <Tag color="brand">{ tag }</Tag>
             {/each}
         </div>
-        <Heading left_icon={Script} level={1}>
+        <Heading
+            left_icon={Script}
+            level={1}>
             {#if !data.title}
                 <span class="placeholder">Act Title</span>
             {:else}
-                {data.title}
+                { data.title }
             {/if}
         </Heading>
         <InputWrapper name="Related Organisations">
@@ -86,15 +87,15 @@ $: toc = convert_lex_to_toc_tree(marked.lexer(data.content))
                 <div class="related-orgs">
                     {#each data.related_organisations as organisation}
                         <LinkTag
-                            right_icon_opacity={0.5}
-                            right_icon={OpenInNew}>
-                            {organisation}
+                            right_icon={OpenInNew}
+                            right_icon_opacity={0.5}>
+                            { organisation }
                         </LinkTag>
                     {/each}
                 </div>
             {/if}
         </InputWrapper>
-        <TableOfContents bind:items={toc}/>
+        <TableOfContents bind:items={ toc }/>
         <div class="content">
             {#if !data.content}
                 <span class="placeholder">No Act Content</span>

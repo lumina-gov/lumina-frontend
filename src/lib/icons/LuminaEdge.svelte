@@ -1,12 +1,15 @@
 <script>
-    export let size = "1em"
-    export let width = size
-    export let height = size
-    export let color = "currentColor"
-    export let viewBox = "0 0 24 24"
+export let size = "1em"
+export let width = size
+export let height = size
+export let color = "currentColor"
+export let viewBox = "0 0 24 24"
 </script>
 
-<svg {width} {height} {viewBox}>
+<svg
+    {height}
+    {viewBox}
+    {width}>
     <path
         d="M2.3359 12.6294C0.388814 15.1563 0.573266 18.7967 2.88925 21.1127C5.40566 23.6291 9.48555 23.6291 12.002 21.1127L18.2584 14.8562L15.9803 12.578L9.72377 18.8345C8.46557 20.0927 6.42563 20.0927 5.16743 18.8345C4.11377 17.7809 3.94248 16.179 4.65355 14.9471L2.3359 12.6294Z"
         fill={color}

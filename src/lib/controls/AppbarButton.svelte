@@ -25,22 +25,24 @@ function handle_keyup(e: KeyboardEvent) {
 </script>
 
 <svelte:element
-    this={tag}
-    href={href}
-    tabindex="0"
-    on:click={clicked}
-    on:keyup={handle_keyup}
-    role="button"
+    this={ tag }
     class="button"
-    class:authenticated_app_bar
-    class:translucent={style === "translucent"}
-    class:transparent={style === "transparent"}
-    class:branded={style === "branded"}
     class:active
+    class:authenticated_app_bar
+    class:branded={ style === "branded" }
+    class:translucent={ style === "translucent" }
+    class:transparent={ style === "transparent" }
+    href={href}
+    role="button"
+    tabindex="0"
+    on:click={ clicked }
+    on:keyup={ handle_keyup }
 >
     {#if left_icon}
         <span class="icon">
-            <svelte:component this={left_icon} {...left_icon_props} />
+            <svelte:component
+                this={ left_icon }
+                {...left_icon_props} />
         </span>
     {/if}
     {#if $$slots.default}
@@ -50,7 +52,7 @@ function handle_keyup(e: KeyboardEvent) {
     {/if}
     {#if right_icon}
         <span class="icon">
-            <svelte:component this={right_icon} />
+            <svelte:component this={ right_icon } />
         </span>
     {/if}
 </svelte:element>

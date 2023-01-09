@@ -7,12 +7,12 @@ export let placeholder = ""
 export let value: string
 </script>
 <InputWrapper
-    on:click={() => input_ref && input_ref.focus()}
+    on:click={ () => input_ref && input_ref.focus() }
     bind:name>
     <textarea
-        bind:value
+        bind:this={ input_ref }
         {placeholder}
-        bind:this={input_ref}/>
+        bind:value/>
 </InputWrapper>
 <style lang="stylus">
 @import "variables"

@@ -34,19 +34,28 @@ export let margin: { top?: number, right?: number, bottom?: number, left?: numbe
  */
 const dispatch = createEventDispatcher()
 
-let vTrack: HTMLDivElement
-let vThumb: HTMLDivElement
+let VTrack: HTMLDivElement
+let VThumb: HTMLDivElement
+let HTrack: HTMLDivElement
+let HThumb: HTMLDivElement
+
+let moving_thumb: HTMLDivElement | null = null
 
 let startTop = 0
 let startY = 0
+let startLeft = 0
+let startX = 0
+
 let timer = 0
 let windowScrollEnabled = false
 let interacted = false
 
 $: teardownViewport = setupViewport(viewport)
 $: teardownContents = setupContents(contents)
-$: teardownTrack = setupTrack(vTrack)
-$: teardownThumb = setupThumb(vThumb)
+$: VTeardownTrack = setupTrack(VTrack)
+$: VTeardownThumb = setupThumb(VThumb)
+$: HTeardownTrack = setupTrack(HTrack)
+$: HTeardownThumb = setupThumb(HThumb)
 
 $: marginTop = margin.top ?? 0
 $: marginBottom = margin.bottom ?? 0
@@ -54,13 +63,20 @@ $: marginRight = margin.right ?? 0
 $: marginLeft = margin.left ?? 0
 
 $: wholeHeight = viewport?.scrollHeight ?? 0
+$: wholeWidth = viewport?.scrollWidth ?? 0
 $: scrollTop = viewport?.scrollTop ?? 0
-$: trackHeight = viewport?.clientHeight ?? 0 - (marginTop + marginBottom)
-$: thumbHeight = wholeHeight > 0 ? (trackHeight / wholeHeight) * trackHeight : 0
-$: thumbTop = wholeHeight > 0 ? (scrollTop / wholeHeight) * trackHeight : 0
+$: scrollLeft = viewport?.scrollLeft ?? 0
+$: VTrackHeight = viewport?.clientHeight ?? 0 - (marginTop + marginBottom)
+$: VThumbHeight = wholeHeight > 0 ? (VTrackHeight / wholeHeight) * VTrackHeight : 0
+$: VThumbTop = wholeHeight > 0 ? (scrollTop / wholeHeight) * VTrackHeight : 0
+$: HTrackWidth = viewport?.clientWidth ?? 0 - (marginLeft + marginRight)
+$: HThumbWidth = wholeWidth > 0 ? (HTrackWidth / wholeWidth) * HTrackWidth : 0
+$: HThumbLeft = wholeWidth > 0 ? (scrollLeft / wholeWidth) * HTrackWidth : 0
 
-$: scrollable = wholeHeight > trackHeight
-$: visible = scrollable && (alwaysVisible || initiallyVisible)
+$: VScrollable = wholeHeight > VTrackHeight
+$: VVisible = VScrollable && (alwaysVisible || initiallyVisible)
+$: HScrollable = wholeWidth > HTrackWidth
+$: HVisible = HScrollable && (alwaysVisible || initiallyVisible)
 
 function setupViewport(viewport: Element|null) {
     if (!viewport) return
@@ -80,9 +96,12 @@ function setupViewport(viewport: Element|null) {
     element.addEventListener("scroll", onScroll, { passive: true })
 
     const observer = new ResizeObserver(entries => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         for (const _entry of entries) {
             wholeHeight = viewport?.scrollHeight ?? 0
-            trackHeight = viewport?.clientHeight - (marginTop + marginBottom) ?? 0
+            wholeWidth = viewport?.scrollWidth ?? 0
+            VTrackHeight = viewport?.clientHeight - (marginTop + marginBottom) ?? 0
+            HTrackWidth = viewport?.clientWidth - (marginLeft + marginRight) ?? 0
         }
     })
 
@@ -98,27 +117,53 @@ function setupViewport(viewport: Element|null) {
 function setupTrack(track: HTMLDivElement) {
     if (!track) return
 
-    teardownTrack?.()
+    if (track === VTrack) {
+        VTeardownTrack?.()
+        VTrack.addEventListener("mouseenter", onTrackEnter)
+        VTrack.addEventListener("mouseleave", onTrackLeave)
 
-    vTrack.addEventListener("mouseenter", onTrackEnter)
-    vTrack.addEventListener("mouseleave", onTrackLeave)
-    return () => {
-        vTrack.removeEventListener("mouseenter", onTrackEnter)
-        vTrack.removeEventListener("mouseleave", onTrackLeave)
+        return () => {
+            VTrack.removeEventListener("mouseenter", onTrackEnter)
+            VTrack.removeEventListener("mouseleave", onTrackLeave)
+        }
+
     }
+    if (track === HTrack) {
+        HTeardownTrack?.()
+        HTrack.addEventListener("mouseenter", onTrackEnter)
+        HTrack.addEventListener("mouseleave", onTrackLeave)
+
+        return () => {
+            HTrack.removeEventListener("mouseenter", onTrackEnter)
+            HTrack.removeEventListener("mouseleave", onTrackLeave)
+        }
+    }
+
 }
 
 function setupThumb(thumb: HTMLDivElement) {
     if (!thumb) return
 
-    teardownThumb?.()
+    if (thumb === VThumb) {
+        VTeardownThumb?.()
+        VThumb.addEventListener("mousedown", onThumbDown, { passive: true })
+        VThumb.addEventListener("touchstart", onThumbDown, { passive: true })
 
-    vThumb.addEventListener("mousedown", onThumbDown, { passive: true })
-    vThumb.addEventListener("touchstart", onThumbDown, { passive: true })
+        return () => {
+            VThumb.removeEventListener("mousedown", onThumbDown)
+            VThumb.removeEventListener("touchstart", onThumbDown)
+        }
+    }
+    if (thumb === HThumb) {
+        HTeardownThumb?.()
+        HThumb.addEventListener("mousedown" , () => console.log("foo"))
+        HThumb.addEventListener("mousedown", onThumbDown, { passive: true, capture: true })
+        HThumb.addEventListener("touchstart", onThumbDown, { passive: true })
 
-    return () => {
-        vThumb.removeEventListener("mousedown", onThumbDown)
-        vThumb.removeEventListener("touchstart", onThumbDown)
+        return () => {
+            HThumb.removeEventListener("mousedown", onThumbDown)
+            HThumb.removeEventListener("touchstart", onThumbDown)
+        }
     }
 }
 
@@ -132,9 +177,12 @@ function setupContents(contents: Element) {
     }
 
     const observer = new ResizeObserver(entries => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         for (const _entry of entries) {
             wholeHeight = viewport?.scrollHeight ?? 0
+            wholeWidth = viewport?.scrollWidth ?? 0
         }
+        contents = contents
     })
 
     observer.observe(contents)
@@ -147,7 +195,8 @@ function setupContents(contents: Element) {
 
 function setupTimer() {
     timer = window.setTimeout(() => {
-        visible = (scrollable && (alwaysVisible || (initiallyVisible && !interacted))) || false
+        VVisible = (VScrollable && (alwaysVisible || (initiallyVisible && !interacted))) || false
+        HVisible = (HScrollable && (alwaysVisible || (initiallyVisible && !interacted))) || false
         dispatch("hide")
     }, hideAfter)
 }
@@ -160,13 +209,18 @@ function clearTimer() {
 }
 
 function onScroll() {
-    if (!scrollable) return
-
+    if (!VScrollable && !HScrollable) return
     clearTimer()
     setupTimer()
 
-    visible = alwaysVisible || (initiallyVisible && !interacted) || true
-    scrollTop = viewport?.scrollTop ?? 0
+    if(VScrollable) {
+        VVisible = alwaysVisible || (initiallyVisible && !interacted) || true
+        scrollTop = viewport?.scrollTop ?? 0
+    }
+    if (HScrollable) {
+        HVisible = alwaysVisible || (initiallyVisible && !interacted) || true
+        scrollLeft = viewport?.scrollLeft ?? 0
+    }
 
     interacted = true
 
@@ -187,8 +241,10 @@ function onThumbDown(event: TouchEvent | MouseEvent) {
     event.preventDefault()
 
     startTop = viewport.scrollTop
+    startLeft = viewport.scrollLeft
     startY = "changedTouches" in event ? event.changedTouches[0].clientY : event.clientY
-
+    startX = "changedTouches" in event ? event.changedTouches[0].clientX : event.clientX
+    moving_thumb = event.currentTarget as HTMLDivElement
     document.addEventListener("mousemove", onThumbMove)
     document.addEventListener("touchmove", onThumbMove)
     document.addEventListener("mouseup", onThumbUp)
@@ -199,10 +255,16 @@ function onThumbMove(event: TouchEvent | MouseEvent) {
     event.stopPropagation()
     event.preventDefault()
 
-    const clientY = "changedTouches" in event ? event.changedTouches[0].clientY : event.clientY
-    const ratio = wholeHeight / trackHeight
-
-    viewport.scrollTop = startTop + ratio * (clientY - startY)
+    if (moving_thumb === VThumb) {
+        const clientY = "changedTouches" in event ? event.changedTouches[0].clientY : event.clientY
+        const VRatio = wholeHeight / VTrackHeight
+        viewport.scrollTop = startTop + VRatio * (clientY - startY)
+    }
+    if (moving_thumb === HThumb) {
+        const clientX = "changedTouches" in event ? event.changedTouches[0].clientX : event.clientX
+        const HRatio = wholeWidth / HTrackWidth
+        viewport.scrollLeft = startLeft + HRatio * (clientX - startX)
+    }
 }
 
 function onThumbUp(event: TouchEvent | MouseEvent) {
@@ -211,6 +273,9 @@ function onThumbUp(event: TouchEvent | MouseEvent) {
 
     startTop = 0
     startY = 0
+    startLeft = 0
+    startX = 0
+    moving_thumb = null
 
     document.removeEventListener("mousemove", onThumbMove)
     document.removeEventListener("touchmove", onThumbMove)
@@ -226,36 +291,81 @@ onMount(() => {
 onDestroy(() => {
     teardownViewport?.()
     teardownContents?.()
-    teardownTrack?.()
-    teardownThumb?.()
+    VTeardownTrack?.()
+    VTeardownThumb?.()
+    HTeardownTrack?.()
+    HTeardownThumb?.()
 })
 </script>
 
-{#if visible}
-<div
-    class="v-scrollbar"
-    class:fixed={windowScrollEnabled}
-    style="height: {trackHeight}px; margin: {marginTop}px {marginRight}px {marginBottom}px {marginLeft}px">
+{#if VVisible}
     <div
-        bind:this={vTrack}
-        class="v-track"
-        style="height: {trackHeight}px"/>
+        style:height="{ VTrackHeight }px"
+        style:margin="{ marginTop }px { marginRight }px { marginBottom }px { marginLeft }px"
+        class="v-scrollbar"
+        class:fixed={ windowScrollEnabled }>
+        <div
+            bind:this={ VTrack }
+            style:height="{ VTrackHeight }px"
+            class="v-track"/>
+        <div
+            bind:this={ VThumb }
+            style:height="{ VThumbHeight }px"
+            style:top="{ VThumbTop }px"
+            class="v-thumb"/>
+    </div>
+{/if}
+{#if HVisible}
     <div
-        bind:this={vThumb}
-        class="v-thumb"
-        style="height: {thumbHeight}px; top: {thumbTop}px"/>
-</div>
+        style:width="{ HTrackWidth }px"
+        style:margin="{ marginTop }px { marginRight }px { marginBottom }px { marginLeft }px"
+        class="h-scrollbar"
+        class:fixed={ windowScrollEnabled }>
+        <div
+            bind:this={ HTrack }
+            style:width="calc({ HTrackWidth }px - { VVisible ? "var(--svrollbar-track-width, 8px))" : "" }"
+            class="h-track"/>
+        <div
+            bind:this={ HThumb }
+            style:width="{ HThumbWidth }px"
+            style:left="{ HThumbLeft }px"
+            class="h-thumb"/>
+    </div>
 {/if}
 
-<style>
+<style lang="stylus">
+
+user-select-none()
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+
 .v-scrollbar {
     position: absolute;
+    user-select: none;
     top: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     right: 0;
-    width: var(--svrollbar-track-width, 10px);
+    width: var(--svrollbar-track-width, 8px);
+    user-select-none()
 }
 
-.v-scrollbar.fixed {
+.h-scrollbar {
+    position: absolute;
+    user-select: none;
+    display: flex;
+    user-select: none;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+    height: var(--svrollbar-track-width, 8px);
+    user-select-none()
+}
+
+.v-scrollbar.fixed, .h-scrollbar.fixed {
     position: fixed;
 }
 
@@ -264,7 +374,18 @@ onDestroy(() => {
     top: 0;
     right: 0;
     border-radius: var(--svrollbar-track-radius, initial);
-    width: var(--svrollbar-track-width, 10px);
+    width: var(--svrollbar-track-width, 8px);
+    opacity: var(--svrollbar-track-opacity, 1);
+    background: var(--svrollbar-track-background, initial);
+    box-shadow: var(--svrollbar-track-shadow, initial);
+}
+
+.h-track {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: var(--svrollbar-track-radius, initial);
+    height: var(--svrollbar-track-width, 8px);
     opacity: var(--svrollbar-track-opacity, 1);
     background: var(--svrollbar-track-background, initial);
     box-shadow: var(--svrollbar-track-shadow, initial);
@@ -272,12 +393,25 @@ onDestroy(() => {
 
 .v-thumb {
     position: relative;
-    margin: 0 auto;
+    margin: 0;
     min-height: 20px;
     border-radius: var(--svrollbar-thumb-radius, 0.25rem);
     width: var(--svrollbar-thumb-width, 6px);
     opacity: var(--svrollbar-thumb-opacity, 0.5);
     background: var(--svrollbar-thumb-background, gray);
     box-shadow: var(--svrollbar-thumb-shadow, initial);
+    user-select-none()
+}
+
+.h-thumb {
+    position: relative;
+    margin: 0;
+    min-width: 20px;
+    border-radius: var(--svrollbar-thumb-radius, 0.25rem);
+    height: var(--svrollbar-thumb-width, 6px);
+    opacity: var(--svrollbar-thumb-opacity, 0.5);
+    background: var(--svrollbar-thumb-background, gray);
+    box-shadow: var(--svrollbar-thumb-shadow, initial);
+    user-select-none()
 }
 </style>

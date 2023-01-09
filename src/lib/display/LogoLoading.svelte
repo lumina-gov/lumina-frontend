@@ -3,9 +3,9 @@ import LuminaEdge from "$lib/icons/LuminaEdge.svelte"
 export let size = "48px"
 
 </script>
-<div class="icon" style="
-    --size: {size};
-">
+<div
+    style:--size={ size }
+    class="icon">
     <LuminaEdge/>
 </div>
 <style lang="stylus">

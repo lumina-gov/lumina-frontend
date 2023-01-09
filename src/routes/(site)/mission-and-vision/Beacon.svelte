@@ -1,6 +1,6 @@
 <script lang="ts">
-    import LuminaEdge from "$lib/icons/LuminaEdge.svelte"
-    import Pillar from "./Pillar.svelte"
+import LuminaEdge from "$lib/icons/LuminaEdge.svelte"
+import Pillar from "./Pillar.svelte"
 
 </script>
 <div class="wrapper">

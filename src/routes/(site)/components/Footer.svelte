@@ -16,7 +16,9 @@ import site_data from "$lib/data/site_data"
     <div class="inner-wrapper call-to-action">
         <div class="cta-text">
             Join the early adopters building capabilities and help shape our future.
-            <a href="/onboarding" class="cta-link">
+            <a
+                class="cta-link"
+                href="/onboarding">
                 <span class="cta-anchor-text">
                     Get involved.
                 </span>
@@ -39,12 +41,24 @@ import site_data from "$lib/data/site_data"
                 Quick Links
             </div>
             <nav class="links-wrapper">
-                <a href="/" class="link">Home</a>
-                <a href="https://lightsquare.org" class="link">Light Square</a>
-                <a href="/citizenship" class="link">Citizenship</a>
-                <a href="https://www.notion.so/lumina-gov/Knowledge-Hub-048c967061914862b2eeff5ba21da29b" class="link">Knowledge Center</a>
-                <a href={site_data.socials.discord} class="link">Discord</a>
-                <a href="/media-and-press" class="link">Media & Press</a>
+                <a
+                    class="link"
+                    href="/">Home</a>
+                <a
+                    class="link"
+                    href="https://lightsquare.org">Light Square</a>
+                <a
+                    class="link"
+                    href="/citizenship">Citizenship</a>
+                <a
+                    class="link"
+                    href="https://www.notion.so/lumina-gov/Knowledge-Hub-048c967061914862b2eeff5ba21da29b">Knowledge Center</a>
+                <a
+                    class="link"
+                    href={site_data.socials.discord}>Discord</a>
+                <a
+                    class="link"
+                    href="/media-and-press">Media & Press</a>
             </nav>
         </div>
         <div class="group">
@@ -67,11 +81,21 @@ import site_data from "$lib/data/site_data"
                 Authorised by the Lumina Autonomous Zone
             </div>
             <nav class="social-media-icons">
-                <a href={site_data.socials.twitter} class="social-media-icon"><Twitter/></a>
-                <a href={site_data.socials.discord} class="social-media-icon"><Discord/></a>
-                <a href={site_data.socials.tiktok} class="social-media-icon"><TikTok/></a>
-                <a href={site_data.socials.facebook} class="social-media-icon"><Facebook/></a>
-                <a href={site_data.socials.youtube} class="social-media-icon"><Youtube/></a>
+                <a
+                    class="social-media-icon"
+                    href={site_data.socials.twitter}><Twitter/></a>
+                <a
+                    class="social-media-icon"
+                    href={site_data.socials.discord}><Discord/></a>
+                <a
+                    class="social-media-icon"
+                    href={site_data.socials.tiktok}><TikTok/></a>
+                <a
+                    class="social-media-icon"
+                    href={site_data.socials.facebook}><Facebook/></a>
+                <a
+                    class="social-media-icon"
+                    href={site_data.socials.youtube}><Youtube/></a>
             </nav>
         </div>
     </div>

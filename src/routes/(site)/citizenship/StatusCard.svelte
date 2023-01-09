@@ -10,7 +10,7 @@ export let left_icon: typeof SvelteComponent
     </div>
     <div class="data">
         <div class="icon">
-            <svelte:component this={left_icon}/>
+            <svelte:component this={ left_icon }/>
         </div>
         <slot/>
     </div>

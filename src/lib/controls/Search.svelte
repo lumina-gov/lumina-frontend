@@ -10,14 +10,16 @@ export function focus() {
 }
 
 </script>
-<div class="search-wrapper" on:click={() => search_el.focus()}>
+<div
+    class="search-wrapper"
+    on:click={ () => search_el.focus() }>
     <Magnify/>
     <input
+        bind:this={ search_el }
+        placeholder={placeholder}
         on:keydown
         on:keyup
-        placeholder={placeholder}
-        bind:this={search_el}
-        bind:value={search}/>
+        bind:value={ search }/>
 </div>
 <style lang="stylus">
 @import "variables"

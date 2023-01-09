@@ -7,4 +7,6 @@
     display flex
     flex-wrap wrap
     gap 8px
+    &.relative
+        position relative
 </style>

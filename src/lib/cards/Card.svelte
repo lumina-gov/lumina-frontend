@@ -31,27 +31,25 @@ function handle_keyup(e: KeyboardEvent) {
 }
 </script>
 <svelte:element
+    this={ tag }
+    style:max-width={ max_width }
+    style:gap={ typeof gap === "number" ? gap + "px" : gap }
+    style:align-items={ align_items }
+    style:justify-content={ justify_content }
+    style:padding
     class="card"
-    this={tag}
-    {href}
-    on:click={clicked}
-    on:keyup={handle_keyup}
-    role="button"
-    class:shadow
-    tabindex={is_clickable ? 0 : -1}
+    class:clickable={ is_clickable }
+    class:disabled
+    class:horizontal={ direction === "horizontal" }
     class:opacity
     class:reset_bg
-    class:disabled
-    class:vertical={direction === "vertical"}
-    class:horizontal={direction === "horizontal"}
-    style="
-        max-width: {max_width};
-        gap: {typeof gap === "number" ? gap + "px" : gap};
-        padding: {padding};
-        align-items: {align_items};
-        justify-content: {justify_content};
-    "
-    class:clickable={is_clickable}>
+    class:shadow
+    class:vertical={ direction === "vertical" }
+    {href}
+    role="button"
+    tabindex={is_clickable ? 0 : -1}
+    on:click={ clicked }
+    on:keyup={ handle_keyup }>
     <slot/>
 </svelte:element>
 <style lang="stylus">

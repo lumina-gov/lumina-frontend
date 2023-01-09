@@ -13,10 +13,12 @@ type FlexDirection = "row" | "row-reverse" | "column" | "column-reverse" | "norm
 export let padding: string | undefined = undefined
 export let gap: number | undefined = undefined
 export let tag = "div"
+export let position: "relative" | "absolute" | "fixed" | "sticky" | "static" | "inherit" | "initial" | "unset" | undefined = undefined
 
 export let flex_direction: FlexDirection | BreakpointColumns<FlexDirection> | undefined = "column"
 export let justify_content: JustifyContent | BreakpointColumns<JustifyContent> | undefined = undefined
 export let align_items: AlignItems | BreakpointColumns<AlignItems> | undefined = undefined
+export let text_align: "left" | "center" | "right" | undefined = undefined
 
 export let columns: BreakpointColumns<string>
 
@@ -36,8 +38,10 @@ $: styles = {
     "align-items": typeof align_items == "string" ? align_items : undefined,
     "justify-content": typeof justify_content == "string" ? justify_content : undefined,
     "flex-direction": typeof flex_direction == "string" ? flex_direction : undefined,
+    "text-align": text_align,
     "padding": padding,
     "gap": gap ? gap + "px" : undefined,
+    "Position": position,
 }
 
 
@@ -47,7 +51,10 @@ $: styles_string = Object.entries(styles)
     .join(";")
 
 </script>
-<svelte:element this={tag} class="grid-item" style={styles_string}>
+<svelte:element
+    this={ tag }
+    style={styles_string}
+    class="grid-item">
     <slot/>
 </svelte:element>
 <style lang="stylus">

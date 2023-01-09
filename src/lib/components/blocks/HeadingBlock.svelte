@@ -22,6 +22,8 @@ function get_rich_text(block: Heading1BlockObjectResponse | Heading2BlockObjectR
 }
 
 </script>
-<Heading underline={true} {level}>
+<Heading
+    {level}
+    underline={true}>
     <RichTextArray {rich_text_array}/>
 </Heading>

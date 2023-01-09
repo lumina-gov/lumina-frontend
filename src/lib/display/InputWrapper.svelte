@@ -1,13 +1,20 @@
 <script lang="ts">
 // This component renders the text of an input element and is used by various controls
 
-export let name: string // name of the input
+export let name: string | undefined = undefined
 
 </script>
-<div class="input-wrapper" on:click on:keypress>
-    <span class="input-label">{name}</span>
+{#if name}
+    <div
+        class="input-wrapper"
+        on:click
+        on:keypress>
+        <span class="input-label">{ name }</span>
+        <slot/>
+    </div>
+{:else}
     <slot/>
-</div>
+{/if}
 <style lang="stylus">
 @import 'variables';
 

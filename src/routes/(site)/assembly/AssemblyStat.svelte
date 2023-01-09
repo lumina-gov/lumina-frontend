@@ -6,10 +6,12 @@ export let text: string
 </script>
 <div class="stat">
     <div class="icon">
-        <svelte:component this={icon} size="24px" />
+        <svelte:component
+            this={ icon }
+            size="24px" />
     </div>
     <div class="text">
-        {text}
+        { text }
     </div>
 </div>
 <style lang="stylus">

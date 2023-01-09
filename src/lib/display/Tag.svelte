@@ -4,12 +4,14 @@ export let opacity = false
 export let text = ""
 </script>
 
-<span class="tag {color}" class:opacity>
+<span
+    class="tag {color}"
+    class:opacity>
     <div class="text">
         {#if $$slots.default}
             <slot />
         {:else}
-            {text}
+            { text }
         {/if}
     </div>
 </span>

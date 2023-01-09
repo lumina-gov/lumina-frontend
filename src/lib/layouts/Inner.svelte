@@ -4,12 +4,12 @@ export let gap: number
 export let vertical_padding: number
 export let align: "center" | "flex-start" | "flex-end" = "flex-start"
 </script>
-<div class="inner" style="
-    --max-width: {typeof max_width === "number" ? max_width + "px" : max_width};
-    --gap: {gap}px;
-    --vertical-padding: {vertical_padding}px;
-    --align: {align};
-">
+<div
+    style:--max-width={ typeof max_width === "number" ? max_width + "px" : max_width }
+    style:--gap="{ gap }px"
+    style:--align={ align }
+    style:--vertical-padding="{ vertical_padding }px"
+    class="inner">
     <slot/>
 </div>
 <style lang="stylus">

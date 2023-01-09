@@ -25,7 +25,9 @@ function get_block_type(block: BlockResponseWithChildren) {
     return block_types[block.type] || Unsupported
 }
 </script>
-<svelte:component this={get_block_type(block)} block={block}/>
+<svelte:component
+    this={ get_block_type(block) }
+    block={block}/>
 {#if block.children && should_render_children}
     <IndentedChildren children={block.children}/>
 {/if}

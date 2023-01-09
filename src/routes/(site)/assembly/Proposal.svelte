@@ -26,24 +26,26 @@ $: days = Math.floor((time_left.getTime() - new Date().getTime()) / (1000 * 60 *
 $: hours = Math.floor((time_left.getTime() - new Date().getTime()) / (1000 * 60 * 60)) % 24
 $: minutes = Math.floor((time_left.getTime() - new Date().getTime()) / (1000 * 60)) % 60
 
-// let interval: ReturnType<typeof setInterval>
+let interval: ReturnType<typeof setInterval>
 
-// onMount(() => {
-//     interval = setInterval(() => {
-//         time_left = proposal.time_left
-//     }, 1000)
-// })
+onMount(() => {
+    interval = setInterval(() => {
+        time_left = proposal.time_left
+    }, 1000)
+})
 
-// onDestroy(() => {
-//     clearInterval(interval)
-// })
+onDestroy(() => {
+    clearInterval(interval)
+})
 </script>
 
 <div class="proposal">
     <div class="main">
         <div class="title-area">
-            <Heading left_icon={ScriptText} level={3}>
-                {proposal.title}
+            <Heading
+                left_icon={ScriptText}
+                level={3}>
+                { proposal.title }
             </Heading>
             <div class="expand">
                 <ArrowExpand />
@@ -55,7 +57,7 @@ $: minutes = Math.floor((time_left.getTime() - new Date().getTime()) / (1000 * 6
                     <Comment />
                 </div>
                 <div class="text">
-                    {proposal.discussion_count} Comments
+                    { proposal.discussion_count } Comments
                 </div>
             </div>
             <div class="item">
@@ -63,7 +65,7 @@ $: minutes = Math.floor((time_left.getTime() - new Date().getTime()) / (1000 * 6
                     <CheckboxMarkedCircle />
                 </div>
                 <div class="text">
-                    {proposal.votes.for + proposal.votes.against} Votes
+                    { proposal.votes.for + proposal.votes.against } Votes
                 </div>
             </div>
             <div class="item">
@@ -72,7 +74,7 @@ $: minutes = Math.floor((time_left.getTime() - new Date().getTime()) / (1000 * 6
                     <AccountCircle/>
                 </div>
                 <div class="text">
-                    {proposal.author}
+                    { proposal.author }
                 </div>
             </div>
         </div>
@@ -81,7 +83,7 @@ $: minutes = Math.floor((time_left.getTime() - new Date().getTime()) / (1000 * 6
         <div class="time-left">
             <div class="time-section">
                 <div class="number">
-                    {days}
+                    { days }
                 </div>
                 <div class="text">
                     Days
@@ -89,7 +91,7 @@ $: minutes = Math.floor((time_left.getTime() - new Date().getTime()) / (1000 * 6
             </div>
             <div class="time-section">
                 <div class="number">
-                    {hours}
+                    { hours }
                 </div>
                 <div class="text">
                     Hours
@@ -97,14 +99,16 @@ $: minutes = Math.floor((time_left.getTime() - new Date().getTime()) / (1000 * 6
             </div>
             <div class="time-section">
                 <div class="number">
-                    {minutes}
+                    { minutes }
                 </div>
                 <div class="text">
                     Mins
                 </div>
             </div>
         </div>
-        <VotingProgressBar against_votes={proposal.votes.against} for_votes={proposal.votes.for}/>
+        <VotingProgressBar
+            against_votes={proposal.votes.against}
+            for_votes={proposal.votes.for}/>
     </div>
 </div>
 <style lang="stylus">

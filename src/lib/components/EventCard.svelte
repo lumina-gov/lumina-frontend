@@ -22,38 +22,42 @@ export let event: {
 
 </script>
 
-<a class="main-link" href="{event.link}">
-    <div class="img" style="background-image:url('{event.img}')">
+<a
+    class="main-link"
+    href={event.link}>
+    <div
+        style:background-image="url('{ event.img }')"
+        class="img">
         <div class="date-banner">
             <div class="day">
-                {event.date.day}
+                { event.date.day }
             </div>
             <div class="month-year">
-                {event.date.month} {event.date.year}
+                { event.date.month } { event.date.year }
             </div>
         </div>
     </div>
     <div class="info-wrapper">
         <div class="event-type">
-            {event.type}
+            { event.type }
         </div>
         <div class="event-title">
-            {event.title}
+            { event.title }
         </div>
         <div class="info-block">
             <div class="icon">
-                <svelte:component this={MapMarker} />
+                <svelte:component this={ MapMarker } />
             </div>
             <div class="info">
-                {event.location}
+                { event.location }
             </div>
         </div>
         <div class="info-block">
             <div class="icon">
-                <svelte:component this={Clock} />
+                <svelte:component this={ Clock } />
             </div>
             <div class="info">
-                {event.date.day} {event.date.month} {event.date.time.hour}:{event.date.time.minutes} {#if !event.date.time.pm} AM{:else} PM{/if}
+                { event.date.day } { event.date.month } { event.date.time.hour }:{ event.date.time.minutes } {#if !event.date.time.pm} AM{:else} PM{/if}
             </div>
         </div>
     </div>

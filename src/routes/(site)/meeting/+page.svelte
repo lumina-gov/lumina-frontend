@@ -1,11 +1,10 @@
 <PageHead
-    title="Meeting times (Your timezone)"
-    description="Find pioneer meeting times in your local timezone"/>
+    description="Find pioneer meeting times in your local timezone"
+    title="Meeting times (Your timezone)"/>
 <script lang="ts">
 import Card from "$lib/cards/Card.svelte"
-import Hero from "$lib/components/layouts/Hero.svelte"
+import Hero from "$lib/layouts/Hero.svelte"
 import Heading from "$lib/display/Heading.svelte"
-import Calendar from "svelte-material-icons/Calendar.svelte"
 import type { PageData } from "./$types"
 import Tag from "$lib/display/Tag.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
@@ -25,17 +24,20 @@ function format_date(date: Date) {
 
 </script>
 <Hero>
-    <Card padding="24px" align_items="flex-start" gap={24}>
+    <Card
+        align_items="flex-start"
+        gap={24}
+        padding="24px">
         <Paragraph>Dates are formatted in your local timezone</Paragraph>
         <!-- <Heading level={2} left_icon={Calendar}>Pick as many times that suit you</Heading> -->
         {#each data.dates as date}
             <div class="event">
-                <Heading level={2}>{date.name}</Heading>
+                <Heading level={2}>{ date.name }</Heading>
                 <div class="date">
-                    { format_date(date.date)}
+                    { format_date(date.date) }
                 </div>
                 <div class="count">
-                    {date.users.length}
+                    { date.users.length }
                 </div>
                 <div class="tags">
                     {#each date.users as user}

@@ -12,7 +12,7 @@ onMount(() => {
     nodes.push(div as Node)
 })
 </script>
-<div bind:this={div}>
+<div bind:this={ div }>
     <slot/>
 </div>
 <style lang="stylus">

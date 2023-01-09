@@ -30,14 +30,14 @@ let search_component: Search
         <div class="input-wrapper">
             <Inside>
                 <div
+                    class="country-selector"
                     tabindex="0"
-                    on:keypress={event => {
+                    on:keypress={ event => {
                         if (event.key === "Enter") {
                             open = !open
                         }
-                    }}
-                    on:click={() => open = !open}
-                    class="country-selector">
+                    } }
+                    on:click={ () => open = !open }>
                     <div class="country-data">
                         {#if !value.country}
                             <div class="country-data-flag">
@@ -54,31 +54,38 @@ let search_component: Search
                 </div>
                 {#if open}
                     <Dropdown>
-                        <Search bind:this={search_component} bind:search on:keyup={e => { if (e.key === "ArrowDown") options.focus() }}/>
+                        <Search
+                            bind:this={ search_component }
+                            bind:search
+                            on:keyup={ e => { if (e.key === "ArrowDown") options.focus() } }/>
                         <Options
-                            on:keyup={e => { if (e.detail.key === "ArrowUp") search_component.focus() }}
-                            bind:this={options}
+                            bind:this={ options }
                             options={filtered}
-                            on:select={e => {
+                            on:keyup={ e => { if (e.detail.key === "ArrowUp") search_component.focus() } }
+                            on:select={ e => {
                                 value.country = e.detail
                                 open = false
-                            }}
+                            } }
                             let:option>
-                            <Country selected={value.country} country={option}/>
+                            <Country
+                                country={option}
+                                selected={value.country}/>
                         </Options>
                     </Dropdown>
                 {/if}
             </Inside>
-            <div class="input-pseudo-wrapper" on:click={() => input_ref.focus()}>
+            <div
+                class="input-pseudo-wrapper"
+                on:click={ () => input_ref.focus() }>
                 <input
-                    bind:this={input_ref}
+                    bind:this={ input_ref }
+                    name={autocomplete}
+                    {autocomplete}
+                    {placeholder}
                     on:keyup
                     on:keydown
                     on:keyup
-                    name={autocomplete}
-                    {placeholder}
-                    {autocomplete}
-                    bind:value={value.number}/>
+                    bind:value={ value.number }/>
             </div>
         </div>
     </ClickoutRegion>

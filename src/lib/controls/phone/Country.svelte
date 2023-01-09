@@ -6,7 +6,7 @@ export let country: Country
 </script>
 <div
     class="country"
-    class:selected={selected && selected.code === country.code}>
+    class:selected={ selected && selected.code === country.code }>
     <div class="country-data-flag">
         <div class="iti-flag flag {country.code.toLowerCase()}"/>
     </div>

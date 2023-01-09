@@ -9,10 +9,10 @@ export let date: Date
 
 function get_day_suffix(day: number) {
     switch (day % 10) {
-    case 1: return "st"
-    case 2: return "nd"
-    case 3: return "rd"
-    default: return "th"
+        case 1: return "st"
+        case 2: return "nd"
+        case 3: return "rd"
+        default: return "th"
     }
 }
 
@@ -48,9 +48,9 @@ $: year = date.getFullYear()
 <div class="date">
     <Calendar size={18}/>
     {#if use_ago}
-        <span>{ago}</span>
+        <span>{ ago }</span>
     {:else}
-        <span>{day_with_suffix} {month} {year}</span>
+        <span>{ day_with_suffix } { month } { year }</span>
     {/if}
 </div>
 <style lang="stylus">

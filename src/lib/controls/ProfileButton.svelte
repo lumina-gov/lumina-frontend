@@ -13,16 +13,16 @@ function clicked(e: Event) {
 }
 </script>
 <div
-    on:click={clicked}
-    tabindex="0"
-    role="button"
     class="profile-button-wrapper"
-    on:keydown={e => {
+    class:active
+    role="button"
+    tabindex="0"
+    on:click={ clicked }
+    on:keydown={ e => {
         if (e.key === "Enter" || e.key === "Escape") {
             clicked(e)
         }
-    }}
-    class:active>
+    } }>
     <Profile/>
 </div>
 <style lang="stylus">

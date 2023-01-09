@@ -15,13 +15,16 @@ export let href: string | undefined = undefined
 $: element_tag = href ? "a" : "div"
 </script>
 <svelte:element
-    this={element_tag}
-    {href}
+    this={ element_tag }
     class="notification"
+    {href}
 >
     <div class="vert">
         <div class="top">
-            <Icon icon={Dot} color="brand" size={14}/>
+            <Icon
+                color="brand"
+                icon={Dot}
+                size={14}/>
             <div class="title">
                 { title }
             </div>

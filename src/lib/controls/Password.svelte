@@ -29,7 +29,7 @@ $: rating = typeof seconds == "number" ?
     seconds < 86400 * 7 ? Rating.Weak :
         seconds < 86400 * 365 * 1 ? Rating.Medium :
             seconds < 86400 * 365 * 50 ? Rating.Strong :
-                Rating.Impossible : null
+            Rating.Impossible : null
 
 $: style = rating !== null ? Rating[rating] : ""
 
@@ -63,17 +63,17 @@ async function check_password_strength() {
 
 </script>
 <Input
-    type={visible ? "text" : "password"}
-    placeholder={placeholder}
+    name={name}
     autocomplete={autocomplete}
-    left_icon={Lock}
-    right_icon={visible ? EyeOutline : EyeOffOutline}
     focus_on_mount={focus_on_mount}
+    left_icon={Lock}
+    placeholder={placeholder}
+    right_icon={visible ? EyeOutline : EyeOffOutline}
     right_icon_handler={() => visible = !visible}
+    type={visible ? "text" : "password"}
     on:keyup
     on:keydown
-    name={name}
-    on:input={() => check_password_strength()}
+    on:input={ () => check_password_strength() }
     bind:value>
     {#if check_strength}
         <div class="strength {style}">
@@ -84,7 +84,7 @@ async function check_password_strength() {
         {#if rating !== null}
             <div class="strength-text-wrapper">
                 <span class="opacity">Would take a goverment agency</span>
-                <span class="strength-text {style}">{ crack_string ? crack_string : "an unknown time"}</span>
+                <span class="strength-text {style}">{ crack_string ? crack_string : "an unknown time" }</span>
                 <span class="opacity">to crack</span>
             </div>
         {/if}
