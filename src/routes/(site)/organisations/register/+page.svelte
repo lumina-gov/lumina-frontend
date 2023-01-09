@@ -38,7 +38,7 @@ export let data: PageData
 <Grid padding_vertical={80}>
     <GridItem
         columns={{
-            "laptop": "2 / span 6",
+            "laptop": "2 / span 8",
             "tablet": "2 / span 6",
             "mobile": "span 4"
         }}

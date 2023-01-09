@@ -5,7 +5,6 @@ import Navigation from "./components/Navigation.svelte"
 import AppBar from "./components/AppBar.svelte"
 import Rater from "./components/Rater.svelte"
 import ClickoutRegion from "$lib/controls/ClickoutRegion.svelte"
-import Inside from "$lib/controls/Inside.svelte"
 
 export let data: LayoutData
 
@@ -30,27 +29,25 @@ $: authenticated = data.user_wrapper.user != null
         gtag('config', 'G-8MK9JSEJ2P');
     </script>
 </svelte:head>
-<div
-    class="layout"
-    class:authenticated>
-    <ClickoutRegion clicked_outside={() => nav_opened = false}>
+<ClickoutRegion clicked_outside={() => nav_opened = false}>
+    <div
+        class="layout"
+        class:authenticated>
         <AppBar
+            bind:user={ data.user_wrapper.user }
+            bind:nav_opened/>
+        <Navigation
             bind:user={ data.user_wrapper.user }
             bind:nav_opened/>
         <div class="content">
             <slot/>
         </div>
-        <Inside>
-            <Navigation
-                bind:user={ data.user_wrapper.user }
-                bind:nav_opened/>
-        </Inside>
         {#if !data.user_wrapper.user}
             <Rater/>
             <Footer/>
         {/if}
-    </ClickoutRegion>
-</div>
+    </div>
+</ClickoutRegion>
 <style lang="stylus">
 @import 'variables'
 
@@ -58,6 +55,7 @@ $: authenticated = data.user_wrapper.user != null
     flex 1
     display flex
     flex-direction column
+    z-index 1
     @media (max-width $tablet)
         overflow-y auto
         height 100%
@@ -65,8 +63,10 @@ $: authenticated = data.user_wrapper.user != null
 
 .layout
     display flex
+    position relative
     flex-direction column
     min-height 100%
+    background rgba(0,0,0,0.2)
     &.authenticated
         @media (max-width $tablet)
             height 100vh
@@ -74,6 +74,6 @@ $: authenticated = data.user_wrapper.user != null
             overflow-y hidden
             grid-template-rows 1fr 60px // content, AppBar
 
-    background rgba(0,0,0,0.2)
+
 
 </style>

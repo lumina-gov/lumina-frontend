@@ -87,7 +87,6 @@ onDestroy(() => {
     style:max-width={ max_width }
     style:left="{ left }px"
     style:top="{ top + 8 }px"
-    style:position={ undefined }
     class="wrapper">
     <div class="dropdown">
         <slot/>
@@ -102,6 +101,7 @@ onDestroy(() => {
     z-index 4
     right 0px
     display flex
+    width 100%
 
 .dropdown
     background mix(white, $dark_app, 4%)

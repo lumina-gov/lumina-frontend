@@ -35,6 +35,7 @@ export let content_height: string | undefined = undefined
 .wrapper
     position relative
     display flex
+    flex-direction column
     overflow hidden
     height 100%
     width 100%

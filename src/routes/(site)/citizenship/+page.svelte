@@ -11,13 +11,13 @@ import Information from "svelte-material-icons/Information.svelte"
 import Alert from "svelte-material-icons/Alert.svelte"
 import Help from "svelte-material-icons/HelpCircle.svelte"
 import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
-import Paragraph from "$lib/display/Paragraph.svelte"
 import FormComponent from "./FormComponent.svelte"
 import StatusComponent from "./StatusComponent.svelte"
 import Grid from "$lib/layouts/Grid.svelte"
 import GridItem from "$lib/layouts/GridItem.svelte"
 import Passport from "svelte-material-icons/Passport.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
+import LoginPrompt from "$lib/components/LoginPrompt.svelte"
 
 export let data: PageData
 
@@ -46,6 +46,7 @@ export let notices: Props<InfoBox>[] = [
 
 let loading = false
 
+$: user = data.user_wrapper.user
 
 
 </script>
@@ -63,17 +64,15 @@ let loading = false
             mobile: "span 4"
         }}
         gap={40}>
-        {#if data.user_wrapper.user && data.user_wrapper.user.citizenship_status === null}
+        {#if user && user.citizenship_status === null}
             <FormComponent
                 bind:loading
-                bind:user={ data.user_wrapper.user }/>
-        {:else if data.user_wrapper.user && data.user_wrapper.user.citizenship_status}
+                bind:user/>
+        {:else if user && user.citizenship_status}
             <StatusComponent/>
         {:else}
             <Heading right_icon={Passport}>Citizenship Registration</Heading>
-            <Paragraph>
-                You must be logged in to register for citizenship.
-            </Paragraph>
+            <LoginPrompt/>
         {/if}
     </GridItem>
     <GridItem
