@@ -14,28 +14,12 @@ function resize() {
     let nearest_horizontal_scrollable_parent: HTMLElement | null = wrapper.parentElement
 
     while (nearest_vertical_scrollable_parent) {
-        if (
-            (nearest_vertical_scrollable_parent.scrollHeight > nearest_vertical_scrollable_parent.clientHeight)
-                && (
-                    getComputedStyle(nearest_vertical_scrollable_parent).overflowY === "hidden"
-                        || getComputedStyle(nearest_vertical_scrollable_parent).overflowY === "scroll"
-                )
-        ) {
-            break
-        }
+        if (getComputedStyle(nearest_vertical_scrollable_parent).overflowY === "scroll") break
         nearest_vertical_scrollable_parent = nearest_vertical_scrollable_parent.parentElement
     }
 
     while (nearest_horizontal_scrollable_parent) {
-        if (
-            (nearest_horizontal_scrollable_parent.scrollWidth > nearest_horizontal_scrollable_parent.clientWidth)
-                && (
-                    getComputedStyle(nearest_horizontal_scrollable_parent).overflowX === "hidden"
-                        || getComputedStyle(nearest_horizontal_scrollable_parent).overflowX === "scroll"
-                )
-        ) {
-            break
-        }
+        if (getComputedStyle(nearest_horizontal_scrollable_parent).overflowX === "scroll") break
         nearest_horizontal_scrollable_parent = nearest_horizontal_scrollable_parent.parentElement
     }
 
@@ -53,19 +37,14 @@ function resize() {
 
     let parent_bounds = parent?.getBoundingClientRect()
 
-    console.log({
-        nearest_vertical_scrollable_parent,
-        nearest_horizontal_scrollable_parent,
-    })
-
-    offset_top += parent_bounds?.bottom || 0
-    offset_top -= vertical_wrapper_bounds?.top || 0
-    offset_top += nearest_vertical_scrollable_parent?.scrollTop || 0
+    offset_top += (parent_bounds?.bottom || 0)
+    offset_top -= (vertical_wrapper_bounds?.top || 0)
+    offset_top += (nearest_vertical_scrollable_parent?.scrollTop || 0)
     offset_top += 8 // gap
 
     offset_left += parent_bounds?.left || 0
     offset_left -= horizontal_wrapper_bounds?.left || 0
-    offset_left += nearest_horizontal_scrollable_parent?.scrollLeft || 0
+    offset_left += (nearest_horizontal_scrollable_parent?.scrollLeft || 0)
 
     left = offset_left
     top = offset_top

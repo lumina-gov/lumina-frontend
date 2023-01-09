@@ -1,5 +1,6 @@
 <script lang="ts">
 export let gap = 16
+export let flex: string | undefined = undefined
 export let justify_content: "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | "normal" = "normal"
 export let align_items: "flex-start" | "center" | "flex-end" | "stretch" | "baseline" | "normal" = "normal"
 export let padding = 0
@@ -10,6 +11,7 @@ export let text_align: "left" | "center" | "right" = "left"
 export let margin_auto = false
 </script>
 <div
+    style:flex
     style:gap="{ gap }px"
     style:justify-content={ justify_content }
     style:text-align={ text_align }

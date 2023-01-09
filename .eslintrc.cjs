@@ -51,9 +51,6 @@ module.exports = {
                 "avoidInvalidUnquotedInHTML": false
             }
         }],
-        "max-params": ["error", {
-            "max": 3
-        }],
         "max-len": ["error", {
             "code": 120,
             "ignoreStrings": true,

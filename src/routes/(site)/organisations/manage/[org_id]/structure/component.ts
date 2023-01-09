@@ -1,4 +1,8 @@
 
+import Account from "svelte-material-icons/Account.svelte"
+import AccountGroup from "svelte-material-icons/AccountGroup.svelte"
+import StateMachine from "svelte-material-icons/StateMachine.svelte"
+
 export type Component = ({
     type: "Body",
 } | {
@@ -9,4 +13,10 @@ export type Component = ({
     id: string,
     name: string
     children: string[]
+}
+
+export const icons = {
+    Role: AccountGroup,
+    Body: StateMachine,
+    Position: Account
 }

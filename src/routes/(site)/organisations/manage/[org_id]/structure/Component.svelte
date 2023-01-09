@@ -1,27 +1,19 @@
 <script lang="ts">
 import SingleSegment from "$lib/controls/SingleSegment.svelte"
 import { tick } from "svelte"
-import Account from "svelte-material-icons/Account.svelte"
-import AccountGroup from "svelte-material-icons/AccountGroup.svelte"
 import Plus from "svelte-material-icons/Plus.svelte"
-import StateMachine from "svelte-material-icons/StateMachine.svelte"
-import type { Component } from "./component"
+import { icons, type Component } from "./component"
 
 export let component: Component
 export let components: Record<string, Component>
 export let component_els: Record<string, HTMLElement>
+export let active_component_id: string | null
 
 let options: Array<"Body" | "Position" | "Role"> = [
     "Body",
     "Position",
     "Role"
 ]
-
-let icons = {
-    Role: AccountGroup,
-    Body: StateMachine,
-    Position: Account
-}
 
 async function add_child(type: "Body" | "Position" | "Role") {
     const id = Math.random().toString(36).slice(2)
@@ -35,13 +27,10 @@ async function add_child(type: "Body" | "Position" | "Role") {
     component = component
     components = components
     await tick()
-    console.log("old, new", active_component, id)
-    // await new Promise( resolve => setTimeout(resolve, 10))
-    active_component = id
+    active_component_id = id
 }
 
-export let active_component: string | null
-$: active = active_component === component.id
+$: active = active_component_id === component.id
 $: active && component_els[component.id] ? component_els[component.id].scrollIntoView({ behavior: "smooth", block: "center", inline: "center"}) : null
 
 
@@ -53,8 +42,8 @@ $: active && component_els[component.id] ? component_els[component.id].scrollInt
         class:active
         role="button"
         tabindex="0"
-        on:click={ () => active_component = component.id }
-        on:keyup={ e => e.key === "Enter" && (active_component = component.id) }>
+        on:click={ () => active_component_id = component.id }
+        on:keyup={ e => e.key === "Enter" && (active_component_id = component.id) }>
         <div class="inner-component">
             <SingleSegment
                 get_icon={type => icons[type]}
@@ -85,7 +74,7 @@ $: active && component_els[component.id] ? component_els[component.id].scrollInt
         {#each component.children as child}
             <svelte:self
                 bind:component_els
-                bind:active_component
+                bind:active_component_id
                 bind:component={ components[child] }
                 bind:components/>
         {/each}

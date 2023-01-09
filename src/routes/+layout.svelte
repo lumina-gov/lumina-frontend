@@ -117,6 +117,7 @@ import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
         border 0
         border-top 1px solid transparify(white, 10%)
         width 100%
+        margin 0
 
     html
         display flex

@@ -4,7 +4,7 @@ import ScrollbarRegion from "$lib/controls/ScrollbarRegion.svelte"
 import Segment from "$lib/controls/Segment.svelte"
 import SingleSegment from "$lib/controls/SingleSegment.svelte"
 import type { Prop } from "$lib/utils/typed_props"
-import { onMount, onDestroy } from "svelte"
+import { onMount, onDestroy, tick } from "svelte"
 import Minus from "svelte-material-icons/Minus.svelte"
 import Plus from "svelte-material-icons/Plus.svelte"
 import Shape from "svelte-material-icons/Shape.svelte"
@@ -13,8 +13,8 @@ import { get_paths_for_component } from "./path"
 
 export let components: Record<string, Prop<Component, "component">>
 export let root: string | null
+export let active_component_id: string | null
 
-let active_component: string | null = null
 let component_els: Record<string, HTMLElement> = {}
 let inner: HTMLElement
 let options: Array<"Body" | "Position" | "Role"> = [
@@ -40,7 +40,7 @@ function set_root(type: Prop<Component, "component">["type"] | null) {
         children: []
     }
     root = id
-    active_component = id
+    active_component_id = id
 }
 
 const resize = () => components = components
@@ -52,11 +52,15 @@ onDestroy(() => {
     if(browser) window.removeEventListener("resize", resize)
 })
 
-$: paths = Object.values(components)
-    .map(component => get_paths_for_component(component, inner, component_els))
-    .reduce((acc, val) => Object.assign(acc, val), {})
+async function scale_changed(_: unknown) {
+    await tick()
+    components = components
+}
+$: scale_changed(scale)
 
-$: console.log(active_component)
+$: paths = Object.values(components)
+    .map(component => get_paths_for_component(component, inner, component_els, scale))
+    .reduce((acc, val) => Object.assign(acc, val), {})
 
 let scale = 1
 
@@ -65,7 +69,7 @@ let scale = 1
     <div class="zoom">
         <Segment
             left_icon={Minus}
-            on:click={ () => scale -= 0.15 * scale }/>
+            on:click={ () => scale -= 0.15 * scale  }/>
         <Segment
             left_icon={Plus}
             on:click={ () => scale += 0.15 * scale }/>
@@ -74,12 +78,12 @@ let scale = 1
         <div
             bind:this={ inner }
             class="inner"
-            on:keyup={ e => e.key === "Escape" ? active_component = null : null }
-            on:click={ e => e.target === inner ? active_component = null : null }>
+            on:keyup={ e => e.key === "Escape" ? active_component_id = null : null }
+            on:click={ e => e.target === inner ? active_component_id = null : null }>
             {#if root}
                 <Component
                     bind:component_els
-                    bind:active_component
+                    bind:active_component_id
                     bind:component={ components[root] }
                     bind:components/>
             {:else}
@@ -97,7 +101,7 @@ let scale = 1
                     d={Object.values(paths).join(" ")}
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2" />
+                    stroke-width="3" />
             </svg>
         </div>
     </ScrollbarRegion>
@@ -112,6 +116,7 @@ let scale = 1
     display flex
     align-items center
     position absolute
+    border-radius 6px
     left 0
     top 0
     right 0
@@ -127,15 +132,13 @@ let scale = 1
 
 
 .inner
-    padding 600px
+    padding 200px
     display flex
     flex-direction column
     align-items center
     position relative
     min-width max-content
     min-height max-content
-
-
 
 svg
     position absolute

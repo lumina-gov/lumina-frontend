@@ -3,7 +3,8 @@ import type { Component } from "./component"
 export function get_paths_for_component(
     component: Component,
     container_el: HTMLElement,
-    elements: Record<string, HTMLElement>
+    elements: Record<string, HTMLElement>,
+    scale: number
 ): Record<string, string> {
     const paths: Record<string, string> = {}
 
@@ -19,12 +20,18 @@ export function get_paths_for_component(
 
         const child_rect = child_el.getBoundingClientRect()
 
-        const startX = (rect_parent.left + (rect_parent.width / 2)) - container_rect.left
-        const startY = (rect_parent.bottom) - container_rect.top
+        let startX = (rect_parent.left + (rect_parent.width / 2)) - container_rect.left
+        let startY = (rect_parent.bottom) - container_rect.top
+
+        startX /= scale
+        startY /= scale
 
         // Calculate the ending position for the path (top center of div2)
-        const endX = (child_rect.left + (child_rect.width / 2)) - container_rect.left
-        const endY = child_rect.top - container_rect.top
+        let endX = (child_rect.left + (child_rect.width / 2)) - container_rect.left
+        let endY = child_rect.top - container_rect.top
+
+        endX /= scale
+        endY /= scale
 
         // Calculate the control point position (right/left of the midpoint between the two divs)
         const intermediateX = startX
