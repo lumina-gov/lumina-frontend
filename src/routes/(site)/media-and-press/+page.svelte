@@ -64,7 +64,9 @@ onMount(() => {
 
 </script>
 <Hero gap={40}>
-    <VerticalLayout max_width={500}>
+    <VerticalLayout
+        align_items="flex-start"
+        max_width={500}>
         <Tag color="brand">For journalists</Tag>
         <Heading left_icon={Newspaper}>Media & Press</Heading>
         <Paragraph>
@@ -80,7 +82,8 @@ onMount(() => {
             underline={true}>Press Kit</Heading>
         <VerticalLayout max_width={500}>
             <Paragraph>
-                A range of resources about the city of Lumina, including legal documents, official symbols, location information, demographic data, and more.
+                A range of resources about the city of Lumina, including legal documents,
+                official symbols, location information, demographic data, and more.
             </Paragraph>
             <div class="items">
                 {#each assets as asset}

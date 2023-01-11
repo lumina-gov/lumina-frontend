@@ -51,11 +51,6 @@ module.exports = {
                 "avoidInvalidUnquotedInHTML": false
             }
         }],
-        "max-len": ["error", {
-            "code": 120,
-            "ignoreStrings": true,
-            "ignoreTemplateLiterals": true,
-        }],
         "svelte/no-at-html-tags": "warn",
         "svelte/mustache-spacing": ["error", {
             "attributesAndProps": "always",

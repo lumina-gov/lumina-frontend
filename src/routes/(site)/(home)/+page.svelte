@@ -39,6 +39,7 @@ import ServicesArea from "./ServicesArea.svelte"
 import InformationArea from "./InformationArea.svelte"
 import Notification from "svelte-material-icons/Bell.svelte"
 import AlertsArea from "./AlertsArea.svelte"
+import Telescope from "svelte-material-icons/Telescope.svelte"
 
 export const organizationSchema: WithContext<GovernmentOrganization> = {
     "@context": "https://schema.org",
@@ -84,6 +85,16 @@ $: service_cards_top = [
             color: "green"
         },
         description: "Apply for citizenship in Lumina, and become a part of the city's government."
+    },
+    {
+        title: "Mission & Vision",
+        href: "/mission-and-vision",
+        icon: Telescope,
+        tag: {
+            text: "Information",
+            color: "blue",
+        },
+        description: "Learn about the founding mission and vision for Lumina, and how we plan to achieve it."
     },
     {
         title: "Direct Democracy Platform",
@@ -224,8 +235,8 @@ $: service_cards_top = [
     >
         <Grid
             columns={{
-                laptop: 9,
-                tablet: 3,
+                laptop: 12,
+                tablet: 6,
                 mobile: 3
             }}
             side_padding={false}>

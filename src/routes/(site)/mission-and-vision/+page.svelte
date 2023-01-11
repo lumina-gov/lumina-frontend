@@ -26,6 +26,16 @@ import Scale from "svelte-material-icons/ScaleBalance.svelte"
 import RocketLaunch from "svelte-material-icons/RocketLaunch.svelte"
 import BookOpenVariant from "svelte-material-icons/BookOpenVariant.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
+import Grid from "$lib/layouts/Grid.svelte"
+import GridItem from "$lib/layouts/GridItem.svelte"
+import ServiceCard from "$lib/components/ServiceCard.svelte"
+import type { Props } from "$lib/utils/typed_props"
+import type { PageData } from "./$types"
+import Passport from "svelte-material-icons/Passport.svelte"
+import Telescope from "svelte-material-icons/Telescope.svelte"
+import site_data from "$lib/data/site_data"
+import Vote from "svelte-material-icons/Vote.svelte"
+import Link from "svelte-material-icons/Link.svelte"
 
 type Goal = {
     title: string,
@@ -33,6 +43,7 @@ type Goal = {
     icon: typeof SvelteComponent
 }
 
+export let data: PageData
 
 let goals: Goal[] = [
     {
@@ -81,6 +92,52 @@ let goals: Goal[] = [
         icon: BookOpenVariant
     },
 ]
+
+$: user = data.user_wrapper.user
+$: user_has_citizenship_applicaiton = user?.citizenship_status === "pending"
+
+$: other_links = [
+    user_has_citizenship_applicaiton ? {
+        icon: Passport,
+        title: "Citizenship Application",
+        href: "/citizenship",
+        tag: {
+            text: "Pending",
+            color: "yellow"
+        },
+        description: "Your citizenship application is currently pending. You will be notified when it is approved."
+    } : {
+        icon: Passport,
+        title: "Apply for citizenship",
+        href: "/citizenship",
+        tag: {
+            text: "Recommended",
+            color: "green"
+        },
+        description: "Apply for citizenship in Lumina, and become a part of the city's government."
+    },
+    {
+        title: "Join Discord",
+        href: site_data.socials.discord,
+        icon: Telescope,
+        tag: {
+            text: "Recommended",
+            color: "brand",
+        },
+        description: "Learn about the founding mission and vision for Lumina, and how we plan to achieve it."
+    },
+    {
+        title: "Direct Democracy Platform",
+        // href: "/direct-democracy",
+        icon: Vote,
+        tag: {
+            text: "Coming soon",
+            color: "white",
+            opacity: true
+        },
+        description: "Vote on proposals and laws, and have your say in the city's future."
+    },
+] satisfies Props<ServiceCard>[]
 </script>
 
 <Hero
@@ -160,3 +217,42 @@ let goals: Goal[] = [
         {/each}
     </ResponsiveLayout>
 </Hero>
+<Grid
+    padding_vertical={100}
+    vertical_gap={60}>
+    <GridItem
+        align_items="flex-start"
+        columns={{
+            laptop: "span 16",
+            tablet: "span 8",
+            mobile: "span 4"
+        }}
+        gap={16}
+    >
+        <Heading
+            left_icon={Link}
+            level={2}>Other Links</Heading>
+        <Grid
+            columns={{
+                laptop: 9,
+                tablet: 3,
+                mobile: 3
+            }}
+            side_padding={false}>
+            {#each other_links as card}
+                <GridItem
+                    align_items="stretch"
+                    columns={{
+                        laptop: "span 3",
+                        tablet: "span 3",
+                        mobile: "span 3"
+                    }}
+                    flex_direction="row">
+                    <ServiceCard
+                        {...card}
+                        size="large"/>
+                </GridItem>
+            {/each}
+        </Grid>
+    </GridItem>
+</Grid>
