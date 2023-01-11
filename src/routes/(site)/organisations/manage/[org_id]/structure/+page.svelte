@@ -66,6 +66,4 @@ let root: string | null = null
 <style lang="stylus">
 @import "variables"
 
-
-
 </style>

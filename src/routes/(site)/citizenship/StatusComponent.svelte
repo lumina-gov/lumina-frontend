@@ -10,6 +10,7 @@ import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
 import FlexWrap from "$lib/display/FlexWrap.svelte"
 import site_data from "$lib/data/site_data"
+import Discord from "svelte-material-icons/Discord.svelte"
 
 </script>
 
@@ -36,7 +37,7 @@ import site_data from "$lib/data/site_data"
             style="translucent"
             href="/"
             hug={true}
-            right_icon={Apps}>
+            right_icon={Discord}>
             Open Hub
         </Button>
     </FlexWrap>
