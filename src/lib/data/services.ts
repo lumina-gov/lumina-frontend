@@ -64,7 +64,7 @@ export const services: Props<ServiceCard>[] = [
     },
     {
         title: "Light University",
-        description: "Learn about the history of Lumina and the Light",
+        description: "Learn valuable skills needed for the real world at Light University",
         icon: LightUniversity,
         tag: {
             color: "white",
