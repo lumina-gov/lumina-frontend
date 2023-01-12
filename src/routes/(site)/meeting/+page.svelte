@@ -33,11 +33,11 @@ function format_date(date: Date) {
         {#each data.dates as date}
             <div class="event">
                 <Heading level={2}>{ date.name }</Heading>
-                <div class="date">
-                    { format_date(date.date) }
-                </div>
                 <div class="count">
                     { date.users.length }
+                </div>
+                <div class="date">
+                    { format_date(date.date) }
                 </div>
                 <div class="tags">
                     {#each date.users as user}
@@ -71,6 +71,7 @@ function format_date(date: Date) {
 .tags
     display: flex
     flex-direction: row
+    flex-wrap wrap
     gap: 8px
     padding-left 20px
 </style>

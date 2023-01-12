@@ -9,6 +9,8 @@ import Bank from "svelte-material-icons/Bank.svelte"
 import ScriptText from "svelte-material-icons/ScriptText.svelte"
 import HammerScrewdriver from "svelte-material-icons/HammerScrewdriver.svelte"
 import Discord from "svelte-material-icons/Discord.svelte"
+import Vote from "svelte-material-icons/Vote.svelte"
+import Domain from "svelte-material-icons/Domain.svelte"
 
 
 export const services: Props<ServiceCard>[] = [
@@ -31,6 +33,28 @@ export const services: Props<ServiceCard>[] = [
             opacity: true,
             text: "Coming Soon"
         },
+    },
+    {
+        title: "Direct Democracy Platform",
+        // href: "/direct-democracy",
+        icon: Vote,
+        tag: {
+            text: "Coming soon",
+            color: "white",
+            opacity: true
+        },
+        description: "Vote on proposals and laws, and have your say in the city's future."
+    },
+    {
+        title: "Organisations",
+        // href: "/organisations",
+        icon: Domain,
+        tag: {
+            text: "Coming soon",
+            color: "white",
+            opacity: true
+        },
+        description: "View, register and manage your organisations here."
     },
     {
         title: "Legislative Registry",
