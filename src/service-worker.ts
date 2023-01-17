@@ -72,4 +72,4 @@ async function get_response(event: FetchEvent): Promise<Response> {
     return fetch(event.request)
 }
 
-export {}
+export { }

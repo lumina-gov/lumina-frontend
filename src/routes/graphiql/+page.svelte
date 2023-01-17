@@ -6,12 +6,15 @@ import type { PageData } from "./$types"
 let container: HTMLDivElement
 export let data: PageData
 
+
 onMount(() => {
-    const root = ReactDOM.createRoot(container)
+    let global = <any>window
+    const root = global.ReactDOM.createRoot(container)
     root.render(
-        React.createElement(GraphiQL, {
-            fetcher: GraphiQL.createFetcher({
+        global.React.createElement(global.GraphiQL, {
+            fetcher: global.GraphiQL.createFetcher({
                 url: PUBLIC_GRAPH_ENDPOINT,
+                // eslint-disable-next-line no-undef
                 fetch(input: URL | Request | string, init?: RequestInit) {
                     return fetch(input, {
                         ...init,
@@ -48,7 +51,6 @@ onMount(() => {
 <div
     bind:this={ container }
     id="graphiql" />
-
 
 <style lang="stylus">
   :global(body)

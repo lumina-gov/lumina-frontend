@@ -1,3 +1,3 @@
 export abstract class RustEnum {
-    abstract as_input(this): string
+    abstract as_input(this: unknown): string
 }
