@@ -4,6 +4,7 @@ import type { LayoutLoad } from "./$types"
 import { get_user } from "$lib/api/user"
 import type { User } from "$lib/types/user"
 import { error } from "@sveltejs/kit"
+import { init_urql } from "$lib/stores/graphql"
 
 export const load: LayoutLoad = async load_event => {
     const auth_token = load_event.data?.auth_token || null
@@ -16,7 +17,7 @@ export const load: LayoutLoad = async load_event => {
         })
     }
 
-    const graph = graph_init(auth_token, domain)
+    const graph = init_urql(auth_token)
     const alerts = alerts_init([])
     // const user = user_init(null)
 

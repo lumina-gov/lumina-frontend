@@ -2,7 +2,7 @@
 import { applications } from "../applications"
 import { serialize } from "bson"
 import { tick } from "svelte"
-import { gmutation } from "$lib/graphql"
+import { gmutation } from "$lib/stores/graphql"
 import { graphql } from "$lib/gql"
 import type { PageData } from "./$types"
 import Button from "$lib/controls/Button.svelte"
@@ -19,16 +19,16 @@ async function submit() {
     await tick()
     let bson = serialize(application).toString()
 
-    const res = await gmutation(graphql(`
-        mutation submit($bson: String!, $t: ApplicationType!) {
-            submitApplication(bson: $bson, applicationType: $t)
-        }`), 
-        {
-            bson,
-            t: data.application_type
-        })
+// const res = await gmutation(graphql(`
+    //     mutation submit($bson: String!, $t: ApplicationType!) {
+    //         submitApplication(bson: $bson, applicationType: $t)
+    //     }`), 
+    //     {
+    //         bson,
+    //         t: data.application_type
+    //     })
 
-    alert(res.data?.submitApplication)
+    // alert(res.data?.submitApplication)
 }
 </script>
 

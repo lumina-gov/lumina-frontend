@@ -30,33 +30,6 @@ export type Scalars = {
   Uuid: any;
 };
 
-export type Application = {
-  __typename?: 'Application';
-  applicationType: ApplicationType;
-  bson: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  id: Scalars['Uuid'];
-  status: ApplicationStatus;
-};
-
-export enum ApplicationStatus {
-  Accepted = 'ACCEPTED',
-  Deliberation = 'DELIBERATION',
-  Received = 'RECEIVED',
-  Rejected = 'REJECTED'
-}
-
-export enum ApplicationType {
-  Citizenship = 'CITIZENSHIP',
-  Organization = 'ORGANIZATION',
-  Pioneer = 'PIONEER'
-}
-
-export type CitizenshipApplication = {
-  __typename?: 'CitizenshipApplication';
-  id: Scalars['Uuid'];
-};
-
 export type CitizenshipApplicationInput = {
   countryOfBirth: Scalars['String'];
   countryOfCitizenship: Array<Scalars['String']>;
@@ -81,7 +54,7 @@ export type Course = {
 
 export type CrackSeconds = {
   __typename?: 'CrackSeconds';
-  guesses: Scalars['Int'];
+  guesses: Scalars['Float'];
   seconds: Scalars['Float'];
   string: Scalars['String'];
 };
@@ -107,12 +80,17 @@ export type LoginUserInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createCitizenshipApplication: Scalars['Uuid'];
   createCourse: Course;
   createUser: Scalars['Uuid'];
   /** Returns a JWT token for the user */
   login: Scalars['String'];
-  submitApplication: Scalars['Boolean'];
   test: Scalars['String'];
+};
+
+
+export type MutationCreateCitizenshipApplicationArgs = {
+  citizenshipApplication: CitizenshipApplicationInput;
 };
 
 
@@ -130,12 +108,6 @@ export type MutationLoginArgs = {
   loginUser: LoginUserInput;
 };
 
-
-export type MutationSubmitApplicationArgs = {
-  applicationType: ApplicationType;
-  bson: Scalars['String'];
-};
-
 export type Query = {
   __typename?: 'Query';
   courseBySlug?: Maybe<Course>;
@@ -146,7 +118,6 @@ export type Query = {
    * On the frontend
    */
   crackTime: CrackSeconds;
-  createCitizenshipApplication: CitizenshipApplication;
   me: User;
   userCount: Scalars['Int'];
 };
@@ -161,11 +132,6 @@ export type QueryCrackTimeArgs = {
   password: Scalars['String'];
 };
 
-
-export type QueryCreateCitizenshipApplicationArgs = {
-  citizenshipApplication: CitizenshipApplicationInput;
-};
-
 export type Unit = {
   __typename?: 'Unit';
   courseId: Scalars['Uuid'];
@@ -178,22 +144,27 @@ export type Unit = {
 
 export type User = {
   __typename?: 'User';
-  applications: Array<Application>;
+  citizenshipStatus?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
+  firstName: Scalars['String'];
   id: Scalars['Uuid'];
+  lastName: Scalars['String'];
+  referrals: Scalars['Int'];
+  roles: Array<Scalars['String']>;
 };
 
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type UserApplicationsArgs = {
-  filterType?: InputMaybe<ApplicationType>;
-};
 
-export type SubmitMutationVariables = Exact<{
-  bson: Scalars['String'];
-  t: ApplicationType;
+export type MeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: any, email: string, firstName: string, lastName: string, roles: Array<string>, referrals: number, citizenshipStatus?: string | null } };
+
+export type GctQueryVariables = Exact<{
+  password: Scalars['String'];
 }>;
 
 
-export type SubmitMutation = { __typename?: 'Mutation', submitApplication: boolean };
+export type GctQuery = { __typename?: 'Query', crackTime: { __typename?: 'CrackSeconds', seconds: number, guesses: number, string: string } };
 
 
-export const SubmitDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"submit"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"bson"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"t"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ApplicationType"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"submitApplication"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"bson"},"value":{"kind":"Variable","name":{"kind":"Name","value":"bson"}}},{"kind":"Argument","name":{"kind":"Name","value":"applicationType"},"value":{"kind":"Variable","name":{"kind":"Name","value":"t"}}}]}]}}]} as unknown as DocumentNode<SubmitMutation, SubmitMutationVariables>;
+export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"roles"}},{"kind":"Field","name":{"kind":"Name","value":"referrals"}},{"kind":"Field","name":{"kind":"Name","value":"citizenshipStatus"}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
+export const GctDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"gct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"crackTime"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"seconds"}},{"kind":"Field","name":{"kind":"Name","value":"guesses"}},{"kind":"Field","name":{"kind":"Name","value":"string"}}]}}]}}]} as unknown as DocumentNode<GctQuery, GctQueryVariables>;

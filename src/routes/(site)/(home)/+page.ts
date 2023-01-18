@@ -1,6 +1,6 @@
 import { MessageType } from "$lib/types/message"
 import type { PageLoad } from "./$types"
-
+// TODOg
 export const load = (async ({ parent }) => {
     const data = await parent()
 

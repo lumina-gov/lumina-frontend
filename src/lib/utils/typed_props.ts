@@ -6,3 +6,5 @@ export type Props<T> = T extends SvelteComponentTyped<
     Record<string, unknown>
 > ? P : never;
 export type Prop<T, K extends keyof Props<T>> = Props<T>[K];
+
+export type PickRequired<T, fields extends keyof T> = T & Required<Pick<T, fields>>;

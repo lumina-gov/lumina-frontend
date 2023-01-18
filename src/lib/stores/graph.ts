@@ -3,10 +3,10 @@ import { RustEnum } from "$lib/utils/enums/rust_enum"
 import { error } from "@sveltejs/kit"
 
 export type GraphStore = {
-    req:<T>(type: TemplateStringsArray, ...text: Record<string, unknown>[]) => Promise<{ data: T, errors: string[]}>,
+    req: <T>(type: TemplateStringsArray, ...text: Record<string, unknown>[]) => Promise<{ data: T, errors: string[] }>,
     auth_token: string | null
 }
-
+// TODOg
 export const graph_init = (auth_token: string | null, api_domain: string): GraphStore => {
     return {
         auth_token,
@@ -44,28 +44,28 @@ export const graph_init = (auth_token: string | null, api_domain: string): Graph
 }
 
 
-function isPrimitive (test: unknown): test is string | number | boolean {
+function isPrimitive(test: unknown): test is string | number | boolean {
     return (test !== Object(test))
 }
 
-function isArray (test: unknown): test is unknown[] {
+function isArray(test: unknown): test is unknown[] {
     return Array.isArray(test)
 }
 
-function isObject (test: unknown): test is Record<string, unknown> {
+function isObject(test: unknown): test is Record<string, unknown> {
     return typeof test === "object" && !Array.isArray(test)
 }
 
-function parseArray (array: unknown[]): string {
+function parseArray(array: unknown[]): string {
     return "[" + array.map(variable => parse_variable(variable)).join(",\n") + "]"
 }
 
-function parseObject (obj: Record<string, unknown>): string {
+function parseObject(obj: Record<string, unknown>): string {
     return "{\n" + Object.keys(obj).map(key => key + ": " + parse_variable(obj[key])).join(",\n") + "\n}"
 }
 
-export function parse_variable (variable: unknown): string {
-    if(variable === null) {
+export function parse_variable(variable: unknown): string {
+    if (variable === null) {
         throw new Error("null is not a valid graph variable")
     }
     if (isPrimitive(variable)) {
@@ -83,7 +83,7 @@ export function parse_variable (variable: unknown): string {
     throw new Error("Could not translate: " + variable)
 }
 
-export function parse_inputs (strings: TemplateStringsArray, variables: Record<string, unknown>[]): string {
+export function parse_inputs(strings: TemplateStringsArray, variables: Record<string, unknown>[]): string {
     let query = ""
 
     for (const index in strings) {
