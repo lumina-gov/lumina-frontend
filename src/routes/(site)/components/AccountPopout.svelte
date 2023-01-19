@@ -4,24 +4,19 @@ import Settings from "svelte-material-icons/Cog.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
 import Profile from "$lib/display/Profile.svelte"
-import type { User } from "$lib/types/user"
-import { page } from "$app/stores"
 import { delete_cookie } from "$lib/utils/cookie"
-import { goto } from "$app/navigation"
+import { goto, invalidateAll } from "$app/navigation"
+import { User } from "$lib/gql/graphql"
 
 export let user: User
-$: name = `${user.first_name} ${user.last_name}`
+$: name = `${user.firstName} ${user.lastName}`
 $: email = user.email
 
-$: data = $page.data
-
 async function logout() {
-    data.graph.auth_token = null
-    data.user_wrapper.user = null
-
     delete_cookie("token")
     await goto("/signin")
-}// TODO
+    await invalidateAll()
+}
 
 </script>
 <Card reset_bg={true}>

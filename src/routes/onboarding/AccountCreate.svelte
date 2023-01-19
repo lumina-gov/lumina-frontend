@@ -7,12 +7,11 @@ import future from "$lib/utils/future"
 import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
 import { MessageType } from "$lib/types/message"
 import { set_cookie } from "$lib/utils/cookie"
-import { goto } from "$app/navigation"
-import { get_user } from "$lib/api/user"
+import { goto, invalidateAll } from "$app/navigation"
 import Password from "$lib/controls/Password.svelte"
 import PhoneInput from "$lib/controls/phone/PhoneInput.svelte"
 import type { Country } from "$lib/data/countries"
-import { Option } from "$lib/utils/enums/option"
+import { graphql } from "$lib/gql"
 
 export let data: import("./$types").PageData
 let loading = false
@@ -37,55 +36,55 @@ $: invalid = !(
         phone.country &&
         phone.number
 )
-// TODO
+
 async function signup () {
-    if (invalid || !phone.country) return
-
-    let referral = localStorage.getItem("referral")
-
     {
-        let { errors } = await data.graph.req`
-            message {
-                create_user(${{
-                ...user,
-                calling_code: phone.country.calling_code,
-                country_code: phone.country.code,
-                phone_number: phone.number,
-                referrer: referral ? Option.Some(referral) : Option.None(),
-            }})
-        }`
+        if (invalid || !phone.country) return
 
-        if (errors.length > 0) {
-            errors.map((error: string) => data.alerts.create_alert(MessageType.Error, error))
+        // TODO referrals
+        let referral = localStorage.getItem("referral")
+
+        const create_user_input = {
+            firstName: user.first_name,
+            lastName: user.last_name,
+            email: user.email,
+            password: user.password,
+            callingCode: phone.country.calling_code,
+            countryCode: phone.country.code,
+            phoneNumber: phone.number,
+        }
+
+        const { error } = await data.graph.gquery(graphql(
+            `mutation createUser($ui: CreateUserInput!) {
+                createUser(createUserInput: $ui)
+            }
+        `), {
+            ui: create_user_input
+        })
+
+        if (error) {
+            data.alerts.create_alert(MessageType.Error, error.message)
             return
         }
+    
+        data.alerts.create_alert(MessageType.Success, "Account Created")
     }
 
-
-    data.alerts.create_alert(MessageType.Success, "Account Created")
-
     {
-        let { data: { login: token }, errors } = await data.graph.req<{ login: string }>`message {
-            login(${{
-                email: user.email,
-                password: user.password,
-            }})
-        }`
+        let { data: loginData, error} = await data.graph.gquery(graphql(`
+            mutation login($user: LoginUserInput!) {
+                login(loginUser: $user)
+            }`), { user })
 
-        if (errors.length > 0) {
-            errors.map((error: string) => data.alerts.create_alert(MessageType.Error, error))
-            return
+        if (error || !loginData) {
+            data.alerts.create_alert(MessageType.Error, error?.message ?? "Login failed")
+        } else {
+            data.alerts.create_alert(MessageType.Success, "Login Successful")
+            set_cookie("token", loginData.login)
+            await invalidateAll()
+            await goto("/")
         }
 
-        if(!token) return data.alerts.create_alert(MessageType.Error, "Invalid Login")
-
-        set_cookie("token", token)
-        data.graph.auth_token = token
-        data.user_wrapper.user = await get_user(data.graph, data.alerts)
-
-        data.alerts.create_alert(MessageType.Success, "Login Successful")
-
-        await goto("/")
     }
 
 }
