@@ -6,7 +6,6 @@ import type { PageData } from "./$types"
 let container: HTMLDivElement
 export let data: PageData
 
-
 onMount(() => {
     let global = <any>window
     const root = global.ReactDOM.createRoot(container)
@@ -20,9 +19,7 @@ onMount(() => {
                         ...init,
                         headers: {
                             ...init?.headers,
-                            ...(data?.token && {
-                                token: data.token,
-                            }),
+                            Authorization: data.auth_token ?? ""
                         },
                     })
                 },
@@ -35,16 +32,16 @@ onMount(() => {
 
 <svelte:head>
     <script
-        crossorigin
+        crossorigin="anonymous"
         src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script
-        crossorigin
+        crossorigin="anonymous"
         src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <link
         href="https://unpkg.com/graphiql/graphiql.min.css"
         rel="stylesheet" />
     <script
-        crossorigin
+        crossorigin="anonymous"
         src="https://unpkg.com/graphiql/graphiql.min.js"></script>
 </svelte:head>
 

@@ -5,9 +5,9 @@ declare global {
     // and what to do when importing types
     declare namespace App {
         // interface Locals {}
-        interface PageData {
-            alerts: AlertsStore;
-        }
+        // interface PageData {
+        //     alerts: AlertsStore;
+        // }
         interface Error {
             code?: string;
             cause?: Error;

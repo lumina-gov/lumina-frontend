@@ -1,37 +1,43 @@
-import { alerts_init } from "$lib/stores/alerts"
-import { graph_init } from "$lib/stores/graph"
+import { AlertsStore, alerts_init } from "$lib/stores/alerts"
 import type { LayoutLoad } from "./$types"
-import { get_user } from "$lib/api/user"
-import type { User } from "$lib/types/user"
-import { error } from "@sveltejs/kit"
-import { init_urql } from "$lib/stores/graphql"
+import { GraphClient, init_urql } from "$lib/stores/graphql"
+import { User } from "$lib/gql/graphql"
+import { graphql } from "$lib/gql"
+import { MessageType } from "$lib/types/message"
 
-export const load: LayoutLoad = async load_event => {
-    const auth_token = load_event.data?.auth_token || null
-    const domain = load_event.data?.api_domain as string
-
-    if (!domain) {
-        throw error(500, {
-            message: "No Lumina API domain provided",
-            code: "lumina_api_domain_missing",
-        })
-    }
-
+export const load: LayoutLoad = async ({ data: { auth_token  } }) => {
     const graph = init_urql(auth_token)
     const alerts = alerts_init([])
-    // const user = user_init(null)
-
-    let user: User | null = null
-
-    if (graph.auth_token) {
-        user = await get_user(graph, alerts)
-    }
-
+    
     return {
         user_wrapper: {
-            user,
+            user: await get_me(graph, alerts),
         },
         alerts,
-        graph
+        graph,
+        auth_token
     }
+}
+
+export async function get_me(graph: GraphClient, alerts: AlertsStore): Promise<User | null> {
+    const USER_QUERY = graphql(`
+    query me {
+        me {
+          id
+          email
+          firstName
+          lastName
+          roles
+          referrals
+          citizenshipStatus
+        }
+      }`)
+
+    const { data, error } = await graph.gquery(USER_QUERY, {})
+
+    if (error) {
+        alerts.create_alert(MessageType.Error, error.message)
+        return null
+    }
+    return data?.me ?? null
 }

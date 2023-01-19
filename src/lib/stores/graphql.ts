@@ -5,12 +5,12 @@ import { error } from "@sveltejs/kit"
 
 export type GraphClient = ReturnType<typeof init_urql>
 
-export const init_urql = (token: string) => Object.assign(createClient({
+export const init_urql = (token: string | undefined) => Object.assign(createClient({
 	url: PUBLIC_GRAPH_ENDPOINT,
 	fetchOptions: {
-		headers: {
+		headers: token ? ({
 			Authorization: token
-		}
+		}) : undefined
 	}
 }), {
 	async gquery<Data = unknown, Variables extends AnyVariables = AnyVariables>(
