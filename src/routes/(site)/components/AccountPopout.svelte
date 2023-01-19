@@ -21,7 +21,7 @@ async function logout() {
 
     delete_cookie("token")
     await goto("/signin")
-}// TODOg
+}// TODO
 
 </script>
 <Card reset_bg={true}>

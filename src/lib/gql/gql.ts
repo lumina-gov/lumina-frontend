@@ -13,8 +13,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n    query me {\n        me {\n          id\n          email\n          firstName\n          lastName\n          roles\n          referrals\n          citizenshipStatus\n        }\n      }": types.MeDocument,
     "\n        query gct($password:String!) {\n            crackTime(password: $password) {\n                seconds\n                guesses\n                string\n            }\n        }": types.GctDocument,
+    "\n   query usercount {\n    userCount\n   }": types.UsercountDocument,
+    "\n    query me {\n        me {\n          id\n          email\n          firstName\n          lastName\n          roles\n          referrals\n          citizenshipStatus\n        }\n      }": types.MeDocument,
+    "\n    mutation login($user: LoginUserInput!) {\n        login(loginUser: $user)\n    }": types.LoginDocument,
 };
 
 /**
@@ -34,11 +36,19 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n        query gct($password:String!) {\n            crackTime(password: $password) {\n                seconds\n                guesses\n                string\n            }\n        }"): (typeof documents)["\n        query gct($password:String!) {\n            crackTime(password: $password) {\n                seconds\n                guesses\n                string\n            }\n        }"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n   query usercount {\n    userCount\n   }"): (typeof documents)["\n   query usercount {\n    userCount\n   }"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n    query me {\n        me {\n          id\n          email\n          firstName\n          lastName\n          roles\n          referrals\n          citizenshipStatus\n        }\n      }"): (typeof documents)["\n    query me {\n        me {\n          id\n          email\n          firstName\n          lastName\n          roles\n          referrals\n          citizenshipStatus\n        }\n      }"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n        query gct($password:String!) {\n            crackTime(password: $password) {\n                seconds\n                guesses\n                string\n            }\n        }"): (typeof documents)["\n        query gct($password:String!) {\n            crackTime(password: $password) {\n                seconds\n                guesses\n                string\n            }\n        }"];
+export function graphql(source: "\n    mutation login($user: LoginUserInput!) {\n        login(loginUser: $user)\n    }"): (typeof documents)["\n    mutation login($user: LoginUserInput!) {\n        login(loginUser: $user)\n    }"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

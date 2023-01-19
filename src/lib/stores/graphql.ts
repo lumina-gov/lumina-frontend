@@ -19,11 +19,7 @@ export const init_urql = (token: string | undefined) => Object.assign(createClie
 		variables: Variables
 	) {
 		const res = await this.query(query, variables).toPromise()
-		if (res.error || !res.data)
-			throw error(501, {
-				message: res.error?.message ?? "No data returned!",
-				code: "GRAPHQL_ERROR",
-			})
+
 		return res
 	},
 	async gmutation<Data = unknown, Variables extends AnyVariables = AnyVariables>(
@@ -32,11 +28,6 @@ export const init_urql = (token: string | undefined) => Object.assign(createClie
 		variables: Variables
 	) {
 		const res = await this.mutation(query, variables).toPromise()
-		if (res.error || !res.data)
-			throw error(501, {
-				message: res.error?.message ?? "No data returned!",
-				code: "GRAPHQL_ERROR",
-			})
 		return res
 	}
 })

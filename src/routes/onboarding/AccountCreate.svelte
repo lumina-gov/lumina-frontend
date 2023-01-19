@@ -37,7 +37,7 @@ $: invalid = !(
         phone.country &&
         phone.number
 )
-// TODOg
+// TODO
 async function signup () {
     if (invalid || !phone.country) return
 

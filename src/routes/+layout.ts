@@ -19,7 +19,7 @@ export const load: LayoutLoad = async ({ data: { auth_token  } }) => {
     }
 }
 
-export async function get_me(graph: GraphClient, alerts: AlertsStore): Promise<User | null> {
+async function get_me(graph: GraphClient, alerts: AlertsStore): Promise<User | null> {
     const USER_QUERY = graphql(`
     query me {
         me {

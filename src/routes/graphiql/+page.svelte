@@ -19,7 +19,7 @@ onMount(() => {
                         ...init,
                         headers: {
                             ...init?.headers,
-                            Authorization: data.auth_token ?? ""
+                            ...(data.auth_token ? { Authorization: data.auth_token } : {})
                         },
                     })
                 },
