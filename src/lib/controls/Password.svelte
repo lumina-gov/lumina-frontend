@@ -40,7 +40,7 @@ async function check_password_strength() {
 
     let { data, error } = await gquery(graphql(`
         query gct($password:String!) {
-            crackTime(password: $password) {
+            crack_time(password: $password) {
                 seconds
                 guesses
                 string

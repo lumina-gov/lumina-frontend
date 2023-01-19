@@ -42,21 +42,22 @@ async function signup () {
         if (invalid || !phone.country) return
 
         // TODO referrals
-        let referral = localStorage.getItem("referral")
+        let referrer = localStorage.getItem("referral")
 
         const create_user_input = {
-            firstName: user.first_name,
-            lastName: user.last_name,
+            first_name: user.first_name,
+            last_name: user.last_name,
             email: user.email,
             password: user.password,
-            callingCode: phone.country.calling_code,
-            countryCode: phone.country.code,
-            phoneNumber: phone.number,
+            calling_code: phone.country.calling_code,
+            country_code: phone.country.code,
+            phone_number: phone.number,
+            referrer,
         }
 
-        const { error } = await data.graph.gquery(graphql(
-            `mutation createUser($ui: CreateUserInput!) {
-                createUser(createUserInput: $ui)
+        const { error } = await data.graph.gquery(graphql(`
+            mutation create_user($ui: CreateUserInput!) {
+                create_user(create_user_input: $ui)
             }
         `), {
             ui: create_user_input
@@ -66,14 +67,14 @@ async function signup () {
             data.alerts.create_alert(MessageType.Error, error.message)
             return
         }
-    
+
         data.alerts.create_alert(MessageType.Success, "Account Created")
     }
 
     {
         let { data: loginData, error} = await data.graph.gquery(graphql(`
             mutation login($user: LoginUserInput!) {
-                login(loginUser: $user)
+                login(login_user: $user)
             }`), { user })
 
         if (error || !loginData) {

@@ -43,6 +43,12 @@ export type CitizenshipApplicationInput = {
   skills: Array<Scalars['String']>;
 };
 
+export enum CitizenshipStatus {
+  Approved = 'APPROVED',
+  Pending = 'PENDING',
+  Rejected = 'REJECTED'
+}
+
 export type Course = {
   __typename?: 'Course';
   createdAt: Scalars['DateTime'];
@@ -71,6 +77,7 @@ export type CreateUserInput = {
   lastName: Scalars['String'];
   password: Scalars['String'];
   phoneNumber: Scalars['String'];
+  referrer?: InputMaybe<Scalars['String']>;
 };
 
 export type LoginUserInput = {
@@ -80,75 +87,75 @@ export type LoginUserInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createCitizenshipApplication: Scalars['Uuid'];
-  createCourse: Course;
-  createUser: Scalars['Uuid'];
+  create_citizenship_application: Scalars['Uuid'];
+  create_course: Course;
+  create_user: Scalars['Uuid'];
   /** Returns a JWT token for the user */
   login: Scalars['String'];
   test: Scalars['String'];
 };
 
 
-export type MutationCreateCitizenshipApplicationArgs = {
-  citizenshipApplication: CitizenshipApplicationInput;
+export type MutationCreate_Citizenship_ApplicationArgs = {
+  citizenship_application: CitizenshipApplicationInput;
 };
 
 
-export type MutationCreateCourseArgs = {
+export type MutationCreate_CourseArgs = {
   course: CreateCourseInput;
 };
 
 
-export type MutationCreateUserArgs = {
-  createUserInput: CreateUserInput;
+export type MutationCreate_UserArgs = {
+  create_user_input: CreateUserInput;
 };
 
 
 export type MutationLoginArgs = {
-  loginUser: LoginUserInput;
+  login_user: LoginUserInput;
 };
 
 export type Query = {
   __typename?: 'Query';
-  courseBySlug?: Maybe<Course>;
+  course_by_slug?: Maybe<Course>;
   courses: Array<Course>;
   /**
    * Returns the crack time of a password
    * Used for password strength estimation
    * On the frontend
    */
-  crackTime: CrackSeconds;
+  crack_time: CrackSeconds;
   me?: Maybe<User>;
-  userCount: Scalars['Int'];
+  user_count: Scalars['Int'];
 };
 
 
-export type QueryCourseBySlugArgs = {
+export type QueryCourse_By_SlugArgs = {
   slug: Scalars['String'];
 };
 
 
-export type QueryCrackTimeArgs = {
+export type QueryCrack_TimeArgs = {
   password: Scalars['String'];
 };
 
 export type Unit = {
   __typename?: 'Unit';
-  courseId: Scalars['Uuid'];
-  createdAt: Scalars['DateTime'];
+  course_id: Scalars['Uuid'];
+  created_at: Scalars['DateTime'];
   id: Scalars['Uuid'];
   name: Scalars['String'];
-  parentUnit?: Maybe<Scalars['Uuid']>;
+  parent_unit?: Maybe<Scalars['Uuid']>;
   slug: Scalars['String'];
 };
 
 export type User = {
   __typename?: 'User';
-  citizenshipStatus?: Maybe<Scalars['String']>;
+  citizenship_status: CitizenshipStatus;
   email: Scalars['String'];
-  firstName: Scalars['String'];
+  first_name: Scalars['String'];
   id: Scalars['Uuid'];
-  lastName: Scalars['String'];
+  last_name: Scalars['String'];
   referrals: Scalars['Int'];
   roles: Array<Scalars['String']>;
 };
@@ -158,24 +165,24 @@ export type GctQueryVariables = Exact<{
 }>;
 
 
-export type GctQuery = { __typename?: 'Query', crackTime: { __typename?: 'CrackSeconds', seconds: number, guesses: number, string: string } };
+export type GctQuery = { __typename?: 'Query', crack_time: { __typename?: 'CrackSeconds', seconds: number, guesses: number, string: string } };
 
-export type UsercountQueryVariables = Exact<{ [key: string]: never; }>;
+export type User_CountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UsercountQuery = { __typename?: 'Query', userCount: number };
+export type User_CountQuery = { __typename?: 'Query', user_count: number };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: any, email: string, firstName: string, lastName: string, roles: Array<string>, referrals: number, citizenshipStatus?: string | null } | null };
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: any, email: string, first_name: string, last_name: string, roles: Array<string>, referrals: number, citizenship_status: CitizenshipStatus } | null };
 
-export type CreateUserMutationVariables = Exact<{
+export type Create_UserMutationVariables = Exact<{
   ui: CreateUserInput;
 }>;
 
 
-export type CreateUserMutation = { __typename?: 'Mutation', createUser: any };
+export type Create_UserMutation = { __typename?: 'Mutation', create_user: any };
 
 export type LoginMutationVariables = Exact<{
   user: LoginUserInput;
@@ -185,8 +192,8 @@ export type LoginMutationVariables = Exact<{
 export type LoginMutation = { __typename?: 'Mutation', login: string };
 
 
-export const GctDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"gct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"crackTime"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"seconds"}},{"kind":"Field","name":{"kind":"Name","value":"guesses"}},{"kind":"Field","name":{"kind":"Name","value":"string"}}]}}]}}]} as unknown as DocumentNode<GctQuery, GctQueryVariables>;
-export const UsercountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"usercount"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userCount"}}]}}]} as unknown as DocumentNode<UsercountQuery, UsercountQueryVariables>;
-export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"roles"}},{"kind":"Field","name":{"kind":"Name","value":"referrals"}},{"kind":"Field","name":{"kind":"Name","value":"citizenshipStatus"}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
-export const CreateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ui"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"createUserInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ui"}}}]}]}}]} as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;
-export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LoginUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"loginUser"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user"}}}]}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const GctDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"gct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"crack_time"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"seconds"}},{"kind":"Field","name":{"kind":"Name","value":"guesses"}},{"kind":"Field","name":{"kind":"Name","value":"string"}}]}}]}}]} as unknown as DocumentNode<GctQuery, GctQueryVariables>;
+export const User_CountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"user_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_count"}}]}}]} as unknown as DocumentNode<User_CountQuery, User_CountQueryVariables>;
+export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"roles"}},{"kind":"Field","name":{"kind":"Name","value":"referrals"}},{"kind":"Field","name":{"kind":"Name","value":"citizenship_status"}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
+export const Create_UserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"create_user"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ui"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"create_user_input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ui"}}}]}]}}]} as unknown as DocumentNode<Create_UserMutation, Create_UserMutationVariables>;
+export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LoginUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login_user"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user"}}}]}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
