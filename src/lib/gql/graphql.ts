@@ -31,13 +31,13 @@ export type Scalars = {
 };
 
 export type CitizenshipApplicationInput = {
-  countryOfBirth: Scalars['String'];
-  countryOfCitizenship: Array<Scalars['String']>;
-  countryOfResidence: Scalars['String'];
-  dateOfBirth: Scalars['DateTime'];
-  ethnicGroups: Array<Scalars['String']>;
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
+  country_of_birth: Scalars['String'];
+  country_of_citizenship: Array<Scalars['String']>;
+  country_of_residence: Scalars['String'];
+  date_of_birth: Scalars['DateTime'];
+  ethnic_groups: Array<Scalars['String']>;
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
   occupations: Array<Scalars['String']>;
   sex: Scalars['String'];
   skills: Array<Scalars['String']>;
@@ -70,13 +70,13 @@ export type CreateCourseInput = {
 };
 
 export type CreateUserInput = {
-  callingCode: Scalars['String'];
-  countryCode: Scalars['String'];
+  calling_code: Scalars['String'];
+  country_code: Scalars['String'];
   email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
   password: Scalars['String'];
-  phoneNumber: Scalars['String'];
+  phone_number: Scalars['String'];
   referrer?: InputMaybe<Scalars['String']>;
 };
 
@@ -172,6 +172,13 @@ export type User_CountQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type User_CountQuery = { __typename?: 'Query', user_count: number };
 
+export type CreateCitAppMutationVariables = Exact<{
+  input: CitizenshipApplicationInput;
+}>;
+
+
+export type CreateCitAppMutation = { __typename?: 'Mutation', create_citizenship_application: any };
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -194,6 +201,7 @@ export type LoginMutation = { __typename?: 'Mutation', login: string };
 
 export const GctDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"gct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"crack_time"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"seconds"}},{"kind":"Field","name":{"kind":"Name","value":"guesses"}},{"kind":"Field","name":{"kind":"Name","value":"string"}}]}}]}}]} as unknown as DocumentNode<GctQuery, GctQueryVariables>;
 export const User_CountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"user_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_count"}}]}}]} as unknown as DocumentNode<User_CountQuery, User_CountQueryVariables>;
+export const CreateCitAppDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createCitApp"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CitizenshipApplicationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_citizenship_application"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"citizenship_application"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<CreateCitAppMutation, CreateCitAppMutationVariables>;
 export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"roles"}},{"kind":"Field","name":{"kind":"Name","value":"referrals"}},{"kind":"Field","name":{"kind":"Name","value":"citizenship_status"}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
 export const Create_UserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"create_user"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ui"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"create_user_input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ui"}}}]}]}}]} as unknown as DocumentNode<Create_UserMutation, Create_UserMutationVariables>;
 export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LoginUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login_user"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user"}}}]}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;

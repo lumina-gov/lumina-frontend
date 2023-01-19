@@ -46,7 +46,7 @@ let user = {
 }
 
 async function signin () {
-    let { data, error} = await graph.gquery(graphql(`
+    let { data, error} = await graph.gmutation(graphql(`
     mutation login($user: LoginUserInput!) {
         login(login_user: $user)
     }`), { user })

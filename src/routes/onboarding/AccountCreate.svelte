@@ -39,7 +39,7 @@ $: invalid = !(
 
 async function signup () {
     {
-        if (invalid || !phone.country) return
+        if (invalid) return
 
         // TODO referrals
         let referrer = localStorage.getItem("referral")
@@ -55,7 +55,7 @@ async function signup () {
             referrer,
         }
 
-        const { error } = await data.graph.gquery(graphql(`
+        const { error } = await data.graph.gmutation(graphql(`
             mutation create_user($ui: CreateUserInput!) {
                 create_user(create_user_input: $ui)
             }
@@ -72,10 +72,10 @@ async function signup () {
     }
 
     {
-        let { data: loginData, error} = await data.graph.gquery(graphql(`
+        let { data: loginData, error} = await data.graph.gmutation(graphql(`
             mutation login($user: LoginUserInput!) {
                 login(login_user: $user)
-            }`), { user })
+            }`), { user: { password: user.password, email: user.email } })
 
         if (error || !loginData) {
             data.alerts.create_alert(MessageType.Error, error?.message ?? "Login failed")
