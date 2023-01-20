@@ -1,5 +1,5 @@
-<script lang="ts">
-import { ApplicationType } from "$lib/gql/graphql"	
+<!-- <script lang="ts">
+import { Appl } from "$lib/gql/graphql"
 import { descriptions } from "./applications"
 
 const types: ApplicationType[] = Object.values(ApplicationType)
@@ -28,4 +28,4 @@ const types: ApplicationType[] = Object.values(ApplicationType)
         border: 1px solid grey
         padding: 20px
 
-</style>
+</style> -->
