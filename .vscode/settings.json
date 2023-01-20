@@ -8,7 +8,7 @@
         "typescript",
     ],
     "[svelte]": {
-        "editor.defaultFormatter": "svelte.svelte-vscode",
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
         // "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
     "editor.codeActionsOnSave": {

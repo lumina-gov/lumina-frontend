@@ -1,6 +1,5 @@
 <script lang="ts">
 import { page } from "$app/stores"
-import { get_user } from "$lib/api/user"
 import IdentityPicker from "$lib/controls/IdentityPicker.svelte"
 import Input from "$lib/controls/Input.svelte"
 import MultiSegment from "$lib/controls/MultiSegment.svelte"
@@ -12,7 +11,6 @@ import { occupations } from "$lib/data/occupations"
 import { skills } from "$lib/data/skills"
 import InputWrapper from "$lib/display/InputWrapper.svelte"
 import { MessageType } from "$lib/types/message"
-import type { User } from "$lib/types/user"
 import future from "$lib/utils/future"
 import SwapHorizontal from "svelte-material-icons/SwapHorizontal.svelte"
 import Calendar from "svelte-material-icons/Calendar.svelte"
@@ -21,7 +19,10 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 import Button from "$lib/controls/Button.svelte"
 import Heading from "$lib/display/Heading.svelte"
 import Passport from "svelte-material-icons/Passport.svelte"
-// TODO graphql
+import { graphql } from "$lib/gql"
+import { invalidateAll } from "$app/navigation"
+import { User } from "$lib/gql/graphql"
+
 $: data = $page.data
 
 export let user: User
@@ -62,53 +63,48 @@ let citizenship_registration: CitizenshipRegistration = {
 }
 
 async function register() {
-    let normalised = {
-        ...citizenship_registration,
-        country_of_citizenship: citizenship_registration.country_of_citizenship.map(c => c.code),
-        country_of_residence: citizenship_registration.country_of_residence?.code,
-        country_of_birth: citizenship_registration.country_of_birth?.code,
-        skills: citizenship_registration.skills.map(s => s[0]),
-        occupations: citizenship_registration.occupations.map(o => o[0]),
-        date_of_birth: new Date(citizenship_registration.date_of_birth).getTime(),
+    function expect<T>(foo: T | undefined | null, error: string): T {
+        if (foo != undefined) return foo
+        throw new Error(error)
     }
 
-    if (isNaN(normalised.date_of_birth)) {
-        data.alerts.create_alert(MessageType.Error, "Invalid date of birth")
-        return
-    }
-    if (normalised.sex === null) {
-        data.alerts.create_alert(MessageType.Error, "You must select a sex")
-        return
-    }
-    if (normalised.country_of_residence === null) {
-        data.alerts.create_alert(MessageType.Error, "You must select a country of residence")
-        return
-    }
-    if (normalised.country_of_birth === null) {
-        data.alerts.create_alert(MessageType.Error, "You must select a country of birth")
-        return
-    }
-    if (normalised.country_of_citizenship.length === 0) {
-        data.alerts.create_alert(MessageType.Error, "You must select a country of citizenship")
-        return
-    }
-    if (normalised.ethnic_groups.length === 0) {
-        data.alerts.create_alert(MessageType.Error, "You must select at least one ethnic group")
+    let normalised
+
+    try {
+        if (citizenship_registration.ethnic_groups.length == 0)
+            throw new Error("You must select at least one ethnic group")
+        if (citizenship_registration.country_of_citizenship.length == 0) 
+            throw new Error("You must select a country of citizenship")
+        if (isNaN(new Date(citizenship_registration.date_of_birth).getTime())) 
+            throw new Error("Invalid date of birth")
+
+        normalised = {
+            ...citizenship_registration,
+            sex: expect(citizenship_registration.sex, "You must select a sex"),
+            country_of_citizenship: citizenship_registration.country_of_citizenship.map(c => c.code),
+            country_of_residence: expect(citizenship_registration.country_of_residence?.code, "You must select a country of residence"),
+            country_of_birth: expect(citizenship_registration.country_of_birth?.code, "You must select a country of birth"),
+            skills: citizenship_registration.skills.map(s => s[0]),
+            occupations: citizenship_registration.occupations.map(o => o[0]),
+            date_of_birth: new Date(citizenship_registration.date_of_birth),
+        }
+    } catch (e: any) {
+        data.alerts.create_alert(MessageType.Error, e.message)
         return
     }
 
-    let { errors } = await data.graph.req`message {
-        create_citizenship_application(${normalised})
-    }`
 
-    if (errors.length > 0) {
-        errors.map((error: string) => data.alerts.create_alert(MessageType.Error, error))
+    let { error } = await data.graph.gmutation(graphql(`
+    mutation createCitApp($input: CitizenshipApplicationInput!) {
+        create_citizenship_application(citizenship_application: $input)
+    }`), { input: normalised })
+
+    if (error) {
+        data.alerts.create_alert(MessageType.Error, error.message)
         return
     }
-
     data.alerts.create_alert(MessageType.Success, "Citizenship application created")
-
-    user = await get_user(data.graph, data.alerts) as User
+    await invalidateAll()
 }
 </script>
 <Heading right_icon={Passport}>Citizenship Registration</Heading>
