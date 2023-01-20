@@ -1,7 +1,6 @@
 <script lang="ts">
 import AppbarButton from "$lib/controls/AppbarButton.svelte"
 import Logo from "$lib/icons/Logo.svelte"
-import type { User } from "$lib/types/user"
 import { onMount } from "svelte"
 import Menu from "svelte-material-icons/Menu.svelte"
 import Apps from "svelte-material-icons/Apps.svelte"
@@ -13,20 +12,20 @@ import Scrim from "$lib/controls/Scrim.svelte"
 import NotificationsPopout from "./NotificationsPopout.svelte"
 import AccountPopout from "./AccountPopout.svelte"
 import Inside from "$lib/controls/Inside.svelte"
+import { MeQuery } from "$lib/gql/graphql"
+import { afterNavigate } from "$app/navigation"
 
 enum Dropdown {
     Notifications,
     Account,
 }
 
-export let user: User | null
+export let user: MeQuery["me"] | null
 export let nav_opened: boolean
 let scrolled = false
 let dropdown: Dropdown | null = null
 
 $: authenticated = user !== null
-
-
 
 onMount(() => {
     scrolled = window.scrollY != 0
@@ -42,6 +41,10 @@ function toggle(toggling: Dropdown) {
         dropdown = toggling
     }
 }
+
+afterNavigate(() => {
+    dropdown = null
+})
 
 </script>
 <header

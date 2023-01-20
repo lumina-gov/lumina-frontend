@@ -4,7 +4,7 @@ import { createEventDispatcher, SvelteComponent } from "svelte"
 
 export let href: string | null = null
 export let left_icon: typeof SvelteComponent | null = null
-export let left_icon_props: Record<string, any> = {}
+export let left_icon_props: Record<string, unknown> = {}
 export let right_icon: typeof SvelteComponent | null = null
 export let style: "translucent" | "transparent" | "branded" = "transparent"
 export let authenticated_app_bar = false

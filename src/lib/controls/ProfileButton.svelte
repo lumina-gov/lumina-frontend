@@ -1,11 +1,11 @@
 <script lang="ts">
 import Profile from "$lib/display/Profile.svelte"
-import type { User } from "$lib/types/user"
+import { MeQuery } from "$lib/gql/graphql"
 import { createEventDispatcher } from "svelte"
 
 let dispatch = createEventDispatcher<{ click: Event }>()
 export let active = false
-export let user: User
+export let user: MeQuery["me"]
 
 function clicked(e: Event) {
     e.stopPropagation()
