@@ -31,13 +31,13 @@ export type Scalars = {
 };
 
 export type CitizenshipApplicationInput = {
-  countryOfBirth: Scalars['String'];
-  countryOfCitizenship: Array<Scalars['String']>;
-  countryOfResidence: Scalars['String'];
-  dateOfBirth: Scalars['DateTime'];
-  ethnicGroups: Array<Scalars['String']>;
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
+  country_of_birth: Scalars['String'];
+  country_of_citizenship: Array<Scalars['String']>;
+  country_of_residence: Scalars['String'];
+  date_of_birth: Scalars['DateTime'];
+  ethnic_groups: Array<Scalars['String']>;
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
   occupations: Array<Scalars['String']>;
   sex: Scalars['String'];
   skills: Array<Scalars['String']>;
@@ -70,13 +70,13 @@ export type CreateCourseInput = {
 };
 
 export type CreateUserInput = {
-  callingCode: Scalars['String'];
-  countryCode: Scalars['String'];
+  calling_code: Scalars['String'];
+  country_code: Scalars['String'];
   email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
   password: Scalars['String'];
-  phoneNumber: Scalars['String'];
+  phone_number: Scalars['String'];
   referrer?: InputMaybe<Scalars['String']>;
 };
 
