@@ -31,6 +31,7 @@ export let data: PageData
 
 $: graph = data.graph
 $: alerts = data.alerts
+$: redirect = data.redirect
 
 enum DisplayPage {
     Email,
@@ -57,7 +58,7 @@ async function signin () {
         alerts.create_alert(MessageType.Success, "Login Successful")
         set_cookie("token", data.login)
         await invalidateAll()
-        await goto("/")
+        await goto(redirect ? redirect + "?token=" + data.login : "/")
     }
 }
 

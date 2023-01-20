@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { User } from "$lib/types/user"
 import type { SvelteComponent } from "svelte"
 import Hub from "$lib/icons/Hub.svelte"
 import Shop from "svelte-material-icons/TagOutline.svelte"
@@ -17,8 +16,9 @@ import Information from "svelte-material-icons/Information.svelte"
 import { information } from "$lib/data/information"
 import Inside from "$lib/controls/Inside.svelte"
 import ScrollbarRegion from "$lib/controls/ScrollbarRegion.svelte"
+import { MeQuery } from "$lib/gql/graphql"
 
-export let user: User | null
+export let user: MeQuery["me"] | null
 export let nav_opened: boolean
 
 type MenuLink = {

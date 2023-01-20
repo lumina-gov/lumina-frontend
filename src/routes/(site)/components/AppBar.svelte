@@ -75,9 +75,7 @@ afterNavigate(() => {
                     authenticated_app_bar={authenticated}
                     left_icon={NotificationOutline}
                     on:click={ () => toggle(Dropdown.Notifications) }/>
-                <ProfileButton
-                    user={user}
-                    on:click={ () => toggle(Dropdown.Account) }/>
+                <ProfileButton on:click={ () => toggle(Dropdown.Account) }/>
             {:else}
                 <AppbarButton
                     href="/signin"
