@@ -1,17 +1,21 @@
 import { createClient, type TypedDocumentNode, type Client as URLQLCLient } from "@urql/core"
 import { PUBLIC_GRAPH_ENDPOINT } from "$env/static/public"
 import type { AnyVariables } from "@urql/core/dist/types/types"
-import { error } from "@sveltejs/kit"
+import { UserStore } from "./user_store"
 
 export type GraphClient = ReturnType<typeof init_urql>
 
-export const init_urql = (token: string | undefined) => Object.assign(createClient({
+export const init_urql = (user_store: UserStore) => Object.assign(createClient({
     url: PUBLIC_GRAPH_ENDPOINT,
-    fetchOptions: {
-        headers: token ? ({
-            Authorization: token
-        }) : undefined
-    }
+    fetch: (url, options = {}) => {
+        if (user_store.auth_token) {
+            options.headers = {
+                ...options.headers,
+                Authorization: user_store.auth_token
+            }
+        }
+        return fetch(url, options)
+    },
 }), {
     async gquery<Data = unknown, Variables extends AnyVariables = AnyVariables>(
         this: URLQLCLient,

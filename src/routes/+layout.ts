@@ -1,43 +1,29 @@
-import { AlertsStore, alerts_init } from "$lib/stores/alerts"
+import { alerts_init } from "$lib/stores/alerts"
 import type { LayoutLoad } from "./$types"
-import { GraphClient, init_urql } from "$lib/stores/graphql"
-import { User } from "$lib/gql/graphql"
-import { graphql } from "$lib/gql"
-import { MessageType } from "$lib/types/message"
+import { init_urql } from "$lib/stores/graphql"
+import { get_me, InvalidTokenError } from "$lib/api/user"
+import { browser } from "$app/environment"
+import { set_cookie } from "$lib/utils/cookie"
+import { user_store_init } from "$lib/stores/user_store"
 
-export const load: LayoutLoad = async ({ data: { auth_token  } }) => {
-    const graph = init_urql(auth_token)
+export const load: LayoutLoad = async ({ data: { auth_token  }}) => {
+    const user_store = user_store_init(auth_token)
+    const graph = init_urql(user_store)
     const alerts = alerts_init([])
 
+    try {
+        user_store.user = await get_me(graph, alerts)
+    } catch (e) {
+        if (browser && e instanceof InvalidTokenError) {
+            set_cookie("token", null)
+        }
+        user_store.user = null
+        user_store.auth_token = null
+    }
+
     return {
-        user_wrapper: {
-            user: await get_me(graph, alerts),
-        },
+        user_store,
         alerts,
         graph,
-        auth_token
     }
-}
-
-async function get_me(graph: GraphClient, alerts: AlertsStore): Promise<User | null> {
-    const USER_QUERY = graphql(`
-        query me {
-            me {
-            id
-            email
-            first_name
-            last_name
-            roles
-            referrals
-            citizenship_status
-            }
-        }`)
-
-    const { data, error } = await graph.gquery(USER_QUERY, {})
-
-    if (error) {
-        alerts.create_alert(MessageType.Error, error.message)
-        return null
-    }
-    return data?.me ?? null
 }

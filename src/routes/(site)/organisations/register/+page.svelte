@@ -73,9 +73,7 @@ export let data: PageData
         <ImagePicker
             name="Logo"
             bind:value={ organisation.logo }/>
-        <Button
-            right_icon={ChevronRight}
-            on:click={ () => {} }>
+        <Button right_icon={ChevronRight}>
             Continue
         </Button>
     </GridItem>

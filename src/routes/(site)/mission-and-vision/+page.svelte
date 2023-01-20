@@ -93,7 +93,7 @@ let goals: Goal[] = [
     },
 ]
 
-$: user = data.user_wrapper.user
+$: user = data.user_store.user
 $: user_has_citizenship_applicaiton = user?.citizenship_status === "pending"
 
 $: other_links = [

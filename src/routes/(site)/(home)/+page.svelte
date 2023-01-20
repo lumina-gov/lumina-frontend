@@ -64,7 +64,7 @@ export const organizationSchema: WithContext<GovernmentOrganization> = {
 
 export let data: PageData
 
-$: user = data.user_wrapper.user
+$: user = data.user_store.user
 $: user_has_citizenship_applicaiton = user?.citizenship_status === CitizenshipStatus.Pending
 
 $: service_cards_top = [

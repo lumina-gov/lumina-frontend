@@ -7,6 +7,7 @@ let container: HTMLDivElement
 export let data: PageData
 
 onMount(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let global = <any>window
     const root = global.ReactDOM.createRoot(container)
     root.render(
@@ -19,7 +20,7 @@ onMount(() => {
                         ...init,
                         headers: {
                             ...init?.headers,
-                            ...(data.auth_token ? { Authorization: data.auth_token } : {})
+                            ...(data.user_store.auth_token ? { Authorization: data.user_store.auth_token } : {})
                         },
                     })
                 },
@@ -53,7 +54,7 @@ onMount(() => {
   :global(body)
     margin 0
     padding 0
-      
+
   #graphiql
     width: 100vw
     height: 100vh

@@ -39,7 +39,7 @@ $: invalid = !(
 
 async function signup () {
     {
-        if (invalid) return
+        if (invalid || !phone.country) return
 
         // TODO referrals
         let referrer = localStorage.getItem("referral")

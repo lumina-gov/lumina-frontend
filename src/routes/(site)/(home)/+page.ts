@@ -12,9 +12,9 @@ export const load: PageLoad = async ({ parent }) => {
     ), {})
 
 
-    if (error)
+    if (error) {
         alerts.create_alert(MessageType.Error, error.message)
-
+    }
     return {
         user_count: data?.user_count || 2000,
     }

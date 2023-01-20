@@ -25,7 +25,7 @@ let filter = {
     status: null
 }
 
-$: user = data.user_wrapper.user
+$: user = data.user_store.user
 
 </script>
 <Grid padding_vertical={80}>
