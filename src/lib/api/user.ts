@@ -32,8 +32,6 @@ export async function get_me(graph: GraphClient, alerts: AlertsStore): Promise<M
         throw new InvalidTokenError()
     }
 
-    console.log("foo")
-
     if (error) {
         alerts.create_alert(MessageType.Error, error.message)
         return null
