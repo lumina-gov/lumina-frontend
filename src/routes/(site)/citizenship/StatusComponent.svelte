@@ -30,14 +30,14 @@ import Discord from "svelte-material-icons/Discord.svelte"
         <Button
             href={site_data.socials.discord}
             hug={true}
-            right_icon={Apps}>
+            right_icon={Discord}>
             Join Discord
         </Button>
         <Button
             style="translucent"
             href="/"
             hug={true}
-            right_icon={Discord}>
+            right_icon={Apps}>
             Open Hub
         </Button>
     </FlexWrap>
