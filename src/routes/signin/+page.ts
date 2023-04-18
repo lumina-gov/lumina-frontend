@@ -1,7 +1,11 @@
 import type { PageLoad } from "./$types"
 import { error, redirect } from "@sveltejs/kit"
 
-const allowed_hosts = ["localhost", "light-university.vercel.app"]
+const allowed_hosts = [
+    "localhost",
+    "light-university.vercel.app",
+    "stellaruniversity.earth"
+]
 
 export const load: PageLoad = async function load({ parent, url }) {
     const data = await parent()
