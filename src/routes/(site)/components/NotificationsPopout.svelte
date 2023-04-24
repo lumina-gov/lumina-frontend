@@ -15,7 +15,7 @@ async function request_notification_permissions() {
             application_server_key
         }
     `
-
+    // TODO graphql
     if (errors.length > 0) {
         errors.map(e => alerts.create_alert(MessageType.Error, e))
         return

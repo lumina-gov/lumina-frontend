@@ -33,7 +33,7 @@ module.exports = {
         "quotes": ["error", "double"],
         "array-element-newline": ["error", "consistent"],
         "no-self-assign": "off",
-        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+        "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
         "svelte/indent": ["error", {
             "indentScript": false,
             "indent": 4,

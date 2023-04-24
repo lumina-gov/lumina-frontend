@@ -1,20 +1,21 @@
+import { graphql } from "$lib/gql"
 import { MessageType } from "$lib/types/message"
 import type { PageLoad } from "./$types"
 
-export const load = (async ({ parent }) => {
-    const data = await parent()
+export const load: PageLoad = async ({ parent }) => {
+    const { graph, alerts } = await parent()
 
-    const { data: { user_count }, errors } = await data.graph.req<{ user_count?: number }>`
-        message {
+    const { data, error } = await graph.gquery(graphql(`
+        query user_count {
             user_count
-        }
-    `
+        }`
+    ), {})
 
-    if (errors.length > 0) {
-        errors.map(error => data.alerts.create_alert(MessageType.Error, error))
+
+    if (error) {
+        alerts.create_alert(MessageType.Error, error.message)
     }
-
     return {
-        user_count: user_count || 2000,
+        user_count: data?.user_count || 2000,
     }
-}) satisfies PageLoad
+}

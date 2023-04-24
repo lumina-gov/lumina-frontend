@@ -1,36 +1,29 @@
 import { alerts_init } from "$lib/stores/alerts"
-import { graph_init } from "$lib/stores/graph"
 import type { LayoutLoad } from "./$types"
-import { get_user } from "$lib/api/user"
-import type { User } from "$lib/types/user"
-import { error } from "@sveltejs/kit"
+import { init_urql } from "$lib/stores/graphql"
+import { get_me, InvalidTokenError } from "$lib/api/user"
+import { browser } from "$app/environment"
+import { set_cookie } from "$lib/utils/cookie"
+import { user_store_init } from "$lib/stores/user_store"
 
-export const load: LayoutLoad = async load_event => {
-    const auth_token = load_event.data?.auth_token || null
-    const domain = load_event.data?.api_domain as string
-
-    if (!domain) {
-        throw error(500, {
-            message: "No Lumina API domain provided",
-            code: "lumina_api_domain_missing",
-        })
-    }
-
-    const graph = graph_init(auth_token, domain)
+export const load: LayoutLoad = async ({ data: { auth_token  }}) => {
+    const user_store = user_store_init(auth_token)
+    const graph = init_urql(user_store)
     const alerts = alerts_init([])
-    // const user = user_init(null)
 
-    let user: User | null = null
-
-    if (graph.auth_token) {
-        user = await get_user(graph, alerts)
+    try {
+        user_store.user = await get_me(graph, alerts)
+    } catch (e) {
+        if (browser && e instanceof InvalidTokenError) {
+            set_cookie("token", null)
+        }
+        user_store.user = null
+        user_store.auth_token = null
     }
 
     return {
-        user_wrapper: {
-            user,
-        },
+        user_store,
         alerts,
-        graph
+        graph,
     }
 }

@@ -40,6 +40,7 @@ import InformationArea from "./InformationArea.svelte"
 import Notification from "svelte-material-icons/Bell.svelte"
 import AlertsArea from "./AlertsArea.svelte"
 import Telescope from "svelte-material-icons/Telescope.svelte"
+import { CitizenshipStatus } from "$lib/gql/graphql"
 
 export const organizationSchema: WithContext<GovernmentOrganization> = {
     "@context": "https://schema.org",
@@ -63,8 +64,8 @@ export const organizationSchema: WithContext<GovernmentOrganization> = {
 
 export let data: PageData
 
-$: user = data.user_wrapper.user
-$: user_has_citizenship_applicaiton = user?.citizenship_status === "pending"
+$: user = data.user_store.user
+$: user_has_citizenship_applicaiton = user?.citizenship_status === CitizenshipStatus.Pending
 
 $: service_cards_top = [
     user_has_citizenship_applicaiton ? {

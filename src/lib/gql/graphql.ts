@@ -30,45 +30,24 @@ export type Scalars = {
   Uuid: any;
 };
 
-export type Application = {
-  __typename?: 'Application';
-  applicationType: ApplicationType;
-  bson: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  id: Scalars['Uuid'];
-  status: ApplicationStatus;
-};
-
-export enum ApplicationStatus {
-  Accepted = 'ACCEPTED',
-  Deliberation = 'DELIBERATION',
-  Received = 'RECEIVED',
-  Rejected = 'REJECTED'
-}
-
-export enum ApplicationType {
-  Citizenship = 'CITIZENSHIP',
-  Organization = 'ORGANIZATION',
-  Pioneer = 'PIONEER'
-}
-
-export type CitizenshipApplication = {
-  __typename?: 'CitizenshipApplication';
-  id: Scalars['Uuid'];
-};
-
 export type CitizenshipApplicationInput = {
-  countryOfBirth: Scalars['String'];
-  countryOfCitizenship: Array<Scalars['String']>;
-  countryOfResidence: Scalars['String'];
-  dateOfBirth: Scalars['DateTime'];
-  ethnicGroups: Array<Scalars['String']>;
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
+  country_of_birth: Scalars['String'];
+  country_of_citizenship: Array<Scalars['String']>;
+  country_of_residence: Scalars['String'];
+  date_of_birth: Scalars['DateTime'];
+  ethnic_groups: Array<Scalars['String']>;
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
   occupations: Array<Scalars['String']>;
   sex: Scalars['String'];
   skills: Array<Scalars['String']>;
 };
+
+export enum CitizenshipStatus {
+  Approved = 'APPROVED',
+  Pending = 'PENDING',
+  Rejected = 'REJECTED'
+}
 
 export type Course = {
   __typename?: 'Course';
@@ -81,7 +60,7 @@ export type Course = {
 
 export type CrackSeconds = {
   __typename?: 'CrackSeconds';
-  guesses: Scalars['Int'];
+  guesses: Scalars['Float'];
   seconds: Scalars['Float'];
   string: Scalars['String'];
 };
@@ -91,13 +70,14 @@ export type CreateCourseInput = {
 };
 
 export type CreateUserInput = {
-  callingCode: Scalars['String'];
-  countryCode: Scalars['String'];
+  calling_code: Scalars['String'];
+  country_code: Scalars['String'];
   email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
   password: Scalars['String'];
-  phoneNumber: Scalars['String'];
+  phone_number: Scalars['String'];
+  referrer?: InputMaybe<Scalars['String']>;
 };
 
 export type LoginUserInput = {
@@ -107,93 +87,121 @@ export type LoginUserInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createCourse: Course;
-  createUser: Scalars['Uuid'];
+  create_citizenship_application: Scalars['Uuid'];
+  create_course: Course;
+  create_user: Scalars['Uuid'];
   /** Returns a JWT token for the user */
   login: Scalars['String'];
-  submitApplication: Scalars['Boolean'];
   test: Scalars['String'];
 };
 
 
-export type MutationCreateCourseArgs = {
+export type MutationCreate_Citizenship_ApplicationArgs = {
+  citizenship_application: CitizenshipApplicationInput;
+};
+
+
+export type MutationCreate_CourseArgs = {
   course: CreateCourseInput;
 };
 
 
-export type MutationCreateUserArgs = {
-  createUserInput: CreateUserInput;
+export type MutationCreate_UserArgs = {
+  create_user_input: CreateUserInput;
 };
 
 
 export type MutationLoginArgs = {
-  loginUser: LoginUserInput;
-};
-
-
-export type MutationSubmitApplicationArgs = {
-  applicationType: ApplicationType;
-  bson: Scalars['String'];
+  login_user: LoginUserInput;
 };
 
 export type Query = {
   __typename?: 'Query';
-  courseBySlug?: Maybe<Course>;
+  course_by_slug?: Maybe<Course>;
   courses: Array<Course>;
   /**
    * Returns the crack time of a password
    * Used for password strength estimation
    * On the frontend
    */
-  crackTime: CrackSeconds;
-  createCitizenshipApplication: CitizenshipApplication;
-  me: User;
-  userCount: Scalars['Int'];
+  crack_time: CrackSeconds;
+  me?: Maybe<User>;
+  user_count: Scalars['Int'];
 };
 
 
-export type QueryCourseBySlugArgs = {
+export type QueryCourse_By_SlugArgs = {
   slug: Scalars['String'];
 };
 
 
-export type QueryCrackTimeArgs = {
+export type QueryCrack_TimeArgs = {
   password: Scalars['String'];
-};
-
-
-export type QueryCreateCitizenshipApplicationArgs = {
-  citizenshipApplication: CitizenshipApplicationInput;
 };
 
 export type Unit = {
   __typename?: 'Unit';
-  courseId: Scalars['Uuid'];
-  createdAt: Scalars['DateTime'];
+  course_id: Scalars['Uuid'];
+  created_at: Scalars['DateTime'];
   id: Scalars['Uuid'];
   name: Scalars['String'];
-  parentUnit?: Maybe<Scalars['Uuid']>;
+  parent_unit?: Maybe<Scalars['Uuid']>;
   slug: Scalars['String'];
 };
 
 export type User = {
   __typename?: 'User';
-  applications: Array<Application>;
+  citizenship_status: CitizenshipStatus;
+  email: Scalars['String'];
+  first_name: Scalars['String'];
   id: Scalars['Uuid'];
+  last_name: Scalars['String'];
+  referral_count: Scalars['Int'];
+  roles: Array<Scalars['String']>;
 };
 
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type UserApplicationsArgs = {
-  filterType?: InputMaybe<ApplicationType>;
-};
 
-export type SubmitMutationVariables = Exact<{
-  bson: Scalars['String'];
-  t: ApplicationType;
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: any, email: string, first_name: string, last_name: string, roles: Array<string>, referral_count: number, citizenship_status: CitizenshipStatus } | null };
+
+export type GctQueryVariables = Exact<{
+  password: Scalars['String'];
 }>;
 
 
-export type SubmitMutation = { __typename?: 'Mutation', submitApplication: boolean };
+export type GctQuery = { __typename?: 'Query', crack_time: { __typename?: 'CrackSeconds', seconds: number, guesses: number, string: string } };
+
+export type User_CountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export const SubmitDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"submit"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"bson"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"t"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ApplicationType"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"submitApplication"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"bson"},"value":{"kind":"Variable","name":{"kind":"Name","value":"bson"}}},{"kind":"Argument","name":{"kind":"Name","value":"applicationType"},"value":{"kind":"Variable","name":{"kind":"Name","value":"t"}}}]}]}}]} as unknown as DocumentNode<SubmitMutation, SubmitMutationVariables>;
+export type User_CountQuery = { __typename?: 'Query', user_count: number };
+
+export type CreateCitAppMutationVariables = Exact<{
+  input: CitizenshipApplicationInput;
+}>;
+
+
+export type CreateCitAppMutation = { __typename?: 'Mutation', create_citizenship_application: any };
+
+export type Create_UserMutationVariables = Exact<{
+  ui: CreateUserInput;
+}>;
+
+
+export type Create_UserMutation = { __typename?: 'Mutation', create_user: any };
+
+export type LoginMutationVariables = Exact<{
+  user: LoginUserInput;
+}>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', login: string };
+
+
+export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"roles"}},{"kind":"Field","name":{"kind":"Name","value":"referral_count"}},{"kind":"Field","name":{"kind":"Name","value":"citizenship_status"}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
+export const GctDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"gct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"crack_time"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"seconds"}},{"kind":"Field","name":{"kind":"Name","value":"guesses"}},{"kind":"Field","name":{"kind":"Name","value":"string"}}]}}]}}]} as unknown as DocumentNode<GctQuery, GctQueryVariables>;
+export const User_CountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"user_count"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_count"}}]}}]} as unknown as DocumentNode<User_CountQuery, User_CountQueryVariables>;
+export const CreateCitAppDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createCitApp"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CitizenshipApplicationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_citizenship_application"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"citizenship_application"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<CreateCitAppMutation, CreateCitAppMutationVariables>;
+export const Create_UserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"create_user"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ui"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"create_user_input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ui"}}}]}]}}]} as unknown as DocumentNode<Create_UserMutation, Create_UserMutationVariables>;
+export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LoginUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login_user"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user"}}}]}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;

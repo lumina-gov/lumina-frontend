@@ -1,12 +1,12 @@
 <script>
-import LuminaEdge from "$lib/icons/LuminaEdge.svelte"
+import LogoEdge from "$lib/icons/LogoEdge.svelte"
 export let size = "48px"
 
 </script>
 <div
     style:--size={ size }
     class="icon">
-    <LuminaEdge/>
+    <LogoEdge/>
 </div>
 <style lang="stylus">
 @import 'variables'

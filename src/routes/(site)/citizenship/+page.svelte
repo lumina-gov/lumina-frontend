@@ -1,6 +1,6 @@
 <PageHead
     description="Apply for citizenship or check your citizenship status"
-    title={data?.user_wrapper?.user?.citizenship_status === null ? "Apply for citizenship" : "Citizenship status"}
+    title={data?.user_store?.user?.citizenship_status === null ? "Apply for citizenship" : "Citizenship status"}
 />
 <script lang="ts">
 import Heading from "$lib/display/Heading.svelte"
@@ -46,7 +46,7 @@ export let notices: Props<InfoBox>[] = [
 
 let loading = false
 
-$: user = data.user_wrapper.user
+$: user = data.user_store.user
 
 
 </script>

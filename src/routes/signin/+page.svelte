@@ -21,16 +21,17 @@ import { MessageType } from "$lib/types/message"
 import { set_cookie } from "$lib/utils/cookie"
 import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
 import future from "$lib/utils/future"
-import { goto } from "$app/navigation"
+import { goto, invalidateAll } from "$app/navigation"
 import type { PageData } from "./$types"
-import { get_user } from "$lib/api/user"
 import Password from "$lib/controls/Password.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
+import { graphql } from "$lib/gql"
 
 export let data: PageData
 
 $: graph = data.graph
 $: alerts = data.alerts
+$: redirect = data.redirect
 
 enum DisplayPage {
     Email,
@@ -46,26 +47,20 @@ let user = {
 }
 
 async function signin () {
-    let { data: { login: token }, errors } = await graph.req<{ login: string }>`message {
-        login(${user})
-    }`
+    let { data, error} = await graph.gmutation(graphql(`
+    mutation login($user: LoginUserInput!) {
+        login(login_user: $user)
+    }`), { user })
 
-    if (errors.length > 0) {
-        errors.map((error: string) => alerts.create_alert(MessageType.Error, error))
-        return
+    if (error || !data) {
+        alerts.create_alert(MessageType.Error, error?.message ?? "Login failed")
+    } else {
+        alerts.create_alert(MessageType.Success, "Login Successful")
+        set_cookie("token", data.login)
+        await invalidateAll()
+        await goto(redirect ? redirect + "?token=" + data.login : "/")
     }
-
-    if(!token) return alerts.create_alert(MessageType.Error, "Invalid Login")
-
-    set_cookie("token", token)
-    data.graph.auth_token = token
-    data.user_wrapper.user = await get_user(graph, alerts)
-
-    alerts.create_alert(MessageType.Success, "Login Successful")
-
-    await goto("/")
 }
-
 
 </script>
 

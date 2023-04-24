@@ -25,6 +25,7 @@ function handle_keyup(e: KeyboardEvent) {
     class="button"
     class:opacity
     href={href}
+    role="button"
     tabindex="0"
     on:click={ clicked }
     on:keyup={ handle_keyup }

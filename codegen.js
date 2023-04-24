@@ -4,18 +4,18 @@ import { writeFileSync } from "fs"
 dotenv.config()
 
 if (!process.env.PUBLIC_GRAPH_ENDPOINT?.length)
-  throw new Error("PUBLIC_GRAPH_ENDPOINT not set in .env!")
+    throw new Error("PUBLIC_GRAPH_ENDPOINT not set in .env!")
 
 /** @type {import('@graphql-codegen/cli').CodegenConfig} */
 const config = {
-  schema: process.env.PUBLIC_GRAPH_ENDPOINT,
-  emitLegacyCommonJSImports: false,
-  documents: ["src/**/*.ts", "src/**/*.svelte"],
-  generates: {
-    "src/lib/gql/": {
-      preset: "client",
+    schema: process.env.PUBLIC_GRAPH_ENDPOINT,
+    emitLegacyCommonJSImports: false,
+    documents: ["src/**/*.ts", "src/**/*.svelte"],
+    generates: {
+        "src/lib/gql/": {
+            preset: "client",
+        },
     },
-  },
 }
 
 // AFTER EDITING THIS FILE, DELETE CODEGEN.YML

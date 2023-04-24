@@ -1,5 +1,5 @@
 <script lang="ts">
-import LuminaEdge from "$lib/icons/LuminaEdge.svelte"
+import LuminaEdge from "$lib/icons/LogoEdge.svelte"
 import Pillar from "./Pillar.svelte"
 
 </script>

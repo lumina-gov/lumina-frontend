@@ -10,7 +10,7 @@ export let data: LayoutData
 
 let nav_opened = false
 
-$: authenticated = data.user_wrapper.user != null
+$: authenticated = data.user_store.user != null
 
 </script>
 
@@ -34,15 +34,15 @@ $: authenticated = data.user_wrapper.user != null
         class="layout"
         class:authenticated>
         <AppBar
-            bind:user={ data.user_wrapper.user }
+            bind:user={ data.user_store.user }
             bind:nav_opened/>
         <Navigation
-            bind:user={ data.user_wrapper.user }
+            bind:user={ data.user_store.user }
             bind:nav_opened/>
         <div class="content">
             <slot/>
         </div>
-        {#if !data.user_wrapper.user}
+        {#if !data.user_store.user}
             <Rater/>
             <Footer/>
         {/if}
