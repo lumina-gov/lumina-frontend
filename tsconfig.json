@@ -20,10 +20,10 @@
 		"./tests/**/*.js",
 		"./tests/**/*.ts",
 		"./tests/**/*.svelte",
-		"node_modules/svelte-material-icons/*.svelte"
+		"./node_modules/svelte-material-icons/*.svelte"
 	],
 	"exclude": [
-		// "./node_modules/**",
+		"./node_modules/[!svelte-material-icons]/**",
 		".svelte-kit/[!ambient.d.ts]**"
 	]
 }

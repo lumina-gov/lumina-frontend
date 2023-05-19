@@ -37,5 +37,5 @@ $: progress.set(width, {
     background: $brand
     height: 100%
     border-radius: 50px
-    transition: width ease-in-out 0.3s
+    transition width ease-in-out 0.3s
 </style>
