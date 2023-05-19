@@ -1,6 +1,4 @@
-import type { PageLoad } from "./$types"
-
-export const load: PageLoad = async function load() {
+export async function load() {
     const organisations = [
         {
             name: "Human Services",

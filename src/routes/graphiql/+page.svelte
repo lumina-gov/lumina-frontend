@@ -1,10 +1,9 @@
 <script lang="ts">
 import { PUBLIC_GRAPH_ENDPOINT } from "$env/static/public"
 import { onMount } from "svelte"
-import type { PageData } from "./$types"
 
 let container: HTMLDivElement
-export let data: PageData
+export let data
 
 onMount(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,4 +1,3 @@
-import type { PageLoad } from "./$types"
 import { error, redirect } from "@sveltejs/kit"
 
 const allowed_hosts = [
@@ -8,7 +7,7 @@ const allowed_hosts = [
     "staging.luminauniversity.earth",
 ]
 
-export const load: PageLoad = async function load({ parent, url }) {
+export async function load({ parent, url }) {
     const data = await parent()
 
     let redirect_param = url.searchParams.get("redirect")

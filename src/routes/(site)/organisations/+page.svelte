@@ -10,7 +10,6 @@ import Domain from "svelte-material-icons/Domain.svelte"
 import Organisation from "./Organisation.svelte"
 import Plus from "svelte-material-icons/Plus.svelte"
 import FlexWrap from "$lib/display/FlexWrap.svelte"
-import type { PageData } from "./$types"
 import MenuDown from "svelte-material-icons/MenuDown.svelte"
 import SingleSegment from "$lib/controls/SingleSegment.svelte"
 import Shape from "svelte-material-icons/Shape.svelte"
@@ -18,7 +17,7 @@ import Sitemap from "svelte-material-icons/Sitemap.svelte"
 import DotsCircle from "svelte-material-icons/DotsCircle.svelte"
 import LoginPrompt from "$lib/components/LoginPrompt.svelte"
 
-export let data: PageData
+export let data
 
 let filter = {
     type: null,

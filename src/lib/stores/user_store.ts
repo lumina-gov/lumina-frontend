@@ -1,8 +1,8 @@
-import { MeQuery } from "$lib/gql/graphql"
+import type { MeQuery } from "$lib/gql/graphql"
 
 export type UserStore = {
     auth_token: string | null,
-    user: MeQuery["me"]
+    user: MeQuery["me"] | null,
 }
 
 export const user_store_init = (auth_token: string | null): UserStore => {

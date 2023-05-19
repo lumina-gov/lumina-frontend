@@ -1,9 +1,7 @@
-<PageHead title={data.post.title}
-/>
+<PageHead title={data.post.title}/>
 <SchemaComponent schema={schema}/>
 <script lang="ts">
 import Hero from "$lib/layouts/Hero.svelte"
-import type { PageData } from "./$types"
 import Newspaper from "svelte-material-icons/Newspaper.svelte"
 import Heading from "$lib/display/Heading.svelte"
 import Tag from "$lib/display/Tag.svelte"
@@ -13,7 +11,7 @@ import BlocksArray from "$lib/components/blocks/BlocksArray.svelte"
 import Date from "$lib/display/Date.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
 
-export let data: PageData
+export let data
 
 import type { NewsArticle, WithContext } from "schema-dts"
 import Author from "$lib/display/Author.svelte"

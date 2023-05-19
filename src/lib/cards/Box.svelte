@@ -9,7 +9,7 @@ export let justify_content: "center" | "flex-start" | "flex-end" | "space-betwee
 export let gap = "0px"
 
 $: is_clickable = href || click_handler
-$: tag = is_clickable ? "a" : "div"
+$: tag = is_clickable ? "a" : "div" as "a" | "div"
 </script>
 <svelte:element
     this={ tag }

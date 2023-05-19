@@ -11,9 +11,9 @@ import { goto, invalidateAll } from "$app/navigation"
 import Password from "$lib/controls/Password.svelte"
 import PhoneInput from "$lib/controls/phone/PhoneInput.svelte"
 import type { Country } from "$lib/data/countries"
-import { graphql } from "$lib/gql"
+import { page } from "$app/stores"
+import { CreateUserDocument, LoginDocument } from "$lib/graphql/graphql-types"
 
-export let data: import("./$types").PageData
 let loading = false
 
 let user = {
@@ -44,7 +44,7 @@ async function signup () {
         // TODO referrals
         let referrer = localStorage.getItem("referral")
 
-        const create_user_input = {
+        const { error } = await $page.data.graph.gmutation(CreateUserDocument, {
             first_name: user.first_name,
             last_name: user.last_name,
             email: user.email,
@@ -53,35 +53,26 @@ async function signup () {
             country_code: phone.country.code,
             phone_number: phone.number,
             referrer,
-        }
-
-        const { error } = await data.graph.gmutation(graphql(`
-            mutation create_user($ui: CreateUserInput!) {
-                create_user(create_user_input: $ui)
-            }
-        `), {
-            ui: create_user_input
         })
 
         if (error) {
-            data.alerts.create_alert(MessageType.Error, error.message)
+            $page.data.alerts.create_alert(MessageType.Error, error.message)
             return
         }
 
-        data.alerts.create_alert(MessageType.Success, "Account Created")
+        $page.data.alerts.create_alert(MessageType.Success, "Account Created")
     }
 
     {
-        let { data: loginData, error} = await data.graph.gmutation(graphql(`
-            mutation login($user: LoginUserInput!) {
-                login(login_user: $user)
-            }`), { user: { password: user.password, email: user.email } })
+        let { data: loginData, error} = await $page.data.graph.gmutation(LoginDocument, {
+            password: user.password, email: user.email
+        })
 
         if (error || !loginData) {
-            data.alerts.create_alert(MessageType.Error, error?.message ?? "Login failed")
+            $page.data.alerts.create_alert(MessageType.Error, error?.message ?? "Login failed")
         } else {
-            data.alerts.create_alert(MessageType.Success, "Login Successful")
-            set_cookie("token", loginData.login)
+            $page.data.alerts.create_alert(MessageType.Success, "Login Successful")
+            set_cookie("token", loginData.auth_token)
             await invalidateAll()
             await goto("/")
         }

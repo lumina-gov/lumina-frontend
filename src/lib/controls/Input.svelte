@@ -1,5 +1,6 @@
 <script lang="ts">
-import { onMount, SvelteComponent } from "svelte"
+import type { SvelteComponent } from "svelte"
+import { onMount } from "svelte"
 import InputWrapper from "../display/InputWrapper.svelte"
 import { createEventDispatcher } from "svelte"
 
@@ -40,6 +41,7 @@ onMount(() => {
                 class="icon"
                 class:clickable={ !!left_icon_handler }
                 role="button"
+                tabindex={left_icon_handler ? 0 : undefined}
                 on:keypress={ e => {
                     if (e.key === "Enter") {
                         handle_icon_click(e, left_icon_handler)
@@ -66,6 +68,7 @@ onMount(() => {
                 class="icon"
                 class:clickable={ !!right_icon_handler }
                 role="button"
+                tabindex={right_icon_handler ? 0 : undefined}
                 on:keypress={ e => {
                     if (e.key === "Enter") {
                         handle_icon_click(e, right_icon_handler)

@@ -23,6 +23,11 @@ function click() {
     class="card"
     class:enabled={ info.enabled }
     class:selected
+    on:keydown={ e => {
+        if (e.key === "Enter") {
+            click()
+        }
+    } }
     on:click={ click }
 >
     <div class="icon">

@@ -4,7 +4,6 @@
 />
 <script lang="ts">
 import Heading from "$lib/display/Heading.svelte"
-import type { PageData } from "./$types"
 import InfoBox from "$lib/display/InfoBox.svelte"
 import type { Props } from "$lib/utils/typed_props"
 import Information from "svelte-material-icons/Information.svelte"
@@ -19,7 +18,7 @@ import Passport from "svelte-material-icons/Passport.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
 import LoginPrompt from "$lib/components/LoginPrompt.svelte"
 
-export let data: PageData
+export let data
 
 export let notices: Props<InfoBox>[] = [
     {

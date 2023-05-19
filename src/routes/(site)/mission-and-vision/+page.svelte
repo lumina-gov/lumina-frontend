@@ -30,12 +30,12 @@ import Grid from "$lib/layouts/Grid.svelte"
 import GridItem from "$lib/layouts/GridItem.svelte"
 import ServiceCard from "$lib/components/ServiceCard.svelte"
 import type { Props } from "$lib/utils/typed_props"
-import type { PageData } from "./$types"
 import Passport from "svelte-material-icons/Passport.svelte"
 import Telescope from "svelte-material-icons/Telescope.svelte"
 import site_data from "$lib/data/site_data"
 import Vote from "svelte-material-icons/Vote.svelte"
 import Link from "svelte-material-icons/Link.svelte"
+import { CitizenshipStatus } from "$lib/graphql/graphql-types"
 
 type Goal = {
     title: string,
@@ -43,7 +43,7 @@ type Goal = {
     icon: typeof SvelteComponent
 }
 
-export let data: PageData
+export let data
 
 let goals: Goal[] = [
     {
@@ -94,7 +94,7 @@ let goals: Goal[] = [
 ]
 
 $: user = data.user_store.user
-$: user_has_citizenship_applicaiton = user?.citizenship_status === "pending"
+$: user_has_citizenship_applicaiton = user?.citizenship_status === CitizenshipStatus.Pending
 
 $: other_links = [
     user_has_citizenship_applicaiton ? {

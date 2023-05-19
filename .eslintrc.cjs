@@ -34,6 +34,7 @@ module.exports = {
         "array-element-newline": ["error", "consistent"],
         "no-self-assign": "off",
         "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+        '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
         "svelte/indent": ["error", {
             "indentScript": false,
             "indent": 4,

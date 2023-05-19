@@ -10,6 +10,11 @@ export let item: TreeItem
 <div class="item">
     <div
         class="text"
+        on:keydown={ e => {
+            if (e.key === "Enter") {
+                toggled = !toggled
+            }
+        } }
         on:click={ () => toggled = !toggled }>
         <div class="icon">
             {#if toggled}
@@ -31,7 +36,7 @@ export let item: TreeItem
     </div>
     {#if item.children.length !== 0 && toggled}
         <div class="children">
-            {#each item.children as child, i}
+            {#each item.children as child}
                 <svelte:self item={child}/>
             {/each}
         </div>

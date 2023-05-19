@@ -1,12 +1,11 @@
 <script lang="ts">
-import type { LayoutData } from "./$types"
 import Footer from "./components/Footer.svelte"
 import Navigation from "./components/Navigation.svelte"
 import AppBar from "./components/AppBar.svelte"
 import Rater from "./components/Rater.svelte"
 import ClickoutRegion from "$lib/controls/ClickoutRegion.svelte"
 
-export let data: LayoutData
+export let data
 
 let nav_opened = false
 

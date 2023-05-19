@@ -9,9 +9,6 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		// needed for lib/gql/graphql.ts
-		"preserveValueImports": false,
-		"importsNotUsedAsValues": "preserve"
 	},
 	"include": [
 		".svelte-kit/ambient.d.ts",

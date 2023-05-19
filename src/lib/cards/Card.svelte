@@ -18,7 +18,7 @@ export let disabled = false
 
 $: is_clickable = (href || interactive)
 
-$: tag = href ? "a" : "div"
+$: tag = href ? "a" : "div" as "a" | "div"
 
 function clicked(e: Event) {
     !is_clickable && dispatch("click", e)

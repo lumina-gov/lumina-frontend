@@ -1,6 +1,4 @@
-import type { LayoutServerLoad } from "./$types"
-
-export const load: LayoutServerLoad = async ({ cookies }) => {
+export async function load ({ cookies }) {
     return {
         auth_token: cookies.get("token") || null,
     }

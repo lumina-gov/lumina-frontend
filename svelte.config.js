@@ -1,5 +1,3 @@
-import adapter from "@sveltejs/adapter-auto"
-// import node from '@sveltejs/adapter-node'
 import preprocess from "svelte-preprocess"
 import { dirname, resolve } from "path"
 import { fileURLToPath } from "url"
@@ -15,10 +13,7 @@ const config = {
             // this will allow us to @import 'variables' inside of our svelte stylus css section
             paths: [resolve(__dirname, "./src/stylus")]
         }
-    }),
-    kit: {
-        adapter: adapter(),
-    }
+    })
 }
 
 export default config

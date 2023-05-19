@@ -5,12 +5,11 @@
 import Card from "$lib/cards/Card.svelte"
 import Hero from "$lib/layouts/Hero.svelte"
 import Heading from "$lib/display/Heading.svelte"
-import type { PageData } from "./$types"
 import Tag from "$lib/display/Tag.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
 
-export let data: PageData
+export let data
 
 // format date by "Weekday HH:MM AM/PM" in the user's timezone
 function format_date(date: Date) {

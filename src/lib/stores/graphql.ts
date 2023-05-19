@@ -1,12 +1,12 @@
-import { createClient, type TypedDocumentNode, type Client as URLQLCLient } from "@urql/core"
+import { createClient, type TypedDocumentNode, type Client, type AnyVariables, fetchExchange } from "@urql/core"
 import { PUBLIC_GRAPH_ENDPOINT } from "$env/static/public"
-import type { AnyVariables } from "@urql/core/dist/types/types"
-import { UserStore } from "./user_store"
+import type { UserStore } from "./user_store"
 
 export type GraphClient = ReturnType<typeof init_urql>
 
 export const init_urql = (user_store: UserStore) => Object.assign(createClient({
     url: PUBLIC_GRAPH_ENDPOINT,
+    exchanges: [fetchExchange],
     fetch: (url, options = {}) => {
         if (user_store.auth_token) {
             options.headers = {
@@ -18,16 +18,16 @@ export const init_urql = (user_store: UserStore) => Object.assign(createClient({
     },
 }), {
     async gquery<Data = unknown, Variables extends AnyVariables = AnyVariables>(
-        this: URLQLCLient,
-        query: TypedDocumentNode<Data, Variables>,
+        this: Client,
+        document: TypedDocumentNode<Data, Variables>,
         variables: Variables
     ) {
-        const res = await this.query(query, variables).toPromise()
+        const res = await this.query(document, variables).toPromise()
 
         return res
     },
     async gmutation<Data = unknown, Variables extends AnyVariables = AnyVariables>(
-        this: URLQLCLient,
+        this: Client,
         query: TypedDocumentNode<Data, Variables>,
         variables: Variables
     ) {

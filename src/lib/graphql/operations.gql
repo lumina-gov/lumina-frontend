@@ -1,0 +1,53 @@
+mutation CreateUser(
+    $email: String!
+    $password: String!
+    $first_name: String!
+    $last_name: String!
+    $calling_code: String!
+    $country_code: String!
+    $phone_number: String!
+    $referrer: UUID
+) {
+    create_user (
+        email: $email
+        password: $password
+        first_name: $first_name
+        last_name: $last_name
+        calling_code: $calling_code
+        country_code: $country_code
+        phone_number: $phone_number
+        referrer: $referrer
+    )
+}
+
+query Me {
+    me {
+        id
+        email
+        first_name
+        last_name
+        roles
+        referral_count
+        citizenship_status
+    }
+}
+
+query CrackTime($password:String!) {
+    crack_time(password: $password) {
+        seconds
+        guesses
+        string
+    }
+}
+
+mutation CreateCitizenshipApplication($input: CitizenshipApplicationInput!) {
+    create_citizenship_application(citizenship_application: $input)
+}
+
+query UserCount {
+    user_count
+}
+
+mutation Login($email: String!, $password: String!) {
+    auth_token(email: $email, password: $password)
+}

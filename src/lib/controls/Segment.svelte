@@ -1,5 +1,6 @@
 <script lang="ts">
-import { createEventDispatcher, SvelteComponent } from "svelte"
+import type { SvelteComponent } from "svelte"
+import { createEventDispatcher } from "svelte"
 
 let dispatch = createEventDispatcher()
 
@@ -26,7 +27,7 @@ function handle_keyup(e: KeyboardEvent) {
     }
 }
 
-$: tag = href ? "a" : "div"
+$: tag = href ? "a" : "div" as "a" | "div"
 </script>
 
 <svelte:element

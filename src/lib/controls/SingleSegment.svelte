@@ -10,7 +10,8 @@ import FlexWrap from "$lib/display/FlexWrap.svelte"
 import MenuDown from "svelte-material-icons/MenuDown.svelte"
 import CloseCircle from "svelte-material-icons/CloseCircle.svelte"
 import Icon from "$lib/display/Icon.svelte"
-import { createEventDispatcher, SvelteComponent } from "svelte"
+import type { SvelteComponent } from "svelte"
+import { createEventDispatcher } from "svelte"
 
 type $$Generic = T
 type T = $$Generic

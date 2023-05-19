@@ -11,7 +11,6 @@ import Paragraph from "$lib/display/Paragraph.svelte"
 import BulletedList from "svelte-material-icons/FormatListBulletedSquare.svelte"
 import ResponsiveLayout from "$lib/layouts/ResponsiveLayout.svelte"
 import Card from "$lib/cards/Card.svelte"
-import type { PageData } from "./$types"
 import DirectoryList from "./DirectoryList.svelte"
 import Grid from "$lib/layouts/Grid.svelte"
 import GridItem from "$lib/layouts/GridItem.svelte"
@@ -23,7 +22,7 @@ import Sidebar from "./Sidebar.svelte"
 import Box from "$lib/cards/Box.svelte"
 import Government from "svelte-material-icons/Bank.svelte"
 
-export let data: PageData
+export let data
 
 let org_types: {
     name: string,

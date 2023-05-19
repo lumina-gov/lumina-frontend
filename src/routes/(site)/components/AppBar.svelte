@@ -12,8 +12,8 @@ import Scrim from "$lib/controls/Scrim.svelte"
 import NotificationsPopout from "./NotificationsPopout.svelte"
 import AccountPopout from "./AccountPopout.svelte"
 import Inside from "$lib/controls/Inside.svelte"
-import { MeQuery } from "$lib/gql/graphql"
 import { afterNavigate } from "$app/navigation"
+import type { MeQuery } from "$lib/graphql/graphql-types"
 
 enum Dropdown {
     Notifications,
