@@ -7,5 +7,6 @@ export default {
         youtube: "https://www.youtube.com/@luminagov",
         tiktok: "https://www.tiktok.com/@luminagov/",
         email: "gov@lumina.earth",
-    }
+    },
+    university: "https://luminauniversity.earth",
 }

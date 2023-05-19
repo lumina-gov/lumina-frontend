@@ -4,7 +4,7 @@ import Settlement from "$lib/icons/Settlement.svelte"
 
 
 export let title: string
-// export let description: string | null = null
+export let description: string | null = null
 
 </script>
 <div class="card">

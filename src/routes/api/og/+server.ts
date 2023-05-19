@@ -4,7 +4,7 @@ import { Resvg } from "@resvg/resvg-js"
 import Card from "./Card.svelte"
 import type { Props } from "$lib/utils/typed_props"
 
-const card = Card as unknown as { render: (props: Props<Card>) => { html: string, css: string } }
+const card = Card as unknown as { render: (props: Props<Card>) => { html: string, css: { code: string } } }
 
 export async function GET ({ fetch, request }) {
 

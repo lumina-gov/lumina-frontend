@@ -1,4 +1,4 @@
-import type { MeQuery } from "$lib/gql/graphql"
+import type { MeQuery } from "$lib/graphql/graphql-types"
 
 export type UserStore = {
     auth_token: string | null,
