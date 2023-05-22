@@ -1,7 +1,7 @@
 import type { SvelteComponent } from "svelte"
 import HumanHandsup from "svelte-material-icons/HumanHandsup.svelte"
 
-type Milestone = {
+export type Milestone = {
     title: string,
     description: string,
     date: Date,
@@ -10,7 +10,7 @@ type Milestone = {
     tags: string[]
 }
 
-type MilestoneContributor = {
+export type MilestoneContributor = {
     name: string,
     description: string,
 }
@@ -18,7 +18,7 @@ type MilestoneContributor = {
 export const milestones : Milestone[] = [
     {
         title: "Added Milestones",
-        description: "Klepsi added milestones",
+        description: "Milestone description lorem ipsum bla htjsa jauteu ndaugh  Description lorem ipsum bla htjsa jauteu ndaugh  lorem ipsum bla ipsum bla htjsa ",
         date: new Date(1684750729770),
         icon: HumanHandsup,
         contributors : [
