@@ -11,7 +11,7 @@ export const init_urql = (user_store: UserStore) => Object.assign(createClient({
         if (user_store.auth_token) {
             options.headers = {
                 ...options.headers,
-                Authorization: user_store.auth_token
+                Authorization: `Bearer ${user_store.auth_token}`
             }
         }
         return fetch(url, options)
