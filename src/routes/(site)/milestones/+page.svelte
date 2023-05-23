@@ -32,9 +32,9 @@ import MilestoneItem from "./MilestoneItem.svelte"
         </Paragraph>
     </VerticalLayout>
 
-    <VerticalLayout>
-        {#each milestones as milestone}
-            <MilestoneItem milestone={milestone}/>
+    <VerticalLayout max_width={850} vertical_padding={0} gap={0}>
+        {#each milestones as milestone , milestone_index}
+            <MilestoneItem last={milestones.length - 1 == milestone_index} milestone={milestone}/>
         {/each}
     </VerticalLayout>
 </Hero>
