@@ -5,10 +5,8 @@
     import Tag from "$lib/display/Tag.svelte";
     import Paragraph from "$lib/display/Paragraph.svelte";
     import VerticalLayout from "$lib/layouts/VerticalLayout.svelte";
-    import Grid from "$lib/layouts/Grid.svelte";
     import HammerScrewdriver from "svelte-material-icons/HammerScrewdriver.svelte";
     import ContributorItem from "./ContributorItem.svelte";
-    import Date from "$lib/display/Date.svelte";
     import MilestoneDate from "./MilestoneDate.svelte"
     export let milestone: Milestone;
     export let last: boolean;
