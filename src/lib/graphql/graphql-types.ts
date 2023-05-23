@@ -12,6 +12,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   DateTime: any;
+  JSON: any;
   UUID: any;
 };
 
@@ -21,19 +22,6 @@ export enum Assessment {
   SoftPass = 'SOFT_PASS',
   Unknown = 'UNKNOWN'
 }
-
-export type CitizenshipApplicationInput = {
-  country_of_birth: Scalars['String'];
-  country_of_citizenship: Array<Scalars['String']>;
-  country_of_residence: Scalars['String'];
-  date_of_birth: Scalars['DateTime'];
-  ethnic_groups: Array<Scalars['String']>;
-  first_name: Scalars['String'];
-  last_name: Scalars['String'];
-  occupations: Array<Scalars['String']>;
-  sex: Scalars['String'];
-  skills: Array<Scalars['String']>;
-};
 
 export enum CitizenshipStatus {
   Approved = 'APPROVED',
@@ -48,6 +36,13 @@ export type CrackSeconds = {
   string: Scalars['String'];
 };
 
+export type Model = {
+  application: Scalars['JSON'];
+  applicationType: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['UUID'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   /**
@@ -55,22 +50,17 @@ export type Mutation = {
    * user is found and the password matches
    */
   auth_token: Scalars['String'];
-  create_citizenship_application: Scalars['UUID'];
   create_light_university_checkout_session: Scalars['String'];
   create_user: Scalars['UUID'];
   question_assessment: QuestionAssessment;
   set_unit_progress: UnitProgress;
+  submit_application: Scalars['UUID'];
 };
 
 
 export type MutationAuth_TokenArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
-};
-
-
-export type MutationCreate_Citizenship_ApplicationArgs = {
-  citizenship_application: CitizenshipApplicationInput;
 };
 
 
@@ -105,6 +95,11 @@ export type MutationSet_Unit_ProgressArgs = {
   course_slug: Scalars['String'];
   status: UnitStatus;
   unit_slug: Scalars['String'];
+};
+
+
+export type MutationSubmit_ApplicationArgs = {
+  application: Model;
 };
 
 export type Query = {
@@ -204,6 +199,7 @@ export type User = {
   referral_count: Scalars['Int'];
   role?: Maybe<Scalars['String']>;
   roles: Array<Scalars['String']>;
+  stripe_customer_id: Scalars['String'];
   stripe_subscription_info: SubscriptionInfo;
 };
 
@@ -238,13 +234,6 @@ export type CrackTimeQueryVariables = Exact<{
 
 export type CrackTimeQuery = { __typename?: 'Query', crack_time: { __typename?: 'CrackSeconds', seconds: number, guesses: number, string: string } };
 
-export type CreateCitizenshipApplicationMutationVariables = Exact<{
-  input: CitizenshipApplicationInput;
-}>;
-
-
-export type CreateCitizenshipApplicationMutation = { __typename?: 'Mutation', create_citizenship_application: any };
-
 export type UserCountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -262,6 +251,5 @@ export type LoginMutation = { __typename?: 'Mutation', auth_token: string };
 export const CreateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first_name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"last_name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"calling_code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"country_code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"phone_number"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"referrer"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UUID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}},{"kind":"Argument","name":{"kind":"Name","value":"first_name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first_name"}}},{"kind":"Argument","name":{"kind":"Name","value":"last_name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"last_name"}}},{"kind":"Argument","name":{"kind":"Name","value":"calling_code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"calling_code"}}},{"kind":"Argument","name":{"kind":"Name","value":"country_code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"country_code"}}},{"kind":"Argument","name":{"kind":"Name","value":"phone_number"},"value":{"kind":"Variable","name":{"kind":"Name","value":"phone_number"}}},{"kind":"Argument","name":{"kind":"Name","value":"referrer"},"value":{"kind":"Variable","name":{"kind":"Name","value":"referrer"}}}]}]}}]} as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;
 export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"roles"}},{"kind":"Field","name":{"kind":"Name","value":"referral_count"}},{"kind":"Field","name":{"kind":"Name","value":"citizenship_status"}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
 export const CrackTimeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CrackTime"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"crack_time"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"seconds"}},{"kind":"Field","name":{"kind":"Name","value":"guesses"}},{"kind":"Field","name":{"kind":"Name","value":"string"}}]}}]}}]} as unknown as DocumentNode<CrackTimeQuery, CrackTimeQueryVariables>;
-export const CreateCitizenshipApplicationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateCitizenshipApplication"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CitizenshipApplicationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_citizenship_application"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"citizenship_application"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<CreateCitizenshipApplicationMutation, CreateCitizenshipApplicationMutationVariables>;
 export const UserCountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"UserCount"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_count"}}]}}]} as unknown as DocumentNode<UserCountQuery, UserCountQueryVariables>;
 export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"auth_token"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}]}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
