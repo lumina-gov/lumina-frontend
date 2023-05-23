@@ -11,17 +11,11 @@ import MilestoneItem from "./MilestoneItem.svelte"
 import Segment from "$lib/controls/Segment.svelte";
 import FlexWrap from "$lib/display/FlexWrap.svelte";
 import type { Milestone } from "$lib/data/milestones";
-    import FilterSegment from "./FilterSegment.svelte";
-let filter : string | undefined
-$: filtered_milestones = filter_milestones();
-function filter_milestones() : Milestone[]{
-    if (typeof filter === "undefined") {
-        return milestones
-    }else {
-        return  milestones.filter(milestone => milestone.tags.includes(filter!));
-    }
-    
-}
+import FilterSegment from "./FilterSegment.svelte";
+
+let filter : string | null
+$: filtered_milestones = filter ? milestones.filter(milestone => milestone.tags.includes(filter!)) : milestones
+                                                    
 </script>
 
 <Hero
