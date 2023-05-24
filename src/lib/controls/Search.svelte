@@ -12,6 +12,12 @@ export function focus() {
 </script>
 <div
     class="search-wrapper"
+    on:keydown={ e => {
+        if (e.key === "Enter") {
+            e.preventDefault()
+            e.stopPropagation()
+        }
+    } }
     on:click={ () => search_el.focus() }>
     <Magnify/>
     <input

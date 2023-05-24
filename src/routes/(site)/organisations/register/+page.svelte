@@ -15,7 +15,6 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 import Domain from "svelte-material-icons/Domain.svelte"
 import Text from "svelte-material-icons/Text.svelte"
 import Web from "svelte-material-icons/Web.svelte"
-import type { PageData } from "./$types"
 
 type OrganisationType = {
     name: string
@@ -33,7 +32,7 @@ let organisation: OrganisationType = {
     logo: null
 }
 
-export let data: PageData
+export let data
 </script>
 <Grid padding_vertical={80}>
     <GridItem

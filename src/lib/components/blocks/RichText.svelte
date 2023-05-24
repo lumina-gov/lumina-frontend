@@ -4,7 +4,7 @@ import type { RichTextItemResponse } from "@notionhq/client/build/src/api-endpoi
 export let rich_text: RichTextItemResponse
 
 $: url = "href" in rich_text ? rich_text.href : null
-$: tag = url ? "a" : "span"
+$: tag = url ? "a" : "span" as "a" | "span"
 
 </script>
 <svelte:element

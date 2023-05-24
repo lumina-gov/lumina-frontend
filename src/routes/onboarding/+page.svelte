@@ -12,8 +12,6 @@ import { onMount } from "svelte"
 import { get_query } from "$lib/utils/query"
 import PageHead from "$lib/components/PageHead.svelte"
 
-export let data: import("./$types").PageData
-
 enum PageType {
     AccountType,
     AccountCreate
@@ -43,7 +41,7 @@ onMount(() => {
     {#if page == PageType.AccountType}
         <AccountType on:next={ () => page = PageType.AccountCreate }/>
     {:else if page == PageType.AccountCreate}
-        <AccountCreate bind:data/>
+        <AccountCreate/>
     {/if}
 </div>
 <style lang="stylus">

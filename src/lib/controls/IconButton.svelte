@@ -7,7 +7,7 @@ export let href: string | null = null
 export let icon: typeof SvelteComponent | null = null
 export let opacity = true
 
-$: tag = href ? "a" : "div"
+$: tag = href ? "a" : "div" as "a" | "div"
 
 function clicked(e: Event) {
     dispatch("click", e)

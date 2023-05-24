@@ -8,7 +8,7 @@ import Facebook from "svelte-material-icons/Facebook.svelte"
 import Twitter from "svelte-material-icons/Twitter.svelte"
 import Youtube from "svelte-material-icons/Youtube.svelte"
 import TikTok from "$lib/icons/TikTok.svelte"
-import { afterNavigate } from "$app/navigation"
+import { beforeNavigate } from "$app/navigation"
 import { services } from "$lib/data/services"
 import type ServiceCard from "$lib/components/ServiceCard.svelte"
 import type { Props } from "$lib/utils/typed_props"
@@ -16,9 +16,9 @@ import Information from "svelte-material-icons/Information.svelte"
 import { information } from "$lib/data/information"
 import Inside from "$lib/controls/Inside.svelte"
 import ScrollbarRegion from "$lib/controls/ScrollbarRegion.svelte"
-import { MeQuery } from "$lib/gql/graphql"
+import type { MeQuery } from "$lib/graphql/graphql-types"
 
-export let user: MeQuery["me"] | null
+export let user: MeQuery["me"]
 export let nav_opened: boolean
 
 type MenuLink = {
@@ -50,7 +50,7 @@ let links: MenuLink[] = [
 
 $: authenticated = user != null
 
-afterNavigate(() => {
+beforeNavigate(() => {
     nav_opened = false
 })
 

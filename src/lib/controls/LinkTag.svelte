@@ -1,11 +1,12 @@
 <script lang="ts">
-import { createEventDispatcher, SvelteComponent } from "svelte"
+import type { SvelteComponent } from "svelte"
+import { createEventDispatcher } from "svelte"
 
 export let href: string | null = null
 export let left_icon: typeof SvelteComponent | null = null
 export let right_icon: typeof SvelteComponent | null = null
 export let right_icon_opacity = 1
-$: tag = href ? "a" : "div"
+$: tag = href ? "a" : "div" as "a" | "div"
 
 let disabled = false
 

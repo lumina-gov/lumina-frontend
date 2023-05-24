@@ -1,15 +1,10 @@
-import { graphql } from "$lib/gql"
+import { UserCountDocument } from "$lib/graphql/graphql-types"
 import { MessageType } from "$lib/types/message"
-import type { PageLoad } from "./$types"
 
-export const load: PageLoad = async ({ parent }) => {
+export async function load({ parent }) {
     const { graph, alerts } = await parent()
 
-    const { data, error } = await graph.gquery(graphql(`
-        query user_count {
-            user_count
-        }`
-    ), {})
+    const { data, error } = await graph.gquery(UserCountDocument, {})
 
 
     if (error) {

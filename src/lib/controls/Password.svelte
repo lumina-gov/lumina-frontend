@@ -6,7 +6,7 @@ import EyeOffOutline from "svelte-material-icons/EyeOffOutline.svelte"
 import Lock from "svelte-material-icons/Lock.svelte"
 import { page } from "$app/stores"
 import { MessageType } from "$lib/types/message"
-import { graphql } from "$lib/gql"
+import { CrackTimeDocument } from "$lib/graphql/graphql-types"
 
 let visible = false
 export let value: string
@@ -37,14 +37,9 @@ $: style = rating !== null ? Rating[rating] : ""
 async function check_password_strength() {
     if (!check_strength) return
 
-    let { data, error } = await $page.data.graph.gquery(graphql(`
-        query gct($password:String!) {
-            crack_time(password: $password) {
-                seconds
-                guesses
-                string
-            }
-        }`), { password: value })
+    let { data, error } = await $page.data.graph.gquery(CrackTimeDocument, {
+        password: value
+    })
 
     if (error || !data?.crack_time) {
         $page.data.alerts.create_alert(MessageType.Error, error?.message || "Cracktime not received.")

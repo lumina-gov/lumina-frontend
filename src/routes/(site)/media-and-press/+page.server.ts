@@ -2,9 +2,8 @@ import { env } from "$env/dynamic/private"
 import notion_data from "$lib/data/notion_data"
 import { has_no_properties } from "$lib/utils/notion_errors"
 import { Client, isFullPage } from "@notionhq/client"
-import type { PageServerLoad } from "./$types"
 
-export const load = (async () => {
+export async function load() {
     const notion = new Client({ auth: env.NOTION_API_KEY })
     const response = await notion.databases.query({
         database_id: notion_data.posts_database_id,
@@ -36,4 +35,4 @@ export const load = (async () => {
             }
         })
     }
-}) satisfies PageServerLoad
+}

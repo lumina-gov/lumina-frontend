@@ -15,7 +15,6 @@ import Settlement from "$lib/icons/Settlement.svelte"
 import Button from "$lib/controls/Button.svelte"
 import Coloured from "$lib/display/Coloured.svelte"
 import Hero from "$lib/layouts/Hero.svelte"
-import type { PageData } from "./$types"
 import type { GovernmentOrganization, WithContext } from "schema-dts"
 import PageHead from "$lib/components/PageHead.svelte"
 import site_data from "$lib/data/site_data"
@@ -40,7 +39,7 @@ import InformationArea from "./InformationArea.svelte"
 import Notification from "svelte-material-icons/Bell.svelte"
 import AlertsArea from "./AlertsArea.svelte"
 import Telescope from "svelte-material-icons/Telescope.svelte"
-import { CitizenshipStatus } from "$lib/gql/graphql"
+import { CitizenshipStatus } from "$lib/graphql/graphql-types"
 
 export const organizationSchema: WithContext<GovernmentOrganization> = {
     "@context": "https://schema.org",
@@ -62,7 +61,7 @@ export const organizationSchema: WithContext<GovernmentOrganization> = {
     ]
 }
 
-export let data: PageData
+export let data
 
 $: user = data.user_store.user
 $: user_has_citizenship_applicaiton = user?.citizenship_status === CitizenshipStatus.Pending

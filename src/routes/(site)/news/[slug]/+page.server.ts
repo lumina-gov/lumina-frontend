@@ -3,9 +3,8 @@ import { get_child_blocks_recursive } from "$lib/api/notion_api"
 import notion_data from "$lib/data/notion_data"
 import { Client } from "@notionhq/client"
 import { error } from "@sveltejs/kit"
-import type { PageServerLoad } from "./$types"
 
-export const load = (async ({ params }) => {
+export async function load({ params }) {
     const notion = new Client({ auth: env.NOTION_API_KEY })
 
     // get the page by slug
@@ -57,4 +56,4 @@ export const load = (async ({ params }) => {
             blocks
         },
     }
-}) satisfies PageServerLoad
+}

@@ -6,7 +6,7 @@ import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
 import Profile from "$lib/display/Profile.svelte"
 import { delete_cookie } from "$lib/utils/cookie"
 import { goto, invalidateAll } from "$app/navigation"
-import { MeQuery } from "$lib/gql/graphql"
+import type { MeQuery } from "$lib/graphql/graphql-types"
 
 export let user: NonNullable<MeQuery["me"]>
 $: name = `${user.first_name} ${user?.last_name}`
@@ -45,6 +45,7 @@ async function logout() {
         <div
             class="link red"
             role="button"
+            tabindex="0"
             on:click={ logout }
             on:keypress={ e => {
                 if (e.key === "Enter") logout()

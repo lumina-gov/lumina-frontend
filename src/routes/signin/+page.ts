@@ -1,13 +1,13 @@
-import type { PageLoad } from "./$types"
 import { error, redirect } from "@sveltejs/kit"
 
 const allowed_hosts = [
     "localhost",
-    "light-university.vercel.app",
-    "stellaruniversity.earth"
+    "lumina-university.vercel.app",
+    "luminauniversity.earth",
+    "staging.luminauniversity.earth",
 ]
 
-export const load: PageLoad = async function load({ parent, url }) {
+export async function load({ parent, url }) {
     const data = await parent()
 
     let redirect_param = url.searchParams.get("redirect")

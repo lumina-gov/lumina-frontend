@@ -1,5 +1,4 @@
 import adapter from "@sveltejs/adapter-auto"
-// import node from '@sveltejs/adapter-node'
 import preprocess from "svelte-preprocess"
 import { dirname, resolve } from "path"
 import { fileURLToPath } from "url"

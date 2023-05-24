@@ -19,13 +19,12 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 import Button from "$lib/controls/Button.svelte"
 import Heading from "$lib/display/Heading.svelte"
 import Passport from "svelte-material-icons/Passport.svelte"
-import { graphql } from "$lib/gql"
 import { invalidateAll } from "$app/navigation"
-import { User } from "$lib/gql/graphql"
+import { CreateCitizenshipApplicationDocument, type MeQuery } from "$lib/graphql/graphql-types"
 
 $: data = $page.data
 
-export let user: User
+export let user: NonNullable<MeQuery["me"]>
 export let loading: boolean
 
 enum Sexes {
@@ -73,9 +72,9 @@ async function register() {
     try {
         if (citizenship_registration.ethnic_groups.length == 0)
             throw new Error("You must select at least one ethnic group")
-        if (citizenship_registration.country_of_citizenship.length == 0) 
+        if (citizenship_registration.country_of_citizenship.length == 0)
             throw new Error("You must select a country of citizenship")
-        if (isNaN(new Date(citizenship_registration.date_of_birth).getTime())) 
+        if (isNaN(new Date(citizenship_registration.date_of_birth).getTime()))
             throw new Error("Invalid date of birth")
 
         normalised = {
@@ -86,18 +85,18 @@ async function register() {
             country_of_birth: expect(citizenship_registration.country_of_birth?.code, "You must select a country of birth"),
             skills: citizenship_registration.skills.map(s => s[0]),
             occupations: citizenship_registration.occupations.map(o => o[0]),
-            date_of_birth: new Date(citizenship_registration.date_of_birth),
+            date_of_birth: new Date(citizenship_registration.date_of_birth).getTime(),
         }
-    } catch (e: any) {
-        data.alerts.create_alert(MessageType.Error, e.message)
-        return
+    } catch (e) {
+        if(e instanceof Error) {
+            return data.alerts.create_alert(MessageType.Error, e.message)
+        } else {
+            return data.alerts.create_alert(MessageType.Error, "An unknown error occurred")
+        }
     }
 
 
-    let { error } = await data.graph.gmutation(graphql(`
-    mutation createCitApp($input: CitizenshipApplicationInput!) {
-        create_citizenship_application(citizenship_application: $input)
-    }`), { input: normalised })
+    let { error } = await data.graph.gmutation(CreateCitizenshipApplicationDocument, normalised)
 
     if (error) {
         data.alerts.create_alert(MessageType.Error, error.message)
@@ -170,6 +169,7 @@ async function register() {
             let:option
             let:search>
             <div class="aliases">
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                 {@html
                     option.slice(1)
                         .map(alias => alias.replace(new RegExp(search ? search : "$^", "ig"), match => `<strong>${match}</strong>`))
@@ -187,6 +187,7 @@ async function register() {
             let:option
             let:search>
             <div class="aliases">
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                 {@html
                     option.slice(1)
                         .map(alias => alias.replace(new RegExp(search ? search : "$^", "ig"), match => `<strong>${match}</strong>`))

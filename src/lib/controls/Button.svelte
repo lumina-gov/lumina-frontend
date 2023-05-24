@@ -1,5 +1,6 @@
 <script lang="ts">
-import { createEventDispatcher, SvelteComponent } from "svelte"
+import type { SvelteComponent } from "svelte"
+import { createEventDispatcher } from "svelte"
 
 export let href: string | null = null
 export let left_icon: typeof SvelteComponent | null = null
@@ -9,7 +10,7 @@ export let hug = true
 export let disabled = false
 export let text: string | null = null
 
-$: tag = href ? "a" : "div"
+$: tag = href ? "a" : "div" as "a" | "div"
 
 let dispatch = createEventDispatcher()
 

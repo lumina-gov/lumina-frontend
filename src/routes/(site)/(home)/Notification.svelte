@@ -12,7 +12,7 @@ export let title: string
 export let tag: Props<Tag>
 export let date: Date
 export let href: string | undefined = undefined
-$: element_tag = href ? "a" : "div"
+$: element_tag = href ? "a" : "div" as "a" | "div"
 </script>
 <svelte:element
     this={ element_tag }

@@ -7,7 +7,6 @@ export type BlockResponseWithChildren<BlockType = BlockObjectResponse> = BlockTy
 }
 
 export async function get_child_blocks_recursive(block_id: string): Promise<BlockResponseWithChildren[]> {
-
     const notion = new Client({ auth: env.NOTION_API_KEY })
 
     const response = await notion.blocks.children.list({

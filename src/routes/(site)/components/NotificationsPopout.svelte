@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 import Button from "$lib/controls/Button.svelte"
 import Card from "$lib/cards/Card.svelte"
 import InformationOutline from "svelte-material-icons/InformationOutline.svelte"
@@ -100,4 +100,4 @@ async function request_notification_permissions() {
     display flex
     gap 8px
     align-items center
-</style>
+</style> -->

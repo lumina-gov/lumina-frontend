@@ -25,6 +25,17 @@ export const services: Props<ServiceCard>[] = [
         href: site_data.socials.discord,
     },
     {
+        title: "Lumina University",
+        description: "Learn valuable skills needed for the real world at Lumina University",
+        icon: LightUniversity,
+        href: site_data.university,
+        tag: {
+            color: "green",
+            opacity: false,
+            text: "Recommended"
+        },
+    },
+    {
         title: "Find a Job",
         description: "Find a job to earn money and get involved in the community",
         icon: HammerScrewdriver,
@@ -80,16 +91,6 @@ export const services: Props<ServiceCard>[] = [
         title: "View Demographics",
         description: "View the demographics of Lumina",
         icon: ChartPie,
-        tag: {
-            color: "white",
-            opacity: true,
-            text: "Coming Soon"
-        },
-    },
-    {
-        title: "Light University",
-        description: "Learn valuable skills needed for the real world at Light University",
-        icon: LightUniversity,
         tag: {
             color: "white",
             opacity: true,

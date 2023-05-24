@@ -25,7 +25,6 @@ import Image from "svelte-material-icons/Image.svelte"
 import Music from "svelte-material-icons/MusicNoteEighth.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import Download from "svelte-material-icons/Download.svelte"
-import type { PageData } from "./$types"
 import PressReleaseLink from "./PressReleaseLink.svelte"
 
 type Asset = {
@@ -35,7 +34,7 @@ type Asset = {
     icon: typeof SvelteComponent
 }
 
-export let data: PageData
+export let data
 
 export let assets: Asset[] = [
     {

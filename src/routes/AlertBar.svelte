@@ -4,6 +4,7 @@
             bind:this={ elements[message.id] }
             class={"action-bar " + MessageType[message.type]}
             role="button"
+            tabindex="0"
             on:keypress={ e => {
                 if (e.key === "Enter") {
                     remove(message.id)

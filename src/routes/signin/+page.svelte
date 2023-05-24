@@ -22,12 +22,11 @@ import { set_cookie } from "$lib/utils/cookie"
 import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
 import future from "$lib/utils/future"
 import { goto, invalidateAll } from "$app/navigation"
-import type { PageData } from "./$types"
 import Password from "$lib/controls/Password.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
-import { graphql } from "$lib/gql"
+import { LoginDocument } from "$lib/graphql/graphql-types"
 
-export let data: PageData
+export let data
 
 $: graph = data.graph
 $: alerts = data.alerts
@@ -47,18 +46,18 @@ let user = {
 }
 
 async function signin () {
-    let { data, error} = await graph.gmutation(graphql(`
-    mutation login($user: LoginUserInput!) {
-        login(login_user: $user)
-    }`), { user })
+    let { data, error} = await graph.gmutation(LoginDocument, {
+        email: user.email,
+        password: user.password
+    })
 
     if (error || !data) {
         alerts.create_alert(MessageType.Error, error?.message ?? "Login failed")
     } else {
         alerts.create_alert(MessageType.Success, "Login Successful")
-        set_cookie("token", data.login)
+        set_cookie("token", data.auth_token)
         await invalidateAll()
-        await goto(redirect ? redirect + "?token=" + data.login : "/")
+        await goto(redirect ? redirect + "?token=" + data.auth_token : "/")
     }
 }
 

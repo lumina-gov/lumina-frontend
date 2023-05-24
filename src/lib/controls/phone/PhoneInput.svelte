@@ -31,6 +31,7 @@ let search_component: Search
             <Inside>
                 <div
                     class="country-selector"
+                    role="button"
                     tabindex="0"
                     on:keypress={ event => {
                         if (event.key === "Enter") {
@@ -76,6 +77,11 @@ let search_component: Search
             </Inside>
             <div
                 class="input-pseudo-wrapper"
+                on:keypress={ event => {
+                    if (event.key === "Enter") {
+                        input_ref.focus()
+                    }
+                } }
                 on:click={ () => input_ref.focus() }>
                 <input
                     bind:this={ input_ref }
