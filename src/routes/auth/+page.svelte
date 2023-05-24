@@ -28,11 +28,11 @@ let auth_request = {
     redirect_location: "https://luminauniversity.earth",
     scopes: [
         "Foo"
-    ]
+    ],
+    created: new Date(),
 }
 
 async function next() {
-    console.log("foo")
     if (auth_request){
     // do something
     } else {

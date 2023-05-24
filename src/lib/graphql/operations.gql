@@ -40,8 +40,30 @@ query CrackTime($password:String!) {
     }
 }
 
-mutation CreateCitizenshipApplication($input: CitizenshipApplicationInput!) {
-    create_citizenship_application(citizenship_application: $input)
+mutation CreateCitizenshipApplication(
+    $date_of_birth: Int!,
+    $sex: String!,
+    $first_name: String!,
+    $last_name: String!,
+    $skills: [String!]!,
+    $occupations: [String!]!,
+    $country_of_citizenship: [String!]!,
+    $country_of_birth: String!,
+    $country_of_residence: String!,
+    $ethnic_groups: [String!]!,
+) {
+    create_citizenship_application (
+        date_of_birth: $date_of_birth,
+        sex: $sex,
+        first_name: $first_name,
+        last_name: $last_name,
+        skills: $skills,
+        occupations: $occupations,
+        country_of_citizenship: $country_of_citizenship,
+        country_of_birth: $country_of_birth,
+        country_of_residence: $country_of_residence,
+        ethnic_groups: $ethnic_groups,
+    )
 }
 
 query UserCount {

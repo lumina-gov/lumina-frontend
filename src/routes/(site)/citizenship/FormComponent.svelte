@@ -85,7 +85,7 @@ async function register() {
             country_of_birth: expect(citizenship_registration.country_of_birth?.code, "You must select a country of birth"),
             skills: citizenship_registration.skills.map(s => s[0]),
             occupations: citizenship_registration.occupations.map(o => o[0]),
-            date_of_birth: new Date(citizenship_registration.date_of_birth),
+            date_of_birth: new Date(citizenship_registration.date_of_birth).getTime(),
         }
     } catch (e) {
         if(e instanceof Error) {
@@ -96,9 +96,7 @@ async function register() {
     }
 
 
-    let { error } = await data.graph.gmutation(CreateCitizenshipApplicationDocument, {
-        input: normalised
-    })
+    let { error } = await data.graph.gmutation(CreateCitizenshipApplicationDocument, normalised)
 
     if (error) {
         data.alerts.create_alert(MessageType.Error, error.message)

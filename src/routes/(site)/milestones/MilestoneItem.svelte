@@ -1,0 +1,70 @@
+<script lang="ts">
+    import Card from "$lib/cards/Card.svelte";
+    import type { Milestone } from "$lib/data/milestones";
+    import Heading from "$lib/display/Heading.svelte";
+    import Tag from "$lib/display/Tag.svelte";
+    import Paragraph from "$lib/display/Paragraph.svelte";
+    import VerticalLayout from "$lib/layouts/VerticalLayout.svelte";
+    import HammerScrewdriver from "svelte-material-icons/HammerScrewdriver.svelte";
+    import ContributorItem from "./ContributorItem.svelte";
+    import MilestoneDate from "./MilestoneDate.svelte"
+    export let milestone: Milestone;
+    export let last: boolean;
+</script>
+
+<div class="milestone">
+    <VerticalLayout align_items={"flex-end"}>
+        <MilestoneDate date={milestone.date}></MilestoneDate>
+        {#each milestone.tags as tag}
+            <Tag>{tag}</Tag>
+        {/each}
+    </VerticalLayout>
+    <div class="line" class:last-line={last}>
+        <div class="circle" />
+    </div>
+    <div class="milestone_card">
+        <Card padding={"24px"}>
+            <VerticalLayout max_width="639px">
+                <Heading left_icon={milestone.icon} level={2}
+                    >{milestone.title}</Heading
+                >
+                <Paragraph>
+                    {milestone.description}
+                </Paragraph>
+
+                <Heading left_icon={HammerScrewdriver} level={3}
+                    >CONTRIBUTIONS</Heading
+                >
+                {#each milestone.contributors as contributor}
+                    <ContributorItem {contributor} />
+                {/each}
+                <br />
+            </VerticalLayout>
+        </Card>
+    </div>
+</div>
+
+<style lang="stylus">
+@import variables
+.milestone_card
+    margin-bottom 24px
+.milestone        
+    display: grid
+    width: 100%
+    max-width:  850px
+    grid-template-columns: max-content max-content 1fr; 
+    grid-gap 0 24px
+.line
+    width 4px
+    height 100%
+    display flex
+    justify-content center
+    background transparify(white, 10%)
+.last-line
+    background none
+.circle
+    min-width 20px
+    height 20px
+    background $brand
+    border-radius 50px
+</style>
