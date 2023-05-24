@@ -46,6 +46,7 @@ async function signin () {
         $page.data.alerts.create_alert(MessageType.Error, error?.message ?? "Login failed")
     } else {
         $page.data.alerts.create_alert(MessageType.Success, "Login Successful")
+        set_cookie("token", null)
         set_cookie("token", data.auth_token)
         await invalidateAll()
         dispatch("next")

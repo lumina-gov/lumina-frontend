@@ -55,6 +55,7 @@ async function signin () {
         alerts.create_alert(MessageType.Error, error?.message ?? "Login failed")
     } else {
         alerts.create_alert(MessageType.Success, "Login Successful")
+        set_cookie("token", null)
         set_cookie("token", data.auth_token)
         await invalidateAll()
         await goto(redirect ? redirect + "?token=" + data.auth_token : "/")
