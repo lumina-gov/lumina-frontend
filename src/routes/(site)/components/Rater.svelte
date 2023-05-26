@@ -41,7 +41,7 @@ let rated = false
     </div>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .rating-hero
     background transparify(white, 4%)

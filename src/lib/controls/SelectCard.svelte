@@ -43,7 +43,7 @@ function click() {
 </div>
 
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .card
     display flex

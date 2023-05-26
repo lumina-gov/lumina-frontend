@@ -45,7 +45,7 @@ $: formatted_date = date.toLocaleDateString("en-AU", {
     </div>
 </a>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .press-release
     display flex

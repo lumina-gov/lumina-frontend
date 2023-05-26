@@ -68,7 +68,7 @@ $: tag = href ? "a" : "div" as "a" | "div"
 </svelte:element>
 
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .segment
     padding 6px

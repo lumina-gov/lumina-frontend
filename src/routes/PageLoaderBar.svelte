@@ -34,7 +34,7 @@ afterNavigate(async () => {
 {/if}
 
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .progress-bar
     position fixed

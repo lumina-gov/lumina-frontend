@@ -53,7 +53,7 @@ export let areas: HubArea[]
 </div>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .main
     display flex

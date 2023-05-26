@@ -316,7 +316,7 @@ $: service_cards_top = [
 </Hero>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 h1
     font-size 40px

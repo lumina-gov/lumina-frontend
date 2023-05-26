@@ -29,7 +29,7 @@ $: against_percentage = against_votes / total_votes * 100
     <span>Support</span>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .progress-bar-wrapper
     display flex

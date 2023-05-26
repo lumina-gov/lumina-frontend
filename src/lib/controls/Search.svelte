@@ -28,7 +28,7 @@ export function focus() {
         bind:value={ search }/>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .search-wrapper
     padding 0 12px

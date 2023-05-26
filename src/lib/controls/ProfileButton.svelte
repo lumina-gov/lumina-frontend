@@ -24,7 +24,7 @@ function clicked(e: Event) {
     <Profile/>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .profile-button-wrapper
     padding 4px

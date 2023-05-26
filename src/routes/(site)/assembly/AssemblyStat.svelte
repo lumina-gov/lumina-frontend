@@ -15,7 +15,7 @@ export let text: string
     </div>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .stat
     display flex

@@ -100,7 +100,7 @@ afterNavigate(() => {
     </Scrim>
 {/if}
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .popout
     max-width 400px

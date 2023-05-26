@@ -48,7 +48,7 @@ $: authenticated = data.user_store.user != null
     </div>
 </ClickoutRegion>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .content
     flex 1

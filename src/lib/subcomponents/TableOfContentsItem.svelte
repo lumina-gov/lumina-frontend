@@ -43,7 +43,7 @@ export let item: TreeItem
     {/if}
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .text
     display flex

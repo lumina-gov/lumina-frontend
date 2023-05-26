@@ -43,6 +43,6 @@ import Discord from "svelte-material-icons/Discord.svelte"
     </FlexWrap>
 </VerticalLayout>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 </style>

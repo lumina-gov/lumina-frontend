@@ -33,7 +33,7 @@ export let organisation: {
         icon={ChevronRight}/>
 </a>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .organisation
     display flex

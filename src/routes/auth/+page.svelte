@@ -74,7 +74,7 @@ async function next() {
     {/if}
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .card
     width 100%

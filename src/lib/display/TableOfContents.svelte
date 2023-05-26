@@ -16,7 +16,7 @@ $: root = {
         toggled={true}/>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .toc
     background transparify(white, 4%)

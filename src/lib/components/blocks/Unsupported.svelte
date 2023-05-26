@@ -2,7 +2,7 @@
     This is an unsupported block type.
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .unsupported
     background-color transparify($red, 8%)

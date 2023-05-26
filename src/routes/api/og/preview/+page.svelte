@@ -13,7 +13,7 @@ export let description = "This is a test of the OG Graph"
     </div>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .card-wrapper
     border-radius 8px

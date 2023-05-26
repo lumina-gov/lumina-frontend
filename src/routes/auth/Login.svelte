@@ -137,7 +137,7 @@ async function signin () {
     </div>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 .hidden
     display: none
 

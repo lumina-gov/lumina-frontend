@@ -60,7 +60,7 @@ async function logout() {
     </div>
 </Card>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .account
     border-bottom 1px solid transparify(white, 12%)

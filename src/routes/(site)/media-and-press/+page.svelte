@@ -184,7 +184,7 @@ onMount(() => {
     </Card>
 </Hero>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .flex-wrap
     display flex

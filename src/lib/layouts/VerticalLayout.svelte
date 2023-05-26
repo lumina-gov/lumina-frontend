@@ -23,7 +23,7 @@ export let margin_auto = false
     <slot/>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .layout
     display flex

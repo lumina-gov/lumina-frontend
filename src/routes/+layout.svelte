@@ -42,7 +42,7 @@ import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
 <!-- <div class="floating-gradient"/> -->
 <slot/>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 // .grid-wrapper
 //     position fixed

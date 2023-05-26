@@ -20,7 +20,7 @@ $: tag = url ? "a" : "span" as "a" | "span"
     {/if}
 </svelte:element>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .bold
     font-weight bold

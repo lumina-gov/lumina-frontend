@@ -91,7 +91,7 @@ let dropdown_toggled = false
     </FlexWrap>
 </InputWrapper>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .null
     border-bottom 1px solid transparify(white, 10%)

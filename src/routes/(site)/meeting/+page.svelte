@@ -48,7 +48,7 @@ function format_date(date: Date) {
     </Card>
 </Hero>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .event
     display: flex

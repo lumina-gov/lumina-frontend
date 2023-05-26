@@ -102,7 +102,7 @@ import site_data from "$lib/data/site_data"
 </footer>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 footer
     background transparify(white, 4%)

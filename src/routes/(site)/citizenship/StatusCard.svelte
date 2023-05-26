@@ -17,7 +17,7 @@ export let left_icon: typeof SvelteComponent
 </div>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 .status
     padding 8px
     border-radius 4px

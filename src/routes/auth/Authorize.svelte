@@ -28,7 +28,7 @@ export let user: NonNullable<MeQuery["me"]>
         size={28}/>
 </button>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 button
     background transparify(white, 4%)

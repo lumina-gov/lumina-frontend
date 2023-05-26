@@ -83,7 +83,7 @@ onMount(() => {
 </InputWrapper>
 
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .clickable
     cursor pointer

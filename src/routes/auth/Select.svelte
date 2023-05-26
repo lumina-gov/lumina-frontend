@@ -73,7 +73,7 @@ let buttons = [
     {/each}
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .buttons
     display flex

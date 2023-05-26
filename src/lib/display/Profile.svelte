@@ -10,7 +10,7 @@ export let size = "32px"
 
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .profile
     width var(--size)

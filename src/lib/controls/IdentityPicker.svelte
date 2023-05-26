@@ -59,7 +59,7 @@ let toggled = false
     </ClickoutRegion>
 </InputWrapper>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .group
     padding 16px

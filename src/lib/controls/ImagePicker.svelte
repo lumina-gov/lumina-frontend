@@ -59,7 +59,7 @@ async function select () {
 </InputWrapper>
 
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .img-wrapper
     width 60px

@@ -1,13 +1,20 @@
 import type { SvelteComponent } from "svelte"
 import HumanHandsup from "svelte-material-icons/HumanHandsup.svelte"
 
+export enum Filter {
+    Service = "Service",
+    Social = "Social",
+    Partnership = "Partnership",
+    Technological = "Technological",
+}
+
 export type Milestone = {
     title: string,
     description: string,
     date: Date,
     icon: typeof SvelteComponent
     contributors: MilestoneContributor[]
-    tags: string[]
+    tags: Filter[]
 }
 
 export type MilestoneContributor = {
@@ -27,7 +34,7 @@ export const milestones : Milestone[] = [
                 description: "A skilled rust developer working to make the world a better place."
             }
         ],
-        tags: ["cool", "amazing"]
+        tags: []
     },
     {
         title: "Added Milestones",
@@ -40,7 +47,7 @@ export const milestones : Milestone[] = [
                 description: "A skilled rust developer working to make the world a better place."
             }
         ],
-        tags: ["cool", "amazing"]
+        tags: []
     },
     {
         title: "Added Milestones",
@@ -53,6 +60,6 @@ export const milestones : Milestone[] = [
                 description: "A skilled rust developer working to make the world a better place."
             }
         ],
-        tags: ["cool", "amazing"]
+        tags: []
     }
 ]

@@ -32,7 +32,7 @@ $: component = active_component_id ? components[active_component_id] : null
     {/if}
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .editor
     padding 16px

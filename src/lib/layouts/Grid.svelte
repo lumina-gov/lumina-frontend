@@ -32,7 +32,7 @@ export let side_padding = true
     <slot/>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .grid
     &.side_padding

@@ -5,7 +5,7 @@
     <slot/>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .flex
     height 0

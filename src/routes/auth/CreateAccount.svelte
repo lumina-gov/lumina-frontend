@@ -156,7 +156,7 @@ async function signup () {
     </Box>
 </Card>
 <style lang="stylus">
-@import 'variables'
+@import variables
 .split
     display grid
     grid-auto-flow column
