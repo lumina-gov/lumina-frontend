@@ -11,6 +11,7 @@ import CheckCircle from "svelte-material-icons/CheckCircle.svelte"
 import LinkVariant from "svelte-material-icons/LinkVariant.svelte"
 import OpenInNew from "svelte-material-icons/OpenInNew.svelte"
 import ShieldCheck from "svelte-material-icons/ShieldCheck.svelte"
+import { scopes } from "./scopes"
 
 
 export let app: NonNullable<GetAuthAppQuery["auth_app"]>
@@ -62,7 +63,7 @@ $: icons = {
                         icon={CheckCircle}
                         size={20}/>
                     <span>
-                        { scope }
+                        { scopes[scope] || scope }
                     </span>
                 </div>
             {/each}
