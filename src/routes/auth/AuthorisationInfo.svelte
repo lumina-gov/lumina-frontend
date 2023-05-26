@@ -2,7 +2,7 @@
 import Button from "$lib/controls/Button.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import Tag from "$lib/display/Tag.svelte"
-import type { GetAuthAppQuery } from "$lib/graphql/graphql-types"
+import { IssueTokenDocument, type GetAuthAppQuery } from "$lib/graphql/graphql-types"
 import LightUniversity from "$lib/icons/LightUniversity.svelte"
 import Flex from "$lib/layouts/Flex.svelte"
 import type { SvelteComponent } from "svelte"
@@ -12,19 +12,43 @@ import LinkVariant from "svelte-material-icons/LinkVariant.svelte"
 import OpenInNew from "svelte-material-icons/OpenInNew.svelte"
 import ShieldCheck from "svelte-material-icons/ShieldCheck.svelte"
 import { scopes } from "./scopes"
+import { MessageType } from "$lib/types/message"
+import { page } from "$app/stores"
+import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
+import { goto } from "$app/navigation"
 
 
 export let app: NonNullable<GetAuthAppQuery["auth_app"]>
 export let redirect: string
-export let app_slug: string
 export let user_selected: boolean
+export let app_slug: string
+
+let loading = false
 
 $: tag_text = app.official ? "Official" : "3rd Party"
 $: icons = {
     "lumina-university": LightUniversity,
 } as Record<string, typeof SvelteComponent>
 
+async function authorise() {
+    loading = true
+    let res = await $page.data.graph.gmutation(IssueTokenDocument, {
+        scopes: $page.data.app_info.app.scopes,
+    })
+
+    if (res.error || !res.data) {
+        $page.data.alerts.create_alert(MessageType.Error, res.error?.message ?? "Failed to issue token")
+    } else {
+        let token = res.data.issue_token
+        await goto(redirect + "?token=" + token)
+    }
+    loading = false
+}
+
 </script>
+{#if loading}
+    <OverlayLoading/>
+{/if}
 <div class="sections">
     <div class="section">
         <Flex
@@ -103,8 +127,8 @@ $: icons = {
     <div class="section">
         <Button
             disabled={!user_selected}
-            href={redirect}
-            right_icon={ShieldCheck}>
+            right_icon={ShieldCheck}
+            on:click={ authorise }>
             Authorise
         </Button>
     </div>
@@ -165,5 +189,6 @@ $: icons = {
 
         span
             margin-left 12px
+            line-height 120%
 
 </style>

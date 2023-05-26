@@ -8,7 +8,7 @@ import LogoLoading from "$lib/display/LogoLoading.svelte"
 <style lang="stylus">
 .overlay-spinner
     display flex
-    background rgba(0,0,0,0.5)
+    background rgba(0,0,0,0.6)
     justify-content center
     align-items center
     position absolute
