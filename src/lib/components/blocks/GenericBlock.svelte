@@ -6,6 +6,8 @@ import ParagraphBlock from "./ParagraphBlock.svelte"
 import IndentedChildren from "./IndentedChildren.svelte"
 import HeadingBlock from "./HeadingBlock.svelte"
 import CalloutBlock from "./CalloutBlock.svelte"
+import QuoteBlock from "./QuoteBlock.svelte"
+import ImageBlock from "./ImageBlock.svelte"
 
 export let block: BlockResponseWithChildren
 
@@ -14,7 +16,9 @@ let block_types: { [key: string]: typeof SvelteComponent } = {
     "heading_2": HeadingBlock,
     "heading_3": HeadingBlock,
     "paragraph": ParagraphBlock,
-    "callout": CalloutBlock
+    "callout": CalloutBlock,
+    "quote": QuoteBlock,
+    "image": ImageBlock,
 }
 
 $: should_render_children = block.children && ![

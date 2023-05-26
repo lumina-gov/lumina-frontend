@@ -14,7 +14,7 @@ export let blocks: BlockResponseWithChildren[]
 .blocks-array
     display flex
     flex-direction column
-    gap 8px
+    gap 24px
     width 100%
     align-items flex-start
 </style>
