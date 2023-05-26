@@ -102,6 +102,7 @@ $: icons = {
     <div class="section">
         <Button
             disabled={!user_selected}
+            href={redirect}
             right_icon={ShieldCheck}>
             Authorise
         </Button>

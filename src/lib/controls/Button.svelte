@@ -15,6 +15,7 @@ $: tag = href ? "a" : "div" as "a" | "div"
 let dispatch = createEventDispatcher()
 
 function clicked(e: Event) {
+    if(disabled) e.preventDefault()
     !disabled && dispatch("click", e)
 }
 
