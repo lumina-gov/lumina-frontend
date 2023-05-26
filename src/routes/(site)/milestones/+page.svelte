@@ -1,3 +1,7 @@
+<PageHead
+    description="View the milestones and history of the development of Lumina leading up to where we are today."
+    title="Milestones"
+/>
 <script lang="ts">
 import Hero from "$lib/layouts/Hero.svelte"
 import Heading from "$lib/display/Heading.svelte"
@@ -14,6 +18,7 @@ import FlexWrap from "$lib/display/FlexWrap.svelte"
 import Handshake from "svelte-material-icons/Handshake.svelte"
 import AccountGroup from "svelte-material-icons/AccountGroup.svelte"
 import Brain from "svelte-material-icons/Brain.svelte"
+import PageHead from "$lib/components/PageHead.svelte"
 
 let filter : Filter | null = null
 
