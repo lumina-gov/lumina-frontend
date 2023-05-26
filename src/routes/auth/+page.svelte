@@ -1,3 +1,7 @@
+<PageHead
+    description="Access Lumina services with your Lumina account"
+    title="Auth Portal"
+/>
 <script lang="ts">
 import AuthorisationInfo from "./AuthorisationInfo.svelte"
 import Tag from "$lib/display/Tag.svelte"
@@ -10,6 +14,7 @@ import Button from "$lib/controls/Button.svelte"
 import ArrowLeft from "svelte-material-icons/ArrowLeft.svelte"
 import { page } from "$app/stores"
 import { goto, invalidateAll } from "$app/navigation"
+import PageHead from "$lib/components/PageHead.svelte"
 
 export let data
 
