@@ -34,6 +34,21 @@ let buttons = [
 ]
 
 </script>
+<div class="what-is">
+    <h3>What is Lumina?</h3>
+    <p>
+        Lumina is a planned city-state which aims to create a modern and technologically advanced society grounded in the principles of direct democracy, and freedom.
+    </p>
+    <p>
+        Lumina offers various digital services globally to citizens and non-citizens.
+    </p>
+    <a href="/mission-and-vision">
+        Read Our Mission & Vision
+        <Icon
+            icon={ArrowRight}
+            size={20}/>
+    </a>
+</div>
 <div class="buttons">
     {#each buttons as button}
         <button on:click={ button.action }>
@@ -56,21 +71,6 @@ let buttons = [
                 size={28}/>
         </button>
     {/each}
-</div>
-<div class="what-is">
-    <h3>What is Lumina?</h3>
-    <p>
-        Lumina is a planned city-state which aims to create a modern and technologically advanced society grounded in the principles of direct democracy, and freedom.
-    </p>
-    <p>
-        Lumina offers various digital services globally to citizens and non-citizens.
-    </p>
-    <a href="/mission-and-vision">
-        Read Our Mission & Vision
-        <Icon
-            icon={ArrowRight}
-            size={20}/>
-    </a>
 </div>
 <style lang="stylus">
 @import 'variables'

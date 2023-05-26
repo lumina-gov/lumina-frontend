@@ -18,7 +18,7 @@ import site_data from "$lib/data/site_data"
             Join the early adopters building capabilities and help shape our future.
             <a
                 class="cta-link"
-                href="/onboarding">
+                href="/auth">
                 <span class="cta-anchor-text">
                     Get involved.
                 </span>
@@ -69,7 +69,7 @@ import site_data from "$lib/data/site_data"
                 Become a citizen of Lumina today!
             </div>
             <Button
-                href="/onboarding"
+                href="/auth"
                 right_icon={ChevronRight}>
                 Get involved
             </Button>

@@ -19,7 +19,7 @@ onMount(() => {
                         ...init,
                         headers: {
                             ...init?.headers,
-                            ...(data.user_store.auth_token ? { Authorization: data.user_store.auth_token } : {})
+                            ...(data.user_store.auth_token ? { Authorization: `Bearer ${data.user_store.auth_token}` } : {})
                         },
                     })
                 },

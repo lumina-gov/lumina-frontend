@@ -5,7 +5,7 @@ import Input from "$lib/controls/Input.svelte"
 import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
 import { MessageType } from "$lib/types/message"
 import { page } from "$app/stores"
-import { LoginDocument } from "$lib/graphql/graphql-types"
+import type { LoginMutation } from "$lib/graphql/graphql-types"
 import { set_cookie } from "$lib/utils/cookie"
 import { invalidateAll } from "$app/navigation"
 import Button from "$lib/controls/Button.svelte"
@@ -21,6 +21,7 @@ import Icon from "$lib/display/Icon.svelte"
 import ShieldAccount from "svelte-material-icons/ShieldAccount.svelte"
 import Web from "svelte-material-icons/Web.svelte"
 import { createEventDispatcher } from "svelte"
+import type { GraphQLError } from "@urql/core/dist/urql-core-chunk"
 
 enum DisplayPage {
     Email,
@@ -37,13 +38,24 @@ let user = {
 }
 
 async function signin () {
-    let { data, error} = await $page.data.graph.gmutation(LoginDocument, {
-        email: user.email,
-        password: user.password
+    let res = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify({
+            email: user.email,
+            password: user.password
+        }),
     })
 
-    if (error || !data) {
-        $page.data.alerts.create_alert(MessageType.Error, error?.message ?? "Login failed")
+    let { data, errors } = await res.json() as { data?: LoginMutation, errors?: GraphQLError[]}
+
+    if (errors || !data) {
+        if (errors) {
+            for (let error of errors) {
+                $page.data.alerts.create_alert(MessageType.Error, error.message)
+            }
+        } else {
+            $page.data.alerts.create_alert(MessageType.Error, "Login failed")
+        }
     } else {
         $page.data.alerts.create_alert(MessageType.Success, "Login Successful")
         set_cookie("token", null)

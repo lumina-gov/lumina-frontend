@@ -70,6 +70,31 @@ query UserCount {
     user_count
 }
 
-mutation Login($email: String!, $password: String!) {
-    auth_token(email: $email, password: $password)
+mutation Login(
+    $email: String!,
+    $password: String!,
+    $app_secret: String!,
+    $scopes:[String!]!
+) {
+    auth_token (
+        email: $email,
+        password: $password,
+        app_secret: $app_secret,
+        scopes: $scopes
+    )
+}
+
+query GetAuthApp($slug: String!) {
+    auth_app(slug: $slug) {
+        name,
+        description,
+        created,
+        redirect_hostnames,
+        scopes,
+        official,
+    }
+}
+
+mutation IssueToken($scopes: [String!]!) {
+    issue_token(scopes: $scopes)
 }

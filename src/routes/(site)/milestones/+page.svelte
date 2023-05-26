@@ -6,16 +6,16 @@ import Paragraph from "$lib/display/Paragraph.svelte"
 import { milestones } from "$lib//data/milestones"
 import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
 import RocketLaunch from "svelte-material-icons/RocketLaunch.svelte"
-import HammerScrewdriver from "svelte-material-icons/HammerScrewdriver.svelte";
+import HammerScrewdriver from "svelte-material-icons/HammerScrewdriver.svelte"
 import MilestoneItem from "./MilestoneItem.svelte"
-import Segment from "$lib/controls/Segment.svelte";
-import FlexWrap from "$lib/display/FlexWrap.svelte";
-import type { Milestone } from "$lib/data/milestones";
-import FilterSegment from "./FilterSegment.svelte";
+import Segment from "$lib/controls/Segment.svelte"
+import FlexWrap from "$lib/display/FlexWrap.svelte"
+import FilterSegment from "./FilterSegment.svelte"
 
 let filter : string | null
+
 $: filtered_milestones = filter ? milestones.filter(milestone => milestone.tags.includes(filter!)) : milestones
-                                                    
+
 </script>
 
 <Hero
@@ -40,15 +40,25 @@ $: filtered_milestones = filter ? milestones.filter(milestone => milestone.tags.
             democratic city-state.
         </Paragraph>
     </VerticalLayout>
-    <FlexWrap><Segment style={filter === undefined ? "branded" : "translucent"} on:click={() => {
-        filter = undefined;
-    }}>All</Segment>
-    <FilterSegment filter_name="Service" filter={filter} icon={HammerScrewdriver}/>  
-</FlexWrap>
+    <FlexWrap><Segment
+        style={filter === undefined ? "branded" : "translucent"}
+        on:click={ () => {
+            filter = null
+        } }>All</Segment>
+        <FilterSegment
+            filter={filter}
+            filter_name="Service"
+            icon={HammerScrewdriver}/>
+    </FlexWrap>
 
-    <VerticalLayout max_width={850} vertical_padding={0} gap={0}>
+    <VerticalLayout
+        gap={0}
+        max_width={850}
+        vertical_padding={0}>
         {#each filtered_milestones as milestone , milestone_index}
-            <MilestoneItem last={milestones.length - 1 == milestone_index} milestone={milestone}/>
+            <MilestoneItem
+                last={milestones.length - 1 == milestone_index}
+                milestone={milestone}/>
         {/each}
     </VerticalLayout>
 </Hero>

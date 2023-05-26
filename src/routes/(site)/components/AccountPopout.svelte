@@ -14,8 +14,8 @@ $: email = user.email
 
 async function logout() {
     delete_cookie("token")
-    await goto("/signin")
     await invalidateAll()
+    await goto("/")
 }
 
 </script>
