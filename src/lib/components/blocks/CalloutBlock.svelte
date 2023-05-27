@@ -29,7 +29,7 @@ $: icon_url = block.callout.icon && "external" in block.callout.icon ? block.cal
     </div>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .icon
     width 1em

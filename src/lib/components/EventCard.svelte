@@ -64,7 +64,7 @@ export let event: {
 </a>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .main-link
     width 100%

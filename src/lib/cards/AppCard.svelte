@@ -48,7 +48,7 @@ export let tag: {
 </Card>
 
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .box
     display flex

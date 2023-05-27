@@ -17,7 +17,7 @@ export let organisations: {
     {/each}
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .directory-list
     display flex

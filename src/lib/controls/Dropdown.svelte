@@ -73,7 +73,7 @@ onDestroy(() => {
 </div>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .wrapper
     position fixed

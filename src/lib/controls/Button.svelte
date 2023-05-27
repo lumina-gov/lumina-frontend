@@ -15,6 +15,7 @@ $: tag = href ? "a" : "div" as "a" | "div"
 let dispatch = createEventDispatcher()
 
 function clicked(e: Event) {
+    if(disabled) e.preventDefault()
     !disabled && dispatch("click", e)
 }
 
@@ -57,7 +58,7 @@ function handle_keyup(e: KeyboardEvent) {
 </svelte:element>
 
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .button
     padding 10px 10px
@@ -102,10 +103,10 @@ function handle_keyup(e: KeyboardEvent) {
                 background: transparify(white, 6%)
     &.disabled
         cursor default
-        opacity 0.5
         background transparent
         outline 1px solid transparify(white, 10%)
         outline-offset 1px
+        color transparify(white, 30%)
 
 
 </style>

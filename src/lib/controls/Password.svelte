@@ -83,7 +83,7 @@ async function check_password_strength() {
 </Input>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .strength-text-wrapper
     color white

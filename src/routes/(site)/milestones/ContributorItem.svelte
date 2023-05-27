@@ -1,16 +1,21 @@
 <script lang="ts">
-import Card from "$lib/cards/Card.svelte"
 import type { MilestoneContributor } from "$lib/data/milestones"
-import Heading from "$lib/display/Heading.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
-import Flex from "$lib/layouts/Flex.svelte"
 export let contributor: MilestoneContributor
 </script>
+<div class="contributor">
+    <span>{ contributor.name }</span>
+    <Paragraph>{ contributor.description }</Paragraph>
+</div>
+<style lang="stylus">
+@import variables
 
-<Card>
-    <Flex align_items="flex-start" >
-        <Heading level={4}>{ contributor.name }</Heading>
-    
-        <Paragraph>{ contributor.description }</Paragraph>
-    </Flex >
-</Card>
+.contributor
+    display grid
+    grid-template-columns 1fr 3fr
+    gap 16px
+    background transparify(white, 4%)
+    padding 8px 16px
+    span
+        font-weight 400
+</style>

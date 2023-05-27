@@ -3,7 +3,7 @@ export let color: "brand" | "red" = "brand"
 </script>
 <span class={color}><slot/></span>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 span
     color $brand

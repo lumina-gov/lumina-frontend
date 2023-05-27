@@ -70,7 +70,7 @@ export function focus() {
     {/if}
 </ScrollbarRegion>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .other-option
     padding 16px 16px

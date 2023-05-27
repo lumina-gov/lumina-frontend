@@ -20,7 +20,7 @@ export let items: {
     {/each}
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .sidebar
     display flex

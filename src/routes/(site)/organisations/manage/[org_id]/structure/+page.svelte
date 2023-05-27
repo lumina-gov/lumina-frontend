@@ -64,6 +64,6 @@ let root: string | null = null
 </VerticalLayout>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 </style>

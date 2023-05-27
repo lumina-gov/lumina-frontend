@@ -23,7 +23,7 @@ export let min_item_size: number
     <slot/>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .layout
     display grid

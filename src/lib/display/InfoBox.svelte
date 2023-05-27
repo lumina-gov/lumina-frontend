@@ -31,7 +31,7 @@ export let description: string | null = null
     </div>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .box
     display flex

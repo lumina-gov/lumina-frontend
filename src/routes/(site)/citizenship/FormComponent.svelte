@@ -206,7 +206,7 @@ async function register() {
     </div>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .aliases
     opacity 0.5

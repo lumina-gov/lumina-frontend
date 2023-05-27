@@ -58,7 +58,7 @@ $: styles_string = Object.entries(styles)
     <slot/>
 </svelte:element>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .grid-item
     display flex

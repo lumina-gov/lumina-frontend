@@ -1,6 +1,9 @@
 <script lang="ts">
+import Button from "$lib/controls/Button.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import Tag from "$lib/display/Tag.svelte"
+import { IssueTokenDocument, type GetAuthAppQuery } from "$lib/graphql/graphql-types"
+import LightUniversity from "$lib/icons/LightUniversity.svelte"
 import Flex from "$lib/layouts/Flex.svelte"
 import type { SvelteComponent } from "svelte"
 import Calendar from "svelte-material-icons/Calendar.svelte"
@@ -8,23 +11,44 @@ import CheckCircle from "svelte-material-icons/CheckCircle.svelte"
 import LinkVariant from "svelte-material-icons/LinkVariant.svelte"
 import OpenInNew from "svelte-material-icons/OpenInNew.svelte"
 import ShieldCheck from "svelte-material-icons/ShieldCheck.svelte"
+import { scopes } from "./scopes"
+import { MessageType } from "$lib/types/message"
+import { page } from "$app/stores"
+import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
+import { goto } from "$app/navigation"
 
 
-export let auth_request: {
-    app: {
-        name: string,
-        official: boolean,
-        description: string,
-        icon: typeof SvelteComponent,
-        created: number
-    },
-    redirect_location: string,
-    scopes: string[]
+export let app: NonNullable<GetAuthAppQuery["auth_app"]>
+export let redirect: string
+export let user_selected: boolean
+export let app_slug: string
+
+let loading = false
+
+$: tag_text = app.official ? "Official" : "3rd Party"
+$: icons = {
+    "lumina-university": LightUniversity,
+} as Record<string, typeof SvelteComponent>
+
+async function authorise() {
+    loading = true
+    let res = await $page.data.graph.gmutation(IssueTokenDocument, {
+        scopes: $page.data.app_info.app.scopes,
+    })
+
+    if (res.error || !res.data) {
+        $page.data.alerts.create_alert(MessageType.Error, res.error?.message ?? "Failed to issue token")
+    } else {
+        let token = res.data.issue_token
+        await goto(redirect + "?token=" + token)
+    }
+    loading = false
 }
 
-$: tag_text = auth_request.app.official ? "Official" : "3rd Party"
-
 </script>
+{#if loading}
+    <OverlayLoading/>
+{/if}
 <div class="sections">
     <div class="section">
         <Flex
@@ -32,18 +56,18 @@ $: tag_text = auth_request.app.official ? "Official" : "3rd Party"
             direction="row">
             <div class="logo">
                 <Icon
-                    icon={auth_request.app.icon}
+                    icon={icons[app_slug]}
                     size={52}/>
             </div>
             <Flex
                 align_items="flex-start"
                 direction="column"
                 gap={8}>
-                <Tag color={auth_request.app.official ? "green" : "yellow"}>
+                <Tag color={app.official ? "green" : "yellow"}>
                     { tag_text }
                 </Tag>
                 <div class="app-tag">
-                    { auth_request.app.name }
+                    { app.name }
                 </div>
             </Flex>
         </Flex>
@@ -53,17 +77,17 @@ $: tag_text = auth_request.app.official ? "Official" : "3rd Party"
     </div>
     <div class="section">
         <div>
-            This will allow <strong>{ auth_request.app.name }</strong> to:
+            This will allow <strong>{ app.name }</strong> to:
         </div>
         <div class="scopes">
-            {#each auth_request.scopes as scope}
+            {#each app.scopes as scope}
                 <div class="scope">
                     <Icon
                         color="green"
                         icon={CheckCircle}
                         size={20}/>
                     <span>
-                        { scope }
+                        { scopes[scope] || scope }
                     </span>
                 </div>
             {/each}
@@ -76,7 +100,7 @@ $: tag_text = auth_request.app.official ? "Official" : "3rd Party"
                 size={18}/>
             <span>
                 Once you authorise, you will be redirected to
-                <strong>{ auth_request.redirect_location }</strong>
+                <strong>{ redirect }</strong>
             </span>
         </div>
         <div class="info">
@@ -84,25 +108,38 @@ $: tag_text = auth_request.app.official ? "Official" : "3rd Party"
                 icon={Calendar}
                 size={18}/>
             <span>
-                App created on { new Date(auth_request.app.created).toLocaleDateString() }
+                App created on { new Date(app.created).toLocaleDateString() }
             </span>
         </div>
         <div class="info">
             <Icon
-                icon={auth_request.app.official ? ShieldCheck : OpenInNew}
+                icon={app.official ? ShieldCheck : OpenInNew}
                 size={18}/>
             <span>
                 This app is an
-                {#if auth_request.app.official}
+                {#if app.official}
                     <strong>official Lumina government service</strong>
                 {:else}
                     <strong>external 3rd party service</strong>
                 {/if}
         </div>
     </div>
+    <div class="section">
+        <Button
+            disabled={!user_selected}
+            right_icon={ShieldCheck}
+            on:click={ authorise }>
+            Authorise
+        </Button>
+    </div>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
+
+.sections
+    display flex
+    flex-direction column
+    max-width 450px
 
 .logo
     background transparify(white, 6%)
@@ -152,5 +189,6 @@ $: tag_text = auth_request.app.official ? "Official" : "3rd Party"
 
         span
             margin-left 12px
+            line-height 120%
 
 </style>

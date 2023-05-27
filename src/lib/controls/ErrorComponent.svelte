@@ -11,7 +11,7 @@ export let error: string
     </div>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .error-wrapper
     display flex

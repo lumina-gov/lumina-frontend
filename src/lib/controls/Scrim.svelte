@@ -17,7 +17,7 @@ let scrim: HTMLDivElement
     <slot/>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .scrim
     z-index 99

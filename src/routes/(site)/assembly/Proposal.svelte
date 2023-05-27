@@ -112,7 +112,7 @@ onDestroy(() => {
     </div>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .proposal
     background transparify(white, 4%)

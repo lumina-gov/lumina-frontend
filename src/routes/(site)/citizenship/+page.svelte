@@ -88,7 +88,7 @@ $: user = data.user_store.user
     </GridItem>
 </Grid>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .notices
     background transparify(white, 6%)

@@ -107,7 +107,7 @@ let scale = 1
     </ScrollbarRegion>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .wrapper
     flex 1

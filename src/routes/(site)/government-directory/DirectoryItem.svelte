@@ -32,7 +32,7 @@ export let organisation: {
     </div>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .directory-item
     display flex

@@ -20,7 +20,7 @@ export let translucent = false
     </Inner>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .hero
     display flex

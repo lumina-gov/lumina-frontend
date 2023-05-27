@@ -31,7 +31,7 @@ export let underline = false
     {/if}
 </svelte:element>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .heading
     font-weight 700

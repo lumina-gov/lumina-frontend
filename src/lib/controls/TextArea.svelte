@@ -15,7 +15,7 @@ export let value: string
         bind:value/>
 </InputWrapper>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 textarea
     padding 16px

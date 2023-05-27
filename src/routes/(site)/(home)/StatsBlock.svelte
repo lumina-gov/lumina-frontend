@@ -44,7 +44,7 @@ export let stats: {
 </Grid>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .stat-icon
     font-size 48px

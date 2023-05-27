@@ -64,7 +64,7 @@ onMount(detectServiceWorkerUpdate)
     </div>
 {/if}
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .alert
     position fixed

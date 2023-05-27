@@ -97,7 +97,7 @@ let search_component: Search
     </ClickoutRegion>
 </InputWrapper>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .input-wrapper
     display flex
