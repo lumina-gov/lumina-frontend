@@ -1,15 +1,18 @@
 <script lang="ts">
-import Card from "$lib/cards/Card.svelte"
 import Heading from "$lib/display/Heading.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
-import Information from "svelte-material-icons/Information.svelte"
+import InformationOutline from "svelte-material-icons/InformationOutline.svelte"
 </script>
 
 <div class="info_grid">
     <div
         style={"grid-area: top;"}
         class="info_card">
-        <Heading left_icon={Information}>About your rights and duties.</Heading>
+        <Heading
+            left_icon={InformationOutline}
+            left_icon_color={"white"}
+            level={3}
+            underline={true}>About your rights and duties.</Heading>
         <Paragraph
         >In Lumina, we strive to provide citizens with many rights, as well
             duties they need to fulfill in order to maintain order in society.</Paragraph
