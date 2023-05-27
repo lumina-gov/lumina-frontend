@@ -7,7 +7,12 @@ const graphql = init_urql({ auth_token: null, user: null })
 /** @type {import('./$types').RequestHandler} */
 export async function PATCH({ url, request }) {
     const token = url.searchParams.get("token")
-    const new_password = (await request.formData()).get("new_password")
+    const parsed_form_data = await (request.formData().catch(() => {
+            throw error(400, "invalid form data or no data")
+        }))
+    const new_password = parsed_form_data.get("new_password")
+    
+
 
 
     if (!token || typeof (token) !== "string") {
@@ -32,7 +37,10 @@ export async function PATCH({ url, request }) {
 }
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
-    const email = (await request.formData()).get("email")
+    const parsed_form_data = await (request.formData().catch(() => {
+        throw error(400, "invalid form data or no data")
+    }))
+    const email = parsed_form_data.get("email")
 
 
     if (!email || typeof (email) !== "string") {
