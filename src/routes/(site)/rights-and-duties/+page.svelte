@@ -7,9 +7,8 @@ import Hero from "$lib/layouts/Hero.svelte"
 import NewspaperVariant from "svelte-material-icons/NewspaperVariant.svelte"
 import Button from "$lib/controls/Button.svelte"
 import Settlement from "$lib/icons/Settlement.svelte"
-import Card from "$lib/cards/Card.svelte"
-import Information from "svelte-material-icons/Information.svelte"
 import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
+import RightsAndDutiesInfo from "./RightsAndDutiesInfo.svelte"
 </script>
 
 <Hero>
@@ -43,25 +42,10 @@ import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
             Become a citizen
         </Button>
     </VerticalLayout>
+
+    <RightsAndDutiesInfo></RightsAndDutiesInfo>
 </Hero>
 
-<Card align_items="flex-start">
-    <Heading left_icon={Information}>About your rights and duties.</Heading>
-    <Paragraph
-    >In Lumina, we strive to provide citizens with many rights, as well
-        duties they need to fulfill in order to maintain order in society.</Paragraph
-    >
 
-    <Paragraph
-    >We strive to ensure that all rights for citizens are actually provided
-        to citizens, as some rights require active fulfillment (eg: right to
-        education).
-    </Paragraph>
-    <Paragraph
-    >There are two types of rights, rights that oblige either inaction
-        (negative rights), or action (positive rights). Some examples of both
-        rights below.
-    </Paragraph>
-</Card>
 
 
