@@ -73,3 +73,12 @@ query UserCount {
 mutation Login($email: String!, $password: String!) {
     auth_token(email: $email, password: $password)
 }
+
+scalar Void
+
+mutation reset_password($email: String!) {
+    reset_password(email : $email)
+}
+mutation reset_to_new_password($token_id: UUID!, $new_password: String!) {
+    reset_to_new_password(token_id: $token_id, new_password: $new_password)
+}
