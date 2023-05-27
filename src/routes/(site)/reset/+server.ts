@@ -1,4 +1,4 @@
-import { reset_password, PasswordLengthError, TokenError } from "$lib/api/password.js"
+import { reset_password, PasswordLengthError, TokenError, UserNotFoundError, send_reset_password_link } from "$lib/api/password.js"
 import { init_urql } from "$lib/stores/graphql"
 import { error } from "@sveltejs/kit"
 
@@ -21,6 +21,27 @@ export async function PATCH({ url, request }) {
         reset_password(graphql, token, new_password)
     } catch (response_error) {
         if (response_error instanceof PasswordLengthError || response_error instanceof TokenError) {
+            throw error(400, response_error.message)
+        }
+
+        throw error(500, "something went wrong, please try again.")
+    }
+
+
+    return new Response("", { status: 201 })
+}
+/** @type {import('./$types').RequestHandler} */
+export async function POST({ request }) {
+    const email = (await request.formData()).get("email")
+
+
+    if (!email || typeof (email) !== "string") {
+        throw error(400, "no email provided")
+    }
+    try {
+        send_reset_password_link(graphql, email)
+    } catch (response_error) {
+        if (response_error instanceof UserNotFoundError) {
             throw error(400, response_error.message)
         }
 
