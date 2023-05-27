@@ -11,7 +11,7 @@ const config = {
     // for more information about preprocessors
     preprocess: preprocess({
         stylus: {
-            // this will allow us to @import 'variables' inside of our svelte stylus css section
+            // this will allow us to @import variables inside of our svelte stylus css section
             paths: [resolve(__dirname, "./src/stylus")]
         }
     }),

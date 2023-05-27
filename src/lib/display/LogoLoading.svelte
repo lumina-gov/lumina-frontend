@@ -9,7 +9,7 @@ export let size = "48px"
     <LogoEdge/>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .icon
     font-size var(--size)

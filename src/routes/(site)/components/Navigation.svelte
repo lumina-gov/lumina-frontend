@@ -137,7 +137,7 @@ beforeNavigate(() => {
 </Inside>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .nav-wrapper
     position fixed

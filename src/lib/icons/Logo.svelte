@@ -12,7 +12,7 @@ import Lumina from "$lib/icons/LogoEdge.svelte"
     </div>
 </a>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .logo
     display flex

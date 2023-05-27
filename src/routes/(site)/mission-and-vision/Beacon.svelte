@@ -10,7 +10,7 @@ import Pillar from "./Pillar.svelte"
     <Pillar/>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .wrapper
     display inline-flex

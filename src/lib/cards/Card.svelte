@@ -53,7 +53,7 @@ function handle_keyup(e: KeyboardEvent) {
     <slot/>
 </svelte:element>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .card
     border-radius 6px

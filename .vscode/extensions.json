@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "sysoev.language-stylus",
+        "svelte.svelte-vscode",
+        "dbaeumer.vscode-eslint"
+    ]
+}

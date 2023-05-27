@@ -25,7 +25,7 @@ $: tag = is_clickable ? "a" : "div" as "a" | "div"
     <slot/>
 </svelte:element>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .box
     width 100%

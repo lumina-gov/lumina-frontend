@@ -17,7 +17,7 @@ export let direction: "row" | "column" = "column"
     <slot />
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .layout
     display flex

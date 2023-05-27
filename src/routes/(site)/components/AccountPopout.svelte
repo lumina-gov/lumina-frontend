@@ -14,8 +14,8 @@ $: email = user.email
 
 async function logout() {
     delete_cookie("token")
-    await goto("/signin")
     await invalidateAll()
+    await goto("/")
 }
 
 </script>
@@ -60,7 +60,7 @@ async function logout() {
     </div>
 </Card>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .account
     border-bottom 1px solid transparify(white, 12%)

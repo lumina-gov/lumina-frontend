@@ -52,7 +52,7 @@ function handle_keyup(e: KeyboardEvent) {
 </svelte:element>
 
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .tag
     padding 6px

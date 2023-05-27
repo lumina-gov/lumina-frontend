@@ -16,7 +16,7 @@ export let text = ""
     </div>
 </span>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .tag
     padding 0 2px

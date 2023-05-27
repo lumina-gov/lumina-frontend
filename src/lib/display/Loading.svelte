@@ -4,7 +4,7 @@
     <div class="spinnerStyle spin3"/>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 // maybe we could try a lumina logo loading bar?
 

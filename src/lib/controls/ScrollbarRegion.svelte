@@ -30,7 +30,7 @@ export let content_height: string | undefined = undefined
 </div>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .wrapper
     position relative

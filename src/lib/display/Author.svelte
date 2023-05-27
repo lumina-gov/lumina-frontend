@@ -16,7 +16,7 @@ export let author: {
     </div>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .author
     display flex

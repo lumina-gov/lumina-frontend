@@ -87,7 +87,7 @@ async function setBottomHeights () {
 
 </script>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .action-container-wrapper
     position fixed

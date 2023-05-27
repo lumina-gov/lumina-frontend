@@ -93,7 +93,7 @@ async function request_notification_permissions() {
     </Button>
 </Card>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .description
     opacity 0.4

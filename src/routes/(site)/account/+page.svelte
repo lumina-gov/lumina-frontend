@@ -17,7 +17,7 @@ console.log("Account Settings")
 </div>
 
 <style lang="stylus">
-    @import 'variables'
+    @import variables
 
 .area
     padding 40px

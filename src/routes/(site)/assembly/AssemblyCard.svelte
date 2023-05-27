@@ -33,7 +33,7 @@ export let href: string
     </Coloured>
 </a>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .card
     padding 16px

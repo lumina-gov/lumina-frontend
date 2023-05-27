@@ -107,7 +107,7 @@ $: toc = convert_lex_to_toc_tree(marked.lexer(data.content))
 </div>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .wrapper
     display grid

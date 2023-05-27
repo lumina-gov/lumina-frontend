@@ -81,7 +81,7 @@ $: active && component_els[component.id] ? component_els[component.id].scrollInt
     </div>
 </div>
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .name
     font-weight 500

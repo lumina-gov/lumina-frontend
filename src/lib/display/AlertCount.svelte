@@ -5,7 +5,7 @@ export let count: number
     { count }
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .alert-count
     padding 2px 8px

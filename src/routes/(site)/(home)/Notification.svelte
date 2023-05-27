@@ -39,7 +39,7 @@ $: element_tag = href ? "a" : "div" as "a" | "div"
     {/if}
 </svelte:element>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .notification
     display flex

@@ -16,7 +16,7 @@ export let name: string | undefined = undefined
     <slot/>
 {/if}
 <style lang="stylus">
-@import 'variables';
+@import variables;
 
 .input-wrapper
     display flex

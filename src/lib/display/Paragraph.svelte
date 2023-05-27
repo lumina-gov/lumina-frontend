@@ -2,7 +2,7 @@
     <slot />
 </p>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 p
     margin 0

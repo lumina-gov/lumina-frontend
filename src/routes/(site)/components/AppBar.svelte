@@ -14,6 +14,7 @@ import AccountPopout from "./AccountPopout.svelte"
 import Inside from "$lib/controls/Inside.svelte"
 import { afterNavigate } from "$app/navigation"
 import type { MeQuery } from "$lib/graphql/graphql-types"
+import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
 
 enum Dropdown {
     Notifications,
@@ -78,12 +79,10 @@ afterNavigate(() => {
                 <ProfileButton on:click={ () => toggle(Dropdown.Account) }/>
             {:else}
                 <AppbarButton
-                    href="/signin"
-                    left_icon={Signin}/>
-                <AppbarButton
                     style="branded"
-                    href="/onboarding"
-                    left_icon={Settlement}>Start</AppbarButton>
+                    href="/auth"
+                    left_icon={ExitToApp}
+                    right_icon={Settlement}>Start</AppbarButton>
             {/if}
         </div>
     </div>
@@ -101,7 +100,7 @@ afterNavigate(() => {
     </Scrim>
 {/if}
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .popout
     max-width 400px

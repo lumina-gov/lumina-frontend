@@ -155,13 +155,13 @@ $: service_cards_top = [
             <FlexWrap>
                 <Button
                     style="translucent"
-                    href="/signin"
+                    href="/auth"
                     hug={true}
                     right_icon={ExitToApp}>
                     Sign In
                 </Button>
                 <Button
-                    href="/onboarding"
+                    href="/auth"
                     hug={true}
                     right_icon={Settlement}>
                     Become a citizen
@@ -316,7 +316,7 @@ $: service_cards_top = [
 </Hero>
 
 <style lang="stylus">
-@import "variables"
+@import variables
 
 h1
     font-size 40px

@@ -23,7 +23,7 @@ $: progress.set(width, {
 </div>
 
 <style lang="stylus">
-@import 'variables'
+@import variables
 
 .progress-bar
     width: 100%

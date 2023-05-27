@@ -7,16 +7,16 @@ import future from "$lib/utils/future"
 import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
 import { MessageType } from "$lib/types/message"
 import { set_cookie } from "$lib/utils/cookie"
-import { goto, invalidateAll } from "$app/navigation"
 import Password from "$lib/controls/Password.svelte"
 import PhoneInput from "$lib/controls/phone/PhoneInput.svelte"
 import type { Country } from "$lib/data/countries"
-import { CreateUserDocument, LoginDocument } from "$lib/graphql/graphql-types"
+import { CreateUserDocument, type LoginMutation } from "$lib/graphql/graphql-types"
 import { page } from "$app/stores"
 import { createEventDispatcher, onMount } from "svelte"
 import Card from "$lib/cards/Card.svelte"
 import Box from "$lib/cards/Box.svelte"
 import Icon from "$lib/display/Icon.svelte"
+import type { GraphQLError } from "@urql/core/dist/urql-core-chunk"
 
 let dispatch = createEventDispatcher<{ next: void }>()
 
@@ -76,15 +76,27 @@ async function signup () {
     }
 
     {
-        let { data: loginData, error} = await $page.data.graph.gmutation(LoginDocument, {
-            password: user.password, email: user.email
+        let res = await fetch("/api/login", {
+            method: "POST",
+            body: JSON.stringify({
+                email: user.email,
+                password: user.password
+            }),
         })
 
-        if (error || !loginData) {
-            $page.data.alerts.create_alert(MessageType.Error, error?.message ?? "Login failed")
+        let { data, errors } = await res.json() as { data?: LoginMutation, errors?: GraphQLError[]}
+
+        if (errors || !data) {
+            if (errors) {
+                for (let error of errors) {
+                    $page.data.alerts.create_alert(MessageType.Error, error.message)
+                }
+            } else {
+                $page.data.alerts.create_alert(MessageType.Error, "Login failed")
+            }
         } else {
             $page.data.alerts.create_alert(MessageType.Success, "Login Successful")
-            set_cookie("token", loginData.auth_token)
+            set_cookie("token", data.auth_token)
             dispatch("next")
         }
     }
@@ -144,7 +156,7 @@ async function signup () {
     </Box>
 </Card>
 <style lang="stylus">
-@import 'variables'
+@import variables
 .split
     display grid
     grid-auto-flow column

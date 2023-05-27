@@ -25,7 +25,7 @@ let alerts: Props<Notification>[] = [
     </div>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .alerts
     display flex

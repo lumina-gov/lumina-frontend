@@ -17,7 +17,7 @@ export let opacity = 1
         size={size}/>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .icon
     display inline-flex

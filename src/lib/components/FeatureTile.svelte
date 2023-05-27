@@ -23,7 +23,7 @@ export let description: string
     </div>
 </div>
 <style lang="stylus">
-@import "variables"
+@import variables
 
 .feature
     display flex
