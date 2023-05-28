@@ -1,5 +1,8 @@
 <svelte:head>
     <link
+        href={env.PUBLIC_GRAPH_ENDPOINT}
+        rel="preconnect">
+    <link
         href="/manifest.json"
         rel="manifest">
     <script
@@ -14,6 +17,7 @@
     </script>
 </svelte:head>
 <script lang="ts">
+import { env } from "$env/dynamic/public"
 import AlertBar from "./AlertBar.svelte"
 import PageLoaderBar from "./PageLoaderBar.svelte"
 import ServiceWorkerUI from "./ServiceWorkerUI.svelte"

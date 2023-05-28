@@ -16,6 +16,9 @@ const config = {
         }
     }),
     kit: {
+        serviceWorker: {
+            register: true
+        },
         adapter: adapter(),
     }
 }
