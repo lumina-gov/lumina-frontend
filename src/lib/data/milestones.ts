@@ -114,7 +114,7 @@ export const milestones: Milestone[] = [
     },
     {
         title: "Light Square",
-        description: "Completion of Light Square, a major public space in Lumina.",
+        description: "Completion of Light Square, Lumina's official newsletter.",
         date: new Date("2023-01-03"),
         icon: NewspaperVariantOutline,
         contributors: [
