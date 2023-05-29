@@ -6,7 +6,6 @@ import Scale from "svelte-material-icons/ScaleBalance.svelte"
 import FormatListBulleted from "svelte-material-icons/FormatListBulleted.svelte"
 import Capitol from "$lib/icons/Capitol.svelte"
 import IdentityCard from "svelte-material-icons/CardAccountDetails.svelte"
-import History from "svelte-material-icons/History.svelte"
 import Culture from "svelte-material-icons/HumanHandsup.svelte"
 import Bank from "svelte-material-icons/Bank.svelte"
 import Vote from "svelte-material-icons/Vote.svelte"
@@ -14,6 +13,7 @@ import Money from "svelte-material-icons/Cash.svelte"
 import Tax from "svelte-material-icons/Taxi.svelte"
 import Family from "svelte-material-icons/HumanMaleFemaleChild.svelte"
 import Hospital from "svelte-material-icons/Hospital.svelte"
+import RocketLaunch from "svelte-material-icons/RocketLaunch.svelte"
 
 
 
@@ -83,14 +83,13 @@ export const information: Props<ServiceCard>[] = [
         },
     },
     {
-        title: "History",
+        title: "Milestones",
         description: "Learn about the history of Lumina, and how we got to where we are today.",
-        // href: "/history",
-        icon: History,
+        href: "/milestones",
+        icon: RocketLaunch,
         tag: {
-            color: "white",
-            opacity: true,
-            text: "Coming Soon"
+            color: "blue",
+            text: "Information"
         },
     },
     {
