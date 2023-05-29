@@ -54,7 +54,7 @@ export let last: boolean
 @import variables
 
 .milestone_card
-    margin-bottom 24px
+    margin-bottom 48px
 .milestone
     display: grid
     width: 100%
