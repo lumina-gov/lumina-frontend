@@ -40,9 +40,11 @@ export let last: boolean
                     level={4}>
                     CONTRIBUTORS
                 </Heading>
-                {#each milestone.contributors as contributor}
-                    <ContributorItem {contributor} />
-                {/each}
+                <div class="milestones">
+                    {#each milestone.contributors as contributor}
+                        <ContributorItem {contributor} />
+                    {/each}
+                </div>
             </VerticalLayout>
         </Card>
     </div>
@@ -72,4 +74,10 @@ export let last: boolean
     height 20px
     background $brand
     border-radius 50px
+
+.milestones
+    display flex
+    flex-direction column
+    gap 6px
+
 </style>

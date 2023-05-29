@@ -14,6 +14,7 @@ export let contributor: MilestoneContributor
     display grid
     grid-template-columns 1fr 3fr
     gap 16px
+    border-radius 4px
     background transparify(white, 4%)
     padding 8px 16px
     span
