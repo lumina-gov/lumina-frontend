@@ -55,7 +55,7 @@ export const milestones: Milestone[] = [
         icon: LightUniversity,
         contributors: [
             {
-                name: "Roméo",
+                name: "Romeo",
                 description: "Worked on frontend and backend development for the establishment of Lumina University",
             },
             {
@@ -149,7 +149,7 @@ export const milestones: Milestone[] = [
         icon: Web,
         contributors: [
             {
-                name: "Roméo",
+                name: "Romeo",
                 description: "Led frontend development efforts to create the website interface",
             },
             {
@@ -175,7 +175,7 @@ export const milestones: Milestone[] = [
             },
             {
                 name: "Albert Marashi",
-                description: "Contributed to and edited various sections of the constitution",
+                description: "Drafted key sections of the constitution",
             },
         ],
         tags: [Filter.Social]
