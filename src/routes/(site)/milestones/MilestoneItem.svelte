@@ -57,7 +57,7 @@ export let last: boolean
     display: grid
     width: 100%
     max-width:  850px
-    grid-template-columns: max-content max-content 1fr;
+    grid-template-columns: 150px max-content 2fr;
     grid-gap 0 24px
 .line
     width 4px
