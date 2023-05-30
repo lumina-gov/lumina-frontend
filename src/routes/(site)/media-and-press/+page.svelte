@@ -19,13 +19,13 @@ import Twitter from "svelte-material-icons/Twitter.svelte"
 import TikTok from "$lib/icons/TikTok.svelte"
 import Youtube from "svelte-material-icons/Youtube.svelte"
 import Email from "svelte-material-icons/Email.svelte"
-import { onMount, type SvelteComponent } from "svelte"
+import type { SvelteComponent } from "svelte"
 import Script from "svelte-material-icons/Script.svelte"
 import Image from "svelte-material-icons/Image.svelte"
 import Music from "svelte-material-icons/MusicNoteEighth.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import Download from "svelte-material-icons/Download.svelte"
-import PressReleaseLink from "./PressReleaseLink.svelte"
+import NewsPostLink from "./NewsPostLink.svelte"
 
 type Asset = {
     name: string
@@ -56,10 +56,6 @@ export let assets: Asset[] = [
         icon: Music
     }
 ]
-
-onMount(() => {
-    console.log(data.press_releases)
-})
 
 </script>
 <Hero gap={40}>
@@ -172,12 +168,12 @@ onMount(() => {
             </Paragraph>
         </VerticalLayout>
         <div class="items">
-            {#each data.press_releases as release}
-                <PressReleaseLink
-                    date={release.date}
-                    tags={["Press Release"]}
-                    title={release.title}
-                    url={"/news/" + release.slug}
+            {#each data.news_posts as news_post}
+                <NewsPostLink
+                    date={new Date(news_post.publishedDate)}
+                    tags={news_post.newsPostTags}
+                    title={news_post.title}
+                    url={"/news/" + news_post.postSlug}
                 />
             {/each}
         </div>

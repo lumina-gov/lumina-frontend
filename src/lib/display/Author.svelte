@@ -1,18 +1,18 @@
 <script lang="ts">
 
-export let author: {
-    name: string
-    src: string
-}
+export let src: string | null = null
+export let name: string
 
 </script>
 <div class="author">
-    <img
-        class="author_img"
-        alt="{author.name} profile picture"
-        src={author.src}>
+    {#if src}
+        <img
+            class="author_img"
+            alt="{name} profile picture"
+            src={src}>
+    {/if}
     <div class="author_name">
-        { author.name }
+        { name }
     </div>
 </div>
 <style lang="stylus">

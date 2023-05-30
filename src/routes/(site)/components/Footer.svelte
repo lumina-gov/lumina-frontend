@@ -52,9 +52,6 @@ import site_data from "$lib/data/site_data"
                     href="/citizenship">Citizenship</a>
                 <a
                     class="link"
-                    href="https://www.notion.so/lumina-gov/Knowledge-Hub-048c967061914862b2eeff5ba21da29b">Knowledge Center</a>
-                <a
-                    class="link"
                     href={site_data.socials.discord}>Discord</a>
                 <a
                     class="link"

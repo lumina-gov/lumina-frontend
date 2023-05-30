@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { BlockResponseWithChildren } from "$lib/api/notion_api"
+import type { Content } from "mdast-util-from-markdown/lib"
 import GenericBlock from "./GenericBlock.svelte"
 
-export let blocks: BlockResponseWithChildren[]
+export let blocks: Content[]
 </script>
 <div class="blocks-array">
     {#each blocks as block}
@@ -14,7 +14,8 @@ export let blocks: BlockResponseWithChildren[]
 .blocks-array
     display flex
     flex-direction column
-    gap 24px
+    gap 1.8em
+    line-height 1.8em
     width 100%
     align-items flex-start
 </style>

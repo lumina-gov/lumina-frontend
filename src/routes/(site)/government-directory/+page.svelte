@@ -21,6 +21,7 @@ import MenuDown from "svelte-material-icons/MenuDown.svelte"
 import Sidebar from "./Sidebar.svelte"
 import Box from "$lib/cards/Box.svelte"
 import Government from "svelte-material-icons/Bank.svelte"
+import { OrganisationType } from "$lib/hygraph/graphql-types"
 
 export let data
 
@@ -52,8 +53,9 @@ let org_types: {
         name: "Corporation",
         description: "A company or group of people authorised to act as a single entity and recognised as such in law, headed by a director",
     }
-
 ]
+
+$: core_orgs = data.organisations.filter(org => org.tags.includes(OrganisationType.Core))
 
 </script>
 
@@ -115,7 +117,7 @@ let org_types: {
                 <ResponsiveLayout
                     align_items="stretch"
                     min_item_size={220}>
-                    {#each data.core_orgs as org}
+                    {#each core_orgs as org}
                         <Card
                             align_items="flex-start"
                             gap={16}
@@ -129,12 +131,14 @@ let org_types: {
                                     { org.description }
                                 </Paragraph>
                             </VerticalLayout>
-                            <div class="tags">
-                                <Tag color="brand">{ org.type }</Tag>
+                            <FlexWrap>
+                                {#each org.tags as tag}
+                                    <Tag color="brand">{ tag }</Tag>
+                                {/each}
                                 <Tag
-                                    color={org.status === "Halted" ? "white" : "green"}
-                                    opacity={org.status === "Halted"}>{ org.status }</Tag>
-                            </div>
+                                    color={org.organisationStatus === "Halted" ? "white" : "green"}
+                                    opacity={org.organisationStatus === "Halted"}>{ org.organisationStatus }</Tag>
+                            </FlexWrap>
                         </Card>
                     {/each}
                 </ResponsiveLayout>

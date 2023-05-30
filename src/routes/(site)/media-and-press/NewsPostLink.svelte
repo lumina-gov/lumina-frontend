@@ -3,25 +3,25 @@ import Icon from "$lib/display/Icon.svelte"
 import Tag from "$lib/display/Tag.svelte"
 import Newspaper from "svelte-material-icons/Newspaper.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
+import type { NewsPostTag } from "$lib/hygraph/graphql-types"
 
 export let title: string
 export let url: string
-export let date: Date
-export let tags: string[]
+export let date: Date | null
+export let tags: Pick<NewsPostTag, "name" | "tagSlug">[]
 
 // date formatted as 12th Aug 2021
-$: formatted_date = date.toLocaleDateString("en-AU", {
+$: formatted_date = date ? date.toLocaleDateString("en-AU", {
     day: "numeric",
     month: "short",
     year: "numeric"
-})
+}) : ""
 
 </script>
 <a
     class="press-release"
     href={url}
-    rel="noreferrer"
-    target="_blank">
+    rel="noreferrer">
     <div>
         <Icon
             icon={Newspaper}
@@ -36,7 +36,7 @@ $: formatted_date = date.toLocaleDateString("en-AU", {
         </div>
         <div class="tags">
             {#each tags as tag}
-                <Tag>{ tag }</Tag>
+                <Tag>{ tag.name }</Tag>
             {/each}
         </div>
         <Icon

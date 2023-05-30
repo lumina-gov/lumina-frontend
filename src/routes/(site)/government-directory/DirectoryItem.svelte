@@ -1,16 +1,12 @@
 <script lang="ts">
+import IconButton from "$lib/controls/IconButton.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import Tag from "$lib/display/Tag.svelte"
+import { OrganisationStatus, OrganisationType, type OrganisationsQuery } from "$lib/hygraph/graphql-types"
 import Government from "svelte-material-icons/Bank.svelte"
+import Web from "svelte-material-icons/Web.svelte"
 
-export let organisation: {
-    name: string,
-    slug: string,
-    type: string,
-    description: string,
-    website: string,
-    status: string,
-}
+export let organisation: OrganisationsQuery["organisations"][0]
 
 </script>
 <div class="directory-item">
@@ -24,10 +20,17 @@ export let organisation: {
         </div>
     </div>
     <div>
-        <Tag>{ organisation.type }</Tag>
+        {#if organisation.officialWebsite}
+            <IconButton
+                href={organisation.officialWebsite}
+                icon={Web}/>
+        {/if}
+        {#each organisation.tags.filter(tag => tag !== OrganisationType.Government) as tag}
+            <Tag>{ tag }</Tag>
+        {/each}
         <Tag
-            color={organisation.status === "Halted" ? "white" : "green"}
-            opacity={organisation.status === "Halted"}>{ organisation.status }</Tag>
+            color={organisation.organisationStatus === OrganisationStatus.Halted ? "white" : "green"}
+            opacity={organisation.organisationStatus === OrganisationStatus.Halted}>{ organisation.organisationStatus }</Tag>
         <!-- <Icon icon={ChevronRight} color="brand" size={24}/> -->
     </div>
 </div>

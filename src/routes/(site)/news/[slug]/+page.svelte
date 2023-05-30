@@ -7,8 +7,7 @@ import Heading from "$lib/display/Heading.svelte"
 import Tag from "$lib/display/Tag.svelte"
 import Card from "$lib/cards/Card.svelte"
 import VerticalLayout from "$lib/layouts/VerticalLayout.svelte"
-import BlocksArray from "$lib/components/blocks/BlocksArray.svelte"
-import Date from "$lib/display/Date.svelte"
+import DateComponent from "$lib/display/Date.svelte"
 import PageHead from "$lib/components/PageHead.svelte"
 
 export let data
@@ -16,14 +15,17 @@ export let data
 import type { NewsArticle, WithContext } from "schema-dts"
 import Author from "$lib/display/Author.svelte"
 import SchemaComponent from "$lib/components/SchemaComponent.svelte"
+import MarkdownRenderer from "$lib/display/MarkdownRenderer.svelte"
+import FlexWrap from "$lib/display/FlexWrap.svelte"
 
+$: date = new Date(data.post.publishedDate)
 
-export const schema: WithContext<NewsArticle> = {
+$: schema = {
     "@context": "https://schema.org",
     "@id": "https://lumina.earth/",
     "@type": "NewsArticle",
     "headline": data.post.title,
-    "datePublished": data.post.date.toISOString(),
+    "datePublished": date.toISOString(),
     "author": [
         {
             "@type": "GovernmentOrganization",
@@ -40,37 +42,39 @@ export const schema: WithContext<NewsArticle> = {
         "@type": "Country",
         "name": "Lumina",
     },
-}
+} satisfies WithContext<NewsArticle>
 
 </script>
 <Hero>
-    <div class="tags">
-        {#each data.post.tags as tag}
-            <Tag color="brand">{ tag }</Tag>
+    <FlexWrap>
+        {#each data.post.newsPostTags as tag}
+            <Tag color="brand">{ tag.name }</Tag>
         {/each}
-    </div>
+    </FlexWrap>
     <Heading left_icon={Newspaper}>{ data.post.title }</Heading>
-    <div class="flex-wrap">
-        <Date date={data.post.date}/>
-        <Author
-            author={{
-                name: "Lumina",
-                src: "/images/lumina.png",
-            }}/>
-    </div>
+    <FlexWrap>
+        <DateComponent date={date}/>
+        {#each data.post.authors as author}
+            <Author
+                name={author.authorName}
+                src={author.displayPicture?.url}/>
+        {/each}
+    </FlexWrap>
     <Card
         padding="32px"
         shadow={true}>
         <VerticalLayout max_width={600}>
-            <BlocksArray blocks={data.post.blocks}/>
+            {#each data.post.content as block}
+                <!-- {#if block.__typename == "markdown"} -->
+                <MarkdownRenderer markdown={block.markdown}/>
+                <!-- {:else} -->
+                <!-- <Unsupported/> -->
+                <!-- {/if} -->
+            {/each}
         </VerticalLayout>
     </Card>
 </Hero>
 <style lang="stylus">
 
-.flex-wrap
-    display flex
-    flex-wrap wrap
-    gap 8px
-    align-items center
+
 </style>

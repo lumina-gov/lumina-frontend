@@ -1,6 +1,6 @@
 import { env } from "$env/dynamic/private"
 import { LoginDocument } from "$lib/graphql/graphql-types"
-import { init_urql, } from "$lib/stores/graphql"
+import { init_urql_lumina, } from "$lib/stores/graphql"
 import { user_store_init } from "$lib/stores/user_store"
 import { error } from "@sveltejs/kit"
 
@@ -15,7 +15,7 @@ export async function POST({ request }) {
     }
     const scopes = json.scopes && Array.isArray(json.scopes) ? json.scopes : ["*"]
     const user_store = user_store_init(null)
-    const graph = init_urql(user_store)
+    const graph = init_urql_lumina(user_store)
 
     const res  = await graph.gmutation(LoginDocument, {
         email: json.email,

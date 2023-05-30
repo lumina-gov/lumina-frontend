@@ -1,0 +1,60 @@
+
+query NewsPosts {
+    newsPosts(orderBy:publishedDate_DESC) {
+        postSlug
+        publishedDate
+        title
+        newsPostTags {
+            tagSlug
+            name
+        }
+    }
+}
+
+query NewsPost($slug: String!) {
+    newsPost(where: { postSlug: $slug }) {
+        createdAt
+        id
+        postSlug
+        publishedDate
+        title
+        updatedAt
+        newsPostTags {
+            id
+            tagSlug
+            name
+        }
+        authors {
+            authorName
+            displayPicture {
+                url(transformation: {
+                        image: { resize: { width: 100, height: 100, fit: clip } }
+                })
+            }
+        }
+        content {
+            __typename
+            ... on Markdown {
+                markdown
+            }
+        }
+    }
+}
+
+query Organisations {
+    organisations(
+        first: 100,
+        where: { public: true, tags_contains_all: [Government]}
+        orderBy: name_ASC
+    ){
+        name
+        logoSquare{
+            url(transformation: {image:{resize:{width: 200, height: 200, fit:clip}}})
+        },
+        officialWebsite,
+        slug,
+        tags,
+        organisationStatus,
+        description
+    }
+}
