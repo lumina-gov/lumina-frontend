@@ -62,7 +62,7 @@ function handle_keyup(e: KeyboardEvent) {
     width 100%
     display flex
     &.disabled
-        opacity 0.6
+        opacity 0.5
         pointer-events none
     &.clickable
         cursor pointer

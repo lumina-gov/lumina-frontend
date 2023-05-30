@@ -37,6 +37,7 @@
     "dependencies": {
         "@resvg/resvg-js": "^2.4.1",
         "@urql/core": "^4.0.7",
+        "chart.js": "^4.3.0",
         "highlight.js": "^11.8.0",
         "marked": "^5.0.2",
         "mdast-util-directive": "^2.2.4",

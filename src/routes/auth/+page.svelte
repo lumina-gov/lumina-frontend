@@ -15,6 +15,7 @@ import ArrowLeft from "svelte-material-icons/ArrowLeft.svelte"
 import { page } from "$app/stores"
 import { goto, invalidateAll } from "$app/navigation"
 import PageHead from "$lib/components/PageHead.svelte"
+import { onMount } from "svelte"
 
 export let data
 
@@ -32,6 +33,15 @@ async function next() {
         await goto(redirect ?? "/")
     }
 }
+
+onMount(() => {
+    let referral = $page.url.searchParams.get("referral")
+    $page.url.searchParams.delete("referral")
+
+    goto($page.url)
+
+    if(referral) localStorage.setItem("referral", referral)
+})
 
 </script>
 <div class="flex">

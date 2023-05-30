@@ -22,7 +22,8 @@ $: disabled = href === undefined
     {disabled}
     gap={size === "large" ? "16px" : "8px"}
     {href}
-    padding={size === "large" ? "24px" : "16px"}>
+    padding={size === "large" ? "24px" : "16px"}
+    reset_bg={true}>
     <Box
         align_items="center"
         direction="horizontal"

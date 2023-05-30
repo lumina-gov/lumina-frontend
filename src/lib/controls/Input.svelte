@@ -16,6 +16,7 @@ export let right_icon_handler: ((e: Event) => void) | undefined = undefined
 export let focus_on_mount = false
 export let value: string
 export let autocomplete: string | undefined = undefined
+export let readonly: boolean | undefined = undefined
 
 export let input_ref: HTMLInputElement | null = null
 
@@ -56,6 +57,7 @@ onMount(() => {
             name={autocomplete}
             {autocomplete}
             {placeholder}
+            {readonly}
             {type}
             {value}
             on:keyup

@@ -3,7 +3,8 @@
 export let padding_vertical: number | undefined = undefined
 export let vertical_gap: number | undefined = undefined
 export let horizontal_gap: number | undefined = undefined
-
+export let flex: string | undefined = undefined
+export let side_padding = true
 export let columns: {
     "mobile": number,
     "tablet": number,
@@ -13,9 +14,6 @@ export let columns: {
     "tablet": 8,
     "laptop": 16,
 }
-
-export let flex: string | undefined = undefined
-export let side_padding = true
 
 </script>
 <div

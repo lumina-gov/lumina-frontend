@@ -12,5 +12,6 @@ export async function load({ parent }) {
     }
     return {
         user_count: data?.user_count || 2000,
+        user_count_by_interval: data?.user_count_by_interval || [0],
     }
 }

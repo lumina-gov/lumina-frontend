@@ -12,20 +12,13 @@ import PhoneInput from "$lib/controls/phone/PhoneInput.svelte"
 import type { Country } from "$lib/data/countries"
 import { CreateUserDocument, type LoginMutation } from "$lib/graphql/graphql-types"
 import { page } from "$app/stores"
-import { createEventDispatcher, onMount } from "svelte"
+import { createEventDispatcher } from "svelte"
 import Card from "$lib/cards/Card.svelte"
 import Box from "$lib/cards/Box.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import type { GraphQLError } from "@urql/core/dist/urql-core-chunk"
 
 let dispatch = createEventDispatcher<{ next: void }>()
-
-onMount(() => {
-    let referral = $page.url.searchParams.get("referral")
-
-    if(referral) localStorage.setItem("referral", referral)
-})
-
 
 let loading = false
 
