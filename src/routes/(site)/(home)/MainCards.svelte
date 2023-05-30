@@ -2,8 +2,9 @@
 import ServiceCard from "$lib/components/ServiceCard.svelte"
 import Grid from "$lib/layouts/Grid.svelte"
 import GridItem from "$lib/layouts/GridItem.svelte"
+import type { Props } from "$lib/utils/typed_props"
 
-export let cards: any[] = []
+export let cards: Props<ServiceCard>[] = []
 </script>
 <div class="main-cards">
     <Grid
@@ -24,6 +25,7 @@ export let cards: any[] = []
                 flex_direction="row">
                 <ServiceCard
                     {...card}
+                    reset_bg={true}
                     size="large"/>
             </GridItem>
         {/each}

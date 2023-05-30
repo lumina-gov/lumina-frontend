@@ -14,6 +14,7 @@ export let size: "small" | "large" = "small"
 export let href: string | undefined = undefined
 export let tag: Props<Tag>
 export let description: string
+export let reset_bg = false
 $: disabled = href === undefined
 
 </script>
@@ -23,7 +24,7 @@ $: disabled = href === undefined
     gap={size === "large" ? "16px" : "8px"}
     {href}
     padding={size === "large" ? "24px" : "16px"}
-    reset_bg={true}>
+    reset_bg={reset_bg}>
     <Box
         align_items="center"
         direction="horizontal"
