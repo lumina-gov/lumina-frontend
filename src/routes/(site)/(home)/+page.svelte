@@ -172,18 +172,9 @@ $: service_cards_top = [
         }}
         justify_content="center"
         position="relative">
-        <div class="stats">
-            <div class="stat">
-                <StatBlock
-                    stat={{
-                        icon: AccountGroup,
-                        name: "Citizens registered",
-                        value: data.user_count,
-                        color: "#5D35D5"
-                    }}/>
-            </div>
-            <Chart data={data.user_count_by_interval}/>
-        </div>
+        <Chart
+            citizen_count={data.user_count}
+            data={data.user_count_by_interval}/>
     </GridItem>
 </Grid>
 <MainCards cards={service_cards_top}/>
@@ -215,19 +206,9 @@ h2
     font-weight 600
     opacity 0.3
 
-.stat
-    position absolute
-    z-index 1
-    top 0
-    left 50px
-
 .padding
     height 80px
     @media (max-width: $tablet)
         height 0
 
-.stats
-    max-height 300px
-    width 100%
-    position relative
 </style>

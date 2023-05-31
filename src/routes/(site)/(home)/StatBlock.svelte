@@ -12,7 +12,7 @@ export let stat: {
 
 <div class="stat">
     <div
-        style:color={ stat.color }
+        style:background={ stat.color }
         class="stat-icon">
         <svelte:component this={ stat.icon } />
     </div>
@@ -30,19 +30,28 @@ export let stat: {
 .stat
     text-align center
     display flex
-    flex-direction column
+    gap 12px
     align-items center
 
 .stat-icon
-    font-size 48px
+    font-size 32px
+    color white
+    display inline-flex
+    height 48px
+    width 48px
+    border-radius 50px
+    align-items center
+    justify-content center
 
 .stat-value
     font-size 36px
     padding-bottom 4px
     font-weight 600
+    display inline-flex
 
 .stat-name
     font-size 18px
     opacity 0.5
+    display inline-flex
 
 </style>

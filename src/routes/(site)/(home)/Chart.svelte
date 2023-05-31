@@ -1,8 +1,11 @@
 <script lang="ts">
 import Chart from "chart.js/auto"
 import { onMount } from "svelte"
+import StatBlock from "./StatBlock.svelte"
+import Passport from "svelte-material-icons/Passport.svelte"
 
 export let data: number[]
+export let citizen_count: number
 // interval in months
 let interval = 3
 let canvas: HTMLCanvasElement
@@ -37,7 +40,7 @@ function clean(data: number[]): { year: string, month: string, count: number }[]
 onMount(generate_canvas)
 
 function generate_canvas() {
-    let chart =new Chart(canvas, {
+    let chart = new Chart(canvas, {
         type: "line",
         data: {
             labels: clean_data.map(({ year, month }) => `${month} ${year}`),
@@ -71,12 +74,20 @@ function generate_canvas() {
             }
         }
     })
+
     window.onresize = () => {
         chart.resize()
     }
 }
 
 </script>
+<StatBlock
+    stat={{
+        icon: Passport,
+        name: "Citizens registered",
+        value: citizen_count,
+        color: "#5D35D5"
+    }}/>
 <canvas
     bind:this={ canvas }
     height="min-content"
@@ -85,5 +96,6 @@ function generate_canvas() {
 @import variables
 
 canvas
+    max-height 350px
     min-height 350px
 </style>
