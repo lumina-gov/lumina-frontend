@@ -58,3 +58,19 @@ query Organisations {
         description
     }
 }
+
+query Act($slug: String!) {
+    act(
+        where: { slug: $slug }
+    ) {
+        title
+        slug
+        actStatus
+        content {
+            __typename
+            ... on Markdown {
+                markdown
+            }
+        }
+    }
+}

@@ -21,6 +21,667 @@ export type Scalars = {
   RichTextAST: any;
 };
 
+export type Act = Node & {
+  __typename?: 'Act';
+  actStatus: ActStatus;
+  content: Array<ActcontentUnion>;
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  dateApproved?: Maybe<Scalars['Date']>;
+  /** Get the document in other stages */
+  documentInStages: Array<Act>;
+  /** List of Act versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  protectedAct: Scalars['Boolean'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  slug: Scalars['String'];
+  /** System stage field */
+  stage: Stage;
+  title: Scalars['String'];
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type ActContentArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type ActCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type ActDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type ActHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type ActPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type ActScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type ActUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type ActConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: ActWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type ActConnection = {
+  __typename?: 'ActConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<ActEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type ActCreateInput = {
+  actStatus: ActStatus;
+  clifrzwcp07zy01un97kq324x?: InputMaybe<LegislationReferenceCreateManyInlineInput>;
+  content?: InputMaybe<ActcontentUnionCreateManyInlineInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  dateApproved?: InputMaybe<Scalars['Date']>;
+  protectedAct: Scalars['Boolean'];
+  slug: Scalars['String'];
+  title: Scalars['String'];
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type ActCreateManyInlineInput = {
+  /** Connect multiple existing Act documents */
+  connect?: InputMaybe<Array<ActWhereUniqueInput>>;
+  /** Create and connect multiple existing Act documents */
+  create?: InputMaybe<Array<ActCreateInput>>;
+};
+
+export type ActCreateOneInlineInput = {
+  /** Connect one existing Act document */
+  connect?: InputMaybe<ActWhereUniqueInput>;
+  /** Create and connect one Act document */
+  create?: InputMaybe<ActCreateInput>;
+};
+
+/** An edge in a connection. */
+export type ActEdge = {
+  __typename?: 'ActEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Act;
+};
+
+/** Identifies documents */
+export type ActManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<ActWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<ActWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<ActWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  actStatus?: InputMaybe<ActStatus>;
+  /** All values that are contained in given list. */
+  actStatus_in?: InputMaybe<Array<InputMaybe<ActStatus>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  actStatus_not?: InputMaybe<ActStatus>;
+  /** All values that are not contained in given list. */
+  actStatus_not_in?: InputMaybe<Array<InputMaybe<ActStatus>>>;
+  /** All values in which the union is empty. */
+  content_empty?: InputMaybe<Scalars['Boolean']>;
+  /** Matches if the modular component contains at least one connection to the item provided to the filter */
+  content_some?: InputMaybe<ActcontentUnionWhereInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  dateApproved?: InputMaybe<Scalars['Date']>;
+  /** All values greater than the given value. */
+  dateApproved_gt?: InputMaybe<Scalars['Date']>;
+  /** All values greater than or equal the given value. */
+  dateApproved_gte?: InputMaybe<Scalars['Date']>;
+  /** All values that are contained in given list. */
+  dateApproved_in?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  /** All values less than the given value. */
+  dateApproved_lt?: InputMaybe<Scalars['Date']>;
+  /** All values less than or equal the given value. */
+  dateApproved_lte?: InputMaybe<Scalars['Date']>;
+  /** Any other value that exists and is not equal to the given value. */
+  dateApproved_not?: InputMaybe<Scalars['Date']>;
+  /** All values that are not contained in given list. */
+  dateApproved_not_in?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  documentInStages_every?: InputMaybe<ActWhereStageInput>;
+  documentInStages_none?: InputMaybe<ActWhereStageInput>;
+  documentInStages_some?: InputMaybe<ActWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  protectedAct?: InputMaybe<Scalars['Boolean']>;
+  /** Any other value that exists and is not equal to the given value. */
+  protectedAct_not?: InputMaybe<Scalars['Boolean']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  slug?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  slug_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  slug_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  slug_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  slug_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  slug_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  slug_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  slug_starts_with?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  title_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum ActOrderByInput {
+  ActStatusAsc = 'actStatus_ASC',
+  ActStatusDesc = 'actStatus_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  DateApprovedAsc = 'dateApproved_ASC',
+  DateApprovedDesc = 'dateApproved_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  ProtectedActAsc = 'protectedAct_ASC',
+  ProtectedActDesc = 'protectedAct_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export enum ActStatus {
+  Draft = 'Draft',
+  InForce = 'InForce',
+  Repealed = 'Repealed'
+}
+
+export type ActUpdateInput = {
+  actStatus?: InputMaybe<ActStatus>;
+  clifrzwcp07zy01un97kq324x?: InputMaybe<LegislationReferenceUpdateManyInlineInput>;
+  content?: InputMaybe<ActcontentUnionUpdateManyInlineInput>;
+  dateApproved?: InputMaybe<Scalars['Date']>;
+  protectedAct?: InputMaybe<Scalars['Boolean']>;
+  slug?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+};
+
+export type ActUpdateManyInlineInput = {
+  /** Connect multiple existing Act documents */
+  connect?: InputMaybe<Array<ActConnectInput>>;
+  /** Create and connect multiple Act documents */
+  create?: InputMaybe<Array<ActCreateInput>>;
+  /** Delete multiple Act documents */
+  delete?: InputMaybe<Array<ActWhereUniqueInput>>;
+  /** Disconnect multiple Act documents */
+  disconnect?: InputMaybe<Array<ActWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Act documents */
+  set?: InputMaybe<Array<ActWhereUniqueInput>>;
+  /** Update multiple Act documents */
+  update?: InputMaybe<Array<ActUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Act documents */
+  upsert?: InputMaybe<Array<ActUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type ActUpdateManyInput = {
+  actStatus?: InputMaybe<ActStatus>;
+  dateApproved?: InputMaybe<Scalars['Date']>;
+  protectedAct?: InputMaybe<Scalars['Boolean']>;
+  title?: InputMaybe<Scalars['String']>;
+};
+
+export type ActUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: ActUpdateManyInput;
+  /** Document search */
+  where: ActWhereInput;
+};
+
+export type ActUpdateOneInlineInput = {
+  /** Connect existing Act document */
+  connect?: InputMaybe<ActWhereUniqueInput>;
+  /** Create and connect one Act document */
+  create?: InputMaybe<ActCreateInput>;
+  /** Delete currently connected Act document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected Act document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single Act document */
+  update?: InputMaybe<ActUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Act document */
+  upsert?: InputMaybe<ActUpsertWithNestedWhereUniqueInput>;
+};
+
+export type ActUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: ActUpdateInput;
+  /** Unique document search */
+  where: ActWhereUniqueInput;
+};
+
+export type ActUpsertInput = {
+  /** Create document if it didn't exist */
+  create: ActCreateInput;
+  /** Update document if it exists */
+  update: ActUpdateInput;
+};
+
+export type ActUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: ActUpsertInput;
+  /** Unique document search */
+  where: ActWhereUniqueInput;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type ActWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Identifies documents */
+export type ActWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<ActWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<ActWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<ActWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  actStatus?: InputMaybe<ActStatus>;
+  /** All values that are contained in given list. */
+  actStatus_in?: InputMaybe<Array<InputMaybe<ActStatus>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  actStatus_not?: InputMaybe<ActStatus>;
+  /** All values that are not contained in given list. */
+  actStatus_not_in?: InputMaybe<Array<InputMaybe<ActStatus>>>;
+  /** All values in which the union is empty. */
+  content_empty?: InputMaybe<Scalars['Boolean']>;
+  /** Matches if the modular component contains at least one connection to the item provided to the filter */
+  content_some?: InputMaybe<ActcontentUnionWhereInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  dateApproved?: InputMaybe<Scalars['Date']>;
+  /** All values greater than the given value. */
+  dateApproved_gt?: InputMaybe<Scalars['Date']>;
+  /** All values greater than or equal the given value. */
+  dateApproved_gte?: InputMaybe<Scalars['Date']>;
+  /** All values that are contained in given list. */
+  dateApproved_in?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  /** All values less than the given value. */
+  dateApproved_lt?: InputMaybe<Scalars['Date']>;
+  /** All values less than or equal the given value. */
+  dateApproved_lte?: InputMaybe<Scalars['Date']>;
+  /** Any other value that exists and is not equal to the given value. */
+  dateApproved_not?: InputMaybe<Scalars['Date']>;
+  /** All values that are not contained in given list. */
+  dateApproved_not_in?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  documentInStages_every?: InputMaybe<ActWhereStageInput>;
+  documentInStages_none?: InputMaybe<ActWhereStageInput>;
+  documentInStages_some?: InputMaybe<ActWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  protectedAct?: InputMaybe<Scalars['Boolean']>;
+  /** Any other value that exists and is not equal to the given value. */
+  protectedAct_not?: InputMaybe<Scalars['Boolean']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  slug?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  slug_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  slug_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  slug_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  slug_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  slug_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  slug_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  slug_starts_with?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  title_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type ActWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<ActWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<ActWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<ActWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<ActWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References Act record uniquely */
+export type ActWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+export type ActcontentUnion = LegislationReference | Markdown;
+
+export type ActcontentUnionConnectInput = {
+  LegislationReference?: InputMaybe<LegislationReferenceConnectInput>;
+  Markdown?: InputMaybe<MarkdownConnectInput>;
+};
+
+export type ActcontentUnionCreateInput = {
+  LegislationReference?: InputMaybe<LegislationReferenceCreateInput>;
+  Markdown?: InputMaybe<MarkdownCreateInput>;
+};
+
+export type ActcontentUnionCreateManyInlineInput = {
+  /** Create and connect multiple existing ActcontentUnion documents */
+  create?: InputMaybe<Array<ActcontentUnionCreateInput>>;
+};
+
+export type ActcontentUnionCreateOneInlineInput = {
+  /** Create and connect one ActcontentUnion document */
+  create?: InputMaybe<ActcontentUnionCreateInput>;
+};
+
+export type ActcontentUnionCreateWithPositionInput = {
+  LegislationReference?: InputMaybe<LegislationReferenceCreateWithPositionInput>;
+  Markdown?: InputMaybe<MarkdownCreateWithPositionInput>;
+};
+
+export type ActcontentUnionUpdateInput = {
+  LegislationReference?: InputMaybe<LegislationReferenceUpdateInput>;
+  Markdown?: InputMaybe<MarkdownUpdateInput>;
+};
+
+export type ActcontentUnionUpdateManyInlineInput = {
+  /** Create and connect multiple ActcontentUnion component instances */
+  create?: InputMaybe<Array<ActcontentUnionCreateWithPositionInput>>;
+  /** Delete multiple ActcontentUnion documents */
+  delete?: InputMaybe<Array<ActcontentUnionWhereUniqueInput>>;
+  /** Update multiple ActcontentUnion component instances */
+  update?: InputMaybe<Array<ActcontentUnionUpdateWithNestedWhereUniqueAndPositionInput>>;
+  /** Upsert multiple ActcontentUnion component instances */
+  upsert?: InputMaybe<Array<ActcontentUnionUpsertWithNestedWhereUniqueAndPositionInput>>;
+};
+
+export type ActcontentUnionUpdateManyWithNestedWhereInput = {
+  LegislationReference?: InputMaybe<LegislationReferenceUpdateManyWithNestedWhereInput>;
+  Markdown?: InputMaybe<MarkdownUpdateManyWithNestedWhereInput>;
+};
+
+export type ActcontentUnionUpdateOneInlineInput = {
+  /** Create and connect one ActcontentUnion document */
+  create?: InputMaybe<ActcontentUnionCreateInput>;
+  /** Delete currently connected ActcontentUnion document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Update single ActcontentUnion document */
+  update?: InputMaybe<ActcontentUnionUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single ActcontentUnion document */
+  upsert?: InputMaybe<ActcontentUnionUpsertWithNestedWhereUniqueInput>;
+};
+
+export type ActcontentUnionUpdateWithNestedWhereUniqueAndPositionInput = {
+  LegislationReference?: InputMaybe<LegislationReferenceUpdateWithNestedWhereUniqueAndPositionInput>;
+  Markdown?: InputMaybe<MarkdownUpdateWithNestedWhereUniqueAndPositionInput>;
+};
+
+export type ActcontentUnionUpdateWithNestedWhereUniqueInput = {
+  LegislationReference?: InputMaybe<LegislationReferenceUpdateWithNestedWhereUniqueInput>;
+  Markdown?: InputMaybe<MarkdownUpdateWithNestedWhereUniqueInput>;
+};
+
+export type ActcontentUnionUpsertWithNestedWhereUniqueAndPositionInput = {
+  LegislationReference?: InputMaybe<LegislationReferenceUpsertWithNestedWhereUniqueAndPositionInput>;
+  Markdown?: InputMaybe<MarkdownUpsertWithNestedWhereUniqueAndPositionInput>;
+};
+
+export type ActcontentUnionUpsertWithNestedWhereUniqueInput = {
+  LegislationReference?: InputMaybe<LegislationReferenceUpsertWithNestedWhereUniqueInput>;
+  Markdown?: InputMaybe<MarkdownUpsertWithNestedWhereUniqueInput>;
+};
+
+export type ActcontentUnionWhereInput = {
+  LegislationReference?: InputMaybe<LegislationReferenceWhereInput>;
+  Markdown?: InputMaybe<MarkdownWhereInput>;
+};
+
+export type ActcontentUnionWhereUniqueInput = {
+  LegislationReference?: InputMaybe<LegislationReferenceWhereUniqueInput>;
+  Markdown?: InputMaybe<MarkdownWhereUniqueInput>;
+};
+
 export type Aggregate = {
   __typename?: 'Aggregate';
   count: Scalars['Int'];
@@ -1401,6 +2062,310 @@ export type ImageTransformationInput = {
   resize?: InputMaybe<ImageResizeInput>;
 };
 
+export type LegislationReference = {
+  __typename?: 'LegislationReference';
+  acts: Array<Act>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  /** System stage field */
+  stage: Stage;
+};
+
+
+export type LegislationReferenceActsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<ActOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ActWhereInput>;
+};
+
+export type LegislationReferenceConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: LegislationReferenceWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type LegislationReferenceConnection = {
+  __typename?: 'LegislationReferenceConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<LegislationReferenceEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type LegislationReferenceCreateInput = {
+  acts?: InputMaybe<ActCreateManyInlineInput>;
+};
+
+export type LegislationReferenceCreateManyInlineInput = {
+  /** Create and connect multiple existing LegislationReference documents */
+  create?: InputMaybe<Array<LegislationReferenceCreateInput>>;
+};
+
+export type LegislationReferenceCreateOneInlineInput = {
+  /** Create and connect one LegislationReference document */
+  create?: InputMaybe<LegislationReferenceCreateInput>;
+};
+
+export type LegislationReferenceCreateWithPositionInput = {
+  /** Document to create */
+  data: LegislationReferenceCreateInput;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+};
+
+/** An edge in a connection. */
+export type LegislationReferenceEdge = {
+  __typename?: 'LegislationReferenceEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: LegislationReference;
+};
+
+/** Identifies documents */
+export type LegislationReferenceManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<LegislationReferenceWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<LegislationReferenceWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<LegislationReferenceWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  acts_every?: InputMaybe<ActWhereInput>;
+  acts_none?: InputMaybe<ActWhereInput>;
+  acts_some?: InputMaybe<ActWhereInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+};
+
+export enum LegislationReferenceOrderByInput {
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC'
+}
+
+export type LegislationReferenceParent = Act;
+
+export type LegislationReferenceParentConnectInput = {
+  Act?: InputMaybe<ActConnectInput>;
+};
+
+export type LegislationReferenceParentCreateInput = {
+  Act?: InputMaybe<ActCreateInput>;
+};
+
+export type LegislationReferenceParentCreateManyInlineInput = {
+  /** Connect multiple existing LegislationReferenceParent documents */
+  connect?: InputMaybe<Array<LegislationReferenceParentWhereUniqueInput>>;
+  /** Create and connect multiple existing LegislationReferenceParent documents */
+  create?: InputMaybe<Array<LegislationReferenceParentCreateInput>>;
+};
+
+export type LegislationReferenceParentCreateOneInlineInput = {
+  /** Connect one existing LegislationReferenceParent document */
+  connect?: InputMaybe<LegislationReferenceParentWhereUniqueInput>;
+  /** Create and connect one LegislationReferenceParent document */
+  create?: InputMaybe<LegislationReferenceParentCreateInput>;
+};
+
+export type LegislationReferenceParentUpdateInput = {
+  Act?: InputMaybe<ActUpdateInput>;
+};
+
+export type LegislationReferenceParentUpdateManyInlineInput = {
+  /** Connect multiple existing LegislationReferenceParent documents */
+  connect?: InputMaybe<Array<LegislationReferenceParentConnectInput>>;
+  /** Create and connect multiple LegislationReferenceParent documents */
+  create?: InputMaybe<Array<LegislationReferenceParentCreateInput>>;
+  /** Delete multiple LegislationReferenceParent documents */
+  delete?: InputMaybe<Array<LegislationReferenceParentWhereUniqueInput>>;
+  /** Disconnect multiple LegislationReferenceParent documents */
+  disconnect?: InputMaybe<Array<LegislationReferenceParentWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing LegislationReferenceParent documents */
+  set?: InputMaybe<Array<LegislationReferenceParentWhereUniqueInput>>;
+  /** Update multiple LegislationReferenceParent documents */
+  update?: InputMaybe<Array<LegislationReferenceParentUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple LegislationReferenceParent documents */
+  upsert?: InputMaybe<Array<LegislationReferenceParentUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type LegislationReferenceParentUpdateManyWithNestedWhereInput = {
+  Act?: InputMaybe<ActUpdateManyWithNestedWhereInput>;
+};
+
+export type LegislationReferenceParentUpdateOneInlineInput = {
+  /** Connect existing LegislationReferenceParent document */
+  connect?: InputMaybe<LegislationReferenceParentWhereUniqueInput>;
+  /** Create and connect one LegislationReferenceParent document */
+  create?: InputMaybe<LegislationReferenceParentCreateInput>;
+  /** Delete currently connected LegislationReferenceParent document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected LegislationReferenceParent document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single LegislationReferenceParent document */
+  update?: InputMaybe<LegislationReferenceParentUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single LegislationReferenceParent document */
+  upsert?: InputMaybe<LegislationReferenceParentUpsertWithNestedWhereUniqueInput>;
+};
+
+export type LegislationReferenceParentUpdateWithNestedWhereUniqueInput = {
+  Act?: InputMaybe<ActUpdateWithNestedWhereUniqueInput>;
+};
+
+export type LegislationReferenceParentUpsertWithNestedWhereUniqueInput = {
+  Act?: InputMaybe<ActUpsertWithNestedWhereUniqueInput>;
+};
+
+export type LegislationReferenceParentWhereInput = {
+  Act?: InputMaybe<ActWhereInput>;
+};
+
+export type LegislationReferenceParentWhereUniqueInput = {
+  Act?: InputMaybe<ActWhereUniqueInput>;
+};
+
+export type LegislationReferenceUpdateInput = {
+  acts?: InputMaybe<ActUpdateManyInlineInput>;
+};
+
+export type LegislationReferenceUpdateManyInlineInput = {
+  /** Create and connect multiple LegislationReference component instances */
+  create?: InputMaybe<Array<LegislationReferenceCreateWithPositionInput>>;
+  /** Delete multiple LegislationReference documents */
+  delete?: InputMaybe<Array<LegislationReferenceWhereUniqueInput>>;
+  /** Update multiple LegislationReference component instances */
+  update?: InputMaybe<Array<LegislationReferenceUpdateWithNestedWhereUniqueAndPositionInput>>;
+  /** Upsert multiple LegislationReference component instances */
+  upsert?: InputMaybe<Array<LegislationReferenceUpsertWithNestedWhereUniqueAndPositionInput>>;
+};
+
+export type LegislationReferenceUpdateManyInput = {
+  /** No fields in updateMany data input */
+  _?: InputMaybe<Scalars['String']>;
+};
+
+export type LegislationReferenceUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: LegislationReferenceUpdateManyInput;
+  /** Document search */
+  where: LegislationReferenceWhereInput;
+};
+
+export type LegislationReferenceUpdateOneInlineInput = {
+  /** Create and connect one LegislationReference document */
+  create?: InputMaybe<LegislationReferenceCreateInput>;
+  /** Delete currently connected LegislationReference document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Update single LegislationReference document */
+  update?: InputMaybe<LegislationReferenceUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single LegislationReference document */
+  upsert?: InputMaybe<LegislationReferenceUpsertWithNestedWhereUniqueInput>;
+};
+
+export type LegislationReferenceUpdateWithNestedWhereUniqueAndPositionInput = {
+  /** Document to update */
+  data?: InputMaybe<LegislationReferenceUpdateInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: LegislationReferenceWhereUniqueInput;
+};
+
+export type LegislationReferenceUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: LegislationReferenceUpdateInput;
+  /** Unique document search */
+  where: LegislationReferenceWhereUniqueInput;
+};
+
+export type LegislationReferenceUpsertInput = {
+  /** Create document if it didn't exist */
+  create: LegislationReferenceCreateInput;
+  /** Update document if it exists */
+  update: LegislationReferenceUpdateInput;
+};
+
+export type LegislationReferenceUpsertWithNestedWhereUniqueAndPositionInput = {
+  /** Document to upsert */
+  data?: InputMaybe<LegislationReferenceUpsertInput>;
+  /** Position in the list of existing component instances, will default to appending at the end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Unique component instance search */
+  where: LegislationReferenceWhereUniqueInput;
+};
+
+export type LegislationReferenceUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: LegislationReferenceUpsertInput;
+  /** Unique document search */
+  where: LegislationReferenceWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type LegislationReferenceWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<LegislationReferenceWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<LegislationReferenceWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<LegislationReferenceWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  acts_every?: InputMaybe<ActWhereInput>;
+  acts_none?: InputMaybe<ActWhereInput>;
+  acts_some?: InputMaybe<ActWhereInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+};
+
+/** References LegislationReference record uniquely */
+export type LegislationReferenceWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
 /** Locale system enumeration */
 export enum Locale {
   /** System locale */
@@ -1540,14 +2505,16 @@ export enum MarkdownOrderByInput {
   MarkdownDesc = 'markdown_DESC'
 }
 
-export type MarkdownParent = NewsPost | Organisation;
+export type MarkdownParent = Act | NewsPost | Organisation;
 
 export type MarkdownParentConnectInput = {
+  Act?: InputMaybe<ActConnectInput>;
   NewsPost?: InputMaybe<NewsPostConnectInput>;
   Organisation?: InputMaybe<OrganisationConnectInput>;
 };
 
 export type MarkdownParentCreateInput = {
+  Act?: InputMaybe<ActCreateInput>;
   NewsPost?: InputMaybe<NewsPostCreateInput>;
   Organisation?: InputMaybe<OrganisationCreateInput>;
 };
@@ -1567,6 +2534,7 @@ export type MarkdownParentCreateOneInlineInput = {
 };
 
 export type MarkdownParentUpdateInput = {
+  Act?: InputMaybe<ActUpdateInput>;
   NewsPost?: InputMaybe<NewsPostUpdateInput>;
   Organisation?: InputMaybe<OrganisationUpdateInput>;
 };
@@ -1589,6 +2557,7 @@ export type MarkdownParentUpdateManyInlineInput = {
 };
 
 export type MarkdownParentUpdateManyWithNestedWhereInput = {
+  Act?: InputMaybe<ActUpdateManyWithNestedWhereInput>;
   NewsPost?: InputMaybe<NewsPostUpdateManyWithNestedWhereInput>;
   Organisation?: InputMaybe<OrganisationUpdateManyWithNestedWhereInput>;
 };
@@ -1609,21 +2578,25 @@ export type MarkdownParentUpdateOneInlineInput = {
 };
 
 export type MarkdownParentUpdateWithNestedWhereUniqueInput = {
+  Act?: InputMaybe<ActUpdateWithNestedWhereUniqueInput>;
   NewsPost?: InputMaybe<NewsPostUpdateWithNestedWhereUniqueInput>;
   Organisation?: InputMaybe<OrganisationUpdateWithNestedWhereUniqueInput>;
 };
 
 export type MarkdownParentUpsertWithNestedWhereUniqueInput = {
+  Act?: InputMaybe<ActUpsertWithNestedWhereUniqueInput>;
   NewsPost?: InputMaybe<NewsPostUpsertWithNestedWhereUniqueInput>;
   Organisation?: InputMaybe<OrganisationUpsertWithNestedWhereUniqueInput>;
 };
 
 export type MarkdownParentWhereInput = {
+  Act?: InputMaybe<ActWhereInput>;
   NewsPost?: InputMaybe<NewsPostWhereInput>;
   Organisation?: InputMaybe<OrganisationWhereInput>;
 };
 
 export type MarkdownParentWhereUniqueInput = {
+  Act?: InputMaybe<ActWhereUniqueInput>;
   NewsPost?: InputMaybe<NewsPostWhereUniqueInput>;
   Organisation?: InputMaybe<OrganisationWhereUniqueInput>;
 };
@@ -1761,6 +2734,8 @@ export type MarkdownWhereUniqueInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Create one act */
+  createAct?: Maybe<Act>;
   /**
    * Create one asset
    * @deprecated Asset mutations will be overhauled soon
@@ -1776,10 +2751,19 @@ export type Mutation = {
   createOrganisation?: Maybe<Organisation>;
   /** Create one scheduledRelease */
   createScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Delete one act from _all_ existing stages. Returns deleted document. */
+  deleteAct?: Maybe<Act>;
   /** Delete one asset from _all_ existing stages. Returns deleted document. */
   deleteAsset?: Maybe<Asset>;
   /** Delete one author from _all_ existing stages. Returns deleted document. */
   deleteAuthor?: Maybe<Author>;
+  /**
+   * Delete many Act documents
+   * @deprecated Please use the new paginated many mutation (deleteManyActsConnection)
+   */
+  deleteManyActs: BatchPayload;
+  /** Delete many Act documents, return deleted documents */
+  deleteManyActsConnection: ActConnection;
   /**
    * Delete many Asset documents
    * @deprecated Please use the new paginated many mutation (deleteManyAssetsConnection)
@@ -1825,10 +2809,19 @@ export type Mutation = {
   deleteScheduledOperation?: Maybe<ScheduledOperation>;
   /** Delete one scheduledRelease from _all_ existing stages. Returns deleted document. */
   deleteScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Publish one act */
+  publishAct?: Maybe<Act>;
   /** Publish one asset */
   publishAsset?: Maybe<Asset>;
   /** Publish one author */
   publishAuthor?: Maybe<Author>;
+  /**
+   * Publish many Act documents
+   * @deprecated Please use the new paginated many mutation (publishManyActsConnection)
+   */
+  publishManyActs: BatchPayload;
+  /** Publish many Act documents */
+  publishManyActsConnection: ActConnection;
   /**
    * Publish many Asset documents
    * @deprecated Please use the new paginated many mutation (publishManyAssetsConnection)
@@ -1870,6 +2863,8 @@ export type Mutation = {
   publishNewsPostTag?: Maybe<NewsPostTag>;
   /** Publish one organisation */
   publishOrganisation?: Maybe<Organisation>;
+  /** Schedule to publish one act */
+  schedulePublishAct?: Maybe<Act>;
   /** Schedule to publish one asset */
   schedulePublishAsset?: Maybe<Asset>;
   /** Schedule to publish one author */
@@ -1880,6 +2875,8 @@ export type Mutation = {
   schedulePublishNewsPostTag?: Maybe<NewsPostTag>;
   /** Schedule to publish one organisation */
   schedulePublishOrganisation?: Maybe<Organisation>;
+  /** Unpublish one act from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishAct?: Maybe<Act>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishAsset?: Maybe<Asset>;
   /** Unpublish one author from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -1890,10 +2887,19 @@ export type Mutation = {
   scheduleUnpublishNewsPostTag?: Maybe<NewsPostTag>;
   /** Unpublish one organisation from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishOrganisation?: Maybe<Organisation>;
+  /** Unpublish one act from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishAct?: Maybe<Act>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishAsset?: Maybe<Asset>;
   /** Unpublish one author from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishAuthor?: Maybe<Author>;
+  /**
+   * Unpublish many Act documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyActsConnection)
+   */
+  unpublishManyActs: BatchPayload;
+  /** Find many Act documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyActsConnection: ActConnection;
   /**
    * Unpublish many Asset documents
    * @deprecated Please use the new paginated many mutation (unpublishManyAssetsConnection)
@@ -1935,10 +2941,19 @@ export type Mutation = {
   unpublishNewsPostTag?: Maybe<NewsPostTag>;
   /** Unpublish one organisation from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishOrganisation?: Maybe<Organisation>;
+  /** Update one act */
+  updateAct?: Maybe<Act>;
   /** Update one asset */
   updateAsset?: Maybe<Asset>;
   /** Update one author */
   updateAuthor?: Maybe<Author>;
+  /**
+   * Update many acts
+   * @deprecated Please use the new paginated many mutation (updateManyActsConnection)
+   */
+  updateManyActs: BatchPayload;
+  /** Update many Act documents */
+  updateManyActsConnection: ActConnection;
   /**
    * Update many assets
    * @deprecated Please use the new paginated many mutation (updateManyAssetsConnection)
@@ -1982,6 +2997,8 @@ export type Mutation = {
   updateOrganisation?: Maybe<Organisation>;
   /** Update one scheduledRelease */
   updateScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Upsert one act */
+  upsertAct?: Maybe<Act>;
   /** Upsert one asset */
   upsertAsset?: Maybe<Asset>;
   /** Upsert one author */
@@ -1992,6 +3009,11 @@ export type Mutation = {
   upsertNewsPostTag?: Maybe<NewsPostTag>;
   /** Upsert one organisation */
   upsertOrganisation?: Maybe<Organisation>;
+};
+
+
+export type MutationCreateActArgs = {
+  data: ActCreateInput;
 };
 
 
@@ -2025,6 +3047,11 @@ export type MutationCreateScheduledReleaseArgs = {
 };
 
 
+export type MutationDeleteActArgs = {
+  where: ActWhereUniqueInput;
+};
+
+
 export type MutationDeleteAssetArgs = {
   where: AssetWhereUniqueInput;
 };
@@ -2032,6 +3059,21 @@ export type MutationDeleteAssetArgs = {
 
 export type MutationDeleteAuthorArgs = {
   where: AuthorWhereUniqueInput;
+};
+
+
+export type MutationDeleteManyActsArgs = {
+  where?: InputMaybe<ActManyWhereInput>;
+};
+
+
+export type MutationDeleteManyActsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ActManyWhereInput>;
 };
 
 
@@ -2135,6 +3177,12 @@ export type MutationDeleteScheduledReleaseArgs = {
 };
 
 
+export type MutationPublishActArgs = {
+  to?: Array<Stage>;
+  where: ActWhereUniqueInput;
+};
+
+
 export type MutationPublishAssetArgs = {
   locales?: InputMaybe<Array<Locale>>;
   publishBase?: InputMaybe<Scalars['Boolean']>;
@@ -2147,6 +3195,24 @@ export type MutationPublishAssetArgs = {
 export type MutationPublishAuthorArgs = {
   to?: Array<Stage>;
   where: AuthorWhereUniqueInput;
+};
+
+
+export type MutationPublishManyActsArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<ActManyWhereInput>;
+};
+
+
+export type MutationPublishManyActsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<ActManyWhereInput>;
 };
 
 
@@ -2264,6 +3330,14 @@ export type MutationPublishOrganisationArgs = {
 };
 
 
+export type MutationSchedulePublishActArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: ActWhereUniqueInput;
+};
+
+
 export type MutationSchedulePublishAssetArgs = {
   locales?: InputMaybe<Array<Locale>>;
   publishBase?: InputMaybe<Scalars['Boolean']>;
@@ -2304,6 +3378,14 @@ export type MutationSchedulePublishOrganisationArgs = {
   releaseId?: InputMaybe<Scalars['String']>;
   to?: Array<Stage>;
   where: OrganisationWhereUniqueInput;
+};
+
+
+export type MutationScheduleUnpublishActArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  where: ActWhereUniqueInput;
 };
 
 
@@ -2349,6 +3431,12 @@ export type MutationScheduleUnpublishOrganisationArgs = {
 };
 
 
+export type MutationUnpublishActArgs = {
+  from?: Array<Stage>;
+  where: ActWhereUniqueInput;
+};
+
+
 export type MutationUnpublishAssetArgs = {
   from?: Array<Stage>;
   locales?: InputMaybe<Array<Locale>>;
@@ -2360,6 +3448,24 @@ export type MutationUnpublishAssetArgs = {
 export type MutationUnpublishAuthorArgs = {
   from?: Array<Stage>;
   where: AuthorWhereUniqueInput;
+};
+
+
+export type MutationUnpublishManyActsArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<ActManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyActsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<ActManyWhereInput>;
 };
 
 
@@ -2475,6 +3581,12 @@ export type MutationUnpublishOrganisationArgs = {
 };
 
 
+export type MutationUpdateActArgs = {
+  data: ActUpdateInput;
+  where: ActWhereUniqueInput;
+};
+
+
 export type MutationUpdateAssetArgs = {
   data: AssetUpdateInput;
   where: AssetWhereUniqueInput;
@@ -2484,6 +3596,23 @@ export type MutationUpdateAssetArgs = {
 export type MutationUpdateAuthorArgs = {
   data: AuthorUpdateInput;
   where: AuthorWhereUniqueInput;
+};
+
+
+export type MutationUpdateManyActsArgs = {
+  data: ActUpdateManyInput;
+  where?: InputMaybe<ActManyWhereInput>;
+};
+
+
+export type MutationUpdateManyActsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  data: ActUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ActManyWhereInput>;
 };
 
 
@@ -2593,6 +3722,12 @@ export type MutationUpdateOrganisationArgs = {
 export type MutationUpdateScheduledReleaseArgs = {
   data: ScheduledReleaseUpdateInput;
   where: ScheduledReleaseWhereUniqueInput;
+};
+
+
+export type MutationUpsertActArgs = {
+  upsert: ActUpsertInput;
+  where: ActWhereUniqueInput;
 };
 
 
@@ -4596,6 +5731,14 @@ export type PublishLocaleInput = {
 
 export type Query = {
   __typename?: 'Query';
+  /** Retrieve a single act */
+  act?: Maybe<Act>;
+  /** Retrieve document version */
+  actVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple acts */
+  acts: Array<Act>;
+  /** Retrieve multiple acts using the Relay connection interface */
+  actsConnection: ActConnection;
   /** Retrieve a single asset */
   asset?: Maybe<Asset>;
   /** Retrieve document version */
@@ -4656,6 +5799,44 @@ export type Query = {
   users: Array<User>;
   /** Retrieve multiple users using the Relay connection interface */
   usersConnection: UserConnection;
+};
+
+
+export type QueryActArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: ActWhereUniqueInput;
+};
+
+
+export type QueryActVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryActsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<ActOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<ActWhereInput>;
+};
+
+
+export type QueryActsConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<ActOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<ActWhereInput>;
 };
 
 
@@ -5066,7 +6247,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Asset | Author | NewsPost | NewsPostTag | Organisation;
+export type ScheduledOperationAffectedDocument = Act | Asset | Author | NewsPost | NewsPostTag | Organisation;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -6529,7 +7710,15 @@ export type OrganisationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type OrganisationsQuery = { __typename?: 'Query', organisations: Array<{ __typename?: 'Organisation', name: string, officialWebsite?: string | null, slug: string, tags: Array<OrganisationType>, organisationStatus: OrganisationStatus, description?: string | null, logoSquare: { __typename?: 'Asset', url: string } }> };
 
+export type ActQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type ActQuery = { __typename?: 'Query', act?: { __typename?: 'Act', title: string, slug: string, actStatus: ActStatus, content: Array<{ __typename: 'LegislationReference' } | { __typename: 'Markdown', markdown: string }> } | null };
+
 
 export const NewsPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"NewsPosts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"newsPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"publishedDate_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"postSlug"}},{"kind":"Field","name":{"kind":"Name","value":"publishedDate"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"newsPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tagSlug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<NewsPostsQuery, NewsPostsQueryVariables>;
 export const NewsPostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"NewsPost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"newsPost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"postSlug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"postSlug"}},{"kind":"Field","name":{"kind":"Name","value":"publishedDate"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"newsPostTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"tagSlug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"authors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"authorName"}},{"kind":"Field","name":{"kind":"Name","value":"displayPicture"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"100"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"100"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"clip"}}]}}]}}]}}]}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Markdown"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}}]}}]}}]}}]} as unknown as DocumentNode<NewsPostQuery, NewsPostQueryVariables>;
 export const OrganisationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Organisations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organisations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"public"},"value":{"kind":"BooleanValue","value":true}},{"kind":"ObjectField","name":{"kind":"Name","value":"tags_contains_all"},"value":{"kind":"ListValue","values":[{"kind":"EnumValue","value":"Government"}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"name_ASC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"logoSquare"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"200"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"200"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"clip"}}]}}]}}]}}]}]}},{"kind":"Field","name":{"kind":"Name","value":"officialWebsite"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"tags"}},{"kind":"Field","name":{"kind":"Name","value":"organisationStatus"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<OrganisationsQuery, OrganisationsQueryVariables>;
+export const ActDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Act"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"act"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"actStatus"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Markdown"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ActQuery, ActQueryVariables>;

@@ -14,8 +14,6 @@ export async function GET ({ fetch, request }) {
         title,
     })
 
-    console.log(result)
-
     const svg = await satori(html(result.html + `<style>${result.css.code}</style>`), {
         fonts: [
             {
@@ -41,9 +39,7 @@ export async function GET ({ fetch, request }) {
         width: 1200,
     })
 
-    const resvg = new Resvg(svg, {
-
-    })
+    const resvg = new Resvg(svg, {})
 
     const pngData = resvg.render()
     const pngBuffer = pngData.asPng()
