@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 import Script from "svelte-material-icons/ScriptText.svelte"
 import Heading from "$lib/display/Heading.svelte"
 import Input from "$lib/controls/Input.svelte"
@@ -175,4 +175,4 @@ $: toc = convert_lex_to_toc_tree(marked.lexer(data.content))
                 font-weight 600
                 font-size 16px
 
-</style>
+</style> -->
