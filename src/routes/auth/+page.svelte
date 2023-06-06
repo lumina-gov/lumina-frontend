@@ -16,6 +16,7 @@ import { page } from "$app/stores"
 import { goto, invalidateAll } from "$app/navigation"
 import PageHead from "$lib/components/PageHead.svelte"
 import { onMount } from "svelte"
+import ForgotPassword from "./ForgotPassword.svelte"
 
 export let data
 
@@ -60,7 +61,11 @@ onMount(() => {
                 bind:auth_page/>
         {:else}
             {#if auth_page == "login"}
-                <Login on:next={ next }/>
+                <Login
+                    bind:auth_page
+                    on:next={ next }/>
+            {:else if auth_page = "forgot-password"}
+                <ForgotPassword on:next={ next }/>
             {:else if auth_page == "create"}
                 <CreateAccount on:next={ next }/>
             {/if}
