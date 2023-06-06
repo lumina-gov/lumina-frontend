@@ -11,12 +11,14 @@ export let right_icon_color: Prop<Icon, "color"> = "brand"
 export let level: 1 | 2 | 3 | 4 = 1
 export let id: string | null = null
 export let underline = false
+export let center = false
 </script>
 
 <svelte:element
     this={ "h" + level }
     {id}
     class="heading"
+    class:center
     class:underline>
     {#if left_icon}
         <Icon
@@ -41,6 +43,8 @@ export let underline = false
     margin 0
     position relative
     scroll-margin-top 80px
+    &.center
+        justify-content center
     &.underline
         padding 0 4px
         padding-bottom 2px

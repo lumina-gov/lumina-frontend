@@ -22,12 +22,14 @@ import ShieldAccount from "svelte-material-icons/ShieldAccount.svelte"
 import Web from "svelte-material-icons/Web.svelte"
 import { createEventDispatcher } from "svelte"
 import type { GraphQLError } from "@urql/core/dist/urql-core-chunk"
+import Heading from "$lib/display/Heading.svelte"
 
 enum DisplayPage {
     Email,
     Password
 }
 
+export let auth_page: string
 let dispatch = createEventDispatcher<{ next: void }>()
 let display = DisplayPage.Email
 let loading = false
@@ -73,13 +75,9 @@ async function signin () {
     <Box
         gap="20px"
         max_width="360px">
-        <h1>
-            <Icon
-                color="brand"
-                icon={ShieldAccount}
-                size={32}/>
-            Login
-        </h1>
+        <Heading
+            center={true}
+            left_icon={ShieldAccount}>Login</Heading>
         {#if display === DisplayPage.Email}
             <Input
                 name="email"
@@ -123,6 +121,12 @@ async function signin () {
                 Sign In
             </Button>
         {/if}
+        <div
+            class="forgot-password"
+            role="button"
+            tabindex="0"
+            on:keydown={ e => { if (e.key === "Enter") auth_page = "forgot-password" } }
+            on:click={ () => auth_page = "forgot-password" }>Forgot Password?</div>
     </Box>
 </Card>
 <div class="security">
@@ -162,14 +166,16 @@ async function signin () {
     padding 10px
     border-radius 4px
 
-h1
-    margin 0
-    gap 10px
-    text-align center
-    display flex
-    font-size: 28px
-    align-items center
-    justify-content center
+.forgot-password
+    color $brand
+    font-size 14px
     font-weight 600
+    margin 0 auto
+    cursor pointer
+    padding 8px 8px
+    border-radius 4px
+    outline 0
+    &:hover, &:focus
+        background transparify(white, 6%)
 
 </style>
