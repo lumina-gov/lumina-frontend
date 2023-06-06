@@ -13,13 +13,11 @@ import Logo from "$lib/icons/Logo.svelte"
 import { MessageType } from "$lib/types/message.js"
 import { set_cookie } from "$lib/utils/cookie.js"
 import type { GraphQLError } from "@urql/core/dist/urql-core-chunk.js"
-import { createEventDispatcher } from "svelte"
 import Send from "svelte-material-icons/Send.svelte"
 import ShieldAccount from "svelte-material-icons/ShieldAccount.svelte"
 
 export let data
 
-let dispatch = createEventDispatcher<{ next: void }>()
 let password = ""
 
 let loading = false
