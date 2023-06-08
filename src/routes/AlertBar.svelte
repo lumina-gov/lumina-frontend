@@ -2,7 +2,10 @@
     {#each $alerts as message}
         <div
             bind:this={ elements[message.id] }
-            class={"action-bar " + MessageType[message.type]}
+            class="action-bar"
+            class:error={ message.type === "error" }
+            class:success={ message.type === "success" }
+            class:warning={ message.type === "warning" }
             role="button"
             tabindex="0"
             on:keypress={ e => {
@@ -28,9 +31,10 @@ import Alert from "svelte-material-icons/Alert.svelte"
 import Info from "svelte-material-icons/AlertCircle.svelte"
 import Close from "svelte-material-icons/Close.svelte"
 import Check from "svelte-material-icons/CheckCircle.svelte"
+import type { SvelteComponent} from "svelte"
 import { onMount, tick } from "svelte"
 import { browser } from "$app/environment"
-import { MessageType, type Message } from "$lib/types/message"
+import type { Message } from "$lib/types/message"
 import { page } from "$app/stores"
 
 $: alerts = $page.data.alerts.store
@@ -38,11 +42,11 @@ $: alerts = $page.data.alerts.store
 let elements: { [key: symbol]: HTMLDivElement } = {}
 
 let icons = {
-    [MessageType.Info]: Info,
-    [MessageType.Warning]: Alert,
-    [MessageType.Error]: Alert,
-    [MessageType.Success]: Check
-}
+    "info": Info,
+    "warning": Alert,
+    "error": Alert,
+    "success": Check
+} satisfies Record<Message["type"], typeof SvelteComponent>
 
 function remove(id: symbol){
     $alerts = $alerts.filter(val => val.id !== id)
@@ -115,11 +119,11 @@ async function setBottomHeights () {
         display grid
         grid-template-columns min-content 1fr min-content
         align-items center
-        &.Warning
+        &.warning
             background #b8992a
-        &.Error
+        &.error
             background #b44
-        &.Success
+        &.success
             background #4a6
         .icon
             padding-right 8px

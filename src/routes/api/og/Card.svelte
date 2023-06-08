@@ -4,7 +4,7 @@ import Settlement from "$lib/icons/Settlement.svelte"
 
 
 export let title: string
-export let description: string | null = null
+export const description: string | null = null
 
 </script>
 <div class="card">
@@ -46,7 +46,7 @@ export let description: string | null = null
 
 .icon
     display flex
-
+-
 .title-area
     display flex
     align-items flex-end

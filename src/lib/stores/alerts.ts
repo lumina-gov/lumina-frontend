@@ -1,9 +1,9 @@
-import type { Message, MessageType } from "$lib/types/message"
+import type { Message } from "$lib/types/message"
 import type { Writable } from "svelte/store"
 import { writable } from "svelte/store"
 
 export type AlertsStore = {
-    create_alert: (type: MessageType, text: string) => void,
+    create_alert: (type: Message["type"], text: string) => void,
     store: Writable<Message[]>
 }
 
@@ -12,7 +12,7 @@ export const alerts_init = (messages: Message[]): AlertsStore => {
 
     return {
         store,
-        create_alert (type: MessageType, text: string) {
+        create_alert (type: Message["type"], text: string) {
             store.update(messages => {
                 messages.push({
                     id: Symbol(),

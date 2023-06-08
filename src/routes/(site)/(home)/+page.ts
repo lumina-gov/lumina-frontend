@@ -1,5 +1,5 @@
 import { UserCountDocument } from "$lib/graphql/graphql-types"
-import { MessageType } from "$lib/types/message"
+
 
 export async function load({ parent }) {
     const { graph, alerts } = await parent()
@@ -8,7 +8,7 @@ export async function load({ parent }) {
 
 
     if (error) {
-        alerts.create_alert(MessageType.Error, error.message)
+        alerts.create_alert("error", error.message)
     }
     return {
         user_count: data?.user_count || 2000,

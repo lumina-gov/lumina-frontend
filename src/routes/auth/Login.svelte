@@ -3,7 +3,7 @@ import Box from "$lib/cards/Box.svelte"
 import Card from "$lib/cards/Card.svelte"
 import Input from "$lib/controls/Input.svelte"
 import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
-import { MessageType } from "$lib/types/message"
+
 import { page } from "$app/stores"
 import type { LoginMutation } from "$lib/graphql/graphql-types"
 import { set_cookie } from "$lib/utils/cookie"
@@ -53,13 +53,13 @@ async function signin () {
     if (errors || !data) {
         if (errors) {
             for (let error of errors) {
-                $page.data.alerts.create_alert(MessageType.Error, error.message)
+                $page.data.alerts.create_alert("error", error.message)
             }
         } else {
-            $page.data.alerts.create_alert(MessageType.Error, "Login failed")
+            $page.data.alerts.create_alert("error", "Login failed")
         }
     } else {
-        $page.data.alerts.create_alert(MessageType.Success, "Login Successful")
+        $page.data.alerts.create_alert("success", "Login Successful")
         set_cookie("token", null)
         set_cookie("token", data.auth_token)
         await invalidateAll()

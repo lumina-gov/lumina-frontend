@@ -6,7 +6,7 @@ import WizardItem from "./WizardItem.svelte"
 import Input from "$lib/controls/Input.svelte"
 import ContentCopy from "svelte-material-icons/ContentCopy.svelte"
 import { page } from "$app/stores"
-import { MessageType } from "$lib/types/message"
+
 import { CitizenshipStatus, type MeQuery } from "$lib/graphql/graphql-types"
 import Discord from "svelte-material-icons/Discord.svelte"
 import site_data from "$lib/data/site_data"
@@ -63,7 +63,7 @@ onMount(() => {
             right_icon={ContentCopy}
             right_icon_handler={() => {
                 navigator.clipboard.writeText("https://lumina.earth/auth?referral=" + user.id)
-                $page.data.alerts.create_alert(MessageType.Success, "Copied to clipboard")
+                $page.data.alerts.create_alert("success", "Copied to clipboard")
             }}
             value={"https://lumina.earth/auth?referral=" + user.id}
         />

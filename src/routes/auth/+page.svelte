@@ -64,7 +64,7 @@ onMount(() => {
                 <Login
                     bind:auth_page
                     on:next={ next }/>
-            {:else if auth_page = "forgot-password"}
+            {:else if auth_page == "forgot-password"}
                 <ForgotPassword on:next={ next }/>
             {:else if auth_page == "create"}
                 <CreateAccount on:next={ next }/>

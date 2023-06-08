@@ -1,9 +1,5 @@
 <script lang="ts">
-import Calendar from "svelte-material-icons/Calendar.svelte"
 import { onMount, onDestroy } from "svelte"
-
-// if the date difference is less than 3 days, we want to show something like:
-    // "3 hours ago", "2 days ago", "10 minutes ago", etc.
 
 export let date: Date
 
@@ -35,7 +31,6 @@ $: diff_in_minutes = diff_in_seconds / 60
 $: diff_in_hours = diff_in_minutes / 60
 $: diff_in_days = diff_in_hours / 24
 
-$: use_ago = diff_in_days <= 3
 $: units_ago = diff_in_hours <= 1 ? "minute" : diff_in_days <= 1 ? "hour" : "day"
 $: units = diff_in_hours <= 1 ? diff_in_minutes : diff_in_days <= 1 ? diff_in_hours : diff_in_days
 $: ago = `${Math.ceil(units)} ${units_ago}${units > 1 ? "s" : ""} ago`

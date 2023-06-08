@@ -10,7 +10,7 @@ import Heading from "$lib/display/Heading.svelte"
 import Tag from "$lib/display/Tag.svelte"
 import { ResetPasswordDocument, type LoginMutation } from "$lib/graphql/graphql-types.js"
 import Logo from "$lib/icons/Logo.svelte"
-import { MessageType } from "$lib/types/message.js"
+
 import { set_cookie } from "$lib/utils/cookie.js"
 import type { GraphQLError } from "@urql/core/dist/urql-core-chunk.js"
 import Send from "svelte-material-icons/Send.svelte"
@@ -30,11 +30,11 @@ async function reset_password() {
     })
     if (!res.data || res.error) {
         loading = false
-        $page.data.alerts.create_alert(MessageType.Error, res.error?.message || "Failed to reset password")
+        $page.data.alerts.create_alert("error", res.error?.message || "Failed to reset password")
         return
     }
 
-    $page.data.alerts.create_alert(MessageType.Success, "Password reset")
+    $page.data.alerts.create_alert("success", "Password reset")
 
     {
         let res = await fetch("/api/login", {
@@ -52,13 +52,13 @@ async function reset_password() {
         if (json.errors || !json.data) {
             if (json.errors) {
                 for (let error of json.errors) {
-                    $page.data.alerts.create_alert(MessageType.Error, error.message)
+                    $page.data.alerts.create_alert("error", error.message)
                 }
             } else {
-                $page.data.alerts.create_alert(MessageType.Error, "Login failed")
+                $page.data.alerts.create_alert("error", "Login failed")
             }
         } else {
-            $page.data.alerts.create_alert(MessageType.Success, "Login Successful")
+            $page.data.alerts.create_alert("success", "Login Successful")
             set_cookie("token", null)
             set_cookie("token", json.data.auth_token)
             await invalidateAll()

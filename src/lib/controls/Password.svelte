@@ -5,7 +5,7 @@ import EyeOutline from "svelte-material-icons/EyeOutline.svelte"
 import EyeOffOutline from "svelte-material-icons/EyeOffOutline.svelte"
 import Lock from "svelte-material-icons/Lock.svelte"
 import { page } from "$app/stores"
-import { MessageType } from "$lib/types/message"
+
 import { CrackTimeDocument } from "$lib/graphql/graphql-types"
 
 let visible = false
@@ -42,7 +42,7 @@ async function check_password_strength() {
     })
 
     if (error || !data?.crack_time) {
-        $page.data.alerts.create_alert(MessageType.Error, error?.message || "Cracktime not received.")
+        $page.data.alerts.create_alert("error", error?.message || "Cracktime not received.")
         return
     }
 

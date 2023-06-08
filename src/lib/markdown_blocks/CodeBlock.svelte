@@ -4,7 +4,7 @@ import hljs from "highlight.js"
 import ContentCopy from "svelte-material-icons/ContentCopy.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import { page } from "$app/stores"
-import { MessageType } from "$lib/types/message"
+
 import ButtonSound from "$lib/sounds/ButtonSound.wav"
 import Tag from "$lib/display/Tag.svelte"
 export let block: Code
@@ -28,7 +28,7 @@ $: numbers = lines.map((_, i) => {
 
 function copy() {
     navigator.clipboard.writeText(block.value)
-    $page.data.alerts.create_alert(MessageType.Info, "Copied to clipboard")
+    $page.data.alerts.create_alert("info", "Copied to clipboard")
     let audio = new Audio(ButtonSound)
     audio.play()
 }

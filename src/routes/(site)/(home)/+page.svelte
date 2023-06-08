@@ -6,7 +6,6 @@
 />
 <SchemaComponent schema={organizationSchema}/>
 <script lang="ts">
-import AccountGroup from "svelte-material-icons/AccountGroup.svelte"
 import Domain from "svelte-material-icons/Domain.svelte"
 import Settlement from "$lib/icons/Settlement.svelte"
 import Button from "$lib/controls/Button.svelte"
@@ -34,7 +33,6 @@ import InformationArea from "./InformationArea.svelte"
 import Telescope from "svelte-material-icons/Telescope.svelte"
 import { CitizenshipStatus } from "$lib/graphql/graphql-types"
 import Chart from "./Chart.svelte"
-import StatBlock from "./StatBlock.svelte"
 import MainCards from "./MainCards.svelte"
 import Wizard from "./Wizard.svelte"
 

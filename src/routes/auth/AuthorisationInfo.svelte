@@ -12,7 +12,7 @@ import LinkVariant from "svelte-material-icons/LinkVariant.svelte"
 import OpenInNew from "svelte-material-icons/OpenInNew.svelte"
 import ShieldCheck from "svelte-material-icons/ShieldCheck.svelte"
 import { scopes } from "./scopes"
-import { MessageType } from "$lib/types/message"
+
 import { page } from "$app/stores"
 import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
 import { goto } from "$app/navigation"
@@ -37,7 +37,7 @@ async function authorise() {
     })
 
     if (res.error || !res.data) {
-        $page.data.alerts.create_alert(MessageType.Error, res.error?.message ?? "Failed to issue token")
+        $page.data.alerts.create_alert("error", res.error?.message ?? "Failed to issue token")
     } else {
         let token = res.data.issue_token
         await goto(redirect + "?token=" + token)

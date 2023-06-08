@@ -1,5 +1,5 @@
 import { NewsPostDocument } from "$lib/hygraph/graphql-types.js"
-import { MessageType } from "$lib/types/message"
+
 import { error } from "@sveltejs/kit"
 
 export async function load({ params, parent }) {
@@ -10,7 +10,7 @@ export async function load({ params, parent }) {
     })
 
     if (gqlError || !data) {
-        stores.alerts.create_alert(MessageType.Error, gqlError?.message || "Error loading news post")
+        stores.alerts.create_alert("error", gqlError?.message || "Error loading news post")
         throw error(500, {
             message: "Error loading news post",
             code: "ERROR_LOADING_NEWS_POST"

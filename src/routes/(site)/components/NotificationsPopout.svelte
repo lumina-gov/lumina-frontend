@@ -4,7 +4,7 @@ import Card from "$lib/cards/Card.svelte"
 import InformationOutline from "svelte-material-icons/InformationOutline.svelte"
 import Bell from "svelte-material-icons/Bell.svelte"
 import { page } from "$app/stores"
-import { MessageType } from "$lib/types/message"
+
 
 async function request_notification_permissions() {
     // get the applicationServerKey
@@ -17,12 +17,12 @@ async function request_notification_permissions() {
     `
     // TODO graphql
     if (errors.length > 0) {
-        errors.map(e => alerts.create_alert(MessageType.Error, e))
+        errors.map(e => alerts.create_alert("error", e))
         return
     }
 
     if (!application_server_key) {
-        alerts.create_alert(MessageType.Error, "No application server key found")
+        alerts.create_alert("error", "No application server key found")
         return
     }
 
@@ -56,11 +56,11 @@ async function request_notification_permissions() {
         }`
 
         if (errors.length > 0) {
-            errors.map(e => alerts.create_alert(MessageType.Error, e))
+            errors.map(e => alerts.create_alert("error", e))
             return
         }
 
-        alerts.create_alert(MessageType.Success, "Successfully subscribed to notifications")
+        alerts.create_alert("success", "Successfully subscribed to notifications")
     }
 
     {
@@ -72,7 +72,7 @@ async function request_notification_permissions() {
             }
         `
         if (errors.length > 0) {
-            errors.map(e => alerts.create_alert(MessageType.Error, e))
+            errors.map(e => alerts.create_alert("error", e))
             return
         }
     }

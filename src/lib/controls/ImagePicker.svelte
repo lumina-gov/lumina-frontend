@@ -1,7 +1,7 @@
 <script lang="ts">
 import { page } from "$app/stores"
 import Upload from "svelte-material-icons/Upload.svelte"
-import { MessageType } from "$lib/types/message"
+
 import InputWrapper from "$lib/display/InputWrapper.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import CloseCircle from "svelte-material-icons/CloseCircle.svelte"
@@ -30,14 +30,14 @@ async function select () {
     file_input.click()
     await file_future
     let file = file_input.files?.[0]
-    if (!file) return $page.data.alerts.create_alert(MessageType.Error, "No file selected")
+    if (!file) return $page.data.alerts.create_alert("error", "No file selected")
 
     value = await new Promise(resolve => {
         let reader = new FileReader()
         reader.onload = e => resolve(e.target?.result as string)
         reader.readAsDataURL(file as File)
     })
-    $page.data.alerts.create_alert(MessageType.Info, "File selected")
+    $page.data.alerts.create_alert("info", "File selected")
 }
 
 </script>

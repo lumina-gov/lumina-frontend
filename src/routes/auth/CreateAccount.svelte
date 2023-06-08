@@ -5,7 +5,7 @@ import Input from "$lib/controls/Input.svelte"
 import Button from "$lib/controls/Button.svelte"
 import future from "$lib/utils/future"
 import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
-import { MessageType } from "$lib/types/message"
+
 import { set_cookie } from "$lib/utils/cookie"
 import Password from "$lib/controls/Password.svelte"
 import PhoneInput from "$lib/controls/phone/PhoneInput.svelte"
@@ -61,11 +61,11 @@ async function signup () {
         })
 
         if (error) {
-            $page.data.alerts.create_alert(MessageType.Error, error.message)
+            $page.data.alerts.create_alert("error", error.message)
             return
         }
 
-        $page.data.alerts.create_alert(MessageType.Success, "Account Created")
+        $page.data.alerts.create_alert("success", "Account Created")
     }
 
     {
@@ -82,13 +82,13 @@ async function signup () {
         if (errors || !data) {
             if (errors) {
                 for (let error of errors) {
-                    $page.data.alerts.create_alert(MessageType.Error, error.message)
+                    $page.data.alerts.create_alert("error", error.message)
                 }
             } else {
-                $page.data.alerts.create_alert(MessageType.Error, "Login failed")
+                $page.data.alerts.create_alert("error", "Login failed")
             }
         } else {
-            $page.data.alerts.create_alert(MessageType.Success, "Login Successful")
+            $page.data.alerts.create_alert("success", "Login Successful")
             set_cookie("token", data.auth_token)
             dispatch("next")
         }

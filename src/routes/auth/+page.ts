@@ -1,5 +1,5 @@
 import { GetAuthAppDocument } from "$lib/graphql/graphql-types.js"
-import { MessageType } from "$lib/types/message.js"
+
 import { error } from "@sveltejs/kit"
 
 
@@ -15,13 +15,13 @@ export async function load ({ parent, url }) {
         })
 
         if(!res.data || res.error) {
-            data.alerts.create_alert(MessageType.Error, res.error?.message ?? "Failed to load app")
+            data.alerts.create_alert("error", res.error?.message ?? "Failed to load app")
         }
 
         const app = res.data?.auth_app
 
         if (!app) {
-            data.alerts.create_alert(MessageType.Error, "App not found")
+            data.alerts.create_alert("error", "App not found")
             throw error(404, {
                 code: "APP_NOT_FOUND",
                 message: "App not found",
@@ -29,7 +29,7 @@ export async function load ({ parent, url }) {
         }
 
         if (!redirect) {
-            data.alerts.create_alert(MessageType.Error, "Redirect not specified")
+            data.alerts.create_alert("error", "Redirect not specified")
             throw error(400, {
                 code: "REDIRECT_NOT_SPECIFIED",
                 message: "Redirect not specified",
@@ -37,7 +37,7 @@ export async function load ({ parent, url }) {
         }
 
         if (!app.redirect_hostnames.includes(new URL(redirect).hostname)) {
-            data.alerts.create_alert(MessageType.Error, `Redirect hostname not allowed for ${app.name}`)
+            data.alerts.create_alert("error", `Redirect hostname not allowed for ${app.name}`)
             throw error(400, {
                 code: "INVALID_REDIRECT_HOSTNAME",
                 message: `Redirect hostname not allowed for ${app.name}`,

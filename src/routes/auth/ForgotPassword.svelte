@@ -3,24 +3,13 @@ import Box from "$lib/cards/Box.svelte"
 import Card from "$lib/cards/Card.svelte"
 import Input from "$lib/controls/Input.svelte"
 import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
-import { MessageType } from "$lib/types/message"
+
 import { page } from "$app/stores"
-import { SendPasswordResetEmailDocument, type LoginMutation } from "$lib/graphql/graphql-types"
-import { set_cookie } from "$lib/utils/cookie"
-import { invalidateAll } from "$app/navigation"
+import { SendPasswordResetEmailDocument } from "$lib/graphql/graphql-types"
 import Button from "$lib/controls/Button.svelte"
 import Email from "svelte-material-icons/Email.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
-import Account from "svelte-material-icons/Account.svelte"
-import SwapHorizontal from "svelte-material-icons/SwapHorizontal.svelte"
-import future from "$lib/utils/future"
-import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
-import Password from "$lib/controls/Password.svelte"
-import Segment from "$lib/controls/Segment.svelte"
-import Icon from "$lib/display/Icon.svelte"
 import ShieldAccount from "svelte-material-icons/ShieldAccount.svelte"
-import Web from "svelte-material-icons/Web.svelte"
-import type { GraphQLError } from "@urql/core/dist/urql-core-chunk"
 import Heading from "$lib/display/Heading.svelte"
 
 
@@ -34,11 +23,11 @@ async function reset_password () {
     loading = false
 
     if (!res.data || res.error) {
-        $page.data.alerts.create_alert(MessageType.Error, "Failed to send password reset email")
+        $page.data.alerts.create_alert("error", "Failed to send password reset email")
         return
     }
 
-    $page.data.alerts.create_alert(MessageType.Success, "Password reset email sent")
+    $page.data.alerts.create_alert("success", "Password reset email sent")
 }
 
 </script>

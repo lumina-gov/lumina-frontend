@@ -10,7 +10,7 @@ import { ethnicities } from "$lib/data/ethnicities"
 import { occupations } from "$lib/data/occupations"
 import { skills } from "$lib/data/skills"
 import InputWrapper from "$lib/display/InputWrapper.svelte"
-import { MessageType } from "$lib/types/message"
+
 import future from "$lib/utils/future"
 import SwapHorizontal from "svelte-material-icons/SwapHorizontal.svelte"
 import Calendar from "svelte-material-icons/Calendar.svelte"
@@ -89,9 +89,9 @@ async function register() {
         }
     } catch (e) {
         if(e instanceof Error) {
-            return data.alerts.create_alert(MessageType.Error, e.message)
+            return data.alerts.create_alert("error", e.message)
         } else {
-            return data.alerts.create_alert(MessageType.Error, "An unknown error occurred")
+            return data.alerts.create_alert("error", "An unknown error occurred")
         }
     }
 
@@ -99,10 +99,10 @@ async function register() {
     let { error } = await data.graph.gmutation(CreateCitizenshipApplicationDocument, normalised)
 
     if (error) {
-        data.alerts.create_alert(MessageType.Error, error.message)
+        data.alerts.create_alert("error", error.message)
         return
     }
-    data.alerts.create_alert(MessageType.Success, "Citizenship application created")
+    data.alerts.create_alert("success", "Citizenship application created")
     await invalidateAll()
 }
 </script>

@@ -1,5 +1,5 @@
 import { ActDocument } from "$lib/hygraph/graphql-types.js"
-import { MessageType } from "$lib/types/message"
+
 import { error } from "@sveltejs/kit"
 
 export async function load({ params, parent }) {
@@ -10,7 +10,7 @@ export async function load({ params, parent }) {
     })
 
     if (gqlError || !data) {
-        stores.alerts.create_alert(MessageType.Error, gqlError?.message || "Error loading act")
+        stores.alerts.create_alert("error", gqlError?.message || "Error loading act")
         throw error(500, {
             message: "Error loading act",
             code: "ACT_LOAD_ERROR"
