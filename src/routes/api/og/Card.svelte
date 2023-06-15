@@ -46,7 +46,7 @@ export const description: string | null = null
 
 .icon
     display flex
--
+
 .title-area
     display flex
     align-items flex-end
