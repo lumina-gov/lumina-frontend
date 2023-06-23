@@ -10,6 +10,7 @@ import ClickoutRegion from "../ClickoutRegion.svelte"
 import Inside from "../Inside.svelte"
 
 import InputWrapper from "$lib/display/InputWrapper.svelte"
+import { tick } from "svelte"
 export let name = "Phone Number"
 
 export let value: { country: CountryType | null, number: string }
@@ -36,22 +37,21 @@ let search_component: Search
                     on:keypress={ event => {
                         if (event.key === "Enter") {
                             open = !open
+                            tick().then(() => search_component.focus())
                         }
                     } }
                     on:click={ () => open = !open }>
                     <div class="country-data">
-                        {#if !value.country}
-                            <div class="country-data-flag">
-                                <div class="iti-flag"/>
-                            </div>
-                        {:else}
-                            <div class="country-data-flag">
-                                <div class="iti-flag flag {value.country.code.toLowerCase()}"/>
-                            </div>
-                            <div class="country-data-label">{ value.country.calling_code }</div>
-                        {/if}
+                        <div class="country-data-flag">
+                            <div
+                                class="iti-flag {value.country?.code.toLowerCase() || ""}"
+                                class:flag={ value.country }/>
+                        </div>
+                        <div
+                            class="country-data-label"
+                            class:placeholder={ !value.country }>{ value.country?.calling_code || "+0" }</div>
                     </div>
-                    <ChevronDown/>
+                    <ChevronDown size={20}/>
                 </div>
                 {#if open}
                     <Dropdown>
@@ -149,6 +149,9 @@ input
             padding-left 5px
             padding-right 5px
             flex 1
+            &.placeholder
+                opacity 0.5
+
     .country-title
         font-size 13px
         text-transform uppercase
