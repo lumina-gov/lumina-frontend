@@ -45,6 +45,11 @@ onMount(() => {
 })
 
 </script>
+<svelte:head>
+    <link
+        href="https://lumina.app/auth"
+        rel="canonical" />
+</svelte:head>
 <div class="flex">
     <div class="inner">
         <Tag>Auth Portal</Tag>
