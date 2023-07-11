@@ -20,7 +20,11 @@ let input_ref: HTMLInputElement
 let open = false
 let search = ""
 
-$: regex = new RegExp(search, "i")
+function escapeRegExp(text: string) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
+}
+
+$: regex = new RegExp(escapeRegExp(search), "i")
 $: filtered = countries.filter(country => regex.test(country.name) || regex.test(country.code) || regex.test(country.calling_code))
 
 let options: Options<CountryType>
