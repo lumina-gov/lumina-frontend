@@ -21,6 +21,7 @@ import Heading from "$lib/display/Heading.svelte"
 import Passport from "svelte-material-icons/Passport.svelte"
 import { invalidateAll } from "$app/navigation"
 import { CreateCitizenshipApplicationDocument, type MeQuery } from "$lib/graphql/graphql-types"
+import { regex_search } from "$lib/utils/regex"
 
 $: data = $page.data
 
@@ -133,27 +134,27 @@ async function register() {
         <MultiSegment
             name="Country of Citizenship"
             get_title={country => country.name}
-            options={search => countries.filter(country => new RegExp(search, "ig").test(country.name))}
+            options={search => countries.filter(country => regex_search(search).test(country.name))}
             bind:values={ citizenship_registration.country_of_citizenship }>
         </MultiSegment>
         <MultiSegment
             name="Ethnic Group"
             allow_other={query => query}
-            options={search => ethnicities.filter(ethnicity => new RegExp(search, "ig").test(ethnicity))}
+            options={search => ethnicities.filter(ethnicity => regex_search(search).test(ethnicity))}
             bind:values={ citizenship_registration.ethnic_groups }/>
     </div>
     <div class="horizontal-inputs">
         <SingleSegment
             name="Country of Residence"
             get_title={value => value.name}
-            options={search => countries.filter(country => new RegExp(search, "ig").test(country.name))}
+            options={search => countries.filter(country => regex_search(search).test(country.name))}
             placeholder="Select Country"
             right_icon={SwapHorizontal}
             bind:value={ citizenship_registration.country_of_residence }/>
         <SingleSegment
             name="Country of Birth"
             get_title={value => value.name}
-            options={search => countries.filter(country => new RegExp(search, "ig").test(country.name))}
+            options={search => countries.filter(country => regex_search(search).test(country.name))}
             placeholder="Select Country"
             right_icon={SwapHorizontal}
             bind:value={ citizenship_registration.country_of_birth }/>
@@ -164,7 +165,7 @@ async function register() {
             allow_other={query => [query]}
             get_title={option => option[0]}
             left_icon={Job}
-            options={search => occupations.filter(occupation => occupation.some(alias => new RegExp(search, "ig").test(alias)))}
+            options={search => occupations.filter(occupation => occupation.some(alias => regex_search(search).test(alias)))}
             bind:values={ citizenship_registration.occupations }
             let:option
             let:search>

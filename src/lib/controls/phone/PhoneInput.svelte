@@ -11,6 +11,7 @@ import Inside from "../Inside.svelte"
 
 import InputWrapper from "$lib/display/InputWrapper.svelte"
 import { tick } from "svelte"
+import { escape_regex } from "$lib/utils/regex"
 export let name = "Phone Number"
 
 export let value: { country: CountryType | null, number: string }
@@ -20,11 +21,9 @@ let input_ref: HTMLInputElement
 let open = false
 let search = ""
 
-function escapeRegExp(text: string) {
-    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
-}
 
-$: regex = new RegExp(escapeRegExp(search), "i")
+
+$: regex = new RegExp(escape_regex(search), "i")
 $: filtered = countries.filter(country => regex.test(country.name) || regex.test(country.code) || regex.test(country.calling_code))
 
 let options: Options<CountryType>
