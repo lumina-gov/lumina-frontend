@@ -154,7 +154,7 @@ aside {
     &.visible {
         display: flex;
 
-        @media (width <= 900px) {
+        @media (max-width: 900px) {
             position: fixed;
             top: 0;
             left: 0;
@@ -164,9 +164,7 @@ aside {
 
     &.default {
         display: flex;
-    }
-    @media (width <= 900px) {
-        &.default {
+        @media (max-width: 900px) {
             display: none;
         }
     }

@@ -61,7 +61,7 @@ export let last: boolean
     max-width: 850px;
     grid-template-columns: 150px max-content 2fr;
     grid-gap: 0 24px;
-    @media (width <= 900px) {
+    @media (max-width: 900px) {
         grid-template-columns: max-content 1fr;
         grid-gap: 12px 24px;
     }
@@ -73,7 +73,7 @@ export let last: boolean
     display: flex;
     justify-content: center;
     background: rgba(255, 255, 255, 0.1);
-    @media (width <= 900px) {
+    @media (max-width: 900px) {
         grid-row: 1 / span 2;
     }
 }
@@ -101,7 +101,7 @@ export let last: boolean
     text-align: right;
     align-items: end;
     gap: 6px;
-    @media (width <= 900px) {
+    @media (max-width: 900px) {
         align-items: start;
         text-align: left;
     }

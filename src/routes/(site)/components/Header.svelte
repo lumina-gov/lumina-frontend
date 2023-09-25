@@ -98,7 +98,7 @@ header {
 
     &.visible {
         display: flex;
-        @media (width <= 900px) {
+        @media (max-width: 900px) {
             &.authenticated {
                 display: none;
             }
@@ -107,7 +107,7 @@ header {
 
     &.default {
         display: none;
-        @media (width <= 900px) {
+        @media (max-width: 900px) {
             display: flex;
             &.authenticated {
                 display: none;

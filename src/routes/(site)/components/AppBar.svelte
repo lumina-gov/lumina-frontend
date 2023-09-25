@@ -50,7 +50,7 @@ afterNavigate(() => {
     background: color-mix(in srgb, var(--dark) 96%, white);
     padding: 4px;
 
-    @media (width <= 900px) {
+    @media (max-width: 900px) {
         display: flex;
     }
 }

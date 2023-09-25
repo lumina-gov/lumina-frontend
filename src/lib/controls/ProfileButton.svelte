@@ -57,7 +57,7 @@ function clicked(e: Event) {
         color: color-mix(white, 80%);
         padding-right: 4px;
     }
-    @media (width <= 900px) {
+    @media (max-width: 900px) {
         border-radius: 0;
         height: 100%;
         width: 100%;

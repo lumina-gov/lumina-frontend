@@ -41,7 +41,7 @@ export let cards: Props<ServiceCard>[] = []
     align-items: center;
     justify-content: center;
     width: 100%;
-    @media (width <= 900px) {
+    @media (max-width: 900px) {
         margin: 0;
         height: unset;
         padding: 20px;

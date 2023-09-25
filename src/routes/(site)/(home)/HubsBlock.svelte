@@ -72,7 +72,7 @@ export let areas: HubArea[]
         color: white;
         background-color: rgba(255, 255, 255, 0.04);
     }
-    @media (width <= 1200px) {
+    @media (max-width: 1200px) {
         margin: 0 auto;
         width: 100%;
     }

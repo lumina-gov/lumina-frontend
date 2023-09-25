@@ -32,7 +32,7 @@ import Lumina from "$lib/icons/LogoEdge.svelte"
         text-transform: uppercase;
         letter-spacing: 0.1em;
 
-        @media (width <= 900px) {
+        @media (max-width: 900px) {
             font-size: 20px;
         }
     }
