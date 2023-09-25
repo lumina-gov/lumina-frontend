@@ -22,13 +22,12 @@ import Lumina from "$lib/icons/LogoEdge.svelte"
     color white
 
 .symbol
-    font-size 40px
+    font-size 30px
     display inline-flex
     color $brand
-    @media (max-width $mobile)
-        font-size 32px
 .brand
-    font-size 24px
+    font-size 20px
+    line-height 100%
     font-weight 700
     text-transform uppercase
     letter-spacing 0.1em

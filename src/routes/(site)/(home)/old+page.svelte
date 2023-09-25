@@ -10,7 +10,6 @@ import Domain from "svelte-material-icons/Domain.svelte"
 import Settlement from "$lib/icons/Settlement.svelte"
 import Button from "$lib/controls/Button.svelte"
 import Coloured from "$lib/display/Coloured.svelte"
-import Filled from "$lib/display/Filled.svelte"
 import Hero from "$lib/layouts/Hero.svelte"
 import type { GovernmentOrganization, WithContext } from "schema-dts"
 import PageHead from "$lib/components/PageHead.svelte"
@@ -24,15 +23,18 @@ import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
 import Heading from "$lib/display/Heading.svelte"
 import Information from "svelte-material-icons/Information.svelte"
 import Profile from "$lib/display/Profile.svelte"
+import type { Props } from "$lib/utils/typed_props"
+import type ServiceCard from "$lib/components/ServiceCard.svelte"
+import Passport from "svelte-material-icons/Passport.svelte"
+import Vote from "svelte-material-icons/Vote.svelte"
 import Cog from "svelte-material-icons/Cog.svelte"
 import ServicesArea from "./ServicesArea.svelte"
 import InformationArea from "./InformationArea.svelte"
+import Telescope from "svelte-material-icons/Telescope.svelte"
+import { CitizenshipStatus } from "$lib/graphql/graphql-types"
 import Chart from "./Chart.svelte"
 import MainCards from "./MainCards.svelte"
 import Wizard from "./Wizard.svelte"
-import Apps from "svelte-material-icons/Apps.svelte"
-import StatBlock from "./StatBlock.svelte"
-import Passport from "svelte-material-icons/Passport.svelte"
 
 export const organizationSchema: WithContext<GovernmentOrganization> = {
     "@context": "https://schema.org",
@@ -57,6 +59,61 @@ export const organizationSchema: WithContext<GovernmentOrganization> = {
 export let data
 
 $: user = data.user_store.user
+$: user_has_citizenship_application = user?.citizenship_status === CitizenshipStatus.Pending
+
+$: service_cards_top = [
+    user_has_citizenship_application ? {
+        icon: Passport,
+        title: "Citizenship Application",
+        href: "/citizenship",
+        tag: {
+            text: "Pending",
+            color: "yellow"
+        },
+        description: "Your citizenship application is currently pending. You will be notified when it is approved."
+    } : {
+        icon: Passport,
+        title: "Apply for citizenship",
+        href: "/citizenship",
+        tag: {
+            text: "Recommended",
+            color: "green"
+        },
+        description: "Apply for citizenship in Lumina, and become a part of the city's government."
+    },
+    {
+        title: "Mission & Vision",
+        href: "/mission-and-vision",
+        icon: Telescope,
+        tag: {
+            text: "Information",
+            color: "blue",
+        },
+        description: "Learn about the founding mission and vision for Lumina, and how we plan to achieve it."
+    },
+    {
+        title: "Direct Democracy Platform",
+        // href: "/direct-democracy",
+        icon: Vote,
+        tag: {
+            text: "Coming soon",
+            color: "white",
+            opacity: true
+        },
+        description: "Vote on proposals and laws, and have your say in the city's future."
+    },
+    {
+        title: "My Organisations",
+        // href: "/organisations",
+        icon: Domain,
+        tag: {
+            text: "Coming soon",
+            color: "white",
+            opacity: true
+        },
+        description: "View, register and manage your organisations here."
+    }
+] satisfies Props<ServiceCard>[]
 
 </script>
 <Grid
@@ -70,40 +127,39 @@ $: user = data.user_store.user
             tablet: "span 8",
             mobile: "span 4"
         }}
-        gap={16}
-        justify_content="center">
-        <div class="large-paragraph">We're building the</div>
-        <h1>city of the <br><Coloured>future</Coloured></h1>
+        gap={16}>
         {#if user}
-            <div class="large-paragraph">
-                for <Coloured>{ user.first_name }</Coloured>, by <Coloured>{ user.first_name }</Coloured>.
-            </div>
-            <Button
-                style="branded"
-                href="/dashboard"
-                hug={true}
-                left_icon={Apps}>
-                Dashboard
-            </Button>
+            <h2>Welcome back</h2>
+            <Heading><Profile size="40px"/> { user.first_name }</Heading>
+            <Wizard user={user}/>
         {:else}
-            <div class="large-paragraph">
-                for <Coloured>you</Coloured>, by <Coloured>you</Coloured>.
-            </div>
+            <h2>Welcome to the</h2>
+            <Heading>city of the <br><Coloured>future</Coloured></Heading>
             <Button
                 style="branded"
                 href="/auth"
                 hug={true}
+                left_icon={ExitToApp}
                 right_icon={Settlement}>
-                Get citizenship
+                Start
             </Button>
+            <Card
+                align_items="flex-start"
+                gap="16px"
+                padding="32px">
+                <Heading
+                    left_icon={Information}
+                    level={3}>What is Lumina?</Heading>
+                <Paragraph>
+                    Welcome to <Coloured>Lumina</Coloured>, a social experiment with the goals of
+                    setting up a new innovative and environmentally sustainable city.
+                </Paragraph>
+                <Paragraph>
+                    Lumina proposes to set up an <Coloured>Autonomous Zone</Coloured>, which is a
+                    city with it's own government, laws, and currency.
+                </Paragraph>
+            </Card>
         {/if}
-        <StatBlock
-            stat={{
-                icon: Passport,
-                name: "Citizens registered",
-                value: data.user_count,
-                color: "#5D35D5"
-            }}/>
     </GridItem>
     <GridItem
         align_items="center"
@@ -114,9 +170,12 @@ $: user = data.user_store.user
         }}
         justify_content="center"
         position="relative">
-        <Chart data={data.user_count_by_interval}/>
+        <Chart
+            citizen_count={data.user_count}
+            data={data.user_count_by_interval}/>
     </GridItem>
 </Grid>
+<MainCards cards={service_cards_top}/>
 <Hero translucent={true}>
     <div class="padding"/>
     <Heading
@@ -149,16 +208,5 @@ h2
     height 80px
     @media (max-width: $tablet)
         height 0
-
-.large-paragraph
-    font-size 20px
-    color transparify(white, 50%)
-    font-weight 600
-
-h1
-    font-weight 700
-    font-size 46px
-    display flex
-    gap 0.4em
 
 </style>

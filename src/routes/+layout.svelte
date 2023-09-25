@@ -125,6 +125,7 @@ import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
 
     html
         display flex
+        max-height 100%
         min-height 100%
         flex 1
         margin 0

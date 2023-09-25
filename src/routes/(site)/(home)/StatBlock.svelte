@@ -4,7 +4,7 @@ import type { SvelteComponent } from "svelte"
 export let stat: {
     value: string | number,
     name: string,
-    icon: typeof SvelteComponent,
+    icon: typeof SvelteComponent<any>,
     color: string
 }
 

@@ -4,9 +4,9 @@ import type { SvelteComponent } from "svelte"
 
 import Icon from "./Icon.svelte"
 
-export let left_icon: typeof SvelteComponent | null = null
+export let left_icon: typeof SvelteComponent<any> | null = null
 export let left_icon_color: Prop<Icon, "color"> = "brand"
-export let right_icon: typeof SvelteComponent | null = null
+export let right_icon: typeof SvelteComponent<any> | null = null
 export let right_icon_color: Prop<Icon, "color"> = "brand"
 export let level: 1 | 2 | 3 | 4 = 1
 export let id: string | null = null

@@ -83,6 +83,23 @@ export const milestones: Milestone[] = [
         tags: [Filter.Technological]
     },
     {
+        title: "Citizenship Applications system",
+        description: "Establishment of a system for processing citizenship applications, an essential step in Lumina's growth.",
+        date: new Date("2023-03-25"),
+        icon: PassportBiometric,
+        contributors: [
+            {
+                name: "Discape",
+                description: "Developed the backend of the applications system and set up a continuous deployment system",
+            },
+            {
+                name: "Albert Marashi",
+                description: "Worked on both frontend and backend development of the applications system, as well as its continuous deployment system",
+            },
+        ],
+        tags: [Filter.Service]
+    },
+    {
         title: "Mission & Vision page",
         description: "Creation of the Mission & Vision page on the Lumina website, detailing Lumina's aspirations and plans.",
         date: new Date("2023-03-10"),
@@ -121,23 +138,6 @@ export const milestones: Milestone[] = [
             {
                 name: "Albert Marashi",
                 description: "Led the design and development of Light Square, managing its successful completion",
-            },
-        ],
-        tags: [Filter.Service]
-    },
-    {
-        title: "Citizenship Applications system",
-        description: "Establishment of a system for processing citizenship applications, an essential step in Lumina's growth.",
-        date: new Date("2023-03-25"),
-        icon: PassportBiometric,
-        contributors: [
-            {
-                name: "Discape",
-                description: "Developed the backend of the applications system and set up a continuous deployment system",
-            },
-            {
-                name: "Albert Marashi",
-                description: "Worked on both frontend and backend development of the applications system, as well as its continuous deployment system",
             },
         ],
         tags: [Filter.Service]

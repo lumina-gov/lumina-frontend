@@ -8,7 +8,6 @@ export let left_icon: typeof SvelteComponent | null = null
 export let left_icon_props: Record<string, unknown> = {}
 export let right_icon: typeof SvelteComponent | null = null
 export let style: "translucent" | "transparent" | "branded" = "transparent"
-export let authenticated_app_bar = false
 export let active = false
 $: tag = href ? "a" : "div" as "a" | "div"
 
@@ -29,7 +28,6 @@ function handle_keyup(e: KeyboardEvent) {
     this={ tag }
     class="button"
     class:active
-    class:authenticated_app_bar
     class:branded={ style === "branded" }
     class:translucent={ style === "translucent" }
     class:transparent={ style === "transparent" }
@@ -72,10 +70,8 @@ function handle_keyup(e: KeyboardEvent) {
     width auto
     cursor pointer
     font-weight 600
-    @media (max-width $tablet)
-        &.authenticated_app_bar
-            width 100%
-            height 100%
+    width 100%
+    height 100%
     .text
         padding 0px 12px
     .icon

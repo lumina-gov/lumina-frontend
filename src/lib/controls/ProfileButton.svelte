@@ -4,6 +4,7 @@ import { createEventDispatcher } from "svelte"
 
 let dispatch = createEventDispatcher<{ click: Event }>()
 export let active = false
+export let name: string | null = null
 
 function clicked(e: Event) {
     e.stopPropagation()
@@ -22,6 +23,11 @@ function clicked(e: Event) {
         }
     } }>
     <Profile/>
+    {#if name}
+        <div class="label">
+            { name }
+        </div>
+    {/if}
 </div>
 <style lang="stylus">
 @import variables
@@ -33,6 +39,7 @@ function clicked(e: Event) {
     display flex
     align-items center
     justify-content center
+    gap 8px
     &:focus-visible
         outline-effect()
     &:hover, &:focus
@@ -45,4 +52,10 @@ function clicked(e: Event) {
         border-radius 0
         height 100%
         width 100%
+
+    .label
+        font-size 16px
+        font-weight 400
+        color transparify(white, 80%)
+        padding-right 4px
 </style>

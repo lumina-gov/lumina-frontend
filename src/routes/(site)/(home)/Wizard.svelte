@@ -52,7 +52,7 @@ onMount(() => {
     </WizardItem>
     <WizardItem checked={user.referral_count > 0}>
         <Paragraph>
-            <strong>Refer a friend</strong> to earn Lumina. You have { user.referral_count } referrals.
+            <strong>Refer a friend</strong> to earn Aura. You have { user.referral_count } referrals.
         </Paragraph>
         <Paragraph>
             Earn 10 Aura (<em>Lumina's currency</em>) for every friend you refer.

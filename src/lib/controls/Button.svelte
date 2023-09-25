@@ -3,8 +3,8 @@ import type { SvelteComponent } from "svelte"
 import { createEventDispatcher } from "svelte"
 
 export let href: string | null = null
-export let left_icon: typeof SvelteComponent | null = null
-export let right_icon: typeof SvelteComponent | null = null
+export let left_icon: typeof SvelteComponent<any> | null = null
+export let right_icon: typeof SvelteComponent<any> | null = null
 export let style: "translucent" | "transparent" | "branded" = "branded"
 export let hug = true
 export let disabled = false
