@@ -149,7 +149,7 @@ aside {
     display: none;
     background: var(--dark-app);
     z-index: 8;
-    border-right: color-mix(in srgb, white 8%, transparent) solid 2px;
+    border-right: 2px solid rgba(var(--white-rgb), 0.1);
 
     &.visible {
         display: flex;

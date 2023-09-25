@@ -18,7 +18,7 @@ export let left_icon: IconComponent
 </a>
 <style>
 .nav-link {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(var(--white-rgb), 0.8);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -31,7 +31,7 @@ export let left_icon: IconComponent
 
     &:is(:hover, :focus) {
         color: white;
-        background: rgba(255, 255, 255, 0.04);
+        background: rgba(var(--white-rgb), 0.04);
     }
 }
 </style>
