@@ -27,15 +27,12 @@ afterNavigate(() => {
 {#if user}
     <div class="app-bar">
         <AppbarButton
-            style="transparent"
             left_icon={Menu}
             on:click={ () => sidebar_opened = sidebar_opened === "default" ? true : !sidebar_opened }/>
         <AppbarButton
-            style="transparent"
             href="/"
             left_icon={Apps}/>
         <AppbarButton
-            style="transparent"
             left_icon={NotificationOutline}
             on:click={ () => toggle("notifications") }/>
         <ProfileButton on:click={ () => toggle("account") }/>
@@ -50,7 +47,7 @@ afterNavigate(() => {
     background: var(--dark);
     background: color-mix(in srgb, var(--dark) 96%, white);
     border-top: 1px solid rgba(var(--white-rgb), 0.1);
-    padding: 4px;
+    padding: 6px;
 
     @media (max-width: 900px) {
         display: flex;

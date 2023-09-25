@@ -3,7 +3,6 @@ import Profile from "$lib/display/Profile.svelte"
 import { createEventDispatcher } from "svelte"
 
 let dispatch = createEventDispatcher<{ click: Event }>()
-export let active = false
 export let name: string | null = null
 
 function clicked(e: Event) {
@@ -13,7 +12,6 @@ function clicked(e: Event) {
 </script>
 <div
     class="profile-button-wrapper"
-    class:active
     role="button"
     tabindex="0"
     on:click={ clicked }
@@ -39,28 +37,24 @@ function clicked(e: Event) {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
     &:focus-visible {
         outline: 2px solid var(--brand);
         outline-offset: 2px;
     }
-    &:hover,
-    &:focus {
-        background: color-mix(white, 8%);
+    &:is(:hover, :focus) {
+        background: rgba(var(--white-rgb), 0.08);
     }
-    &:active,
-    &.active {
-        background: color-mix(white, 14%);
+    &:active {
+        background: rgba(var(--white-rgb), 0.12);
     }
     & .label {
         font-size: 16px;
         font-weight: 400;
         color: color-mix(white, 80%);
         padding-right: 4px;
-    }
-    @media (max-width: 900px) {
-        border-radius: 0;
-        height: 100%;
-        width: 100%;
     }
 }
 </style>

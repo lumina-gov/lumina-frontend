@@ -8,7 +8,6 @@ export let href: string | null = null
 export let left_icon: IconComponent | null = null
 export let left_icon_props: Record<string, unknown> = {}
 export let right_icon: IconComponent | null = null
-export let style: "translucent" | "transparent" | "branded" = "transparent"
 export let active = false
 $: tag = href ? "a" : "div" as "a" | "div"
 
@@ -29,9 +28,6 @@ function handle_keyup(e: KeyboardEvent) {
     this={ tag }
     class="button"
     class:active
-    class:branded={ style === "branded" }
-    class:translucent={ style === "translucent" }
-    class:transparent={ style === "transparent" }
     href={href}
     role="button"
     tabindex="0"
@@ -72,6 +68,8 @@ function handle_keyup(e: KeyboardEvent) {
     width: 100%;
     height: 100%;
 
+    color: rgba(var(--white-rgb), 0.8);
+
     & .text {
         padding: 0px 12px;
     }
@@ -86,45 +84,13 @@ function handle_keyup(e: KeyboardEvent) {
         outline-offset: 2px;
     }
 
-    &.branded {
-        background: var(--brand);
-
-        &:hover,
-        &:focus {
-            background: color-mix(var(--brand), white, 12%);
-        }
-
-        &:active {
-            background: var(--brand);
-        }
+    &:is(:hover, :focus) {
+        background: rgba(var(--white-rgb), 0.08);
+        color: white;
     }
 
-    &.translucent {
-        background: color-mix(white, 8%);
-
-        &:hover,
-        &:focus {
-            background: color-mix(white, 14%);
-        }
-
-        &:active {
-            background: color-mix(white, 8%);
-        }
-    }
-
-    &.transparent {
-        color: color-mix(white, 60%);
-        background: color-mix(white, 0%);
-
-        &:hover,
-        &:focus {
-            background: color-mix(white, 12%);
-            color: white;
-        }
-
-        &:active {
-            background: color-mix(white, 6%);
-        }
+    &:active {
+        background: rgba(var(--white-rgb), 0.04);
     }
 }
 </style>
