@@ -49,6 +49,7 @@ afterNavigate(() => {
     z-index: 5;
     background: var(--dark);
     background: color-mix(in srgb, var(--dark) 96%, white);
+    border-top: 1px solid rgba(var(--white-rgb), 0.1);
     padding: 4px;
 
     @media (max-width: 900px) {
