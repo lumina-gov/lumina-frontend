@@ -19,7 +19,8 @@ import Twitter from "svelte-material-icons/Twitter.svelte"
 import TikTok from "$lib/icons/TikTok.svelte"
 import Youtube from "svelte-material-icons/Youtube.svelte"
 import Email from "svelte-material-icons/Email.svelte"
-import type { SvelteComponent } from "svelte"
+
+import type { IconComponent } from "$lib/utils/icon_type"
 import Script from "svelte-material-icons/Script.svelte"
 import Image from "svelte-material-icons/Image.svelte"
 import Music from "svelte-material-icons/MusicNoteEighth.svelte"
@@ -31,7 +32,7 @@ type Asset = {
     name: string
     url: string
     type: string
-    icon: typeof SvelteComponent
+    icon: IconComponent
 }
 
 export let data
@@ -62,7 +63,7 @@ export let assets: Asset[] = [
     <VerticalLayout
         align_items="flex-start"
         max_width={500}>
-        <Tag color="brand">For journalists</Tag>
+        <Tag>For journalists</Tag>
         <Heading left_icon={Newspaper}>Media & Press</Heading>
         <Paragraph>
             Our media and press page offers a range of resources for journalists and members of the public.
@@ -88,19 +89,19 @@ export let assets: Asset[] = [
                         href={asset.url}>
                         <div>
                             <Icon
-                                color="white"
-                                icon={asset.icon}
-                                opacity={0.5}
-                                size={24}/>
+                                --color="white"
+                                --opacity={0.5}
+                                --size="24px"
+                                icon={asset.icon}/>
                             <div class="asset-title">
                                 { asset.name }
                             </div>
                         </div>
                         <div>
-                            <Tag color="brand">{ asset.type }</Tag>
+                            <Tag>{ asset.type }</Tag>
                             <Icon
-                                icon={Download}
-                                size={24}/>
+                                --size="24px"
+                                icon={Download}/>
                         </div>
                     </a>
                 {/each}
@@ -179,37 +180,44 @@ export let assets: Asset[] = [
         </div>
     </Card>
 </Hero>
-<style lang="stylus">
-@import variables
+<style>
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
 
-.flex-wrap
-    display flex
-    flex-wrap wrap
-    gap 8px
+.items {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
 
-.items
-    display flex
-    flex-direction column
-    width 100%
-    gap 8px
+.asset {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.04);
+    & > div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    & .asset-title {
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+}
 
-.asset
-    display flex
-    gap 16px
-    align-items center
-    justify-content space-between
-    width 100%
-    padding 12px
-    border-radius 4px
-    background transparify(white, 4%)
-    .asset-title
-        color white
-        font-size 14px
-        font-weight 700
-    > div
-        display flex
-        align-items center
-        gap 8px
-    &:hover
-        background transparify(white, 8%)
+
+
 </style>

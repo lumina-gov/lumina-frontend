@@ -69,9 +69,8 @@ onMount(() => {
         />
     </WizardItem>
 </div>
-<style lang="stylus">
-@import variables
-
-.wizards
-    padding 24px
+<style>
+    .wizards {
+        padding: 24px;
+    }
 </style>

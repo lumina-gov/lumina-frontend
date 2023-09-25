@@ -21,134 +21,53 @@ import { env } from "$env/dynamic/public"
 import AlertBar from "./AlertBar.svelte"
 import PageLoaderBar from "./PageLoaderBar.svelte"
 import ServiceWorkerUI from "./ServiceWorkerUI.svelte"
-
 </script>
-<!-- <div class="grid-wrapper">
-    <div class="grid laptop">
-        {#each new Array(16) as _}
-            <div/>
-        {/each}
-    </div>
-    <div class="grid tablet">
-        {#each new Array(8) as _}
-            <div/>
-        {/each}
-    </div>
-    <div class="grid mobile">
-        {#each new Array(4) as _}
-            <div/>
-        {/each}
-    </div>
-</div> -->
 <PageLoaderBar/>
 <AlertBar/>
 <ServiceWorkerUI/>
-<!-- <div class="floating-gradient"/> -->
 <slot/>
-<style lang="stylus">
-@import variables
 
-// .grid-wrapper
-//     position fixed
-//     top 0
-//     left 0
-//     bottom 0
-//     right 0
-//     z-index -3
+<style>
+@import "normalise.css";
+@import "global.css";
 
-// .grid
-//     max-width 1200px
-//     margin 0 auto
-//     display none
-//     padding 0 16px
-//     gap 16px
-//     &.laptop
-//         grid-template-columns repeat(16, 1fr)
-//     &.tablet
-//         grid-template-columns repeat(8, 1fr)
-//     &.mobile
-//         grid-template-columns repeat(4, 1fr)
-//     @media (min-width $tablet)
-//         &.laptop
-//             display grid
-//     @media (min-width $mobile) and (max-width $tablet)
-//         &.tablet
-//             display grid
-//     @media (max-width $mobile)
-//         &.mobile
-//             display grid
-//     height 100%
-//     width 100%
-//     border-right 1.5px dashed transparify(white, 8%)
-//     border-left 1.5px dashed transparify(white, 8%)
-//     > div
-//         border-right 1.5px dashed transparify(white, 8%)
-//         border-left 1.5px dashed transparify(white, 8%)
-//         &:last-child
-//             border-right 1.5px dashed transparify(white, 8%)
+:root {
+    --white-rgb: 255, 255, 255;
+    --white: rgb(var(--white-rgb));
 
-// .floating-gradient
-//     position fixed
-//     top 0
-//     left 0
-//     bottom 0
-//     right 0
-//     z-index -1
-//     background radial-gradient(at 50% 50%, #000F9930 0%, #000F9900 75%)
-//     background-size 60% 60%
-//     background-repeat no-repeat
-//     background-position 50% 50%
-//     // animation move-gradient 10s ease-in-out infinite
-//     transform rotate(45deg) scale(2)
+    --dark-rgb: 45, 55, 68;
+    --dark: rgb(var(--dark-rgb));
 
-// @keyframes move-gradient
-//     0%
-//         background-position 0% 50%
-//     50%
-//         background-position 100% 50%
-//     100%
-//         background-position 0% 50%
+    --dark-app-rgb: 21, 24, 28;
+    --dark-app: rgb(var(--dark-app-rgb));
 
+    --brand-rgb: 116, 70, 246;
+    --brand: rgb(var(--brand-rgb));
 
-:global
-    @import 'normalise'
+    --red-rgb: 226, 84, 84;
+    --red: rgb(var(--red-rgb));
 
-    *
-        &:focus
-            outline-effect()
+    --orange-rgb: 255, 137, 71;
+    --orange: rgb(var(--orange-rgb));
 
-    hr
-        border 0
-        border-top 1px solid transparify(white, 10%)
-        width 100%
-        margin 0
+    --green-rgb: 0, 180, 115;
+    --green: rgb(var(--green-rgb));
 
-    html
-        display flex
-        max-height 100%
-        min-height 100%
-        flex 1
-        margin 0
-        padding 0
-        scroll-behavior smooth
+    --yellow-rgb: 242, 201, 76;
+    --yellow: rgb(var(--yellow-rgb));
 
-    h1, h2, h3, h4, h5, h6
-        font-weight 500
+    --blue-rgb: 37, 112, 182;
+    --blue: rgb(var(--blue-rgb));
 
-    a
-        text-decoration none
-        color $brand
-        &:hover
-            color lighten($brand, 10%)
+    --purple-rgb: 130, 41, 214;
+    --purple: rgb(var(--purple-rgb));
 
-    body
-        background $dark_app
-        color white
-        flex 1
-        margin 0
-        padding 0
-        min-height 100%
-        font-family 'Prompt', sans-serif
-        max-width 100%
+    --yellow-green-rgb: 179, 209, 70;
+    --yellow-green: rgb(var(--yellow-green-rgb));
+
+    --laptop: 1200px;
+    --tablet: 900px;
+    --mobile: 600px;
+}
 
 </style>

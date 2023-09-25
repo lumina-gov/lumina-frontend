@@ -22,20 +22,20 @@ $: progress.set(width, {
         class="inner-bar" />
 </div>
 
-<style lang="stylus">
-@import variables
+<style>
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: color-mix(in srgb, white, 10%);
+    overflow: hidden;
+    border-radius: 50px;
+}
 
-.progress-bar
-    width: 100%
-    height: 12px
-    background: rgba(255,255,255,0.1)
-    overflow: hidden
-    border-radius: 50px
-
-
-.inner-bar
-    background: $brand
-    height: 100%
-    border-radius: 50px
-    transition width ease-in-out 0.3s
+.inner-bar {
+    background: var(--brand);
+    height: 100%;
+    border-radius: 50px;
+    transition: width ease-in-out 0.3s;
+}
 </style>
+

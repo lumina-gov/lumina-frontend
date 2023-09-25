@@ -50,49 +50,60 @@ export let last: boolean
     </div>
 </div>
 
-<style lang="stylus">
-@import variables
+<style>
+.milestone_card {
+    margin-bottom: 48px;
+}
 
-.milestone_card
-    margin-bottom 48px
-.milestone
-    display: grid
-    width: 100%
-    max-width:  850px
+.milestone {
+    display: grid;
+    width: 100%;
+    max-width: 850px;
     grid-template-columns: 150px max-content 2fr;
-    grid-gap 0 24px
-    @media (max-width $tablet)
-        grid-template-columns max-content 1fr
-        grid-gap 12px 24px
-.line
-    width 4px
-    height 100%
-    display flex
-    justify-content center
-    background transparify(white, 10%)
-    @media (max-width $tablet)
-        grid-row 1 / span 2
-.last-line
-    background none
-.circle
-    min-width 20px
-    height 20px
-    background $brand
-    border-radius 50px
+    grid-gap: 0 24px;
+    @media (width <= 900px) {
+        grid-template-columns: max-content 1fr;
+        grid-gap: 12px 24px;
+    }
+}
 
-.milestones
-    display flex
-    flex-direction column
-    gap 6px
+.line {
+    width: 4px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    @media (width <= 900px) {
+        grid-row: 1 / span 2;
+    }
+}
 
-.dates
-    display flex
-    flex-direction column
-    text-align right
-    align-items end
-    gap 6px
-    @media (max-width $tablet)
-        align-items start
-        text-align left
+.last-line {
+    background: none;
+}
 
+.circle {
+    min-width: 20px;
+    height: 20px;
+    background: var(--brand);
+    border-radius: 50px;
+}
+
+.milestones {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dates {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    align-items: end;
+    gap: 6px;
+    @media (width <= 900px) {
+        align-items: start;
+        text-align: left;
+    }
+}
 </style>

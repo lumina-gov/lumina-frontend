@@ -206,37 +206,42 @@ async function register() {
         </Button>
     </div>
 </div>
-<style lang="stylus">
-@import variables
+<style>
+    .aliases {
+        opacity: 0.5;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        padding-top: 8px;
+        padding-bottom: 2px;
+        width: 100%;
+    }
 
-.aliases
-    opacity 0.5
-    text-overflow ellipsis
-    overflow hidden
-    white-space: nowrap
-    padding-top 8px
-    padding-bottom 2px
-    width 100%
+    .date-wrapper {
+        max-width: 250px;
+    }
 
+    .inputs {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 24px;
+    }
 
-.date-wrapper
-    max-width 250px
+    .horizontal-inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+    @media (max-width: 600px) {
+        .horizontal-inputs {
+            grid-template-columns: 1fr;
+        }
+    }
 
-.inputs
-    display flex
-    flex-direction column
-    width 100%
-    gap 24px
-
-.horizontal-inputs
-    display grid
-    grid-template-columns 1fr 1fr
-    gap 24px
-    @media (max-width: 600px)
-        grid-template-columns 1fr
-
-.horizontal-segments
-    display flex
-    flex-wrap wrap
-    gap 8px
+    .horizontal-segments {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
 </style>

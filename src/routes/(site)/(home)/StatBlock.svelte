@@ -1,10 +1,11 @@
 <script lang="ts">
-import type { SvelteComponent } from "svelte"
+
+import type { IconComponent } from "$lib/utils/icon_type"
 
 export let stat: {
     value: string | number,
     name: string,
-    icon: typeof SvelteComponent<any>,
+    icon: IconComponent,
     color: string
 }
 
@@ -23,35 +24,36 @@ export let stat: {
         <span>{ stat.name }</span>
     </div>
 </div>
+<style>
+.stat {
+    text-align: center;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
 
-<style lang="stylus">
-@import variables
+.stat-icon {
+    font-size: 32px;
+    color: white;
+    display: inline-flex;
+    height: 48px;
+    width: 48px;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
+}
 
-.stat
-    text-align center
-    display flex
-    gap 12px
-    align-items center
+.stat-value {
+    font-size: 36px;
+    padding-bottom: 4px;
+    font-weight: 600;
+    display: inline-flex;
+}
 
-.stat-icon
-    font-size 32px
-    color white
-    display inline-flex
-    height 48px
-    width 48px
-    border-radius 50px
-    align-items center
-    justify-content center
-
-.stat-value
-    font-size 36px
-    padding-bottom 4px
-    font-weight 600
-    display inline-flex
-
-.stat-name
-    font-size 18px
-    opacity 0.5
-    display inline-flex
+.stat-name {
+    font-size: 18px;
+    opacity: 0.5;
+    display: inline-flex;
+}
 
 </style>

@@ -1,6 +1,7 @@
 import LightUniversity from "$lib/icons/LightUniversity.svelte"
 import Lumina from "$lib/icons/Lumina.svelte"
-import type { SvelteComponent } from "svelte"
+
+import type { IconComponent } from "$lib/utils/icon_type"
 import Database from "svelte-material-icons/Database.svelte"
 import ListBox from "svelte-material-icons/ListBox.svelte"
 import NewspaperVariantOutline from "svelte-material-icons/NewspaperVariantOutline.svelte"
@@ -20,7 +21,7 @@ export type Milestone = {
     title: string,
     description: string,
     date: Date,
-    icon: typeof SvelteComponent
+    icon: IconComponent
     contributors: MilestoneContributor[]
     tags: Filter[]
 }

@@ -68,47 +68,22 @@ afterNavigate(() => {
     </Scrim>
 {/if}
 
-<style lang="stylus">
-@import variables
-
-.app
-    display flex
-    height 100%
-    .content
-        overflow-y scroll
-        display flex
-        flex-direction column
-        flex 1
-    main
-        flex 1
-
-.popout
-    max-width 400px
-    width 100%
-
-// .content
-//     flex 1
-//     display flex
-//     flex-direction column
-//     z-index 1
-//     @media (max-width $tablet)
-//         overflow-y auto
-//         height 100%
-
-
-// .layout
-//     display flex
-//     position relative
-//     flex-direction column
-//     min-height 100%
-//     background rgba(0,0,0,0.2)
-//     &.authenticated
-//         @media (max-width $tablet)
-//             height 100vh
-//             display grid
-//             overflow-y hidden
-//             grid-template-rows 1fr 60px // content, AppBar
-
-
-
+<style>
+.app {
+    display: flex;
+    height: 100%;
+}
+.content {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+main {
+    flex: 1;
+}
+.popout {
+    max-width: 400px;
+    width: 100%;
+}
 </style>

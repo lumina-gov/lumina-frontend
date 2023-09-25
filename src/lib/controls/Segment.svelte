@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { SvelteComponent } from "svelte"
 import { createEventDispatcher } from "svelte"
+import type { IconComponent } from "$lib/utils/icon_type"
 
 let dispatch = createEventDispatcher()
 
 export let href: string | undefined = undefined
-export let left_icon: typeof SvelteComponent | undefined = undefined
-export let right_icon: typeof SvelteComponent | undefined = undefined
+export let left_icon: IconComponent | undefined = undefined
+export let right_icon: IconComponent | undefined = undefined
 export let right_icon_opacity = 0.5
 export let left_icon_opacity = 0.5
 export let text_opacity = 1
@@ -67,36 +67,47 @@ $: tag = href ? "a" : "div" as "a" | "div"
     {/if}
 </svelte:element>
 
-<style lang="stylus">
-@import variables
+<style>
+.segment {
+    padding: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
 
-.segment
-    padding 6px
-    background transparify(white, 6%)
-    color white
-    display inline-flex
-    align-items center
-    justify-content center
-    border-radius 50px
-    cursor pointer
-    font-weight 500
-    .text
-        padding 2px 6px
-        line-height 100%
-    .icon
-        font-size: 20px
-        display: inline-flex
-    &:hover
-        background transparify(white, 10%)
-    &:focus-visible
-        outline-effect()
-    &.branded
-        background $brand
-        &:hover
-            background lighten($brand, 12%)
-    &.disabled
-        cursor default
-        opacity 0.5
-        background transparent
-        border 1px solid transparify(white, 10%)
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--brand);
+        outline-offset: 2px;
+    }
+
+    &.branded {
+        background: var(--brand);
+        &:hover {
+            background: color-mix(in srgb, var(--brand), white 12%);
+        }
+    }
+
+    &.disabled {
+        cursor: default;
+        opacity: 0.5;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    & .text {
+        padding: 2px 6px;
+        line-height: 100%;
+    }
+    & .icon {
+        font-size: 20px;
+        display: inline-flex;
+    }
+}
 </style>

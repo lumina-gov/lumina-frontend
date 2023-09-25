@@ -25,7 +25,7 @@ export const information: Props<ServiceCard>[] = [
         href: "/mission-and-vision",
         icon: Telescope,
         tag: {
-            color: "blue",
+            color: "var(--blue)",
             text: "Information"
         },
     },
@@ -57,7 +57,7 @@ export const information: Props<ServiceCard>[] = [
         href: "/government-directory",
         icon: FormatListBulleted,
         tag: {
-            color: "blue",
+            color: "var(--blue)",
             text: "Information"
         },
     },
@@ -78,7 +78,7 @@ export const information: Props<ServiceCard>[] = [
         href: "/media-and-press",
         icon: IdentityCard,
         tag: {
-            color: "blue",
+            color: "var(--blue)",
             text: "Information"
         },
     },
@@ -88,7 +88,7 @@ export const information: Props<ServiceCard>[] = [
         href: "/milestones",
         icon: RocketLaunch,
         tag: {
-            color: "blue",
+            color: "var(--blue)",
             text: "Information"
         },
     },

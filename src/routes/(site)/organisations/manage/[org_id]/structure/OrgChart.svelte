@@ -75,6 +75,7 @@ let scale = 1
             on:click={ () => scale += 0.15 * scale }/>
     </div>
     <ScrollbarRegion bind:scale>
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
         <div
             bind:this={ inner }
             class="inner"
@@ -106,46 +107,47 @@ let scale = 1
         </div>
     </ScrollbarRegion>
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.wrapper {
+    flex: 1;
+    background: rgba(var(--white-rgb), 0.04);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    border-radius: 6px;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
 
-.wrapper
-    flex 1
-    background transparify(white, 4%)
-    overflow auto
-    display flex
-    align-items center
-    position absolute
-    border-radius 6px
-    left 0
-    top 0
-    right 0
-    bottom 0
+.zoom {
+    top: 16px;
+    right: 16px;
+    display: flex;
+    position: absolute;
+    z-index: 2;
+    gap: 8px;
+}
 
-.zoom
-    top 16px
-    right 16px
-    display flex
-    position absolute
-    z-index 2
-    gap 8px
+.inner {
+    padding: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    min-width: max-content;
+    min-height: max-content;
+}
 
-
-.inner
-    padding 200px
-    display flex
-    flex-direction column
-    align-items center
-    position relative
-    min-width max-content
-    min-height max-content
-
-svg
-    position absolute
-    color transparify(white, 10%)
-    top 0
-    bottom: 0
-    right 0
-    left 0
-    z-index -1
+svg {
+    position: absolute;
+    color: rgba(var(--white-rgb), 0.1);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: -1;
+}
 </style>

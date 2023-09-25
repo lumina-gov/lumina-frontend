@@ -1,6 +1,6 @@
-import type { SvelteComponentTyped } from "svelte"
+import type { SvelteComponent } from "svelte"
 
-export type Props<T> = T extends SvelteComponentTyped<
+export type Props<T> = T extends SvelteComponent<
     infer P,
     Record<string, unknown>,
     Record<string, unknown>

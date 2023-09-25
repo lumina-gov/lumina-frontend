@@ -30,7 +30,7 @@ let toggled = false
         </div>
         {#if toggled}
             <Inside>
-                <Dropdown max_width="500px">
+                <Dropdown max_width={420}>
                     <div class="group">
                         <div class="space-between">
                             <Heading
@@ -58,22 +58,23 @@ let toggled = false
         {/if}
     </ClickoutRegion>
 </InputWrapper>
-<style lang="stylus">
-@import variables
+<style>
+.group {
+    padding: 16px;
+    display: grid;
+    gap: 16px;
+}
 
-.group
-    padding 16px
-    display grid
-    gap 16px
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-.space-between
-    display flex
-    justify-content space-between
-    align-items center
-
-.input-group
-    display grid
-    gap 16px
-    grid-template-columns repeat(auto-fit, minmax(150px, 1fr))
+.input-group {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
 
 </style>

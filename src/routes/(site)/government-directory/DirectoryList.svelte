@@ -10,13 +10,12 @@ export let organisations: OrganisationsQuery["organisations"]
         <DirectoryItem {organisation} />
     {/each}
 </div>
-<style lang="stylus">
-@import variables
-
-.directory-list
-    display flex
-    flex-direction column
-    background lighten($dark_app, 4%)
-    border-radius 8px
-    width 100%
+<style>
+.directory-list {
+    display: flex;
+    flex-direction: column;
+    background: color-mix(in srgb, var(--dark-app), white 4%);
+    border-radius: 8px;
+    width: 100%;
+}
 </style>

@@ -17,44 +17,53 @@ export let type: keyof typeof icons
 <div class="callout {type}">
     <div class="icon">
         <Icon
-            icon={icons[type]}
-            size={24}/>
+            --size="24px"
+            icon={icons[type]}/>
     </div>
     <div class="content">
         <slot/>
     </div>
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.callout {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--white) 10%, transparent);
+    border: 2px solid color-mix(in srgb, var(--white) 10%, transparent);
+}
 
-.callout
-    display flex
-    gap 20px
-    width 100%
-    padding 20px
-    border-radius 8px
-    background transparify(white, 10%)
-    border 2px solid transparify(white, 10%)
+.callout.note {
+    background: color-mix(in srgb, var(--blue) 10%, transparent);
+    border-color: color-mix(in srgb, var(--blue) 50%, transparent);
+    & .icon {
+        color: var(--blue);
+    }
+}
 
-    &.note
-        background transparify($blue, 10%)
-        border-color transparify($blue, 50%)
-        .icon
-            color $blue
-    &.error
-        background transparify($red, 10%)
-        border-color transparify($red, 50%)
-        .icon
-            color $red
-    &.warning
-        background transparify($yellow, 10%)
-        border-color transparify($yellow, 50%)
-        .icon
-            color $yellow
-    &.success
-        background transparify($green, 10%)
-        border-color transparify($green, 50%)
-        .icon
-            color $green
+.callout.error {
+    background: color-mix(in srgb, var(--red) 10%, transparent);
+    border-color: color-mix(in srgb, var(--red) 50%, transparent);
+    & .icon {
+        color: var(--red);
+    }
+}
 
+.callout.warning {
+    background: color-mix(in srgb, var(--yellow) 10%, transparent);
+    border-color: color-mix(in srgb, var(--yellow) 50%, transparent);
+    & .icon {
+        color: var(--yellow);
+    }
+}
+
+.callout.success {
+    background: color-mix(in srgb, var(--green) 10%, transparent);
+    border-color: color-mix(in srgb, var(--green) 50%, transparent);
+    & .icon {
+        color: var(--green);
+    }
+}
 </style>

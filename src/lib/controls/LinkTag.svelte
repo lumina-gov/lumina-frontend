@@ -1,10 +1,11 @@
 <script lang="ts">
-import type { SvelteComponent } from "svelte"
+
+import type { IconComponent } from "$lib/utils/icon_type"
 import { createEventDispatcher } from "svelte"
 
 export let href: string | null = null
-export let left_icon: typeof SvelteComponent | null = null
-export let right_icon: typeof SvelteComponent | null = null
+export let left_icon: IconComponent | null = null
+export let right_icon: IconComponent | null = null
 export let right_icon_opacity = 1
 $: tag = href ? "a" : "div" as "a" | "div"
 
@@ -26,6 +27,8 @@ function handle_keyup(e: KeyboardEvent) {
     this={ tag }
     class="tag"
     href={href}
+    role={disabled ? undefined : "button"}
+    tabindex={disabled ? -1 : 0}
     on:click={ clicked }
     on:keyup={ handle_keyup }>
     {#if left_icon}
@@ -51,26 +54,30 @@ function handle_keyup(e: KeyboardEvent) {
     {/if}
 </svelte:element>
 
-<style lang="stylus">
-@import variables
+<style>
+    .tag {
+        padding: 6px;
+        gap: 6px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 4px;
 
-.tag
-    padding 6px
-    gap 6px
-    text-decoration none
-    display inline-flex
-    align-items center
-    color white
-    font-size 18px
-    font-weight 500
-    background transparify(white, 4%)
-    border-radius 4px
-    .text
-        padding 0 4px
-    .icon
-        display inline-flex
-    &:hover
-        cursor pointer
-        background transparify(white, 8%)
+        & .text {
+            padding: 0 4px;
+        }
 
+        & .icon {
+            display: inline-flex;
+        }
+
+        &:hover {
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.08);
+        }
+    }
 </style>

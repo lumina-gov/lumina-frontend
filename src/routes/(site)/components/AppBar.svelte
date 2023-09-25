@@ -41,17 +41,17 @@ afterNavigate(() => {
         <ProfileButton on:click={ () => toggle("account") }/>
     </div>
 {/if}
-<style lang="stylus">
-@import variables
+<style>
+.app-bar {
+    position: sticky;
+    bottom: 0;
+    display: none;
+    z-index: 5;
+    background: color-mix(in srgb, var(--dark) 96%, white);
+    padding: 4px;
 
-.app-bar
-    position sticky
-    bottom 0
-    display none
-    z-index 5
-    background mix($dark, white, 96%)
-    padding 4px
-    @media (max-width: $tablet)
-        display flex
-
+    @media (width <= 900px) {
+        display: flex;
+    }
+}
 </style>

@@ -10,6 +10,8 @@ export let item: TreeItem
 <div class="item">
     <div
         class="text"
+        role="button"
+        tabindex="0"
         on:keydown={ e => {
             if (e.key === "Enter") {
                 toggled = !toggled
@@ -42,22 +44,24 @@ export let item: TreeItem
         </div>
     {/if}
 </div>
-<style lang="stylus">
-@import variables
+<style>
+    .text {
+        display: flex;
+        padding: 6px;
+        gap: 12px;
+        align-items: center;
+        font-weight: 600;
+        font-size: 18px;
+        cursor: pointer;
+        & .icon {
+            color: var(--brand);
+        }
+        & .prefix {
+            opacity: 0.4;
+        }
+    }
 
-.text
-    display flex
-    padding 6px
-    gap 12px
-    align-items center
-    font-weight 600
-    font-size 18px
-    cursor pointer
-    .icon
-        color $brand
-    .prefix
-        opacity 0.4
-.children
-    padding-left 20px
-
+    .children {
+        padding-left: 20px;
+    }
 </style>

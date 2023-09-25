@@ -16,9 +16,9 @@ export let direction: "row" | "column" = "column"
     class="layout">
     <slot />
 </div>
-<style lang="stylus">
-@import variables
+<style>
 
-.layout
-    display flex
+.layout {
+    display: flex;
+}
 </style>

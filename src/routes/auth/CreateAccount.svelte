@@ -96,7 +96,7 @@ async function signup () {
 }
 </script>
 {#if loading}
-    <OverlayLoading/>
+    <OverlayLoading fixed={true}/>
 {/if}
 <Card padding="24px">
     <Box
@@ -104,9 +104,9 @@ async function signup () {
         max_width="360px">
         <h1>
             <Icon
-                color="brand"
-                icon={ShieldAccount}
-                size={32}/>
+                --color="var(--brand)"
+                --size="32px"
+                icon={ShieldAccount}/>
             Create Account
         </h1>
         <!-- <div class="center">
@@ -148,22 +148,22 @@ async function signup () {
         </Button>
     </Box>
 </Card>
-<style lang="stylus">
-@import variables
-.split
-    display grid
-    grid-auto-flow column
-    grid-auto-columns 1fr
-    gap 20px
+<style>
+.split {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 20px;
+}
 
-h1
-    margin 0
-    gap 10px
-    text-align center
-    display flex
-    font-size: 28px
-    align-items center
-    justify-content center
-    font-weight 600
-
+h1 {
+    margin: 0;
+    gap: 10px;
+    text-align: center;
+    display: flex;
+    font-size: 28px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
 </style>

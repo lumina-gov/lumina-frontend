@@ -6,6 +6,7 @@ let scrim: HTMLDivElement
 
 </script>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
     bind:this={ scrim }
     class="scrim"
@@ -16,19 +17,19 @@ let scrim: HTMLDivElement
     } }>
     <slot/>
 </div>
-<style lang="stylus">
-@import variables
-
-.scrim
-    z-index 99
-    position fixed
-    display flex
-    align-items center
-    justify-content center
-    top 0
-    left 0
-    padding 40px
-    right 0
-    bottom 0
-    background transparify($dark_app, 40%)
+<style>
+.scrim {
+    z-index: 99;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    padding: 40px;
+    right: 0;
+    bottom: 0;
+    background: color-mix(in srgb, black 40%, transparent);
+    backdrop-filter: blur(4px);
+}
 </style>

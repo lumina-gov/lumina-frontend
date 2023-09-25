@@ -63,31 +63,33 @@ onMount(detectServiceWorkerUpdate)
         </div>
     </div>
 {/if}
-<style lang="stylus">
-@import variables
+<style>
+.alert {
+    position: fixed;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    left: 0;
+    bottom: 24px;
+    right: 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 16px;
+    background: var(--dark-app);
+    border: 1px solid color-mix(in srgb, white, 10%);
+    border-radius: 4px;
+    box-shadow: 0 0 5px color-mix(in srgb, black, 10%);
+    gap: 16px;
 
-.alert
-    position fixed
-    width 100%
-    max-width 500px
-    margin 0 auto
-    left 0
-    bottom 24px
-    right 0
-    z-index 20
-    display flex
-    flex-direction column
-    text-align center
-    padding 16px
-    background $dark_app
-    border 1px solid transparify(white, 10%)
-    border-radius 4px
-    shadow()
-    gap 16px
-    .alert-title
-        font-size 18px
-        font-weight 700
-    .status
-        font-weight 700
+    & .alert-title {
+        font-size: 18px;
+        font-weight: 700;
+    }
 
+    & .status {
+        font-weight: 700;
+    }
+}
 </style>

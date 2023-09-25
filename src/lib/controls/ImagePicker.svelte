@@ -52,49 +52,58 @@ async function select () {
         on:click={ select }>
         <div class="icon">
             <Icon
-                icon={value ? CloseCircle : Upload}
-                size={24}/>
+                --size="24px"
+                icon={value ? CloseCircle : Upload}/>
         </div>
     </div>
 </InputWrapper>
 
-<style lang="stylus">
-@import variables
+<style>
+.img-wrapper {
+    width: 60px;
+    height: 60px;
+    background-color: color-mix(white, 8%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    overflow: hidden;
+    color: white;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    border: 1px solid color-mix(white, 16%);
 
-.img-wrapper
-    width 60px
-    height 60px
-    background-color transparify(white, 8%)
-    background-size cover
-    background-repeat no-repeat
-    background-position center
-    border-radius 8px
-    cursor pointer
-    display flex
-    overflow hidden
-    color white
-    justify-content center
-    position relative
-    align-items center
-    border 1px solid transparify(white, 16%)
-    .icon
-        z-index 3
-    &:hover
-        &::after
-            content ""
-            position absolute
-            top -1px
-            left -1px
-            right -1px
-            bottom -1px
-            background-color transparify(mix($brand, white, 70%), 40%)
-            z-index 2
-    &.has_image
-        background-color none
-        .icon
-            display none
-        &:hover
-            .icon
-                display flex
+    & .icon {
+        z-index: 3;
+    }
 
+    &:hover {
+        &::after {
+            content: "";
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background-color: color-mix(mix(var(--brand), white, 70%), 40%);
+            z-index: 2;
+        }
+    }
+
+    &.has_image {
+        background-color: none;
+        & .icon {
+            display: none;
+        }
+
+        &:hover {
+            & .icon {
+                display: flex;
+            }
+        }
+    }
+}
 </style>

@@ -1,4 +1,4 @@
-<PageHead
+<!-- <PageHead
     description="Lumina is a social experiment with the goals of setting up a new innovative and environmentally sustainable city."
     include_suffix={false}
     title="Lumina » The City of the Future"
@@ -28,13 +28,13 @@ import type ServiceCard from "$lib/components/ServiceCard.svelte"
 import Passport from "svelte-material-icons/Passport.svelte"
 import Vote from "svelte-material-icons/Vote.svelte"
 import Cog from "svelte-material-icons/Cog.svelte"
-import ServicesArea from "./ServicesArea.svelte"
-import InformationArea from "./InformationArea.svelte"
+import ServicesArea from "../(home)/ServicesArea.svelte"
+import InformationArea from "../(home)/InformationArea.svelte"
 import Telescope from "svelte-material-icons/Telescope.svelte"
 import { CitizenshipStatus } from "$lib/graphql/graphql-types"
-import Chart from "./Chart.svelte"
-import MainCards from "./MainCards.svelte"
-import Wizard from "./Wizard.svelte"
+import Chart from "../(home)/Chart.svelte"
+import MainCards from "../(home)/MainCards.svelte"
+import Wizard from "../(home)/Wizard.svelte"
 
 export const organizationSchema: WithContext<GovernmentOrganization> = {
     "@context": "https://schema.org",
@@ -194,19 +194,4 @@ $: service_cards_top = [
         Here you can find information about the city, and how it works.
     </Paragraph>
     <InformationArea/>
-</Hero>
-
-<style lang="stylus">
-@import variables
-
-h2
-    font-size 20px
-    font-weight 600
-    opacity 0.3
-
-.padding
-    height 80px
-    @media (max-width: $tablet)
-        height 0
-
-</style>
+</Hero> -->

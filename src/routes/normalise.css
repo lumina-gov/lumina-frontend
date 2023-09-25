@@ -1,20 +1,20 @@
-@import variables
 
-*
-    box-sizing border-box
+* {
+    box-sizing: border-box;
+}
 
 /* Change the white to any color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px mix(white, $dark_app, 10%) inset !important;
-    -webkit-text-fill-color: mix(white, yellow, 70%) !important;
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px color-mix(white, var(--dark-app), 10%) inset !important;
+    -webkit-text-fill-color: color-mix(white, yellow, 70%) !important;
 
 }
 
 input {
-    font-size-adjust 0.5
+    font-size-adjust: 0.5;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -37,13 +37,14 @@ time, mark, audio, video, input, textarea, button {
     vertical-align: baseline;
 }
 
-button
-    background none
-    border none
-    outline none
-    cursor pointer
-    color inherit
-    font-size inherit
+button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: inherit;
+    font-size: inherit;
+}
 
 p {
     margin: 1em 0;

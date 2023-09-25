@@ -42,7 +42,7 @@ async function check_password_strength() {
     })
 
     if (error || !data?.crack_time) {
-        $page.data.alerts.create_alert("error", error?.message || "Cracktime not received.")
+        $page.data.alerts.create_alert("error", error?.message || "Password strength data not received.")
         return
     }
 
@@ -82,47 +82,61 @@ async function check_password_strength() {
     {/if}
 </Input>
 
-<style lang="stylus">
-@import variables
+<style>
 
-.strength-text-wrapper
-    color white
-    .opacity
-        opacity 0.5
-    .strength-text
-        color white
-        &.Weak
-            color $red
-        &.Medium
-            color $orange
-        &.Strong
-            color mix($yellow, $green)
-        &.Impossible
-            color darken($green, 10%)
-.strength
-    display flex
-    width 100%
-    gap 8px
-    overflow hidden
-    border-radius 20px
+.strength-text-wrapper {
+    color: white;
+    & .opacity {
+        opacity: 0.5;
+    }
+    & .strength-text {
+        color: white;
+        &.Weak {
+            color: var(--red);
+        }
+        &.Medium {
+            color: var(--orange);
+        }
+        &.Strong {
+            color: color-mix(var(--yellow), var(--green));
+        }
+        &.Impossible {
+            color: darken(var(--green), 10%);
+        }
+    }
+}
 
-    .bar
-        height 8px
-        background transparify(white, 6%)
-        flex 1
-    &.Weak
-        .filled
-            background $red
-    &.Medium
-        .filled
-            background $orange
-    &.Strong
-        .filled
-            background mix($yellow, $green)
-    &.Impossible
-        .filled
-            background darken($green, 10%)
+.strength {
+    display: flex;
+    width: 100%;
+    gap: 8px;
+    overflow: hidden;
+    border-radius: 20px;
 
-
-
+    & .bar {
+        height: 8px;
+        background: color-mix(white, 6%);
+        flex: 1;
+    }
+    &.Weak {
+        & .filled {
+            background: var(--red);
+        }
+    }
+    &.Medium {
+        & .filled {
+            background: var(--orange);
+        }
+    }
+    &.Strong {
+        & .filled {
+            background: color-mix(in srgb, var(--yellow), var(--green));
+        }
+    }
+    &.Impossible {
+        & .filled {
+            background: var(--green)
+        }
+    }
+}
 </style>

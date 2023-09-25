@@ -19,15 +19,14 @@ export let translucent = false
         <slot/>
     </Inner>
 </div>
-<style lang="stylus">
-@import variables
-
-.hero
-    display flex
-    flex-direction column
-    width 100%
-    align-items center
-    &.translucent
-        background transparify(white, 2%)
-
+<style>
+.hero {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    &.translucent {
+        background: rgba(255, 255, 255, 0.03);
+    }
+}
 </style>

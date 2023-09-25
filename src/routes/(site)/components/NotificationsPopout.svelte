@@ -92,12 +92,11 @@ async function request_notification_permissions() {
         Enable notifications
     </Button>
 </Card>
-<style lang="stylus">
-@import variables
-
-.description
-    opacity 0.4
-    display flex
-    gap 8px
-    align-items center
-</style> -->
+<style>
+    :global(.description) {
+        opacity: 0.4;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+</style>-->

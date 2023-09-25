@@ -13,12 +13,10 @@ export let block: ListItem
     {/if}
     <BlocksArray blocks={block.children}/>
 </li>
-<style lang="stylus">
-@import variables
-
-li
-    margin 0
-    list-style initial
-    padding-left 0.8em
-
+<style>
+li {
+    margin: 0;
+    list-style: initial;
+    padding-left: 0.8em;
+}
 </style>

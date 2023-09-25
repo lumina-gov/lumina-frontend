@@ -7,6 +7,7 @@ export let name: string | undefined = undefined
 
 </script>
 {#if name}
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div
         class="input-wrapper"
         on:click
@@ -17,13 +18,12 @@ export let name: string | undefined = undefined
 {:else}
     <slot/>
 {/if}
-<style lang="stylus">
-@import variables;
-
-.input-wrapper
-    display flex
-    flex-direction column
-    gap 8px
-    color white
-    width 100%
+<style>
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: white;
+    width: 100%;
+}
 </style>

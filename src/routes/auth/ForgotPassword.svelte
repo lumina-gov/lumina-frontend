@@ -60,8 +60,3 @@ async function reset_password () {
         </Button>
     </Box>
 </Card>
-<style lang="stylus">
-@import variables
-
-
-</style>

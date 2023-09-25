@@ -49,7 +49,7 @@ function toggle(toggling: "notifications" | "account") {
         </div>
         <div class="section">
             <NavLink
-                href="/"
+                href="/dashboard"
                 left_icon={Apps}
                 text="Dashboard"/>
         </div>
@@ -139,72 +139,93 @@ function toggle(toggling: "notifications" | "account") {
         </div>
     </div>
 </aside>
-<style lang="stylus">
-@import variables
+<style>
+aside {
+    width: 100%;
+    max-width: 300px;
+    flex: 1 0 auto;
+    justify-content: space-between;
+    flex-direction: column;
+    display: none;
+    background: var(--dark-app);
+    z-index: 8;
+    border-right: color-mix(in srgb, white 8%, transparent) solid 2px;
 
-aside
-    width 100%
-    max-width 300px
-    flex 1 0 auto
-    justify-content space-between
-    flex-direction column
-    display none
-    background $dark_app
-    z-index 8
-    border-right transparify(white, 8%) solid 2px
-    &.visible
-        display flex
-        @media (max-width: $tablet)
-            position fixed
-            top 0
-            left 0
-            bottom 0
-    &.default
-        display flex
-    @media (max-width: $tablet)
-        &.default
-            display none
+    &.visible {
+        display: flex;
 
-.content
-    padding 8px 0
-    display flex
-    flex-direction column
-    gap 8px
-    .top
-        display flex
-        gap 8px
-        padding 0 8px
-    .section
-        display flex
-        padding 0 8px
-        flex-direction column
+        @media (width <= 900px) {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+        }
+    }
 
-h4
-    font-size 14px
-    font-weight 600
-    text-transform uppercase
-    opacity 0.3
-    padding-bottom 8px
+    &.default {
+        display: flex;
+    }
+    @media (width <= 900px) {
+        &.default {
+            display: none;
+        }
+    }
+}
 
-.auth-buttons
-    display flex
-    gap 8px
-    &.space-between
-        justify-content space-between
+.content {
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 
-.socials
-    display flex
-    align-items center
-    justify-content center
-    gap 8px
-    .social-media-icon
-        display inline-flex
-        font-size 24px
-        color white
-        opacity 0.8
-        padding 8px
-        border-radius 4px
-        &:hover
-            opacity 1
-            background transparify(white, 4%)
+    & .top {
+        display: flex;
+        gap: 8px;
+        padding: 0 8px;
+    }
+
+    & .section {
+        display: flex;
+        padding: 0 8px;
+        flex-direction: column;
+    }
+}
+
+h4 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    opacity: 0.3;
+    padding-bottom: 8px;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 8px;
+
+    &.space-between {
+        justify-content: space-between;
+    }
+}
+
+.socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    & .social-media-icon {
+        display: inline-flex;
+        font-size: 24px;
+        color: white;
+        opacity: 0.8;
+        padding: 8px;
+        border-radius: 4px;
+
+        &:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.08);
+        }
+    }
+}
 </style>

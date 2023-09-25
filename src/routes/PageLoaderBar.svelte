@@ -28,25 +28,24 @@ afterNavigate(async () => {
         class="progress-bar"
         out:fade|local={ { delay: 500 } }>
         <div
-            style={`--width: ${$progress * 100}%`}
+            style:--width="{ $progress * 100 }%"
             class="progress-sliver" />
     </div>
 {/if}
 
-<style lang="stylus">
-@import variables
+<style>
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    z-index: 1000;
+}
 
-.progress-bar
-    position fixed
-    top 0
-    left 0
-    right 0
-    height 6px
-    z-index 1000
-
-
-.progress-sliver
-    width var(--width)
-    background-color $brand
-    height 100%
+.progress-bar .progress-sliver {
+    width: var(--width);
+    background-color: var(--brand);
+    height: 100%;
+}
 </style>

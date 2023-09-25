@@ -1,13 +1,8 @@
-<script lang="ts">
-export let color: "brand" | "red" = "brand"
-</script>
-<span class={color}><slot/></span>
-<style lang="stylus">
-@import variables
+<span><slot/></span>
+<style>
 
-span
-    color $brand
-    display inline-flex
-    &.red
-        color $red
+span {
+    color: var(--color);
+    display: inline-flex;
+}
 </style>

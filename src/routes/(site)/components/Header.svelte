@@ -10,21 +10,31 @@ import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
 import Settlement from "$lib/icons/Settlement.svelte"
 import { onMount } from "svelte"
 import Button from "$lib/controls/Button.svelte"
+import { getNearestScrollableParent } from "$lib/utils/scrollable_parent"
 
 export let user: MeQuery["me"]
 export let sidebar_opened: "default" | boolean
 export let dropdown: "notifications" | "account" | null = null
 let scrolled = false
+let header: HTMLElement
+let nearest_vertical_scrollable_parent: HTMLElement | null
 $: authenticated = user != null
 
 onMount(() => {
-    scrolled = window.scrollY != 0
-    window.addEventListener("scroll", updateScroll)
-    return () => window.removeEventListener("scroll", updateScroll)
+    nearest_vertical_scrollable_parent = getNearestScrollableParent(header, "vertical")
+    console.log(nearest_vertical_scrollable_parent)
+    if(!nearest_vertical_scrollable_parent) return
+    scrolled = nearest_vertical_scrollable_parent.scrollTop != 0
+    nearest_vertical_scrollable_parent.addEventListener("scroll", updateScroll)
+    return () => {
+        if(nearest_vertical_scrollable_parent){
+            nearest_vertical_scrollable_parent.removeEventListener("scroll", updateScroll)
+        }
+    }
 })
 
 function updateScroll() {
-    scrolled = window.scrollY != 0
+    scrolled = nearest_vertical_scrollable_parent?.scrollTop != 0
 }
 
 
@@ -37,6 +47,7 @@ function toggle(toggling: "notifications" | "account") {
 }
 </script>
 <header
+    bind:this={ header }
     class:authenticated
     class:default={ sidebar_opened === "default" }
     class:scrolled
@@ -65,44 +76,50 @@ function toggle(toggling: "notifications" | "account") {
         {/if}
     </div>
 </header>
-<style lang="stylus">
-@import variables
+<style>
+header {
+    width: 100%;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    z-index: 8;
+    background: transparent;
+    box-shadow: none;
+    position: sticky;
+    top: 0;
+    transition: box-shadow 0.1s ease-in-out, background 0.1s ease-in-out;
 
-header
-    width 100%
-    display none
-    justify-content space-between
-    align-items center
-    padding 8px
-    z-index 8
-    background transparent
-    box-shadow none
-    position sticky
-    top 0
-    transition box-shadow 0.1s ease-in-out, background 0.1s ease-in-out
-    .side
-        display flex
-        align-items center
-        gap 8px
+    & .side {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
 
-    &.visible
-        display flex
-        @media (max-width $tablet)
-            &.authenticated
-                display none
-    &.default
-        display none
+    &.visible {
+        display: flex;
+        @media (width <= 900px) {
+            &.authenticated {
+                display: none;
+            }
+        }
+    }
 
-    @media (max-width $tablet)
-        &.default
-            display flex
-            &.authenticated
-                display none
+    &.default {
+        display: none;
+        @media (width <= 900px) {
+            display: flex;
+            &.authenticated {
+                display: none;
+            }
+        }
+    }
 
-
-    &.scrolled
-        box-shadow 0 0 10px 0 rgba(0, 0, 0, 0.5)
-        background $dark_app
-        background transparify(mix(white, $dark_app, 8%), 50%)
-        background-blur(10px)
+    &.scrolled {
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+        background: var(--dark-app);
+        background: color-mix(white, var(--dark-app) 8%, transparent);
+        backdrop-filter: blur(10px);
+    }
+}
 </style>

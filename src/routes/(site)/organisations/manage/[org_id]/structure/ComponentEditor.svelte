@@ -31,16 +31,16 @@ $: component = active_component_id ? components[active_component_id] : null
         </div>
     {/if}
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.editor {
+    padding: 16px;
+    height: 100%;
+    border-radius: 6px;
+    background: rgba(var(--white-rgb), 0.04);
+    overflow-y: auto;
+}
 
-.editor
-    padding 16px
-    height 100%
-    border-radius 6px
-    background transparify(white, 4%)
-    overflow-y auto
-
-.placeholder
-    opacity 0.5
+.placeholder {
+    opacity: 0.5;
+}
 </style>

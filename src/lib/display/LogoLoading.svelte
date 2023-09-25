@@ -8,22 +8,23 @@ export let size = "48px"
     class="icon">
     <LogoEdge/>
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.icon {
+    font-size: var(--size);
+    display: inline-flex;
+    color: var(--brand);
+    animation: spin 1s infinite ease-in-out;
+}
 
-.icon
-    font-size var(--size)
-    display inline-flex
-    color $brand
-    animation spin 1s infinite ease-in-out
-
-@keyframes spin
-    from
-        transform: rotate(180deg)
-    50%
-        transform: rotate(90deg)
-    to
-        transform: rotate(0deg)
-
-
+@keyframes spin {
+    from {
+        transform: rotate(180deg);
+    }
+    50% {
+        transform: rotate(90deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
 </style>

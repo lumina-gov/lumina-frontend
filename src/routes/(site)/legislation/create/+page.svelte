@@ -106,73 +106,102 @@ $: toc = convert_lex_to_toc_tree(marked.lexer(data.content))
     </div>
 </div>
 
-<style lang="stylus">
-@import variables
+<style>
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
 
-.wrapper
-    display grid
-    grid-template-columns 1fr 1fr
-    height 100%
-    @media (max-width 1100px)
-        grid-template-columns 1fr
+    @media (max-width: 1100px) {
+        grid-template-columns: 1fr;
+    }
+}
 
-.tags, .related-orgs
-    display flex
-    flex-wrap wrap
-    gap 8px
+.tags,
+.related-orgs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
 
-.placeholder
-    opacity 0.3
+.placeholder {
+    opacity: 0.3;
+}
 
-.area
-    padding 40px
-    gap 32px
-    display flex
-    flex-direction column
-    overflow-y auto
-    flex 1
-    &.light
-        background transparify(white, 4%)
+.area {
+    padding: 40px;
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex: 1;
+}
 
-.content
-    :global
-        counter-reset h1counter
-        h1, h2, h3, h4, h5, h6
-            font-weight 600
-            opacity 1
-        p
-            opacity 0.6
-        ol
-            opacity 0.6
-        h1
-            counter-reset h2counter
-            &:before
-                content "Division " counter(h1counter)
-                counter-increment h1counter
-                margin-right 8px
-                display block
-                opacity 0.5
-                font-weight 600
-                font-size 16px
-        h2
-            counter-reset h3counter
-            &:before
-                content "Part " counter(h2counter)
-                counter-increment h2counter
-                margin-right 8px
-                display block
-                opacity 0.5
-                font-weight 600
-                font-size 16px
-        h3
-            counter-reset h4counter
-            &:before
-                content "Section " counter(h3counter)
-                counter-increment h3counter
-                margin-right 8px
-                display block
-                opacity 0.5
-                font-weight 600
-                font-size 16px
+.area.light {
+    background: rgba(var(--white-rgb), 0.04);
+}
 
+.content {
+    counter-reset: h1counter;
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+    font-weight: 600;
+    opacity: 1;
+}
+
+.content p {
+    opacity: 0.6;
+}
+
+.content ol {
+    opacity: 0.6;
+}
+
+.content h1 {
+    counter-reset: h2counter;
+}
+
+.content h1:before {
+    content: "Division " counter(h1counter);
+    counter-increment: h1counter;
+    margin-right: 8px;
+    display: block;
+    opacity: 0.5;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.content h2 {
+    counter-reset: h3counter;
+}
+
+.content h2:before {
+    content: "Part " counter(h2counter);
+    counter-increment: h2counter;
+    margin-right: 8px;
+    display: block;
+    opacity: 0.5;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.content h3 {
+    counter-reset: h4counter;
+}
+
+.content h3:before {
+    content: "Section " counter(h3counter);
+    counter-increment: h3counter;
+    margin-right: 8px;
+    display: block;
+    opacity: 0.5;
+    font-weight: 600;
+    font-size: 16px;
+}
 </style> -->

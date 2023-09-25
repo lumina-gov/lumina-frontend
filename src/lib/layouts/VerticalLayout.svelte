@@ -22,11 +22,10 @@ export let margin_auto = false
     class="layout">
     <slot/>
 </div>
-<style lang="stylus">
-@import variables
-
-.layout
-    display flex
-    flex-direction column
-    width 100%
+<style>
+    .layout {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
 </style>

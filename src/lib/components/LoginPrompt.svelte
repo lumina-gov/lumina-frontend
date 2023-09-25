@@ -15,7 +15,7 @@ $: url = $page.url
     <Paragraph>You must be logged in to access this section</Paragraph>
     <Button
         style="branded"
-        href="/auth?redirect={url.toString()}"
+        href="/auth?redirect={encodeURIComponent(url.href)}"
         right_icon={Settlement}
         text="Start" />
 </Card>

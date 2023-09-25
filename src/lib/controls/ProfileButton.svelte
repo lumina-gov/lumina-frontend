@@ -29,33 +29,38 @@ function clicked(e: Event) {
         </div>
     {/if}
 </div>
-<style lang="stylus">
-@import variables
+<style>
 
-.profile-button-wrapper
-    padding 4px
-    cursor pointer
-    border-radius 4px
-    display flex
-    align-items center
-    justify-content center
-    gap 8px
-    &:focus-visible
-        outline-effect()
-    &:hover, &:focus
-        background transparify(white, 8%)
-    &:active
-        background transparify(white, 14%)
-    &.active
-        background transparify(white, 14%)
-    @media (max-width $tablet)
-        border-radius 0
-        height 100%
-        width 100%
-
-    .label
-        font-size 16px
-        font-weight 400
-        color transparify(white, 80%)
-        padding-right 4px
+.profile-button-wrapper {
+    padding: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    &:focus-visible {
+        outline: 2px solid var(--brand);
+        outline-offset: 2px;
+    }
+    &:hover,
+    &:focus {
+        background: color-mix(white, 8%);
+    }
+    &:active,
+    &.active {
+        background: color-mix(white, 14%);
+    }
+    & .label {
+        font-size: 16px;
+        font-weight: 400;
+        color: color-mix(white, 80%);
+        padding-right: 4px;
+    }
+    @media (width <= 900px) {
+        border-radius: 0;
+        height: 100%;
+        width: 100%;
+    }
+}
 </style>

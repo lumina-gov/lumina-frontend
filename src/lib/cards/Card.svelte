@@ -46,38 +46,58 @@ function handle_keyup(e: KeyboardEvent) {
     class:shadow
     class:vertical={ direction === "vertical" }
     {href}
-    role="button"
+    role={is_clickable ? "button" : undefined}
     tabindex={is_clickable ? 0 : -1}
     on:click={ clicked }
     on:keyup={ handle_keyup }>
     <slot/>
 </svelte:element>
-<style lang="stylus">
-@import variables
+<style>
+.card {
+    border-radius: 6px;
+    color: white;
+    background: color-mix(in srgb, white 4%, var(--dark-app));
+    width: 100%;
+    display: flex;
+    outline: none;
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
 
-.card
-    border-radius 6px
-    color white
-    background transparify(white, 4%)
-    width 100%
-    display flex
-    &.disabled
-        opacity 0.5
-        pointer-events none
-    &.clickable
-        cursor pointer
-        &:hover
-            background transparify(white, 8%)
-    &.shadow
-        box-shadow 0 2px 6px rgba(0, 0, 0, 0.3)
-    &.reset_bg
-        background mix(white, $dark_app, 10%)
-    &.vertical
-        flex-direction column
-    &.horizontal
-        flex-direction row
-    &.opacity
-        opacity 0.5
-    &:focus-visible
-        outline-effect()
+    &.clickable {
+        cursor: pointer;
+
+        &:hover {
+            background: color-mix(in srgb, white 8%, var(--dark-app));
+        }
+
+        &:focus-visible, &:focus {
+            outline: 2px solid var(--brand);
+            outline-offset: 2px;
+        }
+    }
+
+    &.shadow {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    &.reset_bg {
+        background: color-mix(in srgb, white 10%, var(--dark-app));
+
+    }
+
+    &.vertical {
+        flex-direction: column;
+    }
+
+    &.horizontal {
+        flex-direction: row;
+    }
+
+    &.opacity {
+        opacity: 0.5;
+    }
+
+}
 </style>

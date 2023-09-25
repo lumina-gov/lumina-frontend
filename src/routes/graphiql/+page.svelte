@@ -49,12 +49,10 @@ onMount(() => {
     bind:this={ container }
     id="graphiql" />
 
-<style lang="stylus">
-  :global(body)
-    margin 0
-    padding 0
+<style global>
 
-  #graphiql
-    width: 100vw
-    height: 100vh
+#graphiql {
+    width: 100vw;
+    height: 100vh;
+}
 </style>

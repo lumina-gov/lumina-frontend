@@ -10,6 +10,7 @@ export function focus() {
 }
 
 </script>
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
     class="search-wrapper"
     on:keydown={ e => {
@@ -27,23 +28,23 @@ export function focus() {
         on:keyup
         bind:value={ search }/>
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.search-wrapper {
+    padding: 0 12px;
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    gap: 8px;
+}
 
-.search-wrapper
-    padding 0 12px
-    background transparify(white, 8%)
-    display flex
-    align-items center
-    font-size 16px
-    gap 8px
-    input
-        background 0
-        border 0
-        flex 1
-        padding 8px 0
-        font-size 16px
-        outline 0
-        color white
-
+.search-wrapper input {
+    background: 0;
+    border: 0;
+    flex: 1;
+    padding: 8px 0;
+    font-size: 16px;
+    outline: 0;
+    color: white
+}
 </style>

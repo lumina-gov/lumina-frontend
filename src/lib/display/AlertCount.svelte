@@ -4,13 +4,13 @@ export let count: number
 <div class="alert-count">
     { count }
 </div>
-<style lang="stylus">
-@import variables
+<style>
 
-.alert-count
-    padding 2px 8px
-    background transparify(white, 4%)
-    border-radius 100%
-    font-size 14px
-    color transparify(white, 50%)
+.alert-count {
+    padding: 2px 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 100%;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+}
 </style>

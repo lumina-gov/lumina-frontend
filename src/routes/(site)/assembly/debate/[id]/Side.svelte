@@ -23,36 +23,43 @@ export let comments: Prop<Comment, "comment">[]
         {/each}
     </div>
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.side {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 16px;
+}
 
-.side
-    display flex
-    width 100%
-    flex-direction column
-    gap 16px
-    .comments
-        display flex
-        flex-direction column
-        gap 16px
+.comments {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 
-    .header
-        display flex
-        align-items center
-        gap 16px
-        width 100%
-        justify-content space-between
+.header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    justify-content: space-between;
+}
 
-    .tag
-        padding 8px
-        border-radius 4px
-        font-size 14px
-        font-weight 600
-        text-transform uppercase
-        &.support
-            background transparify($green, 10%)
-            color $green
-        &.against
-            background transparify($red, 10%)
-            color $red
+.tag {
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    &.support {
+        background: rgba(var(--green-rgb), 0.1);
+        color: var(--green);
+    }
+
+    &.against {
+        background: rgba(var(--red-rgb), 0.1);
+        color: var(--red);
+    }
+
+}
 </style>

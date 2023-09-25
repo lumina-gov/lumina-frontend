@@ -93,32 +93,33 @@ onMount(() => {
         </div>
     {/if}
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.card {
+    width: 100%;
+    max-width: 600px;
+    padding: 24px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.04);
+}
 
-.card
-    width 100%
-    max-width 600px
-    padding 24px
-    border-radius 6px
-    display flex
-    flex-direction column
-    align-items center
-    background transparify(white, 4%)
+.flex {
+    display: flex;
+    height: 100%;
+    padding: 36px;
+    align-items: center;
+    gap: 36px;
+    flex-direction: column;
+}
 
-.flex
-    display flex
-    height 100%
-    padding 36px
-    align-items center
-    gap 36px
-    flex-direction column
-
-.inner
-    max-width 450px
-    width 100%
-    display flex
-    flex-direction column
-    align-items center
-    gap 16px
+.inner {
+    max-width: 450px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
 </style>

@@ -1,15 +1,13 @@
-import type Tag from "$lib/display/Tag.svelte"
-import type { Prop } from "$lib/utils/typed_props"
-import type { SvelteComponent } from "svelte"
+import type { IconComponent } from "$lib/utils/icon_type"
 
 export type HubType = {
     link?: string,
     tag: {
         text: string,
-        color: Prop<Tag, "color">,
+        color: string,
     },
     title: {
-        icon: typeof SvelteComponent,
+        icon: IconComponent,
         text: string,
     },
     description: string,

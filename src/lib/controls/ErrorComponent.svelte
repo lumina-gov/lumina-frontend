@@ -10,16 +10,16 @@ export let error: string
         { error }
     </div>
 </div>
-<style lang="stylus">
-@import variables
-
-.error-wrapper
-    display flex
-    align-items center
-    gap 8px
-    .icon
-        color $red
-    .error
-        font-weight 500
-
+<style>
+.error-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    & .icon {
+        color: var(--red);
+    }
+    & .error {
+        font-weight: 500;
+    }
+}
 </style>

@@ -17,12 +17,12 @@
             <div class="icon">
                 <svelte:component
                     this={ icons[message.type] }
-                    size="22px"/>
+                    --size="22px"/>
             </div>
             <div class="text">
                 { message.text }
             </div>
-            <Close size="22px"/>
+            <Close --size="22px"/>
         </div>
     {/each}
 </div>
@@ -31,11 +31,11 @@ import Alert from "svelte-material-icons/Alert.svelte"
 import Info from "svelte-material-icons/AlertCircle.svelte"
 import Close from "svelte-material-icons/Close.svelte"
 import Check from "svelte-material-icons/CheckCircle.svelte"
-import type { SvelteComponent} from "svelte"
 import { onMount, tick } from "svelte"
 import { browser } from "$app/environment"
 import type { Message } from "$lib/types/message"
 import { page } from "$app/stores"
+import type { IconComponent } from "$lib/utils/icon_type"
 
 $: alerts = $page.data.alerts.store
 
@@ -46,7 +46,7 @@ let icons = {
     "warning": Alert,
     "error": Alert,
     "success": Check
-} satisfies Record<Message["type"], typeof SvelteComponent>
+} satisfies Record<Message["type"], IconComponent>
 
 function remove(id: symbol){
     $alerts = $alerts.filter(val => val.id !== id)
@@ -90,43 +90,50 @@ async function setBottomHeights () {
 }
 
 </script>
-<style lang="stylus">
-@import variables
+<style>
+.action-container-wrapper {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    height: 0;
+    display: flex;
+    align-items: flex-end;
+    z-index: 250;
+    justify-content: center;
 
-.action-container-wrapper
-    position fixed
-    bottom 10px
-    left 0
-    right 0
-    height 0
-    display flex
-    align-items flex-end
-    z-index 250
-    justify-content center
-    .action-bar
-        cursor pointer
-        background $brand
-        position fixed
-        width 100%
-        max-width 500px
-        padding 8px
-        font-weight 500
-        box-shadow 0 0 5px rgba(0,0,0,0.1)
-        border-radius 5px
-        z-index 251
-        color white
-        transition 0.2s ease-in-out
-        display grid
-        grid-template-columns min-content 1fr min-content
-        align-items center
-        &.warning
-            background #b8992a
-        &.error
-            background #b44
-        &.success
-            background #4a6
-        .icon
-            padding-right 8px
-            display inline-flex
+    & .action-bar {
+        cursor: pointer;
+        background: var(--brand);
+        position: fixed;
+        width: 100%;
+        max-width: 500px;
+        padding: 8px;
+        font-weight: 500;
+        box-shadow: 0 0 5px color-mix(in srgb, black, 10%);
+        border-radius: 5px;
+        z-index: 251;
+        color: white;
+        transition: 0.2s ease-in-out;
+        display: grid;
+        grid-template-columns: min-content 1fr min-content;
+        align-items: center;
+        &.warning {
+            background: var(--yellow)
+        }
 
+        &.error {
+            background: var(--red);
+        }
+
+        &.success {
+            background: var(--green);
+        }
+
+        & .icon {
+            padding-right: 8px;
+            display: inline-flex;
+        }
+    }
+}
 </style>

@@ -1,35 +1,33 @@
 <script lang="ts">
-import type { SvelteComponent } from "svelte"
 import Unsupported from "./Unsupported.svelte"
 import ParagraphBlock from "./ParagraphBlock.svelte"
 import HeadingBlock from "./HeadingBlock.svelte"
 import type { Block } from "$lib/types/block"
 import ContainerDirective from "./ContainerDirective.svelte"
-import type { PartialRecord } from "$lib/utils/typed_props"
 import ListBlock from "./ListBlock.svelte"
 import BlockQuoteBlock from "./BlockQuoteBlock.svelte"
 import CodeBlock from "./CodeBlock.svelte"
 import TableBlock from "./TableBlock.svelte"
-import LeafDirective from "./LeafDirective.svelte"
 
 export let block: Block
 
-let block_types: PartialRecord<Block["type"], typeof SvelteComponent> = {
-    "heading": HeadingBlock,
-    "paragraph": ParagraphBlock,
-    "containerDirective": ContainerDirective,
-    "leafDirective": LeafDirective,
-    "list": ListBlock,
-    "blockquote": BlockQuoteBlock,
-    "code": CodeBlock,
-    "table": TableBlock,
-}
-
-function get_block_type(block: Block) {
-    return block_types[block.type] || Unsupported
-}
-
 </script>
-<svelte:component
-    this={ get_block_type(block) }
-    block={block}/>
+{#if block.type === "paragraph"}
+    <ParagraphBlock {block}/>
+{:else if block.type === "heading"}
+    <HeadingBlock {block}/>
+{:else if block.type === "containerDirective"}
+    <ContainerDirective {block}/>
+{:else if block.type === "list"}
+    <ListBlock {block}/>
+{:else if block.type === "blockquote"}
+    <BlockQuoteBlock {block}/>
+{:else if block.type === "code"}
+    <CodeBlock {block}/>
+{:else if block.type === "table"}
+    <TableBlock {block}/>
+{:else if block.type === "leafDirective"}
+    <Unsupported/>
+{:else}
+    <Unsupported/>
+{/if}

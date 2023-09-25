@@ -111,71 +111,87 @@ onDestroy(() => {
             for_votes={proposal.votes.for}/>
     </div>
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.proposal {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 
-.proposal
-    background transparify(white, 4%)
-    border-radius 4px
-    display flex
-    align-items center
-    cursor pointer
-    &:hover
-        background transparify(white, 8%)
-    .voting-info
-        display flex
-        flex-direction column
-        gap 8px
-        padding 8px
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
 
-.time-left
-    display flex
-    gap 8px
-    .time-section
-        display flex
-        flex 1
-        align-items center
-        gap 4px
-        font-size 14px
-        font-weight 600
-        .text
-            text-transform uppercase
-            opacity 0.5
-.title-area
-    display flex
-    align-items center
-    justify-content space-between
-    gap 8px
+    & .voting-info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px;
 
-.expand
-    color transparify(white, 50%)
-    background transparify(white, 6%)
-    padding 2px
-    display inline-flex
-    border-radius 4px
-    font-size 18px
+        & .time-left {
+            display: flex;
+            gap: 8px;
 
-.main
-    padding 16px
-    flex 1
-    display flex
-    flex-direction column
-    gap 8px
-    border-right 1px solid transparify(white, 10%)
+            & .time-section {
+                display: flex;
+                flex: 1;
+                align-items: center;
+                gap: 4px;
+                font-size: 14px;
+                font-weight: 600;
 
-.data
-    display flex
-    align-items center
+                & .text {
+                    text-transform: uppercase;
+                    opacity: 0.5;
+                }
+            }
+        }
+    }
 
-.item
-    display flex
-    color transparify(white, 50%)
-    border-right 1px solid transparify(white, 10%)
-    padding-right 8px
-    margin-right 8px
-    gap 4px
-    &:last-child
-        border-right none
-        padding-right 0
-        margin-right 0
+    & .title-area {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    & .expand {
+        color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.06);
+        padding: 2px;
+        display: inline-flex;
+        border-radius: 4px;
+        font-size: 18px;
+    }
+
+    & .main {
+        padding: 16px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+        & .data {
+            display: flex;
+            align-items: center;
+
+            & .item {
+                display: flex;
+                color: rgba(255, 255, 255, 0.5);
+                border-right: 1px solid rgba(255, 255, 255, 0.1);
+                padding-right: 8px;
+                margin-right: 8px;
+                gap: 4px;
+
+                &:last-child {
+                    border-right: none;
+                    padding-right: 0;
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
 </style>

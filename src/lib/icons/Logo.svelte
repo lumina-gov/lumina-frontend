@@ -11,26 +11,30 @@ import Lumina from "$lib/icons/LogoEdge.svelte"
         Lumina
     </div>
 </a>
-<style lang="stylus">
-@import variables
+<style>
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: white;
 
-.logo
-    display flex
-    align-items center
-    gap 12px
-    text-decoration none
-    color white
+    & .symbol {
+        font-size: 30px;
+        display: inline-flex;
+        color: var(--brand);
+    }
 
-.symbol
-    font-size 30px
-    display inline-flex
-    color $brand
-.brand
-    font-size 20px
-    line-height 100%
-    font-weight 700
-    text-transform uppercase
-    letter-spacing 0.1em
-    @media (max-width $mobile)
-        font-size 20px
+    & .brand {
+        font-size: 20px;
+        line-height: 100%;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+
+        @media (width <= 900px) {
+            font-size: 20px;
+        }
+    }
+}
 </style>

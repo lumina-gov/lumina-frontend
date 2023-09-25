@@ -45,6 +45,8 @@ function copy() {
         {/if}
         <div
             class="copy"
+            role="button"
+            tabindex="0"
             on:keypress={ e => e.key === "Enter" ? copy() : null }
             on:click={ copy }>
             <Icon icon={ContentCopy}/>
@@ -66,133 +68,158 @@ function copy() {
         </div>
     </code>
 </pre>
-<style lang="stylus">
-@import variables
+<style>
+.copy {
+    display: inline-flex;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    padding: 6px;
+    border-radius: 4px;
+    user-select: none;
+    color: rgba(255, 255, 255, 0.8);
+    background: color-mix(white 15%, var(--dark-app));
+    margin-left: auto;
+}
 
-.copy
-    display inline-flex
-    cursor pointer
-    color white
-    font-size 20px
-    padding 6px
-    border-radius 4px
-    user-select none
-    color transparify(white, 80%)
-    background mix(white, $dark_app, 15%)
-    margin-left auto
-    &:hover, &:active
-        color white
-        background mix(white, $dark_app, 25%)
+.copy:hover,
+.copy:active {
+    color: white;
+    background: color-mix(white 25%, var(--dark-app));
+}
 
-.header
-    border-bottom 1px solid transparify(white, 10%)
-    padding 4px
-    display contents
-    align-items center
-    justify-content space-between
-    &.show-header
-        display flex
-    &:not(.show-header)
-        .copy
-            position absolute
-            top 0
-            right 0
-            margin 10px
+.header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4px;
+    display: contents;
+    align-items: center;
+    justify-content: space-between;
+}
 
-.number
-    white-space pre-wrap
-    color white
-    user-select none
-    background transparify(white, 6%)
-    padding 0 6px
-    letter-spacing 2px
-    .zero
-        display inline
-        opacity 0.2
+.header.show-header {
+    display: flex;
+}
 
-    &.small
-        height 8px
+.header:not(.show-header) .copy {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}
 
-pre
-    position relative
-    font-size 14px
-    background transparify(white, 6%)
-    font-family "Source Code Pro", monospace
-    border-radius 4px
-    width 100%
-    white-space normal
-    &.editable
-        border-radius 0
+.number {
+    white-space: pre-wrap;
+    color: white;
+    user-select: none;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0 6px;
+    letter-spacing: 2px;
+}
 
-code
-    width 100%
-    display block
-.line
-    display flex
-    gap 16px
-    padding-right 16px
+.number .zero {
+    display: inline;
+    opacity: 0.2;
+}
 
-.code
-    white-space pre-wrap
+.number.small {
+    height: 8px;
+}
 
-:global
-    .hljs-comment,
-    .hljs-quote
-        color: #5c6370
-        font-style: italic
+pre {
+    position: relative;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    font-family: "Source Code Pro", monospace;
+    border-radius: 4px;
+    width: 100%;
+    white-space: normal;
+}
 
-    .hljs-doctag,
-    .hljs-keyword,
-    .hljs-formula
-        color: #c678dd
+pre.editable {
+    border-radius: 0;
+}
 
+code {
+    width: 100%;
+    display: block;
+}
 
-    .hljs-section,
-    .hljs-name,
-    .hljs-selector-tag,
-    .hljs-deletion,
-    .hljs-subst
-        color: #e06c75
+.line {
+    display: flex;
+    gap: 16px;
+    padding-right: 16px;
+}
 
-    .hljs-literal
-        color: #56b6c2
+.code {
+    white-space: pre-wrap;
+}
 
-    .hljs-string,
-    .hljs-regexp,
-    .hljs-addition,
-    .hljs-attribute,
-    .hljs-meta-string
-        color: #98c379
+:global(.hljs-comment),
+:global(.hljs-quote) {
+    color: #5c6370;
+    font-style: italic;
+}
 
-    .hljs-built_in,
-    .hljs-class .hljs-title
-        color: #e6c07b
+:global(.hljs-doctag),
+:global(.hljs-keyword),
+:global(.hljs-formula) {
+    color: #c678dd;
+}
 
+:global(.hljs-section),
+:global(.hljs-name),
+:global(.hljs-selector-tag),
+:global(.hljs-deletion),
+:global(.hljs-subst) {
+    color: #e06c75;
+}
 
-    .hljs-attr,
-    .hljs-variable,
-    .hljs-template-variable,
-    .hljs-type,
-    .hljs-selector-class,
-    .hljs-selector-attr,
-    .hljs-selector-pseudo,
-    .hljs-number
-        color: #d19a66
+:global(.hljs-literal) {
+    color: #56b6c2;
+}
 
-    .hljs-symbol,
-    .hljs-bullet,
-    .hljs-link,
-    .hljs-meta,
-    .hljs-selector-id,
-    .hljs-title
-        color: #61aeee
+:global(.hljs-string),
+:global(.hljs-regexp),
+:global(.hljs-addition),
+:global(.hljs-attribute),
+:global(.hljs-meta-string) {
+    color: #98c379;
+}
 
-    .hljs-emphasis
-        font-style: italic
+:global(.hljs-built_in),
+:global(.hljs-class .hljs-title) {
+    color: #e6c07b;
+}
 
-    .hljs-strong
-        font-weight: bold
+:global(.hljs-attr),
+:global(.hljs-variable),
+:global(.hljs-template-variable),
+:global(.hljs-type),
+:global(.hljs-selector-class),
+:global(.hljs-selector-attr),
+:global(.hljs-selector-pseudo),
+:global(.hljs-number) {
+    color: #d19a66;
+}
 
-    .hljs-link
-        text-decoration: underline
+:global(.hljs-symbol),
+:global(.hljs-bullet),
+:global(.hljs-link),
+:global(.hljs-meta),
+:global(.hljs-selector-id),
+:global(.hljs-title) {
+    color: #61aeee;
+}
+
+:global(.hljs-emphasis) {
+    font-style: italic;
+}
+
+:global(.hljs-strong) {
+    font-weight: bold;
+}
+
+:global(.hljs-link) {
+    text-decoration: underline;
+}
 </style>

@@ -1,5 +1,6 @@
 <script lang="ts">
-import type { SvelteComponent } from "svelte"
+
+import type { IconComponent } from "$lib/utils/icon_type"
 import { onMount } from "svelte"
 import InputWrapper from "../display/InputWrapper.svelte"
 import { createEventDispatcher } from "svelte"
@@ -9,8 +10,8 @@ let dispatch = createEventDispatcher<{input: string}>()
 export let name: string
 export let placeholder = ""
 export let type = ""
-export let left_icon: typeof SvelteComponent | null = null
-export let right_icon: typeof SvelteComponent | null = null
+export let left_icon: IconComponent | null = null
+export let right_icon: IconComponent | null = null
 export let left_icon_handler: ((e: Event) => void) | undefined = undefined
 export let right_icon_handler: ((e: Event) => void) | undefined = undefined
 export let focus_on_mount = false
@@ -84,47 +85,51 @@ onMount(() => {
     <slot/>
 </InputWrapper>
 
-<style lang="stylus">
-@import variables
+<style>
+.clickable {
+    cursor: pointer;
+    border-radius: 50px;
+    &:hover {
+        background: color-mix(white, 6%);
+    }
+    &:active {
+        background: color-mix(white, 12%);
+    }
+}
 
-.clickable
-    cursor pointer
-    border-radius 50px
-    &:hover
-        background transparify(white, 6%)
-    &:active
-        background transparify(white, 12%)
+input {
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+    color: inherit;
+    line-height: normal;
+    flex: 1;
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    padding-left: 6px;
+    margin: 0;
+    &::placeholder {
+        color: white;
+        opacity: 0.3;
+    }
+}
 
-input
-    appearance none
-    border none
-    outline none
-    background none
-    color inherit
-    line-height normal
-    flex 1
-    width 100%
-    padding 12px 16px
-    font-size 16px
-    padding-left 6px
-    margin 0
-    &::placeholder
-        color white
-        opacity 0.3
+.input-pseudo-wrapper {
+    padding: 0 6px;
+    border-radius: 4px;
+    align-items: center;
+    cursor: text;
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+}
 
-.input-pseudo-wrapper
-    padding 0 6px
-    border-radius 4px
-    align-items center
-    cursor text
-    display flex
-    background rgba(255,255,255,0.1)
-
-.icon
-    font-size 20px
-    padding 6px
-    display inline-flex
-    align-items center
-    color rgba(255, 255, 255, 0.5)
-
+.icon {
+    font-size: 20px;
+    padding: 6px;
+    display: inline-flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.5);
+}
 </style>

@@ -22,12 +22,10 @@ export let min_item_size: number
     class="layout">
     <slot/>
 </div>
-<style lang="stylus">
-@import variables
+<style>
 
-.layout
-    display grid
-    // grid-auto-flow column
-    // overflow hidden
-    width 100%
+.layout {
+    display: grid;
+    width: 100%;
+}
 </style>

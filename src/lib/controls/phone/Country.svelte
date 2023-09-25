@@ -13,18 +13,20 @@ export let country: Country
     <div class="country-name">{ country.name }</div>
     <div class="country-code">{ country.calling_code }</div>
 </div>
-<style lang="stylus">
-.country
-    display grid
-    grid-template-columns max-content 1fr max-content
-    grid-gap 8px
-    align-items center
-    height 32px
-    // padding 6px 10px
-    cursor pointer
-    .country-name
-        font-weight 600
-        font-size 12px
-    .country-code
-        font-size 17px
+<style>
+.country {
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+    grid-gap: 8px;
+    align-items: center;
+    height: 32px;
+    cursor: pointer;
+    & .country-name {
+        font-weight: 600;
+        font-size: 12px;
+    }
+    & .country-code {
+        font-size: 17px;
+    }
+}
 </style>

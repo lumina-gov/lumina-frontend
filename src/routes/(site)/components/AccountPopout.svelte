@@ -36,8 +36,8 @@ async function logout() {
             class="link"
             href="/account">
             <Icon
-                icon={Settings}
-                size={20}/>
+                --size="20px"
+                icon={Settings}/>
             <span>
                 Account Settings
             </span>
@@ -51,62 +51,75 @@ async function logout() {
                 if (e.key === "Enter") logout()
             } }>
             <Icon
-                icon={ExitToApp}
-                size={20}/>
+                --size="20px"
+                icon={ExitToApp}/>
             <span>
                 Log Out
             </span>
         </div>
     </div>
 </Card>
-<style lang="stylus">
-@import variables
+<style>
+.account {
+    border-bottom: 1px solid color-mix(white, var(--dark-app), 12%);
+    padding: 16px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-.account
-    border-bottom 1px solid transparify(white, 12%)
-    padding 16px
-    width 100%
-    display flex
-    align-items center
-    gap 8px
-    .data
-        display flex
-        flex-direction column
-        gap 8px
-        line-height 1
-        .name
-            font-size 18px
-            font-weight 500
-        .email
-            font-size 14px
-            font-weight 500
-            opacity 0.5
+    & .data {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        line-height: 1;
 
-.links
-    width 100%
-    display flex
-    flex-direction column
-    padding 8px
-    gap 0px
+        & .name {
+            font-size: 18px;
+            font-weight: 500;
+        }
 
-.link
-    display flex
-    align-items center
-    gap 8px
-    padding 8px
-    width 100%
-    border-radius 4px
-    cursor pointer
-    color white
-    font-size 16px
-    font-weight 600
-    opacity 0.5
-    &:hover
-        opacity 1
-        background transparify(white, 8%)
-    &.red
-        color $red
-        opacity 1
-        &:hover
-            color lighten($red, 20%)
+        & .email {
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.5;
+        }
+    }
+}
+
+.links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    gap: 0px;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    opacity: 0.5;
+
+    &:hover {
+        opacity: 1;
+        background: color-mix(white, var(--dark-app), 8%);
+    }
+
+    &.red {
+        color: var(--red);
+        opacity: 1;
+
+        &:hover {
+            color: lighten(var(--red), 20%);
+        }
+    }
+}
 </style>

@@ -11,22 +11,28 @@ export let block: ContainerDirective
         <BlocksArray blocks={block.children}/>
     </div>
 </details>
-<style lang="stylus">
-@import variables
+<style>
 
-details
-    border 1px solid transparify(white, 10%)
-    width 100%
-    border-radius 8px
-    overflow hidden
-    summary
-        padding 8px 16px
-        cursor pointer
-        font-weight bold
-        outline none
-        &:hover, &:focus
-            background-color transparify(white, 10%)
+details {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
 
-    .content
-        padding 16px
+details summary {
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    outline: none;
+}
+
+details summary:hover,
+details summary:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+details .content {
+    padding: 16px;
+}
 </style>

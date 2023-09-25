@@ -53,13 +53,15 @@ $: year = date.getFullYear()
         <span>{ day_with_suffix } { month } { year }</span>
     {/if}
 </div>
-<style lang="stylus">
+<style>
 
-.date
-    display flex
-    gap 8px
-    align-items center
-    font-size 14px
-    opacity 0.5
-    font-weight 600
+.date {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 14px;
+    opacity: 0.5;
+    font-weight: 600;
+}
+
 </style>

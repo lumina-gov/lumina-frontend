@@ -12,9 +12,9 @@ export let organisation: OrganisationsQuery["organisations"][0]
 <div class="directory-item">
     <div>
         <Icon
-            color="brand"
-            icon={Government}
-            size={24}/>
+            --color="var(--brand)"
+            --size="24px"
+            icon={Government}/>
         <div class="name">
             { organisation.name }
         </div>
@@ -29,28 +29,33 @@ export let organisation: OrganisationsQuery["organisations"][0]
             <Tag>{ tag }</Tag>
         {/each}
         <Tag
-            color={organisation.organisationStatus === OrganisationStatus.Halted ? "white" : "green"}
+            --color={organisation.organisationStatus === OrganisationStatus.Halted ? "white" : "var(--green)"}
             opacity={organisation.organisationStatus === OrganisationStatus.Halted}>{ organisation.organisationStatus }</Tag>
         <!-- <Icon icon={ChevronRight} color="brand" size={24}/> -->
     </div>
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.directory-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 16px;
 
-.directory-item
-    display flex
-    justify-content space-between
-    align-items center
-    padding 16px
-    border-bottom 1px solid transparify(white, 10%)
-    gap 16px
-    > div
-        display flex
-        align-items center
-        gap 12px
-    &:last-child
-        border-bottom none
-    .name
-        font-size 18px
-        font-weight 700
+    & > div {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    & .name {
+        font-size: 18px;
+        font-weight: 700;
+    }
+}
 </style>

@@ -25,12 +25,11 @@ $: parent = self?.argument?.parent ? data.comments[self?.argument?.parent] : nul
             side="against"/>
     </div>
 </Hero>
-<style lang="stylus">
-@import variables
-
-.sides
-    display: grid
-    grid-template-columns: 1fr 1fr
-    gap: 16px
-    width: 100%
+<style>
+.sides {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: 100%;
+}
 </style>

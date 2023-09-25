@@ -17,13 +17,12 @@ type Argument = {
 <div class="comment">
     { comment.text }
 </div>
-<style lang="stylus">
-@import variables
+<style>
 
-.comment
-    padding 16px
-    background rgba(255, 255, 255, 0.05)
-    border-radius 4px
-    width 100%
-
+.comment {
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 4px;
+    width: 100%;
+}
 </style>

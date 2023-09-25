@@ -24,8 +24,8 @@ $: formatted_date = date ? date.toLocaleDateString("en-AU", {
     rel="noreferrer">
     <div>
         <Icon
-            icon={Newspaper}
-            size={24}/>
+            --size="24px"
+            icon={Newspaper}/>
         <div class="title">
             { title }
         </div>
@@ -40,41 +40,45 @@ $: formatted_date = date ? date.toLocaleDateString("en-AU", {
             {/each}
         </div>
         <Icon
-            icon={ChevronRight}
-            size={24}/>
+            --size="24px"
+            icon={ChevronRight}/>
     </div>
 </a>
-<style lang="stylus">
-@import variables
+<style>
+.press-release {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.04);
+    gap: 8px;
 
-.press-release
-    display flex
-    justify-content space-between
-    align-items center
-    padding 16px
-    border-radius 4px
-    background-color transparify(white, 4%)
-    gap 8px
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+    }
 
-    > div
-        display flex
-        align-items center
-        gap 8px
+    & > div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
 
-    &:hover
-        background-color transparify(white, 8%)
+    & .title {
+        font-size: 18px;
+        font-weight: 600;
+        color: white;
+    }
 
-    .title
-        font-size 18px
-        font-weight 600
-        color white
+    & .date {
+        font-size: 14px;
+        opacity: 0.5;
+        color: white;
+    }
 
-    .date
-        font-size 14px
-        opacity 0.5
-        color white
-
-    .tags
-        display: flex
-        gap 8px
+    & .tags {
+        display: flex;
+        gap: 8px;
+    }
+}
 </style>

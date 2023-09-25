@@ -8,7 +8,8 @@ import ClickoutRegion from "./ClickoutRegion.svelte"
 import Options from "./Options.svelte"
 import Dropdown from "./Dropdown.svelte"
 import Search from "./Search.svelte"
-import type { SvelteComponent } from "svelte"
+
+import type { IconComponent } from "$lib/utils/icon_type"
 import FlexWrap from "$lib/display/FlexWrap.svelte"
 
 type $$Generic = T
@@ -24,7 +25,7 @@ export let name: string
 export let values: T[]
 export let options: T[] | ((query: string) => T[])
 export let search_placeholder = "Search..."
-export let left_icon: typeof SvelteComponent | undefined = undefined
+export let left_icon: IconComponent | undefined = undefined
 export let allow_other: ((query: string) => T) | undefined = undefined
 export let get_title: (value: T) => string = value => value as unknown as string
 let search = ""

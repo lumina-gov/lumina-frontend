@@ -29,34 +29,35 @@ export let content_height: string | undefined = undefined
     />
 </div>
 
-<style lang="stylus">
-@import variables
+<style>
+.wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    min-height: 0;
+    --svrollbar-track-background: rgba(255, 255, 255, 0.04);
+    --svrollbar-thumb-background: var(--brand);
 
-.wrapper
-    position relative
-    display flex
-    flex-direction column
-    overflow hidden
-    height 100%
-    width 100%
-    min-height 0
-    --svrollbar-track-background transparify(white, 4%)
-    --svrollbar-thumb-background $brand
+    & .contents {
+        min-width: 100%;
+        min-height: 100%;
+    }
 
-.contents
-    min-width 100%
-    min-height 100%
+    & .viewport {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+        box-sizing: border-box;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
 
-.viewport
-    position relative
-    width 100%
-    height 100%
-    overflow scroll
-    box-sizing border-box
-    -ms-overflow-style none
-    scrollbar-width none
-
-    &::-webkit-scrollbar
-        display none
-
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
 </style>

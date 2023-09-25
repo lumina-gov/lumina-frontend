@@ -1,10 +1,11 @@
 <script lang="ts">
-import type { SvelteComponent } from "svelte"
+
+import type { IconComponent } from "$lib/utils/icon_type"
 import { createEventDispatcher } from "svelte"
 
 export let href: string | null = null
-export let left_icon: typeof SvelteComponent<any> | null = null
-export let right_icon: typeof SvelteComponent<any> | null = null
+export let left_icon: IconComponent | null = null
+export let right_icon: IconComponent | null = null
 export let style: "translucent" | "transparent" | "branded" = "branded"
 export let hug = true
 export let disabled = false
@@ -57,56 +58,80 @@ function handle_keyup(e: KeyboardEvent) {
     {/if}
 </svelte:element>
 
-<style lang="stylus">
-@import variables
+<style>
+.button {
+    padding: 10px 10px;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    justify-content: center;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: 600;
 
-.button
-    padding 10px 10px
-    color white
-    display inline-flex
-    align-items: center
-    white-space nowrap
-    justify-content: center
-    border-radius 4px
-    width 100%
-    cursor pointer
-    font-weight 600
-    .text
-        padding 0px 12px
-    &.hug
-        width auto
-    .icon
-        font-size: 20px
-        display: inline-flex
-    &:not(.disabled)
-        &:focus-visible
-            outline-effect()
-        &.branded
-            background: $brand
-            &:hover, &:focus
-                background: lighten($brand, 12%)
-            &:active
-                background $brand
-        &.translucent
-            background transparify(white, 8%)
-            &:hover, &:focus
-                background: transparify(white, 14%)
-            &:active
-                background: transparify(white, 8%)
-        &.transparent
-            color transparify(white, 60%)
-            background transparify(white, 0%)
-            &:hover, &:focus
-                background: transparify(white, 12%)
-                color white
-            &:active
-                background: transparify(white, 6%)
-    &.disabled
-        cursor default
-        background transparent
-        outline 1px solid transparify(white, 10%)
-        outline-offset 1px
-        color transparify(white, 30%)
+    & .text {
+        padding: 0px 12px;
+    }
 
+    &.hug {
+        width: auto;
+    }
 
+    & .icon {
+        font-size: 20px;
+        display: inline-flex;
+    }
+
+    &:not(.disabled) {
+        outline: none;
+
+        &.branded {
+            background: var(--brand);
+
+            &:is(:hover, :focus) {
+                background: color-mix(in srgb, var(--brand), white 14%);
+            }
+
+            &:active {
+                background: var(--brand);
+            }
+        }
+
+        &.translucent {
+            background: rgba(255, 255, 255, 0.08);
+
+            &:hover, &:focus {
+                background: color-mix(in srgb, white 14%, transparent);
+            }
+
+            &:active {
+                background: rgba(255, 255, 255, 0.08);
+            }
+        }
+
+        &.transparent {
+            color: color-mix(in srgb, white 60%, transparent);
+            background: color-mix(in srgb, white 0%, transparent);
+
+            &:hover, &:focus {
+                background: color-mix(in srgb, white 12%, transparent);
+                color: white;
+            }
+
+            &:active {
+                background: rgba(255, 255, 255, 0.06);
+            }
+        }
+    }
+
+    &.disabled {
+        cursor: default;
+        background: transparent;
+        outline: 1px solid rgba(255, 255, 255, 0.1);
+        outline-offset: 1px;
+        color: color-mix(in srgb, white 30%, transparent);
+    }
+}
 </style>

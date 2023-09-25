@@ -1,93 +1,78 @@
 <script lang="ts">
-import { browser } from "$app/environment"
-import { onDestroy, onMount } from "svelte"
+import { onMount, tick } from "svelte"
 
-export let max_height = "300px"
-export let max_width = "300px"
-
-let wrapper: HTMLElement
-let left = 0
-let top = 0
-
-function resize() {
-    let nearest_vertical_scrollable_parent: HTMLElement | null = wrapper.parentElement
-    let nearest_horizontal_scrollable_parent: HTMLElement | null = wrapper.parentElement
-
-    while (nearest_vertical_scrollable_parent) {
-        if (getComputedStyle(nearest_vertical_scrollable_parent).overflowY === "scroll") break
-        nearest_vertical_scrollable_parent = nearest_vertical_scrollable_parent.parentElement
-    }
-
-    while (nearest_horizontal_scrollable_parent) {
-        if (getComputedStyle(nearest_horizontal_scrollable_parent).overflowX === "scroll") break
-        nearest_horizontal_scrollable_parent = nearest_horizontal_scrollable_parent.parentElement
-    }
-
-    let offset_top = 0
-    let offset_left = 0
-
-    let vertical_wrapper_bounds = nearest_vertical_scrollable_parent?.getBoundingClientRect()
-    let horizontal_wrapper_bounds = nearest_horizontal_scrollable_parent?.getBoundingClientRect()
-
-    // get the span's nearest parent who is not display: contents
-    let parent = wrapper.parentElement
-    while (parent && (getComputedStyle(parent).display === "contents" || getComputedStyle(parent).display === "none")) {
-        parent = parent.parentElement
-    }
-
-    let parent_bounds = parent?.getBoundingClientRect()
-
-    offset_top += (parent_bounds?.bottom || 0)
-    offset_top -= (vertical_wrapper_bounds?.top || 0)
-    offset_top += (nearest_vertical_scrollable_parent?.scrollTop || 0)
-    offset_top += 8 // gap
-
-    offset_left += parent_bounds?.left || 0
-    offset_left -= horizontal_wrapper_bounds?.left || 0
-    offset_left += (nearest_horizontal_scrollable_parent?.scrollLeft || 0)
-
-    left = offset_left
-    top = offset_top
-}
-
+export let max_height: number = 320
+export let max_width: number = 320
+let width: undefined | number = undefined
+let dropdown: HTMLDivElement
+let left: number = 0
 onMount(() => {
     resize()
-    window.addEventListener("resize", resize, { passive: true })
-})
-onDestroy(() => {
-    if (browser) {
+    window.addEventListener("resize", resize)
+    return () => {
         window.removeEventListener("resize", resize)
     }
 })
+
+// when the window resizes
+async function resize() {
+    // get the width of the window
+    let w = window.innerWidth
+
+    // we want to set the width of the dropdown to the width of the window
+    // or the max width of the dropdown, whichever is smaller
+    width = Math.min(w - 48, max_width)
+
+    // if the right side of the dropdown is off the screen
+    // we want to move it to the left by the amount it's off the screen
+    let rect = dropdown.getBoundingClientRect()
+
+    if (rect.left + width > w) {
+        // the amount it's off the screen is the right side of the dropdown
+        // minus the width of the window
+        let off = rect.right - w
+
+        // we want to move the dropdown to the left by the amount it's off the screen
+        left = -off + 8
+    } else {
+        // otherwise, we want to move the dropdown to the left by 0
+        left = 0
+    }
+
+    // scroll into view
+    await tick()
+    dropdown.scrollIntoView({ block: "nearest", inline: "nearest" })
+}
+
 </script>
-<div
-    bind:this={ wrapper }
-    style:max-height={ max_height }
-    style:max-width={ max_width }
-    style:left="{ left }px"
-    style:top="{ top + 8 }px"
-    class="wrapper">
-    <div class="dropdown">
+<div class="wrapper">
+    <div
+        bind:this={ dropdown }
+        style:left="{ left }px"
+        style:width={ width ? width + "px" : undefined }
+        style:max-height="{ max_height }px"
+        style:max-width="{ max_width }px"
+        class="dropdown">
         <slot/>
     </div>
 </div>
 
-<style lang="stylus">
-@import variables
 
-.wrapper
-    position fixed
-    z-index 4
-    right 0px
-    display flex
-    width 100%
+<style>
+.wrapper {
+    height: 0;
+    position: relative;
+    z-index: 20;
+    width: 100%;
+}
 
-.dropdown
-    background mix(white, $dark_app, 4%)
-    box-shadow: 0px 10px 16px -6px transparify(black, 50%)
-    display flex
-    flex-direction column
-    overflow hidden
-    border-radius 6px
-    width 100%
+.dropdown {
+    background: color-mix(in srgb, var(--dark-app) 90%, white);
+    box-shadow: 0px 10px 16px -6px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: absolute;
+    border-radius: 6px;
+}
 </style>

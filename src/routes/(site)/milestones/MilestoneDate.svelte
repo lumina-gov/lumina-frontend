@@ -44,18 +44,20 @@ $: year = date.getFullYear()
     <span class="main_date">{ day_with_suffix } { month } { year }</span>
     <span class="sub_date">{ ago }</span>
 </div>
-<style lang="stylus">
-
-.date
-    justify-content flex-start
-    display inline-flex
-    flex-direction column
-    gap 8px
-    font-weight 600
-.main_date
-    opacity 1
-    font-size 18px
-.sub_date
-    opacity 0.5
-    font-size 16px
+<style>
+.date {
+    justify-content: flex-start;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+    font-weight: 600;
+}
+.main_date {
+    opacity: 1;
+    font-size: 18px;
+}
+.sub_date {
+    opacity: 0.5;
+    font-size: 16px;
+}
 </style>

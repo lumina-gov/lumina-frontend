@@ -28,53 +28,67 @@ $: against_percentage = against_votes / total_votes * 100
     </div>
     <span>Support</span>
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.progress-bar-wrapper {
+    display: flex;
+    height: 14px;
+    width: 100%;
+    gap: 4px;
+}
 
-.progress-bar-wrapper
-    display flex
-    height 14px
-    width 100%
-    gap 4px
+.text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+}
 
-.text
-    display flex
-    align-items center
-    justify-content center
-    gap 4px
-    font-size 14px
-    font-weight 500
-    text-transform uppercase
-    color transparify(white, 50%)
-    .support
-        color $green
-    .against
-        color $red
+.text .support {
+    color: var(--green);
+}
 
-.progress
-    display flex
-    flex 1
-    height 100%
-    background transparify(white, 6%)
-    padding 3px 0
-    .bar
-        height 100%
-    &.left
-        border-top-left-radius 20px
-        padding-left 3px
-        justify-content flex-end
-        border-bottom-left-radius 20px
-        .bar
-            background $red
-            border-top-left-radius 20px
-            border-bottom-left-radius 20px
-    &.right
-        border-top-right-radius 20px
-        padding-right 3px
-        border-bottom-right-radius 20px
-        .bar
-            background $green
-            border-top-right-radius 20px
-            border-bottom-right-radius 20px
+.text .against {
+    color: var(--red);
+}
 
+.progress {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 3px 0;
+}
+
+.progress .bar {
+    height: 100%;
+}
+
+.progress.left {
+    border-top-left-radius: 20px;
+    padding-left: 3px;
+    justify-content: flex-end;
+    border-bottom-left-radius: 20px;
+}
+
+.progress.left .bar {
+    background: var(--red);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.progress.right {
+    border-top-right-radius: 20px;
+    padding-right: 3px;
+    border-bottom-right-radius: 20px;
+}
+
+.progress.right .bar {
+    background: var(--green);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
 </style>

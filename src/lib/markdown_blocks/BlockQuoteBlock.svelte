@@ -8,12 +8,11 @@ export let block: Blockquote
 <blockquote>
     <BlocksArray blocks={block.children}/>
 </blockquote>
-<style lang="stylus">
-@import variables
-
-blockquote
-    margin 0
-    color transparify(white, 80%)
-    border-left 4px solid transparify(white, 15%)
-    padding-left 1em
+<style>
+blockquote {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+    border-left: 4px solid rgba(255, 255, 255, 0.15);
+    padding-left: 1em;
+}
 </style>

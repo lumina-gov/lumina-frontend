@@ -12,18 +12,18 @@ export let description = "This is a test of the OG Graph"
             {title} />
     </div>
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.card-wrapper {
+    border-radius: 8px;
+    margin: 40px;
+    box-shadow: 0 0 8px 0 color-mix(in srgb, black 20%, transparent);
+    overflow: auto;
+}
 
-.card-wrapper
-    border-radius 8px
-    margin 40px
-    box-shadow 0 0 8px 0 transparify(black, 20%)
-    overflow auto
-
-.inner
-    background white
-    height 630px
-    width 1200px
-
+.inner {
+    background: white;
+    height: 630px;
+    width: 1200px;
+}
 </style>
+

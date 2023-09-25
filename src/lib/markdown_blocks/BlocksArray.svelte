@@ -9,13 +9,13 @@ export let blocks: Content[]
         <GenericBlock {block}/>
     {/each}
 </div>
-<style lang="stylus">
-
-.blocks-array
-    display flex
-    flex-direction column
-    gap 1.8em
-    line-height 1.8em
-    width 100%
-    align-items flex-start
+<style>
+.blocks-array {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8em;
+    line-height: 1.8em;
+    width: 100%;
+    align-items: flex-start;
+}
 </style>

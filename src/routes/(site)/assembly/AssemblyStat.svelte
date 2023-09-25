@@ -1,7 +1,8 @@
 <script lang="ts">
-import type { SvelteComponent } from "svelte"
+import type { IconComponent } from "$lib/utils/icon_type"
 
-export let icon: typeof SvelteComponent
+
+export let icon: IconComponent
 export let text: string
 </script>
 <div class="stat">
@@ -14,20 +15,20 @@ export let text: string
         { text }
     </div>
 </div>
-<style lang="stylus">
-@import variables
-
-.stat
-    display flex
-    align-items center
-    gap 6px
-    font-size 16px
-    font-weight 600
-    .icon
-        width 20px
-        height 20px
-        display flex
-        align-items center
-        justify-content center
-        color $brand
+<style>
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    & .icon {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brand);
+    }
+}
 </style>

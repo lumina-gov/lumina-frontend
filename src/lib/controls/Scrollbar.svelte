@@ -333,36 +333,34 @@ onDestroy(() => {
     </div>
 {/if}
 
-<style lang="stylus">
-
-user-select-none()
-    -webkit-user-select: none
-    -moz-user-select: none
-    -ms-user-select: none
-    user-select: none
+<style>
+.v-scrollbar,
+.h-scrollbar,
+.v-thumb,
+.h-thumb {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 .v-scrollbar {
     position: absolute;
-    user-select: none;
     top: 0;
     display: flex;
     align-items: center;
     flex-direction: column;
     right: 0;
     width: var(--svrollbar-track-width, 8px);
-    user-select-none()
 }
 
 .h-scrollbar {
     position: absolute;
-    user-select: none;
     display: flex;
-    user-select: none;
     align-items: center;
     bottom: 0;
     left: 0;
     height: var(--svrollbar-track-width, 8px);
-    user-select-none()
 }
 
 .v-scrollbar.fixed, .h-scrollbar.fixed {
@@ -400,7 +398,6 @@ user-select-none()
     opacity: var(--svrollbar-thumb-opacity, 0.5);
     background: var(--svrollbar-thumb-background, gray);
     box-shadow: var(--svrollbar-thumb-shadow, initial);
-    user-select-none()
 }
 
 .h-thumb {
@@ -412,6 +409,5 @@ user-select-none()
     opacity: var(--svrollbar-thumb-opacity, 0.5);
     background: var(--svrollbar-thumb-background, gray);
     box-shadow: var(--svrollbar-thumb-shadow, initial);
-    user-select-none()
 }
 </style>

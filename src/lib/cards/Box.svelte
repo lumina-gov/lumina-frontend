@@ -24,16 +24,18 @@ $: tag = is_clickable ? "a" : "div" as "a" | "div"
     href={href}>
     <slot/>
 </svelte:element>
-<style lang="stylus">
-@import variables
-
-.box
-    width 100%
-    display flex
-    &.vertical
-        flex-direction column
-    &.horizontal
-        flex-direction row
-    &.padding
-        padding 20px
+<style>
+.box {
+    width: 100%;
+    display: flex;
+}
+.box.vertical {
+    flex-direction: column;
+}
+.box.horizontal {
+    flex-direction: row;
+}
+.box.padding {
+    padding: 20px;
+}
 </style>

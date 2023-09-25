@@ -6,11 +6,9 @@
 />
 <SchemaComponent schema={organizationSchema}/>
 <script lang="ts">
-import Domain from "svelte-material-icons/Domain.svelte"
 import Settlement from "$lib/icons/Settlement.svelte"
 import Button from "$lib/controls/Button.svelte"
 import Coloured from "$lib/display/Coloured.svelte"
-import Filled from "$lib/display/Filled.svelte"
 import Hero from "$lib/layouts/Hero.svelte"
 import type { GovernmentOrganization, WithContext } from "schema-dts"
 import PageHead from "$lib/components/PageHead.svelte"
@@ -18,18 +16,13 @@ import site_data from "$lib/data/site_data"
 import SchemaComponent from "$lib/components/SchemaComponent.svelte"
 import Grid from "$lib/layouts/Grid.svelte"
 import GridItem from "$lib/layouts/GridItem.svelte"
-import Card from "$lib/cards/Card.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
-import ExitToApp from "svelte-material-icons/ExitToApp.svelte"
 import Heading from "$lib/display/Heading.svelte"
 import Information from "svelte-material-icons/Information.svelte"
-import Profile from "$lib/display/Profile.svelte"
 import Cog from "svelte-material-icons/Cog.svelte"
 import ServicesArea from "./ServicesArea.svelte"
 import InformationArea from "./InformationArea.svelte"
 import Chart from "./Chart.svelte"
-import MainCards from "./MainCards.svelte"
-import Wizard from "./Wizard.svelte"
 import Apps from "svelte-material-icons/Apps.svelte"
 import StatBlock from "./StatBlock.svelte"
 import Passport from "svelte-material-icons/Passport.svelte"
@@ -73,10 +66,11 @@ $: user = data.user_store.user
         gap={16}
         justify_content="center">
         <div class="large-paragraph">We're building the</div>
-        <h1>city of the <br><Coloured>future</Coloured></h1>
+        <h1>city of the <Coloured --color="var(--brand)">future</Coloured></h1>
         {#if user}
             <div class="large-paragraph">
-                for <Coloured>{ user.first_name }</Coloured>, by <Coloured>{ user.first_name }</Coloured>.
+                for <Coloured --color="var(--brand)">{ user.first_name }</Coloured>,
+                by <Coloured --color="var(--brand)">{ user.first_name }</Coloured>.
             </div>
             <Button
                 style="branded"
@@ -137,28 +131,18 @@ $: user = data.user_store.user
     <InformationArea/>
 </Hero>
 
-<style lang="stylus">
-@import variables
+<style>
 
-h2
-    font-size 20px
-    font-weight 600
-    opacity 0.3
+.large-paragraph {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+}
 
-.padding
-    height 80px
-    @media (max-width: $tablet)
-        height 0
-
-.large-paragraph
-    font-size 20px
-    color transparify(white, 50%)
-    font-weight 600
-
-h1
-    font-weight 700
-    font-size 46px
-    display flex
-    gap 0.4em
-
+h1 {
+    font-weight: 700;
+    font-size: 46px;
+    display: flex;
+    gap: 0.35em;
+}
 </style>

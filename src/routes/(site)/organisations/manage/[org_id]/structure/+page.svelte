@@ -62,8 +62,3 @@ let root: string | null = null
         </GridItem>
     </Grid>
 </VerticalLayout>
-
-<style lang="stylus">
-@import variables
-
-</style>

@@ -1,12 +1,13 @@
 <script lang="ts">
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
-import type { SvelteComponent } from "svelte"
+
+import type { IconComponent } from "$lib/utils/icon_type"
 
 type HubArea = {
     href: string,
     title: string,
     description?: string,
-    icon: typeof SvelteComponent
+    icon: IconComponent
 }
 
 export let main_area: HubArea
@@ -52,58 +53,65 @@ export let areas: HubArea[]
     {/each}
 </div>
 
-<style lang="stylus">
-@import variables
+<style>
+.main {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.04);
+    justify-content: center;
+}
 
-.main
-    display flex
-    flex-direction column
-    padding 40px
-    background transparify(white, 4%)
-    justify-content center
+.link {
+    text-decoration: none;
+    color: white;
+    padding: 24px;
+    display: flex;
+    max-width: 450px;
+    &:hover {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.04);
+    }
+    @media (width <= 1200px) {
+        margin: 0 auto;
+        width: 100%;
+    }
+}
 
-.link
-    text-decoration none
-    color white
-    padding 24px
-    display flex
-    max-width 450px
-    &:hover
-        color white
-        background-color transparify(white, 4%)
-    @media (max-width $laptop)
-        margin 0 auto
-        width 100%
+.area {
+    display: flex;
+    align-items: center;
+}
 
-.area
-    display flex
-    align-items center
+.heading {
+    margin: 10px 0;
+    font-size: 28px;
+    font-weight: 700;
+}
 
-.heading
-    margin 10px 0
-    font-size 28px
-    font-weight 700
+p {
+    font-weight: 500;
+    margin: 0;
+    opacity: 0.5;
+    max-width: 315px;
+}
 
-p
-    font-weight 500
-    margin 0
-    opacity 0.5
-    max-width 315px
+.icon {
+    display: inline-flex;
+    font-size: 36px;
+    margin-right: 10px;
+    color: var(--brand);
+}
 
-.icon
-    display inline-flex
-    font-size 36px
-    margin-right 10px
-    color $brand
+.info-heading {
+    font-weight: 600;
+    font-size: 18px;
+    margin: auto 0;
+}
 
-.info-heading
-    font-weight 600
-    font-size 18px
-    margin auto 0
-
-.chevron-right
-    display inline-flex
-    margin-left auto
-    font-size 28px
-
+.chevron-right {
+    display: inline-flex;
+    margin-left: auto;
+    font-size: 28px;
+}
 </style>

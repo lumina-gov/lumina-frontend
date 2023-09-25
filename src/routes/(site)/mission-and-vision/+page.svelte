@@ -13,7 +13,8 @@ import Paragraph from "$lib/display/Paragraph.svelte"
 import ResponsiveLayout from "$lib/layouts/ResponsiveLayout.svelte"
 import Card from "$lib/cards/Card.svelte"
 import UnresponsiveLayout from "$lib/layouts/VerticalLayout.svelte"
-import type { SvelteComponent } from "svelte"
+
+import type { IconComponent } from "$lib/utils/icon_type"
 import FeatureTile from "$lib/components/FeatureTile.svelte"
 
 import HumanGreetingVariant from "svelte-material-icons/HumanGreetingVariant.svelte"
@@ -40,7 +41,7 @@ import { CitizenshipStatus } from "$lib/graphql/graphql-types"
 type Goal = {
     title: string,
     description: string,
-    icon: typeof SvelteComponent
+    icon: IconComponent
 }
 
 export let data
@@ -103,7 +104,7 @@ $: other_links = [
         href: "/citizenship",
         tag: {
             text: "Pending",
-            color: "yellow"
+            color: "var(--yellow)"
         },
         description: "Your citizenship application is currently pending. You will be notified when it is approved."
     } : {
@@ -112,7 +113,7 @@ $: other_links = [
         href: "/citizenship",
         tag: {
             text: "Recommended",
-            color: "green"
+            color: "var(--green)"
         },
         description: "Apply for citizenship in Lumina, and become a part of the city's government."
     },
@@ -122,7 +123,7 @@ $: other_links = [
         icon: Telescope,
         tag: {
             text: "Recommended",
-            color: "brand",
+            color: "var(--brand)",
         },
         description: "Learn about the founding mission and vision for Lumina, and how we plan to achieve it."
     },

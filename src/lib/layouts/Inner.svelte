@@ -12,15 +12,15 @@ export let align: "center" | "flex-start" | "flex-end" = "flex-start"
     class="inner">
     <slot/>
 </div>
-<style lang="stylus">
-
-.inner
-    max-width var(--max-width)
-    width 100%
-    margin 0 auto
-    gap var(--gap)
-    padding var(--vertical-padding, 0) 16px
-    display flex
-    flex-direction column
-    align-items var(--align)
+<style>
+.inner {
+    max-width: var(--max-width);
+    width: 100%;
+    margin: 0 auto;
+    gap: var(--gap);
+    padding: var(--vertical-padding, 0) 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: var(--align);
+}
 </style>

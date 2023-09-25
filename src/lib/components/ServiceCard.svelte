@@ -6,13 +6,14 @@ import Icon from "$lib/display/Icon.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
 import Tag from "$lib/display/Tag.svelte"
 import type { Props } from "$lib/utils/typed_props"
-import type { SvelteComponent } from "svelte"
 
-export let icon: typeof SvelteComponent
+import type { IconComponent } from "$lib/utils/icon_type"
+
+export let icon: IconComponent
 export let title: string
 export let size: "small" | "large" = "small"
 export let href: string | undefined = undefined
-export let tag: Props<Tag>
+export let tag: Props<Tag> & { color: string }
 export let description: string
 export let reset_bg = false
 $: disabled = href === undefined
@@ -30,20 +31,24 @@ $: disabled = href === undefined
         direction="horizontal"
         gap="16px">
         <Icon
-            color="brand"
-            icon={icon}
-            size={size === "large" ? 40 : 24} />
+            --color="var(--brand)"
+            --size="{size === "large" ? 40 : 24}px"
+            icon={icon} />
         <Box
             align_items="flex-start"
             gap="8px">
             <Heading level={3}>{ title }</Heading>
             {#if size === "large"}
-                <Tag {...tag} />
+                <Tag
+                    {...tag}
+                    --color={tag.color} />
             {/if}
         </Box>
     </Box>
     {#if size === "small"}
-        <Tag {...tag} />
+        <Tag
+            {...tag}
+            --color={tag.color} />
     {/if}
     <Paragraph>{ description }</Paragraph>
 </Card>

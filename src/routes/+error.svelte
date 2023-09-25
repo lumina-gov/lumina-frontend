@@ -9,7 +9,7 @@ import Home from "svelte-material-icons/Home.svelte"
 $: error = $page.error as NonNullable<typeof $page.error>
 </script>
 <div class="area">
-    <Tag color="red">
+    <Tag --color="var(--red)">
         Error
     </Tag>
     <div class="status">
@@ -17,7 +17,7 @@ $: error = $page.error as NonNullable<typeof $page.error>
     </div>
     <Heading
         left_icon={Alert}
-        left_icon_color="red">
+        left_icon_color="var(--red)">
         { error.message }
     </Heading>
     {#if error.code}
@@ -31,19 +31,22 @@ $: error = $page.error as NonNullable<typeof $page.error>
         hug={true}
         left_icon={Home}>Go Home</Button>
 </div>
-<style lang="stylus">
-.area
-    padding 32px
-    display flex
-    flex-direction column
-    align-items center
-    gap 20px
+<style>
+.area {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
 
-.status
-    font-size 4em
-    font-weight 700
+.status {
+    font-size: 4em;
+    font-weight: 700;
+}
 
-.code
-    font-size 1.2em
-    font-weight 600
+.code {
+    font-size: 1.2em;
+    font-weight: 600;
+}
 </style>

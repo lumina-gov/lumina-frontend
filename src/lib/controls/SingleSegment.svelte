@@ -1,4 +1,6 @@
 <script lang="ts">
+import type { IconComponent } from "$lib/utils/icon_type"
+
 import Segment from "$lib/controls/Segment.svelte"
 import InputWrapper from "$lib/display/InputWrapper.svelte"
 import Inside from "./Inside.svelte"
@@ -10,7 +12,6 @@ import FlexWrap from "$lib/display/FlexWrap.svelte"
 import MenuDown from "svelte-material-icons/MenuDown.svelte"
 import CloseCircle from "svelte-material-icons/CloseCircle.svelte"
 import Icon from "$lib/display/Icon.svelte"
-import type { SvelteComponent } from "svelte"
 import { createEventDispatcher } from "svelte"
 
 type $$Generic = T
@@ -21,14 +22,14 @@ const dispatch = createEventDispatcher<{ select: T | null }>()
 export let name: string | undefined = undefined
 export let value: T | null = null
 export let get_title: (value: T) => string = value => value as unknown as string
-export let get_icon: (value: T) => typeof SvelteComponent | undefined = () => left_icon
+export let get_icon: (value: T) => IconComponent | undefined = () => left_icon
 export let allow_other: ((query: string) => T) | undefined = undefined
 export let allow_null = false
 
 export let placeholder = "Select an option"
 export let options: T[] | ((query: string) => T[])
-export let right_icon: typeof SvelteComponent = MenuDown
-export let left_icon: typeof SvelteComponent | undefined = undefined
+export let right_icon: IconComponent = MenuDown
+export let left_icon: IconComponent | undefined = undefined
 
 let search = ""
 
@@ -64,7 +65,7 @@ let dropdown_toggled = false
                                 on:click={ () => select_option(null) }>
                                 Remove { placeholder }
                                 <Icon
-                                    color="red"
+                                    --color="var(--red)"
                                     icon={CloseCircle}/>
                             </div>
                         {/if}
@@ -90,17 +91,17 @@ let dropdown_toggled = false
         </ClickoutRegion>
     </FlexWrap>
 </InputWrapper>
-<style lang="stylus">
-@import variables
-
-.null
-    border-bottom 1px solid transparify(white, 10%)
-    padding 12px
-    display flex
-    justify-content space-between
-    cursor pointer
-    gap 8px
-    &:focus, &:hover, &:focus-within
-        background transparify(white, 10%)
-        outline none
+<style>
+.null {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    gap: 8px;
+    &:is(:focus, :hover, :focus-within) {
+        background: rgba(255, 255, 255, 0.1);
+        outline: none;
+    }
+}
 </style>

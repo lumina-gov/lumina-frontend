@@ -29,20 +29,22 @@ export let columns: {
     class:side_padding>
     <slot/>
 </div>
-<style lang="stylus">
-@import variables
-
-.grid
-    &.side_padding
-        padding 0 16px
-    display grid
-    max-width $laptop
-    margin 0 auto
-    gap 16px
-    width 100%
-    grid-template-columns repeat(var(--laptop-columns), 1fr)
-    @media (max-width $tablet)
-        grid-template-columns repeat(var(--tablet-columns), 1fr)
-    @media (max-width $mobile)
-        grid-template-columns repeat(var(--mobile-columns), 1fr)
+<style>
+.grid {
+    display: grid;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 16px;
+    width: 100%;
+    grid-template-columns: repeat(var(--laptop-columns), 1fr);
+    &.side_padding {
+        padding: 0 16px;
+    }
+    @media (max-width: 900px) {
+        grid-template-columns: repeat(var(--tablet-columns), 1fr);
+    }
+    @media (max-width: 600px) {
+        grid-template-columns: repeat(var(--mobile-columns), 1fr);
+    }
+}
 </style>

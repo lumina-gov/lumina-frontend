@@ -48,7 +48,7 @@ $: schema = {
 <Hero>
     <FlexWrap>
         {#each data.post.newsPostTags as tag}
-            <Tag color="brand">{ tag.name }</Tag>
+            <Tag>{ tag.name }</Tag>
         {/each}
     </FlexWrap>
     <Heading left_icon={Newspaper}>{ data.post.title }</Heading>
@@ -65,16 +65,8 @@ $: schema = {
         shadow={true}>
         <VerticalLayout max_width={600}>
             {#each data.post.content as block}
-                <!-- {#if block.__typename == "markdown"} -->
                 <MarkdownRenderer markdown={block.markdown}/>
-                <!-- {:else} -->
-                <!-- <Unsupported/> -->
-                <!-- {/if} -->
             {/each}
         </VerticalLayout>
     </Card>
 </Hero>
-<style lang="stylus">
-
-
-</style>

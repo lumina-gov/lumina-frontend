@@ -37,24 +37,27 @@ export let block: PhrasingContent
 {:else}
     <Unsupported/>
 {/if}
-<style lang="stylus">
-@import variables
+<style>
 
-code
-    font-family "Source Code Pro", monospace
-    &.inline
-        display inline
-        background transparify(white, 10%)
-        padding 1px 6px
-        margin 0 4px
-        border-radius 4px
+code {
+    font-family: "Source Code Pro", monospace;
+    &.inline {
+        display: inline;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1px 6px;
+        margin: 0 4px;
+        border-radius: 4px;
+    }
+}
 
-strong
-    border 1px solid transparify(white, 20%)
-    border-radius 4px
-    padding 1px 6px
-    color white
+strong {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 1px 6px;
+    color: white;
+}
 
-img
-    width 100%
+img {
+    width: 100%;
+}
 </style>

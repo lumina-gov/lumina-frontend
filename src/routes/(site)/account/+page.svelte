@@ -16,13 +16,12 @@ console.log("Account Settings")
         title="This feature is not developed yet"/>
 </div>
 
-<style lang="stylus">
-    @import variables
-
-.area
-    padding 40px
-    gap 32px
-    display flex
-    flex-direction column
-    flex 1
+<style>
+.area {
+    padding: 40px;
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
 </style>

@@ -82,10 +82,9 @@ function generate_canvas() {
     bind:this={ canvas }
     height="min-content"
     width="min-content"/>
-<style lang="stylus">
-@import variables
-
-canvas
-    max-height 350px
-    min-height 350px
+<style>
+canvas {
+    max-height: 350px;
+    min-height: 350px;
+}
 </style>

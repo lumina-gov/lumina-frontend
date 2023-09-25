@@ -19,7 +19,7 @@ export const services: Props<ServiceCard>[] = [
         description: "Join the Discord to get involved and stay up to date",
         icon: Discord,
         tag: {
-            color: "green",
+            color: "var(--green)",
             text: "Recommended"
         },
         href: site_data.socials.discord,
@@ -30,7 +30,7 @@ export const services: Props<ServiceCard>[] = [
         icon: LightUniversity,
         href: site_data.university,
         tag: {
-            color: "green",
+            color: "var(--green)",
             opacity: false,
             text: "Recommended"
         },

@@ -69,7 +69,7 @@ async function signin () {
 
 </script>
 {#if loading}
-    <OverlayLoading/>
+    <OverlayLoading fixed={true}/>
 {/if}
 <Card padding="24px">
     <Box
@@ -133,49 +133,56 @@ async function signin () {
     <span>Protect yourself from phishing attacks. Always check that you are on:</span>
     <div class="browser">
         <Icon
-            icon={Web}
-            opacity={0.5}/>
+            --opacity={0.5}
+            icon={Web}/>
         <div class="url">
             https://lumina.earth
         </div>
     </div>
 </div>
-<style lang="stylus">
-@import variables
-.hidden
-    display: none
+<style>
+.hidden {
+    display: none;
+}
 
-.segment
-    display flex
-    justify-content center
+.segment {
+    display: flex;
+    justify-content: center;
+}
 
-.security
-    display flex
-    flex-direction column
-    align-items center
-    span
-        opacity 0.6
-        text-align center
+.security {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-.browser
-    display inline-flex
-    align-items center
-    gap 12px
-    margin-top 10px
-    background transparify(white, 6%)
-    padding 10px
-    border-radius 4px
+    & span {
+        opacity: 0.6;
+        text-align: center;
+    }
+}
 
-.forgot-password
-    color $brand
-    font-size 14px
-    font-weight 600
-    margin 0 auto
-    cursor pointer
-    padding 8px 8px
-    border-radius 4px
-    outline 0
-    &:hover, &:focus
-        background transparify(white, 6%)
+.browser {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 10px;
+    border-radius: 4px;
+}
 
+.forgot-password {
+    color: var(--brand);
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 auto;
+    cursor: pointer;
+    padding: 8px 8px;
+    border-radius: 4px;
+    outline: 0;
+
+    &:is(:hover, :focus) {
+        background: rgba(255, 255, 255, 0.06);
+    }
+}
 </style>

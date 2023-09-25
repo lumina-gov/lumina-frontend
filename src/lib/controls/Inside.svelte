@@ -15,7 +15,8 @@ onMount(() => {
 <div bind:this={ div }>
     <slot/>
 </div>
-<style lang="stylus">
-div
-    display contents
+<style>
+div {
+    display: contents;
+}
 </style>

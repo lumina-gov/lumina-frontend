@@ -13,5 +13,5 @@ import TagOutline from "svelte-material-icons/TagOutline.svelte"
     <Heading
         left_icon={TagOutline}
         level={1}>Shop</Heading>
-    <Tag color="brand">Coming Soon</Tag>
+    <Tag>Coming Soon</Tag>
 </Hero>

@@ -7,19 +7,20 @@ import HandCoin from "svelte-material-icons/HandCoin.svelte"
     <Icon icon={HandCoin}/>
     <span>Donate</span>
 </a>
-<style lang="stylus">
-@import variables
+<style>
+a {
+    border: 2px solid color-mix(in srgb, var(--brand) 30%, transparent);
+    border-radius: 4px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    justify-content: center;
+    &:hover {
+        background: var(--brand);
+        color: white;
+    }
+}
 
-a
-    border 2px solid transparify($brand, 30%)
-    border-radius 4px
-    padding 10px
-    display flex
-    align-items center
-    gap 8px
-    font-weight 500
-    justify-content center
-    &:hover
-        background $brand
-        color white
 </style>

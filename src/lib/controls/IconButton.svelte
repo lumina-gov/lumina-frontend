@@ -1,10 +1,11 @@
 <script lang="ts">
-import { type SvelteComponent, createEventDispatcher } from "svelte"
+import type { IconComponent } from "$lib/utils/icon_type"
+import { createEventDispatcher } from "svelte"
 
 let dispatch = createEventDispatcher()
 
 export let href: string | null = null
-export let icon: typeof SvelteComponent | null = null
+export let icon: IconComponent | null = null
 export let opacity = true
 
 $: tag = href ? "a" : "div" as "a" | "div"
@@ -32,31 +33,35 @@ function handle_keyup(e: KeyboardEvent) {
 >
     <svelte:component this={ icon } />
 </svelte:element>
+<style>
+.button {
+    padding: 8px;
+    background: none;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 24px;
+    &.opacity {
+        color: color-mix(in srgb, white 40%, transparent);
+    }
 
-<style lang="stylus">
-@import variables
+    &:hover {
+        background: color-mix(in srgb, white 12%, transparent);
+        color: white;
+    }
 
-.button
-    padding 8px
-    background none
-    color white
-    display inline-flex
-    align-items center
-    justify-content center
-    border-radius 4px
-    cursor pointer
-    font-weight 600
-    font-size 24px
-    &.opacity
-        color transparify(white, 40%)
-    &:hover
-        background transparify(white, 12%)
-        color white
-    &:active
-        background transparify(white, 8%)
-        color white
-    &:focus-visible
-        outline-effect()
+    &:active {
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+    }
 
+    &:focus-visible {
+        outline: none;
+    }
+}
 
 </style>

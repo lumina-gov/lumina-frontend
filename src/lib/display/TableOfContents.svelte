@@ -15,12 +15,10 @@ $: root = {
         item={root}
         toggled={true}/>
 </div>
-<style lang="stylus">
-@import variables
-
-.toc
-    background transparify(white, 4%)
-    padding 8px
-    border-radius 4px
-
+<style>
+.toc {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 8px;
+    border-radius: 4px;
+}
 </style>

@@ -15,23 +15,23 @@ export let name: string
         { name }
     </div>
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.author {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    font-size: 14px;
+    color: white;
+}
 
-.author
-    display flex
-    flex-direction row
-    gap 8px
-    align-items center
-    font-size 14px
-    color white
+.author_img {
+    width: 24px;
+    height: 24px;
+    border-radius: 100px;
+}
 
-.author_img
-    width 24px
-    height 24px
-    border-radius 100px
-
-.author_name
-    font-weight 600
-
+.author_name {
+    font-weight: 600;
+}
 </style>

@@ -65,7 +65,7 @@ $: core_orgs = data.organisations.filter(org => org.tags.includes(OrganisationTy
     <VerticalLayout
         align_items="flex-start"
         max_width={500}>
-        <Tag color="brand">Official Resource</Tag>
+        <Tag>Official Resource</Tag>
         <Heading left_icon={BulletedList}>Government Directory</Heading>
         <Paragraph>
             Your guide to the structures, organisations and key people in the government of Lumina.
@@ -133,10 +133,10 @@ $: core_orgs = data.organisations.filter(org => org.tags.includes(OrganisationTy
                             </VerticalLayout>
                             <FlexWrap>
                                 {#each org.tags as tag}
-                                    <Tag color="brand">{ tag }</Tag>
+                                    <Tag>{ tag }</Tag>
                                 {/each}
                                 <Tag
-                                    color={org.organisationStatus === "Halted" ? "white" : "green"}
+                                    --color={org.organisationStatus === "Halted" ? "white" : "var(--green)"}
                                     opacity={org.organisationStatus === "Halted"}>{ org.organisationStatus }</Tag>
                             </FlexWrap>
                         </Card>

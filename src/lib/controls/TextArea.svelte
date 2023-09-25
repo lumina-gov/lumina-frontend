@@ -14,20 +14,20 @@ export let value: string
         {placeholder}
         bind:value/>
 </InputWrapper>
-<style lang="stylus">
-@import variables
 
-textarea
-    padding 16px
-    border-radius 4px
-    align-items center
-    cursor text
-    display flex
-    border 0
-    min-height 200px
-    width 100%
-    color white
-    outline 0
-    resize vertical
-    background rgba(255,255,255,0.1)
+<style>
+textarea {
+    padding: 16px;
+    border-radius: 4px;
+    align-items: center;
+    cursor: text;
+    display: flex;
+    border: 0;
+    min-height: 200px;
+    width: 100%;
+    color: white;
+    outline: 0;
+    resize: vertical;
+    background: color-mix(white, rgba(255, 255, 255, 0.1), 10%);
+}
 </style>

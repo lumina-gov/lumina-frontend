@@ -23,47 +23,50 @@ export let user: NonNullable<MeQuery["me"]>
         </div>
     </div>
     <Icon
-        color="brand"
-        icon={SwapHorizontal}
-        size={28}/>
+        --color="var(--brand)"
+        --size="28px"
+        icon={SwapHorizontal}/>
 </button>
-<style lang="stylus">
-@import variables
+<style>
+button {
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    outline: 0;
+    padding: 24px;
+    width: 100%;
+    &:is(:hover, :focus) {
+        background: rgba(255, 255, 255, 0.04);
+    }
+}
 
-button
-    background transparify(white, 4%)
-    display flex
-    align-items center
-    border-radius 4px
-    outline 0
-    padding 24px
-    width 100%
-    &:hover, &:focus
-        background transparify(white, 4%)
+.horizontal {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-.horizontal
-    display flex
-    align-items center
-    gap 12px
+.vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+    flex: 1;
+}
 
-.vertical
-    display flex
-    flex-direction column
-    align-items start
-    gap 8px
-    flex 1
+.title {
+    font-weight: 600;
+    font-size: 18px;
+}
 
-.title
-    font-weight 600
-    font-size 18px
+.description {
+    opacity: 0.6;
+}
 
-.description
-    opacity 0.6
-
-.icon
-    color $brand
-    display inline-flex
-    font-size 28px
-
-
+.icon {
+    color: var(--brand);
+    display: inline-flex;
+    font-size: 28px;
+}
 </style>

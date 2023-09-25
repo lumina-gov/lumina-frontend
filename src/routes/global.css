@@ -1,0 +1,44 @@
+*:focus {
+    outline: var(--brand) 1px dashed;
+    outline-offset: 1px;
+}
+hr {
+    border: 0;
+    border-top: 1px solid color-mix(in srgb, white, 10%, transparent);
+    width: 100%;
+    margin: 0;
+}
+
+html {
+    display: flex;
+    max-height: 100%;
+    min-height: 100%;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+    color: var(--brand);
+}
+
+a:hover {
+    color: lighten(var(--brand), 10%);
+}
+
+body {
+    background: var(--dark-app);
+    color: white;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: 'Prompt', sans-serif;
+    max-width: 100%;
+}

@@ -47,24 +47,29 @@ export let columns: BreakpointColumns<string>
     class="grid-item">
     <slot/>
 </svelte:element>
-<style lang="stylus">
-@import variables
-
-.grid-item
-    display flex
-    width 100%
-    grid-column var(--laptop-columns)
-    justify-content var(--laptop-justify-content)
-    align-items var(--laptop-align-items)
-    flex-direction var(--laptop-flex-direction)
-    @media (max-width $tablet)
-        grid-column var(--tablet-columns)
-        justify-content var(--tablet-justify-content)
-        align-items var(--tablet-align-items)
-        flex-direction var(--tablet-flex-direction)
-    @media (max-width $mobile)
-        grid-column var(--mobile-columns)
-        justify-content var(--mobile-justify-content)
-        align-items var(--mobile-align-items)
-        flex-direction var(--mobile-flex-direction)
+<style>
+.grid-item {
+    display: flex;
+    width: 100%;
+    grid-column: var(--laptop-columns);
+    justify-content: var(--laptop-justify-content);
+    align-items: var(--laptop-align-items);
+    flex-direction: var(--laptop-flex-direction);
+}
+@media (max-width: 900px) {
+    .grid-item {
+        grid-column: var(--tablet-columns);
+        justify-content: var(--tablet-justify-content);
+        align-items: var(--tablet-align-items);
+        flex-direction: var(--tablet-flex-direction);
+    }
+}
+@media (max-width: 600px) {
+    .grid-item {
+        grid-column: var(--mobile-columns);
+        justify-content: var(--mobile-justify-content);
+        align-items: var(--mobile-align-items);
+        flex-direction: var(--mobile-flex-direction);
+    }
+}
 </style>

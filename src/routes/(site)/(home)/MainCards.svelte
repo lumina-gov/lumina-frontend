@@ -31,20 +31,20 @@ export let cards: Props<ServiceCard>[] = []
         {/each}
     </Grid>
 </div>
-<style lang="stylus">
-@import variables
-
-.main-cards
-    height 0
-    margin-top 40px
-    z-index 1
-    display flex
-    flex-direction column
-    align-items center
-    justify-content center
-    width 100%
-    @media (max-width: $tablet)
-        margin 0
-        height unset
-        padding 20px
+<style>
+.main-cards {
+    height: 0;
+    margin-top: 40px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    @media (width <= 900px) {
+        margin: 0;
+        height: unset;
+        padding: 20px;
+    }
+}
 </style>

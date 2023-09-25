@@ -1,12 +1,13 @@
 
 <script lang="ts">
-import type { SvelteComponent } from "svelte"
+
+import type { IconComponent } from "$lib/utils/icon_type"
 import { createEventDispatcher } from "svelte"
 
 export let href: string | null = null
-export let left_icon: typeof SvelteComponent | null = null
+export let left_icon: IconComponent | null = null
 export let left_icon_props: Record<string, unknown> = {}
-export let right_icon: typeof SvelteComponent | null = null
+export let right_icon: IconComponent | null = null
 export let style: "translucent" | "transparent" | "branded" = "transparent"
 export let active = false
 $: tag = href ? "a" : "div" as "a" | "div"
@@ -56,48 +57,74 @@ function handle_keyup(e: KeyboardEvent) {
     {/if}
 </svelte:element>
 
-<style lang="stylus">
-@import variables
+<style>
+.button {
+    padding: 10px 10px;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    justify-content: center;
+    border-radius: 4px;
+    width: auto;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    height: 100%;
 
-.button
-    padding 10px 10px
-    color white
-    display inline-flex
-    align-items: center
-    white-space nowrap
-    justify-content: center
-    border-radius 4px
-    width auto
-    cursor pointer
-    font-weight 600
-    width 100%
-    height 100%
-    .text
-        padding 0px 12px
-    .icon
-        font-size: 20px
-        display: inline-flex
-    &:focus-visible
-        outline-effect()
-    &.branded
-        background: $brand
-        &:hover, &:focus
-            background: lighten($brand, 12%)
-        &:active
-            background $brand
-    &.translucent
-        background transparify(white, 8%)
-        &:hover, &:focus
-            background: transparify(white, 14%)
-        &:active
-            background: transparify(white, 8%)
-    &.transparent
-        color transparify(white, 60%)
-        background transparify(white, 0%)
-        &:hover, &:focus
-            background: transparify(white, 12%)
-            color white
-        &:active
-            background: transparify(white, 6%)
+    & .text {
+        padding: 0px 12px;
+    }
 
+    & .icon {
+        font-size: 20px;
+        display: inline-flex;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--brand);
+        outline-offset: 2px;
+    }
+
+    &.branded {
+        background: var(--brand);
+
+        &:hover,
+        &:focus {
+            background: color-mix(var(--brand), white, 12%);
+        }
+
+        &:active {
+            background: var(--brand);
+        }
+    }
+
+    &.translucent {
+        background: color-mix(white, 8%);
+
+        &:hover,
+        &:focus {
+            background: color-mix(white, 14%);
+        }
+
+        &:active {
+            background: color-mix(white, 8%);
+        }
+    }
+
+    &.transparent {
+        color: color-mix(white, 60%);
+        background: color-mix(white, 0%);
+
+        &:hover,
+        &:focus {
+            background: color-mix(white, 12%);
+            color: white;
+        }
+
+        &:active {
+            background: color-mix(white, 6%);
+        }
+    }
+}
 </style>

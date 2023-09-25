@@ -22,14 +22,14 @@ export let data
 
 export let notices: Props<InfoBox>[] = [
     {
-        color: "yellow",
+        color: "var(--yellow)",
         icon: Information,
         tag: "Notice",
         title: "Citizenship Pre-registration only",
         description: "Lumina's government is in early stages, and our identity verification systems required for full citizenship are being worked on. On this page, you may pre-register for citizenship, and we will notify you when our citizenship application process is available."
     },
     {
-        color: "red",
+        color: "var(--red)",
         icon: Alert,
         tag: "Warning",
         title: "It is an offence to intentionally provide false or misleading information"
@@ -87,15 +87,14 @@ $: user = data.user_store.user
         </div>
     </GridItem>
 </Grid>
-<style lang="stylus">
-@import variables
-
-.notices
-    background transparify(white, 6%)
-    display flex
-    flex-direction column
-    padding 24px
-    border-radius 8px
-    gap 40px
+<style>
+.notices {
+    background: rgba(255, 255, 255, 0.04);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    border-radius: 8px;
+    gap: 40px;
+}
 
 </style>

@@ -80,49 +80,55 @@ $: active && component_els[component.id] ? component_els[component.id].scrollInt
         {/each}
     </div>
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.name {
+    font-weight: 500;
+    font-size: 18px;
+}
+.name.placeholder {
+    color: rgba(var(--white-rgb), 0.5);
+}
 
-.name
-    font-weight 500
-    font-size 18px
-    &.placeholder
-        color transparify(white, 50%)
+.inner-component {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
-.inner-component
-    display flex
-    flex-direction column
-    gap 8px
+.add-child {
+    position: absolute;
+    top: calc(100% + 24px);
+    z-index: 2;
+}
 
-.add-child
-    position absolute
-    top calc(100% + 24px)
-    z-index 2
+.component {
+    position: relative;
+    background: rgba(var(--white-rgb), 0.04);
+    border-radius: 6px;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+}
+.component:focus {
+    outline: none;
+}
+.component.active {
+    background: rgba(var(--white-rgb), 0.08);
+    outline: 1px solid var(--brand);
+    outline-offset: 2px;
+}
 
-.component
-    position relative
-    background transparify(white, 4%)
-    border-radius 6px
-    padding 16px
-    display flex
-    justify-content center
-    &:focus
-        outline none
-    &.active
-        background transparify(white, 8%)
-        outline 1px solid $brand
-        outline-offset 2px
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
 
-
-.container
-    display flex
-    flex-direction column
-    align-items center
-    gap 60px
-
-.sub-components
-    display flex
-    flex-direction row
-    justify-content center
-    gap 24px
+.sub-components {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 24px;
+}
 </style>

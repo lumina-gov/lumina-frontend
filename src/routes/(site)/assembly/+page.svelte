@@ -71,7 +71,7 @@ let proposals = [
             <div class="description">
                 Lumina Assembly is Lumina's direct democracy system, which enables citizens to propose and vote on new legislation.
             </div>
-            <Tag color="white">Stats</Tag>
+            <Tag --color="white">Stats</Tag>
             <AssemblyStat
                 icon={HumanGreetingVariant}
                 text="550 active voters"/>
@@ -107,39 +107,46 @@ let proposals = [
         </div>
     </div>
 </div>
-<style lang="stylus">
-@import variables
+<style>
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-.space-between
-    display flex
-    justify-content space-between
-    align-items center
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 
-.cards
-    display flex
-    flex-direction column
-    gap 16px
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    @media (max-width: 800px) {
+        grid-template-columns: 1fr;
+    }
+}
 
-.grid-2
-    display grid
-    grid-template-columns 1fr 1fr
-    gap 16px
-    @media (max-width: 800px)
-        grid-template-columns 1fr
 
-.description
-    opacity 0.5
+.description {
+    opacity: 0.5;
+}
 
-.section
-    padding 40px 16px
-    border-bottom 1px solid transparify(white, 10%)
+.section {
+    padding: 40px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-.inner-section
-    max-width 1000px
-    margin 0 auto
+.inner-section {
+    max-width: 1000px;
+    margin: 0 auto;
+}
 
-.vertical-flex
-    display flex
-    gap 16px
-    flex-direction column
+.vertical-flex {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+}
 </style>
