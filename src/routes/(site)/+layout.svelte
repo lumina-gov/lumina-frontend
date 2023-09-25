@@ -6,6 +6,8 @@ import Scrim from "$lib/controls/Scrim.svelte"
 import NotificationsPopout from "./components/NotificationsPopout.svelte"
 import AccountPopout from "./components/AccountPopout.svelte"
 import { afterNavigate } from "$app/navigation"
+import ClickoutRegion from "$lib/controls/ClickoutRegion.svelte"
+import Inside from "$lib/controls/Inside.svelte"
 
 export let data
 
@@ -36,10 +38,14 @@ afterNavigate(() => {
     </script>
 </svelte:head>
 <div class="app">
-    <Sidebar
-        bind:user
-        bind:sidebar_opened
-        bind:dropdown/>
+    <ClickoutRegion clicked_outside={() => sidebar_opened = false}>
+        <Inside>
+            <Sidebar
+                bind:user
+                bind:sidebar_opened
+                bind:dropdown/>
+        </Inside>
+    </ClickoutRegion>
     <div class="content">
         <Header
             bind:sidebar_opened
