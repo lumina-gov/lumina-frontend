@@ -47,11 +47,16 @@ afterNavigate(() => {
     bottom: 0;
     display: none;
     z-index: 5;
+    background: var(--dark);
     background: color-mix(in srgb, var(--dark) 96%, white);
     padding: 4px;
 
     @media (max-width: 900px) {
         display: flex;
+    }
+
+    @media all and (display-mode: standalone) {
+        padding-bottom: 30px;
     }
 }
 </style>
