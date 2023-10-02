@@ -10,7 +10,7 @@
     align-items: var(--align-items, flex-start);
     align-content: var(--align-content, flex-start);
     gap: var(--gap, 0);
-    width: var(--width, 100%);
-    height: var(--height, 100%);
+    width: var(--width);
+    height: var(--height);
 }
 </style>

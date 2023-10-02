@@ -177,6 +177,10 @@ aside {
         }
     }
 
+    @media all and (display-mode: standalone) {
+        padding-bottom: 30px;
+    }
+
     &.default {
         display: flex;
         @media (max-width: 900px) {

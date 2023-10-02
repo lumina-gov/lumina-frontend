@@ -131,7 +131,6 @@ $: user = data.user_store.user
         <FlexBox
             --flex-direction="column"
             --gap="16px"
-            --height="100%"
             --justify-content="center">
             <Heading level={2}><Filled>What</Filled> is Lumina?</Heading>
             <Paragraph>
@@ -205,7 +204,8 @@ $: user = data.user_store.user
                 tablet: "span 8",
                 mobile: "span 4"
             }}
-            gap={24}>
+            gap={24}
+            justify_content="center">
             <Heading level={3}>
                 <Filled>Lumina's</Filled> System
             </Heading>
