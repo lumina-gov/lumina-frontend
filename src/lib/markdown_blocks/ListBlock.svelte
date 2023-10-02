@@ -15,5 +15,8 @@ $: tag = block.ordered ? "ol" : "ul"
 <style>
 ol, ul {
     margin-left: 1.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
 }
 </style>

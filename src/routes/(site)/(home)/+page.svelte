@@ -35,6 +35,7 @@ import Telescope from "svelte-material-icons/Telescope.svelte"
 import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import ArrowRight from "svelte-material-icons/ArrowRight.svelte"
+import FrequentlyAskedQuestions from "$lib/display/FrequentlyAskedQuestions.svelte"
 
 export const organizationSchema: WithContext<GovernmentOrganization> = {
     "@context": "https://schema.org",
@@ -59,6 +60,108 @@ export const organizationSchema: WithContext<GovernmentOrganization> = {
 export let data
 
 $: user = data.user_store.user
+
+let faqs = [
+    {
+        question: "What is Lumina?",
+        answer: "Lumina is a proposed autonomous city, or a city with it's own government, laws, and currency.",
+    },
+    {
+        question: "How can I get involved?",
+        answer: `
+You can get involved by:
+- [Creating an account](/auth)
+- [Applying for citizenship](/citizenship)
+- [Joining our community on Discord](https://discord.gg/5Q9Y5yY)
+- Contributing to the discussions
+
+If you have technical programming skills, design skills, or other skills, join our Discord and let us know how you can help.
+        `
+    },
+    {
+        question: "Where will Lumina be located?",
+        answer: `
+Lumina will be built in a yet-to-be-determined area. The city will be set up as an autonomous SEZ (Special economic zone) granting our city autonomy from it's host government.
+
+Some proposed locations are:
+
+- SEZ in Auckland Island, NZ (Uninhabited)
+- SEZ Robinson River, NT, Australia.
+- SEZ near Calvert River, NT, Australia.
+- SEZ in Liberia
+`,
+    },
+    {
+        question: "How can I become a citizen of Lumina?",
+        answer: `
+You can become a citizen by first:
+- [Creating an account](/auth)
+- and then [applying for citizenship](/citizenship).
+`
+    },
+    {
+        question: "Who will be in charge of Lumina?",
+        answer: `
+The citizens of Lumina will be in charge of the city. The citizens will vote on all laws, and will be able to propose and create new laws.
+
+Once the Direct Democracy has been established, citizens will vote on laws and will be able to establish new ministries and government organisations.
+
+Ministers will be elected by citizens using Single-Transferable-Vote (STV) to run the ministries that may be created in the legislation. The power of ministers will be limited by the legislation written by citizens.
+
+This system reduces corruption, as ministers cannot be bribed to change legislation (as they do not have the power to do so, without majority citizen approval).
+
+This system makes each government ministries independent and autonomous from one-another, and increases accountability of ministers to the public, as they are directly responsible for their own ministries, with only the citizens above to report to.
+`,
+    },
+    {
+        question: "How does the system ensure that my vote is secure and counted accurately",
+        answer: `
+Our system uses a multi-signature validation process. When you vote, your decision is sent to several independent divisions, each of which verifies and signs your vote.
+
+You will also be able to verify that your vote was counted correctly by checking the anonymous public vote log and through immediate notifications sent to you confirming your vote.
+
+For a more technical explanation of our system, see [voting system security document](https://www.notion.so/lumina-gov/Voting-System-Security-a089e20812d9477f987f166a22955034?pvs=4)
+`,
+    },
+    {
+        question: "How will Lumina be funded?",
+        answer: `
+Funding for the movement will be done through a few stages:
+
+- Stage 1: Funding essential services.
+    - Revenues from [Lumina University](https://luminauniversity.earth)
+    - Donations from citizens and supporters
+- Stage 2: Transitioning into a professional organisation
+    - Revenue from Lumina Banking services (transaction fees, interest on loans, etc)
+    - Revenue from citizenship applications
+- Stage 3: Settlement
+    - Revenue from land sales
+    - Revenue from settlement packages (housing, supplies, etc)
+    - Tax revenue
+`,
+    },
+    {
+        question: "How will tax work in Lumina?",
+        answer: `
+Lumina will be primarily using a consumption/sales tax, which is a tax on the purchases between individuals and businesses.
+
+The consumption tax rate will be approximately set to around 20-30% and only charged on purchases between individuals and businesses.
+
+Income will not be taxed. So if you earn $100,000, and spend $50,000 you are only taxed on the $50,000 you spent.
+
+#### Benefits of a consumption tax
+- **Simplicity**: A consumption tax is relatively simple to implement and understand, compared to complex income tax systems. This could make it easier for the government to administer and for citizens to comply with.
+- **Efficiency**: A consumption tax can be efficient to collect, as it is levied at the point of sale and can be automatically collected through the use of digital technologies. This could reduce administrative costs and improve compliance.
+- **Transparency**: A consumption tax is transparent, as the tax rate is clearly visible on the price of goods and services. This could make it easier for citizens to understand the tax system and hold the government accountable for its tax policy.
+- **Economic growth**: A consumption tax can encourage economic growth, as it does not tax income or savings. This could provide incentives for individuals and businesses to invest and save, leading to increased economic activity.
+- **Automatic**: A consumption tax can be automatically collected through the use of digital technologies. This could reduce administrative costs and improve compliance. It removes the need for tax returns and lengthy forms for citizens to fill out
+
+#### Other notes
+- Rebates for low-earners will be offered to citizens.
+- Citizens will also be able choose how part of their money is allocated towards government services, enabling them more direct control over what the government spends its money on.
+`,
+    },
+]
 
 </script>
 <div class="wrapper">
@@ -308,6 +411,12 @@ $: user = data.user_store.user
         Join the early adopters building capabilities and help shape our future.
         <a href="/auth">Get Involved <Icon icon={ArrowRight}/></a>
     </div>
+</Hero>
+<Hero
+    --border-top="2px solid rgba(255, 255, 255, 0.1)"
+    translucent={false}
+    vertical_padding={60}>
+    <FrequentlyAskedQuestions faqs={faqs}/>
 </Hero>
 <style>
 

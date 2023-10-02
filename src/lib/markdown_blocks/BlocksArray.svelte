@@ -13,7 +13,7 @@ export let blocks: Content[]
 .blocks-array {
     display: flex;
     flex-direction: column;
-    gap: 1.8em;
+    gap: 0.8rem;
     line-height: 1.8em;
     width: 100%;
     align-items: flex-start;
