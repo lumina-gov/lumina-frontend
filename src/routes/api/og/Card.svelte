@@ -1,6 +1,7 @@
 <script lang="ts">
 import LogoEdge from "$lib/icons/LogoEdge.svelte"
 import Settlement from "$lib/icons/Settlement.svelte"
+import Variables from "../../Variables.svelte"
 
 
 export let title: string
@@ -40,7 +41,7 @@ export const description: string | null = null
         text-decoration: none;
         border-radius: 10px;
         color: white;
-        background: var(--brand);
+        background: rgb(116, 70, 246)
     }
 
     .fake-button .icon {
@@ -55,7 +56,7 @@ export const description: string | null = null
     .box {
         height: 4em;
         margin-bottom: 1.5em;
-        background: var(--brand);
+        background: rgb(116, 70, 246);
         display: flex;
         width: 1em;
     }
@@ -73,7 +74,7 @@ export const description: string | null = null
     }
 
     .card {
-        background: linear-gradient(90deg, color-mix(in srgb, var(--brand) 15%, var(--dark-app)), var(--dark-app));
+        background: rgb(21, 24, 28);
         width: 100%;
         padding: 3em;
         gap: 2em;
@@ -97,7 +98,7 @@ export const description: string | null = null
     .symbol {
         font-size: 1.6em;
         display: flex;
-        color: var(--brand);
+        color: rgb(116, 70, 246);
     }
 
     .brand {
