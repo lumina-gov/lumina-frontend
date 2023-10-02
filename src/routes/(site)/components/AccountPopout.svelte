@@ -7,10 +7,13 @@ import Profile from "$lib/display/Profile.svelte"
 import { delete_cookie } from "$lib/utils/cookie"
 import { goto, invalidateAll } from "$app/navigation"
 import type { MeQuery } from "$lib/graphql/graphql-types"
+import OverlayLoading from "$lib/controls/OverlayLoading.svelte"
+import future from "$lib/utils/future"
 
 export let user: NonNullable<MeQuery["me"]>
 $: name = `${user.first_name} ${user?.last_name}`
 $: email = user.email
+let loading = false
 
 async function logout() {
     delete_cookie("token")
@@ -19,6 +22,9 @@ async function logout() {
 }
 
 </script>
+{#if loading}
+    <OverlayLoading/>
+{/if}
 <Card reset_bg={true}>
     <div class="account">
         <Profile size="48px"/>
@@ -46,9 +52,9 @@ async function logout() {
             class="link red"
             role="button"
             tabindex="0"
-            on:click={ logout }
+            on:click={ () => future(logout(), value => loading = value) }
             on:keypress={ e => {
-                if (e.key === "Enter") logout()
+                if (e.key === "Enter") future(logout(), value => loading = value)
             } }>
             <Icon
                 --size="20px"

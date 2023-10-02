@@ -43,6 +43,7 @@ export let center = false
     scroll-margin-top: 80px;
     z-index: 1;
     &.center {
+        display: flex;
         justify-content: center;
     }
     &.underline {
