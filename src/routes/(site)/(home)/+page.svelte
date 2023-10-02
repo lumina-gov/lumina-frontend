@@ -65,7 +65,7 @@ $: user = data.user_store.user
     <Globe/>
     <Grid
         horizontal_gap={60}
-        padding_vertical={220}
+        padding_vertical={200}
         vertical_gap={60}>
         <GridItem
             align_items="center"
@@ -145,7 +145,9 @@ $: user = data.user_store.user
     --border-top="2px solid rgba(255, 255, 255, 0.1)"
     translucent={true}
     vertical_padding={60}>
-    <ResponsiveLayout min_item_size={300}>
+    <ResponsiveLayout
+        gap={40}
+        min_item_size={300}>
         <FlexBox
             --flex-direction="column"
             --justify-content="center">
@@ -173,7 +175,9 @@ $: user = data.user_store.user
     --border-top="2px solid rgba(255, 255, 255, 0.1)"
     translucent={true}
     vertical_padding={60}>
-    <ResponsiveLayout min_item_size={300}>
+    <ResponsiveLayout
+        gap={40}
+        min_item_size={300}>
         <CurrentSystemSvg/>
         <FlexBox
             --flex-direction="column"
@@ -197,7 +201,7 @@ $: user = data.user_store.user
     <Grid
         horizontal_gap={32}
         side_padding={false}
-        vertical_gap={64}>
+        vertical_gap={32}>
         <GridItem
             columns={{
                 laptop: "span 7",
