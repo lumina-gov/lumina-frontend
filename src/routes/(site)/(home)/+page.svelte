@@ -198,18 +198,12 @@ $: user = data.user_store.user
     --border-top="2px solid rgba(255, 255, 255, 0.1)"
     translucent={true}
     vertical_padding={60}>
-    <Grid
-        horizontal_gap={32}
-        side_padding={false}
-        vertical_gap={32}>
-        <GridItem
-            columns={{
-                laptop: "span 7",
-                tablet: "span 8",
-                mobile: "span 4"
-            }}
-            gap={24}
-            justify_content="center">
+    <ResponsiveLayout
+        gap={40}
+        min_item_size={300}>
+        <FlexBox
+            --flex-direction="column"
+            --justify-content="center">
             <Heading level={3}>
                 <Filled>Lumina's</Filled> System
             </Heading>
@@ -217,16 +211,13 @@ $: user = data.user_store.user
                 Thanks to modern technology, it's finally possible to bypass corrupt representatives, by enabling citizens to <Coloured>debate and vote online</Coloured>, ensuring every citizen's voice has a say in the direction of our society.
             </Paragraph>
             <LuminaSystemSvg/>
-        </GridItem>
-        <GridItem
-            columns={{
-                laptop: "span 9",
-                tablet: "span 8",
-                mobile: "span 4"
-            }}>
+        </FlexBox>
+        <FlexBox
+            --flex-direction="column"
+            --justify-content="center">
             <DebateSvg/>
-        </GridItem>
-    </Grid>
+        </FlexBox>
+    </ResponsiveLayout>
 </Hero>
 <Hero align="center">
     <Heading level={2}>
