@@ -11,12 +11,17 @@ export let data
 
 let sidebar_opened: "default" | boolean = "default"
 let dropdown: "notifications" | "account" | null = null
+let content: HTMLElement
 
 $: user = data.user_store.user
 
 afterNavigate(() => {
     dropdown = null
     sidebar_opened = "default"
+    content.scrollTo({
+        behavior: "instant",
+        top: 0,
+    })
 })
 
 </script>
@@ -41,7 +46,9 @@ afterNavigate(() => {
         bind:user
         bind:sidebar_opened
         bind:dropdown/>
-    <div class="content">
+    <div
+        bind:this={ content }
+        class="content">
         <Header
             bind:sidebar_opened
             bind:dropdown

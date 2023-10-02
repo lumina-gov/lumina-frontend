@@ -3,7 +3,6 @@ import SchemaComponent from "$lib/components/SchemaComponent.svelte"
 import type { FAQPage, WithContext } from "schema-dts"
 import showdown from "showdown"
 import MarkdownRenderer from "./MarkdownRenderer.svelte"
-import Icon from "./Icon.svelte"
 import Faq from "./FAQ.svelte"
 
 let converter = new showdown.Converter()
