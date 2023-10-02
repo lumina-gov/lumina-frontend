@@ -28,6 +28,7 @@ export let stat: {
 .stat {
     text-align: center;
     display: flex;
+    flex-direction: column;
     gap: 12px;
     align-items: center;
 }
@@ -44,8 +45,7 @@ export let stat: {
 }
 
 .stat-value {
-    font-size: 36px;
-    padding-bottom: 4px;
+    font-size: 42px;
     font-weight: 600;
     display: inline-flex;
 }

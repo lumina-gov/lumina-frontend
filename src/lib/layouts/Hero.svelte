@@ -28,5 +28,7 @@ export let translucent = false
     &.translucent {
         background: rgba(255, 255, 255, 0.03);
     }
+
+    border-top: var(--border-top);
 }
 </style>

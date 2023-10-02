@@ -2,7 +2,7 @@
 <style>
 
 span {
-    color: var(--color);
-    display: inline-flex;
+    color: var(--color, var(--brand));
+    display: inline;
 }
 </style>

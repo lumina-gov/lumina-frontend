@@ -30,7 +30,7 @@ afterNavigate(() => {
             left_icon={Menu}
             on:click={ () => sidebar_opened = sidebar_opened === "default" ? true : !sidebar_opened }/>
         <AppbarButton
-            href="/"
+            href="/dashboard"
             left_icon={Apps}/>
         <AppbarButton
             left_icon={NotificationOutline}

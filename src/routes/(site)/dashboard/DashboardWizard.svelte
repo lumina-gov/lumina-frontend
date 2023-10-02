@@ -2,7 +2,7 @@
 import Button from "$lib/controls/Button.svelte"
 import Paragraph from "$lib/display/Paragraph.svelte"
 import Passport from "svelte-material-icons/Passport.svelte"
-import WizardItem from "./WizardItem.svelte"
+import WizardItem from "$lib/display/WizardItem.svelte"
 import Input from "$lib/controls/Input.svelte"
 import ContentCopy from "svelte-material-icons/ContentCopy.svelte"
 import { page } from "$app/stores"

@@ -5,7 +5,7 @@ export function getNearestScrollableParent(wrapper: HTMLElement, direction: "hor
         const computedStyle = getComputedStyle(nearestScrollableParent)
         const overflowStyle = direction === "horizontal" ? computedStyle.overflowX : computedStyle.overflowY
 
-        if (overflowStyle === "scroll") {
+        if (overflowStyle === "scroll" || overflowStyle === "auto") {
             break
         }
 

@@ -35,7 +35,7 @@ export let center = false
 <style>
 .heading {
     font-weight: 700;
-    display: flex;
+    /* display: flex; */
     gap: 0.4em;
     align-items: center;
     margin: 0;

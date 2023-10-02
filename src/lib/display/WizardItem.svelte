@@ -4,9 +4,12 @@ import Check from "svelte-material-icons/Check.svelte"
 import Circle from "svelte-material-icons/Circle.svelte"
 
 export let checked: boolean
+export let margin_bottom: string | undefined = undefined
 
 </script>
-<div class="wizard">
+<div
+    style:--margin-bottom={ margin_bottom }
+    class="wizard">
     <div class="line">
         <div
             class="circle"
@@ -27,7 +30,7 @@ export let checked: boolean
     grid-template-columns: max-content 1fr;
     gap: 40px;
 
-    &:last-child {
+    &:last-child{
         & .line {
             background: transparent;
         }
@@ -38,7 +41,7 @@ export let checked: boolean
 
     & .content {
         padding: 6px 0;
-        margin-bottom: 20px;
+        margin-bottom: var(--margin-bottom, 16px);
         display: flex;
         flex-direction: column;
         align-items: start;
@@ -48,7 +51,7 @@ export let checked: boolean
     & .line {
         width: 4px;
         height: 100%;
-        background: color-mix(white, var(--dark-app), 8%);
+        background: color-mix(in srgb, white 10%, var(--dark-app));
         display: flex;
         align-items: start;
         justify-content: center;
@@ -61,7 +64,7 @@ export let checked: boolean
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        background: color-mix(white, var(--dark-app), 10%);
+        background: color-mix(in srgb, white 10%, var(--dark-app));
 
         &.checked {
             background: var(--brand);

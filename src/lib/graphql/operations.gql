@@ -68,7 +68,7 @@ mutation CreateCitizenshipApplication(
 
 query UserCount {
     user_count
-    user_count_by_interval(interval: 3, count: 20)
+    # user_count_by_interval(interval: 3, count: 20)
 }
 
 mutation Login(

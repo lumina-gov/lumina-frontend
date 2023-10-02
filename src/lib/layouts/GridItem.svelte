@@ -56,7 +56,7 @@ export let columns: BreakpointColumns<string>
     align-items: var(--laptop-align-items);
     flex-direction: var(--laptop-flex-direction);
 }
-@media (max-width: 900px) {
+@container (max-width: 900px) {
     .grid-item {
         grid-column: var(--tablet-columns);
         justify-content: var(--tablet-justify-content);
@@ -64,7 +64,7 @@ export let columns: BreakpointColumns<string>
         flex-direction: var(--tablet-flex-direction);
     }
 }
-@media (max-width: 600px) {
+@container (max-width: 600px) {
     .grid-item {
         grid-column: var(--mobile-columns);
         justify-content: var(--mobile-justify-content);

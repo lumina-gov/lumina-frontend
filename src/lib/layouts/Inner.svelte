@@ -18,7 +18,7 @@ export let align: "center" | "flex-start" | "flex-end" = "flex-start"
     width: 100%;
     margin: 0 auto;
     gap: var(--gap);
-    padding: var(--vertical-padding, 0) 16px;
+    padding: var(--vertical-padding, 0) 24px;
     display: flex;
     flex-direction: column;
     align-items: var(--align);

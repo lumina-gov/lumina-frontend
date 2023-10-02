@@ -1,14 +1,11 @@
 <script lang="ts">
-export let color: "brand" | "red" = "brand"
+
 </script>
-<span class={color}><slot/></span>
+<span><slot/></span>
 <style>
 span {
-    background: var(--brand);
-    padding: 0 4px;
-    display: inline-flex;
-    &.red {
-        background: var(--red);
-    }
+    background: var(--color, var(--brand));
+    padding: 4px 6px;
+    display: inline-block;
 }
 </style>

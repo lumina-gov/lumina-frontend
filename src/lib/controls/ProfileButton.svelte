@@ -12,6 +12,7 @@ function clicked(e: Event) {
 </script>
 <div
     class="profile-button-wrapper"
+    class:has-name={ !!name }
     role="button"
     tabindex="0"
     on:click={ clicked }
@@ -40,6 +41,9 @@ function clicked(e: Event) {
     border-radius: 4px;
     width: 100%;
     height: 100%;
+    &.has-name {
+        justify-content: flex-start;
+    }
     &:focus-visible {
         outline: 2px solid var(--brand);
         outline-offset: 2px;

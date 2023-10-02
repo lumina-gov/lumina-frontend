@@ -139,6 +139,14 @@ function toggle(toggling: "notifications" | "account") {
         </div>
     </div>
 </aside>
+
+{#if sidebar_opened === true}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <div
+        class="scrim"
+        on:click={ () => sidebar_opened = false }/>
+{/if}
 <style>
 aside {
     width: 100%;
@@ -159,6 +167,13 @@ aside {
             top: 0;
             left: 0;
             bottom: 0;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+            border-right: none;
+        }
+
+        @media (max-width: 600px) {
+            max-width: none;
+            width: 100%;
         }
     }
 
@@ -167,6 +182,20 @@ aside {
         @media (max-width: 900px) {
             display: none;
         }
+    }
+}
+
+.scrim {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 7;
+    display: none;
+    @media (max-width: 900px) {
+        display: block;
     }
 }
 

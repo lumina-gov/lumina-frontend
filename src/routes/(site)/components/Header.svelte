@@ -22,7 +22,6 @@ $: authenticated = user != null
 
 onMount(() => {
     nearest_vertical_scrollable_parent = getNearestScrollableParent(header, "vertical")
-    console.log(nearest_vertical_scrollable_parent)
     if(!nearest_vertical_scrollable_parent) return
     scrolled = nearest_vertical_scrollable_parent.scrollTop != 0
     nearest_vertical_scrollable_parent.addEventListener("scroll", updateScroll)
@@ -98,6 +97,7 @@ header {
 
     &.visible {
         display: flex;
+        border-bottom: 2px solid rgba(var(--white-rgb), 0.1);
         @media (max-width: 900px) {
             &.authenticated {
                 display: none;
@@ -117,6 +117,7 @@ header {
 
     &.scrolled {
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+        border: none;
         background: var(--dark-app);
         background: color-mix(white, var(--dark-app) 8%, transparent);
         backdrop-filter: blur(10px);

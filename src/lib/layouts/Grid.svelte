@@ -16,20 +16,29 @@ export let columns: {
 }
 
 </script>
-<div
-    style:--mobile-columns={ columns.mobile }
-    style:--tablet-columns={ columns.tablet }
-    style:--laptop-columns={ columns.laptop }
-    style:padding-top={ padding_vertical ? `${padding_vertical}px` : undefined }
-    style:padding-bottom={ padding_vertical ? `${padding_vertical}px` : undefined }
-    style:grid-row-gap={ vertical_gap ? `${vertical_gap}px` : undefined }
-    style:grid-column-gap={ horizontal_gap ? `${horizontal_gap}px` : undefined }
-    style:flex
-    class="grid"
-    class:side_padding>
-    <slot/>
+<div class="container">
+    <div
+        style:--mobile-columns={ columns.mobile }
+        style:--tablet-columns={ columns.tablet }
+        style:--laptop-columns={ columns.laptop }
+        style:padding-top={ padding_vertical ? `${padding_vertical}px` : undefined }
+        style:padding-bottom={ padding_vertical ? `${padding_vertical}px` : undefined }
+        style:grid-row-gap={ vertical_gap ? `${vertical_gap}px` : undefined }
+        style:grid-column-gap={ horizontal_gap ? `${horizontal_gap}px` : undefined }
+        style:flex
+        class="grid"
+        class:side_padding>
+        <slot/>
+    </div>
 </div>
+
 <style>
+
+.container {
+    container-type: inline-size;
+    width: 100%;
+}
+
 .grid {
     display: grid;
     max-width: 1200px;
@@ -38,12 +47,12 @@ export let columns: {
     width: 100%;
     grid-template-columns: repeat(var(--laptop-columns), 1fr);
     &.side_padding {
-        padding: 0 16px;
+        padding: 0 24px;
     }
-    @media (max-width: 900px) {
+    @container (max-width: 900px) {
         grid-template-columns: repeat(var(--tablet-columns), 1fr);
     }
-    @media (max-width: 600px) {
+    @container (max-width: 600px) {
         grid-template-columns: repeat(var(--mobile-columns), 1fr);
     }
 }
