@@ -35,6 +35,8 @@
     },
     "type": "module",
     "dependencies": {
+        "@builder.io/partytown": "^0.8.1",
+        "@builder.io/sdk-svelte": "^0.6.2",
         "@resvg/resvg-js": "^2.4.1",
         "@types/showdown": "^2.0.2",
         "@types/three": "^0.156.0",

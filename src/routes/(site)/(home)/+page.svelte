@@ -164,6 +164,7 @@ Income will not be taxed. So if you earn $100,000, and spend $50,000 you are onl
 ]
 
 </script>
+
 <div class="wrapper">
     <Globe/>
     <Grid
