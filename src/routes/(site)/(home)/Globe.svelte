@@ -14,14 +14,9 @@ onMount(async () => {
     // Setting up the Three.js scene
     const scene = new Scene()
     const camera = new PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 1000)
-    const renderer = new WebGLRenderer({ alpha: true })
     const light = new AmbientLight(0xFFFFFF, 1)
 
     camera.position.set(0, 0, 250)  // Offset camera to the right to get center-right positioning
-    renderer.setSize(container.clientWidth, container.clientHeight)
-    renderer.setClearColor(0x000000, 0)
-    container.appendChild(renderer.domElement)
-
 
     // Adding the three-globe to the scene
     const globe = new ThreeGlobe()
@@ -45,6 +40,12 @@ onMount(async () => {
 
         renderer.render(scene, camera)
     }
+
+    const renderer = new WebGLRenderer({ alpha: true })
+
+    renderer.setSize(container.clientWidth, container.clientHeight)
+    renderer.setClearColor(0x000000, 0)
+    container.appendChild(renderer.domElement)
 
     animate()
 
