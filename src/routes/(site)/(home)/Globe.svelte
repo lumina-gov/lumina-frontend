@@ -1,6 +1,5 @@
 <script lang="ts">
 import { onMount, onDestroy } from "svelte"
-import countries from "./ne_110m_admin_0_countries.geojson?raw"
 import type { Object3D, Object3DEventMap } from "three"
 type Countries = { features: object[] }
 
@@ -10,6 +9,7 @@ let resizeObserver: ResizeObserver
 onMount(async () => {
     const { Scene, PerspectiveCamera, WebGLRenderer, AmbientLight } = await import("three")
     const { default: ThreeGlobe } = await import("three-globe")
+    const { default: countries } = await import("./map.geojson?raw")
 
     // Setting up the Three.js scene
     const scene = new Scene()
@@ -21,6 +21,7 @@ onMount(async () => {
     renderer.setSize(container.clientWidth, container.clientHeight)
     renderer.setClearColor(0x000000, 0)
     container.appendChild(renderer.domElement)
+
 
     // Adding the three-globe to the scene
     const globe = new ThreeGlobe()

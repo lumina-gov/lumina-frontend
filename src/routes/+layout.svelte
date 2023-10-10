@@ -5,18 +5,11 @@
     <link
         href="/manifest.json"
         rel="manifest">
-    <script>
-        partytown = {
-        forward: ['dataLayer.push']
-        };
-    </script>
-    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-    {@html "<" + "script>" + partytownSnippet() + "<" + "/script>"}
     <script
-        src="https://www.googletagmanager.com/gtag/js?id=G-8MK9JSEJ2P"
-        type="text/partytown">
+        defer
+        src="https://www.googletagmanager.com/gtag/js?id=G-8MK9JSEJ2P">
     </script>
-    <script type="text/partytown">
+    <script defer>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -25,7 +18,6 @@
     </script>
 </svelte:head>
 <script lang="ts">
-import { partytownSnippet } from "@builder.io/partytown/integration"
 import { env } from "$env/dynamic/public"
 import AlertBar from "./AlertBar.svelte"
 import PageLoaderBar from "./PageLoaderBar.svelte"
