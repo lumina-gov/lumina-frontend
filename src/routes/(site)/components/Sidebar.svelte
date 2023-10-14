@@ -63,6 +63,10 @@ function toggle(toggling: "notifications" | "account") {
                 href="https://luminauniversity.earth"
                 left_icon={LightUniversity}
                 text="Lumina University"/>
+            <NavLink
+                href={site_data.socials.discord}
+                left_icon={Discord}
+                text="Join Discord Server"/>
         </section>
         <div class="section">
             <h4>Information</h4>

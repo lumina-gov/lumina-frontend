@@ -36,6 +36,8 @@ import ChevronRight from "svelte-material-icons/ChevronRight.svelte"
 import Icon from "$lib/display/Icon.svelte"
 import ArrowRight from "svelte-material-icons/ArrowRight.svelte"
 import FrequentlyAskedQuestions from "$lib/display/FrequentlyAskedQuestions.svelte"
+import Discord from "svelte-material-icons/Discord.svelte"
+import FlexWrap from "$lib/display/FlexWrap.svelte"
 
 export const organizationSchema: WithContext<GovernmentOrganization> = {
     "@context": "https://schema.org",
@@ -187,24 +189,42 @@ Income will not be taxed. So if you earn $100,000, and spend $50,000 you are onl
                     for <Coloured --color="var(--brand)">{ user.first_name }</Coloured>,
                     by <Coloured --color="var(--brand)">{ user.first_name }</Coloured>.
                 </div>
-                <Button
-                    style="branded"
-                    href="/dashboard"
-                    hug={true}
-                    left_icon={Apps}>
-                    Open Dashboard
-                </Button>
+                <FlexWrap>
+                    <Button
+                        style="branded"
+                        href="/dashboard"
+                        hug={true}
+                        left_icon={Apps}>
+                        Open Dashboard
+                    </Button>
+                    <Button
+                        style="translucent"
+                        href={site_data.socials.discord}
+                        hug={true}
+                        right_icon={Discord}>
+                        Join Discord
+                    </Button>
+                </FlexWrap>
             {:else}
                 <div class="large-paragraph">
                     for <Coloured>you</Coloured>, by <Coloured>you</Coloured>.
                 </div>
-                <Button
-                    style="branded"
-                    href="/auth"
-                    hug={true}
-                    right_icon={Settlement}>
-                    Get citizenship
-                </Button>
+                <FlexWrap>
+                    <Button
+                        style="branded"
+                        href="/auth"
+                        hug={true}
+                        right_icon={Settlement}>
+                        Get citizenship
+                    </Button>
+                    <Button
+                        style="translucent"
+                        href={site_data.socials.discord}
+                        hug={true}
+                        right_icon={Discord}>
+                        Join Discord
+                    </Button>
+                </FlexWrap>
             {/if}
         </GridItem>
         <GridItem
