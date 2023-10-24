@@ -8,7 +8,9 @@
         "typescript",
     ],
     "editor.codeActionsOnSave": {
-        "source.fixAll": true
+        "source.fixAll": true,
     },
     "svelte.enable-ts-plugin": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
 }
