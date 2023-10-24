@@ -38,6 +38,7 @@
         "@builder.io/partytown": "^0.8.1",
         "@builder.io/sdk-svelte": "^0.6.2",
         "@resvg/resvg-js": "^2.4.1",
+        "@supabase/supabase-js": "^2.38.2",
         "@types/showdown": "^2.0.2",
         "@types/three": "^0.156.0",
         "@urql/core": "^4.0.7",
